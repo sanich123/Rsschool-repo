@@ -106,7 +106,7 @@ dist
 
 node_modules
 public
-source/css/style.css
-source/css/style.css.map
+# source/css/style.css
+# source/css/style.css.map
 
-source/index.html
+# source/index.html
