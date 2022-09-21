@@ -1,6 +1,7 @@
 @import '../global/variables.less';
 
 .promo {
+  .container(@big-desktop-width);
   position: relative;
   min-height: 700px;
 
@@ -44,6 +45,9 @@
   }
 
   &__btn {
+    position: absolute;
+    right: 250px;
+    bottom: 100px;
     background: @orange-gradient;
     border-radius: 25px;
     padding: 16px 50px;
