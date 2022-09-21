@@ -1,5 +1,53 @@
-.promo__background {
-  width: 1600px;
-  height: 780px;
-  background-image: url('../../img/photos/bg-big-panda.png');
+@import '../global/variables.less';
+
+.promo {
+  position: relative;
+  min-height: 700px;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: -80px;
+    background-image: url("../../img/photos/bg-big-panda.png");
+    width: 1600px;
+    height: 780px;
+    z-index: -5;
+  }
+
+  &__h2 {
+    width: 500.31px;
+    position: absolute;
+    font-weight: 700;
+    font-size: 106.496px;
+    line-height: 75%;
+    text-align: center;
+    text-transform: uppercase;
+    color: @white;
+    right: 100px;
+    z-index: 999;
+
+    &--yellow {
+      color: @yellow;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 465px;
+    height: 465px;
+    border-radius: 50%;
+
+    background: @orange-gradient;
+    right: 200px;
+    top: 20px;
+  }
+
+  &__btn {
+    background: @orange-gradient;
+    border-radius: 25px;
+    padding: 16px 50px;
+    color: @white;
+    text-transform: uppercase;
+  }
 }

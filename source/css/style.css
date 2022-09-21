@@ -362,7 +362,7 @@ body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   font-family: "Roboto", "Arial", sans-serif;
-  font-weight: 900;
+  font-weight: 400;
   font-style: normal;
   list-style: none;
   min-height: 100vh;
@@ -380,18 +380,6 @@ a {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
-.accept-btn {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  text-transform: uppercase;
-  color: #ffffff;
-  background-color: #68b738;
-  border: none;
-  padding: 10px 0;
-  cursor: pointer;
-  outline: none;
-}
 .to-center {
   display: flex;
   align-items: center;
@@ -408,31 +396,98 @@ a {
   border: none;
   cursor: pointer;
 }
-.arial-font {
-  font-family: "Arial", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  color: #444444;
-}
-header {
+.header {
+  min-height: 80px;
+  padding: 0 220px;
+  width: 1600px;
+  margin: 0 auto;
   background-color: black;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
 }
-.promo__background {
+.header__wrapper {
+  background: #000000;
+  width: auto;
+}
+.header__contact {
+  margin-left: auto;
+  color: #ffffff;
+}
+.header .nav-list {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  justify-content: start;
+  gap: 58px;
+}
+.header .nav-list__item a {
+  color: white;
+}
+.header .nav-list__item .active {
+  background-color: black;
+  background-image: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+}
+.promo {
+  position: relative;
+  min-height: 700px;
+}
+.promo::before {
+  position: absolute;
+  content: '';
+  top: -80px;
+  background-image: url("../../img/photos/bg-big-panda.png");
   width: 1600px;
   height: 780px;
-  background-image: url('../../img/photos/bg-big-panda.png');
+  z-index: -5;
 }
-:root {
-  --base-green: #68b738;
-  --base-grey: #f2f2f2;
-  --special-grey2: #ebebeb;
-  --special-grey: #cdcdcd;
-  --special-dark-grey: #444444;
-  --special-dark-grey2: #222222;
-  --status-error: #ff8282;
-  --basic-green2: #5eaa2f;
-  --mobile-width: 320px;
-  --table-width: 768px;
-  --desktop-width: 1440px;
+.promo__h2 {
+  width: 500.31px;
+  position: absolute;
+  font-weight: 700;
+  font-size: 106.496px;
+  line-height: 75%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  right: 100px;
+  z-index: 999;
+}
+.promo__h2--yellow {
+  color: #FFEE2E;
+}
+.promo::after {
+  content: '';
+  position: absolute;
+  width: 465px;
+  height: 465px;
+  border-radius: 50%;
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  right: 200px;
+  top: 20px;
+}
+.promo__btn {
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-radius: 25px;
+  padding: 16px 50px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.cards {
+  background-image: url('../../img/decorate/flower-2.svg'), url('../../img/decorate/flower-3.svg');
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom right, bottom left;
+  background-size: 368px 275px;
+}
+.purpose {
+  background-image: url("../../img/decorate/flower-1.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 293px 695px;
 }
 /*# sourceMappingURL=style.css.map */

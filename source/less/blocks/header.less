@@ -1,6 +1,51 @@
 @import "../global/variables.less";
 @import "../mixins/mixins.less";
 
-header {
+.header {
+
+  min-height: 80px;
+  padding: 0 220px;
+  &__wrapper {
+    background: @black;
+    width: auto;
+  }
+
+  .container(@big-desktop-width);
   background-color: black;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  &__contact {
+    margin-left: auto;
+    color: @white;
+  }
+
+  .nav-list {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: start;
+    gap: 58px;
+
+    &__item {
+      a {
+        color: white;
+      }
+      .active {
+        background-color: black;
+        background-image: linear-gradient(
+          113.96deg,
+          #f9804b 1.49%,
+          #fe9013 101.44%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+      }
+    }
+  }
 }
