@@ -1,91 +1,37 @@
 @import "../global/variables.less";
 @import "../mixins/mixins.less";
 
-.footer {
+footer {
+  background: black;
+  .container(@big-desktop-width);
+  padding: 41px 220px;
+
   &__wrapper {
-    background: @base-grey;
+    background: black;
   }
-  &__logo:hover {
-    opacity: 0.6;
-  }
-  &__logo:active,
-  &__logo:focus {
-    opacity: 0.3;
-  }
-  .container(@mobile-width);
-  background-color: @base-grey;
-  display: grid;
-  gap: 30px;
-  justify-items: center;
-  align-items: center;
-  padding: 20px;
-
-  .social-list {
-    .reset-ul();
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    a:hover #icon-youtube path,
-    a:hover #icon-vk path,
-    a:hover #icon-telegram path,
-    a:focus #icon-youtube path,
-    a:focus #icon-vk path,
-    a:focus #icon-telegram path {
-      fill: @base-green;
-    }
-    a:active,
-    a:focus {
-      opacity: 0.3;
-    }
-  }
-
-  .academy-links {
-    .reset-ul();
-    width: 100%;
+  .email-label {
+    font-size: 24px;
+    line-height: 120%;
+    color: #ffffff;
     display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
-    align-items: center;
-
-    a {
-      .arial-font();
-      font-size: 16px;
-      line-height: 18px;
-      &:hover svg path {
-        fill: @base-green;
-      }
-      &:focus {
-        opacity: 0.3;
-      }
-    }
+    grid-template-rows: auto auto;
   }
-}
 
-@media (min-width: @tablet-width) {
-  .footer {
-    .container(@tablet-width);
-    min-height: 147px;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 30px;
-
-    &__logo {
-      justify-self: start;
-    }
-
-    .academy-links {
-      grid-template-columns: auto auto;
-      justify-content: end;
-      gap: 22px;
-    }
+  .logo-form__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
-}
-
-@media (min-width: @desktop-width) {
-  .footer {
-    .container(@desktop-width);
-    padding: 0 110px;
-    min-height: 149px;
+  .footer__donation-btn {
+    .reset-btn();
+    padding: 16px 30px;
+    background: @orange-gradient;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    min-width: 298px;
   }
 }
