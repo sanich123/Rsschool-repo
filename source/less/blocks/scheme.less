@@ -1,0 +1,103 @@
+.scheme {
+  .container(@big-desktop-width);
+  padding: 69px 220px 100px 220px;
+  min-height: 1004px;
+
+  border-radius: 20px;
+
+  &__wrapper {
+    background: @super-gradient;
+    opacity: 0.9;
+  }
+
+  .text__wrapper {
+    width: 1160px;
+    height: 835px;
+    background: rgba(253, 253, 255, 0.52);
+    padding: 41px 99px 59px 99px;
+    border-radius: 20px;
+  }
+
+  &__h2 {
+    font-size: 48px;
+    line-height: 120%;
+    text-align: center;
+    color: #fe9013;
+  }
+
+  &__p {
+    font-size: 24px;
+    line-height: 120%;
+    color: #333b41;
+  }
+
+  &__smaller-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+    color: #333b41;
+  }
+
+  &__h3 {
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 130%;
+    color: #333b41;
+    text-align: center;
+  }
+
+  .order-list {
+    .reset-ul();
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    margin-left: 198px;
+
+    .svg-wrapper {
+      width: 168px;
+      height: 168px;
+      background: #ffffff;
+      border-radius: 5px;
+      border: 1px solid
+        linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__item p {
+      width: 168px;
+    }
+    &__item {
+      position: relative;
+    }
+
+    .second-item {
+      &::before, &::after {
+        position: absolute;
+        content: '';
+        width: 69px;
+        height: 35px;
+        background-image: url('../../img/icons/fat-arrow.svg');
+        background-size: 69px 35px;
+        z-index: 20;
+        top: 30%;
+        left: -100px;
+      }
+      &::after {
+        left: 200px;
+      }
+    }
+  }
+
+  &__btn {
+    .reset-btn();
+    background: @orange-gradient;
+    border-radius: 25px;
+    padding: 16px 50px;
+    color: @white;
+    text-transform: uppercase;
+    margin-left: 431px;
+    margin-right: 431px;
+    min-width: 298px;
+  }
+}
