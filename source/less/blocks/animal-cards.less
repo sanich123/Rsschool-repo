@@ -1,3 +1,14 @@
+@keyframes bottom-top {
+  from {
+    bottom: 0;
+    left: 50px;
+    right: 50px;
+  }
+  to {
+    bottom: 30%;
+  }
+}
+
 .cards {
   position: relative;
   .container(@big-desktop-width);
@@ -7,13 +18,47 @@
     url("../img/decorate/flower-3.svg");
   background-repeat: no-repeat, no-repeat;
   background-position: bottom right, bottom left;
-  background-size: 368px 275px;
+  background-size: 368px 275px, 292px 450px;
 
   .animals-list {
     &__item {
-      border: 1px solid @orange-gradient;
-      border-radius: 5px;
+      position: relative;
+      border: 1px solid;
+      border-image-source: @orange-gradient;
+      border-image-slice: 1;
+
+      .img__wrapper {
+        display: inline-block;
+        position: relative;
+        background: white;
+        img:hover {
+          transform: scale(1.03);
+        }
+      }
+      .img__wrapper:hover::after {
+        content: attr(data-title);
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        background: grey;
+        animation: 1s bottom-top;
+        bottom: 30%;
+        left: 50px;
+        right: 50px;
+      }
     }
+
+    // &__item::before {
+    //     content: "";
+    //     position: absolute;
+    //     width: 370px;
+    //     height: 430px;
+    //     left: -1px;
+    //     top: -2px;
+    //     background: @orange-gradient;
+    //     z-index: -1;
+    //     border-radius: 5px;
+    //   }
     .reset-ul();
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -80,4 +125,8 @@
     left: 0;
     top: 34%;
   }
+}
+
+.animal-description__wrapper {
+  background: white;
 }

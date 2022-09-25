@@ -1,7 +1,7 @@
 .testimonials {
   .container(@big-desktop-width);
   padding: 140px 220px 104px;
-  background-image: url('../img/decorate/leaf.svg');
+  background-image: url("../img/decorate/leaf.svg");
   background-position: bottom right;
   background-repeat: no-repeat;
 
@@ -79,5 +79,27 @@
     text-transform: uppercase;
     color: #ffffff;
     margin-top: 60px;
+  }
+  &__range {
+    width: 599px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &::-webkit-slider-runnable-track {
+      background: #f5f7f6;
+      border-radius: 5px;
+      height: 8px;
+      width: 599px;
+      cursor: pointer;
+    }
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      background: #fe9013;
+      border-radius: 5px;
+      width: 115.19px;
+      height: 6px;
+      cursor: pointer;
+    }
   }
 }
