@@ -37,6 +37,19 @@
     line-height: 130%;
     color: #333b41;
   }
+  &__link {
+    position: relative;
+    color: inherit;
+  }
+
+  &__link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #FE9013;
+    bottom: -5px;
+  }
 
   &__h3 {
     font-weight: 400;
@@ -90,14 +103,11 @@
   }
 
   &__btn {
-    .reset-btn();
     background: @orange-gradient;
     border-radius: 25px;
     padding: 16px 50px;
     color: @white;
     text-transform: uppercase;
     margin-left: 431px;
-    margin-right: 431px;
-    min-width: 298px;
   }
 }
