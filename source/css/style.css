@@ -481,6 +481,16 @@ a {
   color: #ffffff;
   text-transform: uppercase;
 }
+@keyframes bottom-top {
+  from {
+    bottom: 0;
+    left: 50px;
+    right: 50px;
+  }
+  to {
+    bottom: 30%;
+  }
+}
 .cards {
   position: relative;
   width: 1600px;
@@ -505,6 +515,24 @@ a {
 .cards .animals-list__item {
   border: 1px solid linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-radius: 5px;
+}
+.cards .animals-list__item .img__wrapper {
+  display: inline-block;
+  position: relative;
+}
+.cards .animals-list__item .img__wrapper img:hover {
+  transform: scale(1.03);
+}
+.cards .animals-list__item .img__wrapper:hover::after {
+  content: attr(data-title);
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  background: rgba(255, 255, 230, 0.9);
+  animation: 1s bottom-top;
+  bottom: 30%;
+  left: 50px;
+  right: 50px;
 }
 .cards .animals-list .animal-description__wrapper {
   padding: 8px 16px;

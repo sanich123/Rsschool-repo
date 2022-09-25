@@ -1,3 +1,14 @@
+@keyframes bottom-top {
+  from {
+    bottom: 0;
+    left: 50px;
+    right: 50px;
+  }
+  to {
+    bottom: 30%;
+  }
+}
+
 .cards {
   position: relative;
   .container(@big-desktop-width);
@@ -13,6 +24,25 @@
     &__item {
       border: 1px solid @orange-gradient;
       border-radius: 5px;
+
+      .img__wrapper {
+        display: inline-block;
+        position: relative;
+        img:hover {
+          transform: scale(1.03);
+        }
+      }
+      .img__wrapper:hover::after {
+        content: attr(data-title);
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        background: rgba(255, 255, 230, 0.9);
+        animation: 1s bottom-top;
+        bottom: 30%;
+        left: 50px;
+        right: 50px;
+      }
     }
     .reset-ul();
     display: grid;
