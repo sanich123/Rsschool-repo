@@ -5,26 +5,30 @@
         include ../../img/svg/logo.svg
       form(class="footer__email-form" action="#")
         label(class="email-label" for="email") Subscribe to our news
-          input#email
+          input#email(type="email" placeholder="Enter your email")
         button(type="submit" class="footer__email-form--btn") Submit
     a(class="footer__donation-btn") Donate for volunteers
     .lists__wrapper
       ul(class="footer__social-list social-list")
         li(class="social-list__item")
-          a(href="http://www.facebook.com") Facebook
+          a(href="http://www.facebook.com")
             include ../../img/icons/icon-facebook.svg
+            span Facebook
         li(class="social-list__item")
-          a(href="http://www.twitter.com") Twitter
+          a(href="http://www.twitter.com")
             include ../../img/icons/icon-twitter.svg
+            span Twitter
         li(class="social-list__item")
-          a(href="http://www.instargram.com") Instagram
+          a(href="http://www.instargram.com")
             include ../../img/icons/icon-instagram.svg
+            span Instagram
         li(class="social-list__item")
-          a(href="http://www.youtube.com") Youtube
+          a(href="http://www.youtube.com")
             include ../../img/icons/icon-youtube.svg
+            span Youtube
       ul(class="footer__nav-list footer-nav-list")
         li(class="footer-nav-list__item")
-          a(href="./index.html") About
+          a(href="./index.html" class="active") About
         li(class="footer-nav-list__item")
           a(href="./index.html") Map
         li(class="footer-nav-list__item")
@@ -33,5 +37,6 @@
           a(href="./index.html") Donate
         li(class="footer-nav-list__item")
           a(href="./index.html") Contact us
-      a(href="https://www.figma.com/file/ypzT9idgAILaSRVRmDAJxn/online-zoo-3-weeks") Designed by Alisa Samborskaya
-      span ©RSSchool & ©Yem Digital 2021
+      .contacts__wrapper
+        a(href="https://www.figma.com/file/ypzT9idgAILaSRVRmDAJxn/online-zoo-3-weeks") Designed by Alisa Samborskaya
+        span ©RSSchool & ©Yem Digital 2021
