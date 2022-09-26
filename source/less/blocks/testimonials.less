@@ -2,20 +2,22 @@
   .container(@big-desktop-width);
   padding: 140px 220px 104px;
   background-image: url("../img/decorate/leaf.svg");
-  background-position: bottom right;
+  background-position: bottom -132px right;
   background-repeat: no-repeat;
+  min-height: 919px;
 
   h2 {
+    font: 400 36px/1.3 Roboto;
     text-align: center;
-    font-size: 36px;
-    line-height: 130%;
     color: #333b41;
+    margin-top: 0;
+    margin-bottom: 46px;
   }
 
   .testimonials-list {
-    .reset-ul();
+     .reset-ul();
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 
     &__item {
@@ -26,23 +28,33 @@
       height: 391px;
 
       b {
-        font-size: 16px;
-        line-height: 120%;
+        font: 400 16px/1.2 Roboto;
         color: #000000;
       }
 
       .person__location {
-        display: grid;
-        grid-template-columns: auto auto;
+        position: relative;
         grid-area: location;
-        font-weight: 300;
-        font-size: 15px;
-        line-height: 120%;
+        display: grid;
+        grid-template-columns: 87px auto;
+        gap: 16px;
+        font: 300 15px/1.2 Roboto;
         color: #bdbdbd;
+        &::after {
+          content:'';
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          background: #BDBDBD;
+          border-radius: 50%;
+          right: 93px;
+          top: 7px;
+        }
       }
 
       .person__wrapper {
         display: grid;
+        grid-template-columns: 47px auto;
         grid-template-areas:
           "svg b"
           "svg location";
@@ -60,27 +72,26 @@
         }
       }
       .person__comment {
-        font-weight: 300;
-        font-size: 15px;
-        line-height: 120%;
+        padding-top: 10px;
+        font: 300 15px/1.2 Roboto;
         color: #767474;
       }
     }
   }
   &__btn {
     .reset-btn();
-    padding: 16px 50px;
+    padding: 16px 85px;
     background: @orange-gradient;
     border-radius: 5px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 140%;
+    font: 500 16px/1.4 Roboto;
     text-align: center;
     text-transform: uppercase;
     color: #ffffff;
-    margin-top: 60px;
+    margin-top: 25px;
   }
   &__range {
+    margin-top: 24px;
+    margin-left: 280px;
     width: 599px;
     -webkit-appearance: none;
     -moz-appearance: none;
