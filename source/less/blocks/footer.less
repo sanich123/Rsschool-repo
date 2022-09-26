@@ -12,6 +12,7 @@
   .email-label {
     font: 400 24px/120% Roboto;
     color: #ffffff;
+    margin-left: 8px;
   }
 
   .logo-form__wrapper {
@@ -19,6 +20,8 @@
     grid-template-columns: 1fr 377px;
   }
   #email {
+    margin-top: 14px;
+    margin-left: 9px;
     width: 228px;
     height: 42px;
     padding: 10px 10px 16px 10px;
@@ -44,7 +47,8 @@
 
   &__donation-btn {
     .reset-btn();
-    padding: 16px 30px;
+    display: inline-block;
+    padding: 16px 50px;
     background: @orange-gradient;
     border-radius: 5px;
     font-weight: 500;
@@ -54,6 +58,8 @@
     text-transform: uppercase;
     color: #ffffff;
     min-width: 298px;
+    margin-top: 35px;
+    margin-bottom: -2px;
   }
 
   &__email-form--btn {
@@ -78,9 +84,10 @@
   .social-list {
     display: grid;
     grid-auto-rows: auto;
-    gap: 20px;
+    gap: 13px;
     .reset-ul();
     margin-top: 50px;
+    margin-left: 10px;
     &__item a {
       position: relative;
 
@@ -122,9 +129,13 @@
   }
 
   .footer-nav-list {
+    .reset-ul();
+    margin-left: 12px;
+    margin-bottom: -3px;
     display: grid;
-    grid-template-columns: repeat(5, auto;);
+    grid-template-columns: repeat(4, auto;);
     align-self: end;
+    column-gap: 45px;
     a {
       color: white;
     }
@@ -135,7 +146,8 @@
     grid-auto-rows: auto;
     justify-self: end;
     color: white;
-    a {
+    a, span {
+      font: 100 16px/1.3 Roboto;
       color: white;
     }
   }
