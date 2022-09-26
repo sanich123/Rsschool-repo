@@ -551,7 +551,6 @@ a {
   grid-template-areas: "b svg" "p svg";
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  height: 60px;
 }
 .cards .animals-list .animal-description__wrapper b {
   text-transform: uppercase;
@@ -646,11 +645,6 @@ a {
 .purpose__anotherP {
   margin-top: 32px;
   font: 400 16px/1.4 Roboto;
-}
-.purpose__img {
-  margin-left: 8px;
-  margin-top: -1px;
-  backdrop-filter: blur(2px);
 }
 .scheme {
   width: 1600px;
@@ -895,7 +889,7 @@ a {
 }
 .footer .logo-form__wrapper {
   display: grid;
-  grid-template-columns: 1fr 384px;
+  grid-template-columns: auto 384px;
 }
 .footer #email {
   margin-top: 14px;
