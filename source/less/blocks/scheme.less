@@ -11,50 +11,58 @@
   }
 
   .text__wrapper {
-    width: 1160px;
-    height: 835px;
+    min-width: 1160px;
+    min-height: 835px;
     background: rgba(253, 253, 255, 0.52);
-    padding: 41px 99px 59px 99px;
+    padding: 41px 40px 59px 99px;
     border-radius: 20px;
   }
 
   &__h2 {
-    font-size: 48px;
-    line-height: 120%;
+    font: 400 48px/1.2 Roboto;
+    margin: 0;
+    margin-left: -52px;
     text-align: center;
     color: #fe9013;
   }
 
   &__p {
-    font-size: 24px;
-    line-height: 120%;
+    margin-top: 30px;
+    margin-bottom: 42px;
+    font: 400 24px/1.2 Roboto;
     color: #333b41;
   }
 
-  &__smaller-text {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 130%;
+  &__smaller-normal {
+    width: 863px;
+    margin-top: 10px;
+    font: 400 16px/1.3 Roboto;
     color: #333b41;
   }
+
+  &__smaller-bold {
+    margin-right: -70px;
+    font: 500 16px/1.3 Roboto;
+  }
+
   &__link {
     position: relative;
     color: inherit;
   }
 
   &__link::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 1px;
-    background: #FE9013;
-    bottom: -5px;
+    background: #fe9013;
+    bottom: -3px;
   }
 
   &__h3 {
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 130%;
+    margin-top: 60px;
+    margin-left: -60px;
+    font: 400 36px/1.3 Roboto;
     color: #333b41;
     text-align: center;
   }
@@ -62,52 +70,60 @@
   .order-list {
     .reset-ul();
     display: grid;
-    grid-template-columns: repeat(3, auto);
-    margin-left: 198px;
+    grid-template-columns: repeat(3, 168px);
+    column-gap: 130px;
+    margin-top: 39px;
+    margin-left: 100px;
 
     .svg-wrapper {
       width: 168px;
       height: 168px;
       background: #ffffff;
       border-radius: 5px;
-      border: 1px solid
-        linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+      border: 1px solid;
+      border-image-source: @orange-gradient;
+      border-image-slice: 1;
       display: grid;
       justify-content: center;
       align-items: center;
     }
-
-    &__item p {
-      width: 168px;
-    }
     &__item {
+      width: 168px;
       position: relative;
+      p {
+        margin-top: 30px;
+        font: 400 16px/1.4 Roboto;
+        width: 168px;
+      }
     }
 
     .second-item {
-      &::before, &::after {
+      &::before,
+      &::after {
         position: absolute;
-        content: '';
+        content: url("../img/icons/fat-arrow.svg");
         width: 69px;
-        height: 35px;
-        background-image: url('../img/icons/fat-arrow.svg');
-        background-size: 69px 35px;
-        z-index: 20;
-        top: 30%;
-        left: -100px;
+        height: 35.08px;
+        top: 61px;
+        left: -99px;
       }
       &::after {
-        left: 200px;
+        top: 57px;
+        left: 197px;
       }
     }
   }
 
   &__btn {
+    display: inline-block;
     background: @orange-gradient;
     border-radius: 25px;
-    padding: 16px 50px;
+    padding: 16px 73px;
+    font: 500 16px/1.4 Roboto;
     color: @white;
+    text-align: center;
     text-transform: uppercase;
-    margin-left: 431px;
+    margin-top: 45px;
+    margin-left: 332px;
   }
 }

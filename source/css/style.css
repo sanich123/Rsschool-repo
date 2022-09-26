@@ -398,7 +398,7 @@ a {
 }
 .header {
   min-height: 80px;
-  padding: 0 220px;
+  padding: 2px 220px 0;
   width: 1600px;
   margin: 0 auto;
   background-color: black;
@@ -419,6 +419,7 @@ a {
   grid-template-columns: repeat(5, auto);
   justify-content: start;
   gap: 58px;
+  margin-left: 24px;
 }
 .header .nav-list__item a {
   color: white;
@@ -455,7 +456,8 @@ a {
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
-  right: 100px;
+  top: -2px;
+  right: 220px;
   z-index: 999;
 }
 .promo__h2--yellow {
@@ -468,16 +470,20 @@ a {
   height: 465px;
   border-radius: 50%;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
-  right: 200px;
-  top: 20px;
+  right: 328px;
+  top: 13px;
 }
 .promo__btn {
   position: absolute;
-  right: 250px;
+  right: 320px;
   bottom: 100px;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-radius: 25px;
-  padding: 16px 50px;
+  display: grid;
+  place-items: center;
+  min-width: 298px;
+  min-height: 54px;
+  font: 500 16px/1.4 Roboto;
   color: #ffffff;
   text-transform: uppercase;
 }
@@ -496,11 +502,11 @@ a {
   width: 1600px;
   margin: 0 auto;
   padding: 0 220px;
-  min-height: 1103px;
+  min-height: 1106px;
   background-image: url("../img/decorate/flower-2.svg"), url("../img/decorate/flower-3.svg");
   background-repeat: no-repeat, no-repeat;
   background-position: bottom right, bottom left;
-  background-size: 368px 275px, 292px 450px;
+  background-size: 368px 275px, 292px 460px;
 }
 .cards .animals-list {
   margin: 0;
@@ -517,6 +523,8 @@ a {
   border: 1px solid;
   border-image-source: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-image-slice: 1;
+  width: 366px;
+  height: 426px;
 }
 .cards .animals-list__item .img__wrapper {
   display: inline-block;
@@ -546,19 +554,24 @@ a {
   height: 60px;
 }
 .cards .animals-list .animal-description__wrapper b {
+  text-transform: uppercase;
   grid-area: b;
   margin: 0;
   padding: 0;
 }
 .cards .animals-list .animal-description__wrapper p {
   margin: 0;
+  margin-top: -9px;
+  margin-left: -2px;
   padding: 0;
   grid-area: p;
+  font: 300 15px/1.2 Roboto;
 }
 .cards .animals-list .animal-description__wrapper svg {
   grid-area: svg;
   justify-self: end;
-  align-self: center;
+  align-self: start;
+  margin-right: -7px;
 }
 .cards__btn {
   position: absolute;
@@ -568,14 +581,12 @@ a {
   cursor: pointer;
   background: #fe9013;
   border-radius: 25px;
-  padding: 16px 45px;
+  padding: 16px 58px;
+  font: 500 16px/1.4 Roboto;
   color: #ffffff;
   text-transform: uppercase;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
   text-align: center;
-  left: 42%;
+  left: 651px;
   bottom: 100px;
 }
 .cards__btn-right,
@@ -589,14 +600,13 @@ a {
   border-radius: 50%;
   width: 62px;
   height: 62px;
+  top: 403px;
 }
 .cards__btn-right {
-  top: 34%;
-  right: 0;
+  right: 139px;
 }
 .cards__btn-left {
-  left: 0;
-  top: 34%;
+  left: 139px;
 }
 .animal-description__wrapper {
   background: white;
@@ -604,29 +614,43 @@ a {
 .purpose {
   width: 1600px;
   margin: 0 auto;
+  position: relative;
   padding: 140px 220px 0 220px;
   min-height: 723px;
   display: grid;
   grid-template-columns: 609px 465px;
-  gap: 77px;
-  background-image: url("../img/decorate/flower-1.png");
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  background-size: 293px 695px;
+  gap: 85px;
   color: #333b41;
 }
+.purpose::before {
+  content: '';
+  position: absolute;
+  width: 293px;
+  height: 605px;
+  background: url('../img/decorate/flower-1.png') no-repeat;
+  right: -89px;
+  top: 12px;
+}
 .purpose__h2 {
-  margin-top: 0;
-  font-size: 48px;
-  line-height: 120%;
+  margin: 0;
+  margin-bottom: 23px;
+  font: 400 48px/1.2 Roboto;
 }
 .purpose__p {
-  font-size: 16px;
-  line-height: 130%;
+  font: 400 16px/1.3 Roboto;
 }
 .purpose__h3 {
-  font-size: 24px;
-  line-height: 120%;
+  margin-top: 54px;
+  font: 400 24px/1.2 Roboto;
+}
+.purpose__anotherP {
+  margin-top: 32px;
+  font: 400 16px/1.4 Roboto;
+}
+.purpose__img {
+  margin-left: 8px;
+  margin-top: -1px;
+  backdrop-filter: blur(2px);
 }
 .scheme {
   width: 1600px;
@@ -640,45 +664,51 @@ a {
   opacity: 0.9;
 }
 .scheme .text__wrapper {
-  width: 1160px;
-  height: 835px;
+  min-width: 1160px;
+  min-height: 835px;
   background: rgba(253, 253, 255, 0.52);
-  padding: 41px 99px 59px 99px;
+  padding: 41px 40px 59px 99px;
   border-radius: 20px;
 }
 .scheme__h2 {
-  font-size: 48px;
-  line-height: 120%;
+  font: 400 48px/1.2 Roboto;
+  margin: 0;
+  margin-left: -52px;
   text-align: center;
   color: #fe9013;
 }
 .scheme__p {
-  font-size: 24px;
-  line-height: 120%;
+  margin-top: 30px;
+  margin-bottom: 42px;
+  font: 400 24px/1.2 Roboto;
   color: #333b41;
 }
-.scheme__smaller-text {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 130%;
+.scheme__smaller-normal {
+  width: 863px;
+  margin-top: 10px;
+  font: 400 16px/1.3 Roboto;
   color: #333b41;
+}
+.scheme__smaller-bold {
+  margin-right: -70px;
+  font: 500 16px/1.3 Roboto;
 }
 .scheme__link {
   position: relative;
   color: inherit;
 }
 .scheme__link::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 1px;
-  background: #FE9013;
-  bottom: -5px;
+  background: #fe9013;
+  bottom: -3px;
 }
 .scheme__h3 {
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 130%;
+  margin-top: 60px;
+  margin-left: -60px;
+  font: 400 36px/1.3 Roboto;
   color: #333b41;
   text-align: center;
 }
@@ -687,68 +717,79 @@ a {
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  margin-left: 198px;
+  grid-template-columns: repeat(3, 168px);
+  column-gap: 130px;
+  margin-top: 39px;
+  margin-left: 100px;
 }
 .scheme .order-list .svg-wrapper {
   width: 168px;
   height: 168px;
   background: #ffffff;
   border-radius: 5px;
-  border: 1px solid linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+  border: 1px solid;
+  border-image-source: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-image-slice: 1;
   display: grid;
   justify-content: center;
   align-items: center;
 }
-.scheme .order-list__item p {
-  width: 168px;
-}
 .scheme .order-list__item {
+  width: 168px;
   position: relative;
+}
+.scheme .order-list__item p {
+  margin-top: 30px;
+  font: 400 16px/1.4 Roboto;
+  width: 168px;
 }
 .scheme .order-list .second-item::before,
 .scheme .order-list .second-item::after {
   position: absolute;
-  content: '';
+  content: url("../img/icons/fat-arrow.svg");
   width: 69px;
-  height: 35px;
-  background-image: url('../img/icons/fat-arrow.svg');
-  background-size: 69px 35px;
-  z-index: 20;
-  top: 30%;
-  left: -100px;
+  height: 35.08px;
+  top: 61px;
+  left: -99px;
 }
 .scheme .order-list .second-item::after {
-  left: 200px;
+  top: 57px;
+  left: 197px;
 }
 .scheme__btn {
+  display: inline-block;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-radius: 25px;
-  padding: 16px 50px;
+  padding: 16px 73px;
+  font: 500 16px/1.4 Roboto;
   color: #ffffff;
+  text-align: center;
   text-transform: uppercase;
-  margin-left: 431px;
+  margin-top: 45px;
+  margin-left: 332px;
 }
 .testimonials {
   width: 1600px;
   margin: 0 auto;
   padding: 140px 220px 104px;
   background-image: url("../img/decorate/leaf.svg");
-  background-position: bottom right;
+  background-position: bottom -132px right;
   background-repeat: no-repeat;
+  min-height: 919px;
 }
 .testimonials h2 {
+  font: 400 36px/1.3 Roboto;
   text-align: center;
-  font-size: 36px;
-  line-height: 130%;
   color: #333b41;
+  margin-top: 0;
+  margin-bottom: 46px;
 }
 .testimonials .testimonials-list {
   margin: 0;
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
 .testimonials .testimonials-list__item {
@@ -759,21 +800,31 @@ a {
   height: 391px;
 }
 .testimonials .testimonials-list__item b {
-  font-size: 16px;
-  line-height: 120%;
+  font: 400 16px/1.2 Roboto;
   color: #000000;
 }
 .testimonials .testimonials-list__item .person__location {
-  display: grid;
-  grid-template-columns: auto auto;
+  position: relative;
   grid-area: location;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 120%;
+  display: grid;
+  grid-template-columns: 87px auto;
+  gap: 16px;
+  font: 300 15px/1.2 Roboto;
   color: #bdbdbd;
+}
+.testimonials .testimonials-list__item .person__location::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #BDBDBD;
+  border-radius: 50%;
+  right: 93px;
+  top: 7px;
 }
 .testimonials .testimonials-list__item .person__wrapper {
   display: grid;
+  grid-template-columns: 47px auto;
   grid-template-areas: "svg b" "svg location";
 }
 .testimonials .testimonials-list__item .person__wrapper svg,
@@ -787,9 +838,8 @@ a {
   grid-area: b;
 }
 .testimonials .testimonials-list__item .person__comment {
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 120%;
+  padding-top: 10px;
+  font: 300 15px/1.2 Roboto;
   color: #767474;
 }
 .testimonials__btn {
@@ -797,18 +847,18 @@ a {
   outline: none;
   border: none;
   cursor: pointer;
-  padding: 16px 50px;
+  padding: 16px 85px;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-radius: 5px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
+  font: 500 16px/1.4 Roboto;
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
-  margin-top: 60px;
+  margin-top: 25px;
 }
 .testimonials__range {
+  margin-top: 24px;
+  margin-left: 280px;
   width: 599px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -892,6 +942,7 @@ a {
   place-items: center;
   font: 400 16px/140% Roboto;
   color: #4b9200;
+  cursor: pointer;
 }
 .lists__wrapper {
   display: grid;
@@ -1194,7 +1245,7 @@ input::-webkit-inner-spin-button {
   margin: 0 auto;
   width: 1600px;
   height: 390px;
-  background-image: url("../../img/photos/bg-big-panda-crop.png");
+  background-image: url("../img/photos/bg-big-panda-crop.png");
   background-repeat: no-repeat;
   background-size: 1600px 390px;
 }

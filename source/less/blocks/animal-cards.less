@@ -13,12 +13,12 @@
   position: relative;
   .container(@big-desktop-width);
   padding: 0 220px;
-  min-height: 1103px;
+  min-height: 1106px;
   background-image: url("../img/decorate/flower-2.svg"),
     url("../img/decorate/flower-3.svg");
   background-repeat: no-repeat, no-repeat;
   background-position: bottom right, bottom left;
-  background-size: 368px 275px, 292px 450px;
+  background-size: 368px 275px, 292px 460px;
 
   .animals-list {
     &__item {
@@ -26,6 +26,8 @@
       border: 1px solid;
       border-image-source: @orange-gradient;
       border-image-slice: 1;
+      width: 366px;
+      height: 426px;
 
       .img__wrapper {
         display: inline-block;
@@ -75,19 +77,24 @@
       grid-template-rows: auto auto;
       height: 60px;
       b {
+        text-transform: uppercase;
         grid-area: b;
         margin: 0;
         padding: 0;
       }
       p {
         margin: 0;
+        margin-top: -9px;
+        margin-left: -2px;
         padding: 0;
         grid-area: p;
+        font: 300 15px/1.2 Roboto;
       }
       svg {
         grid-area: svg;
         justify-self: end;
-        align-self: center;
+        align-self: start;
+        margin-right: -7px;
       }
     }
   }
@@ -96,14 +103,12 @@
     .reset-btn();
     background: #fe9013;
     border-radius: 25px;
-    padding: 16px 45px;
+    padding: 16px 58px;
+    font: 500 16px/1.4 Roboto ;
     color: @white;
     text-transform: uppercase;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 140%;
     text-align: center;
-    left: 42%;
+    left: 651px;
     bottom: 100px;
   }
   &__btn-right,
@@ -114,16 +119,15 @@
     border-radius: 50%;
     width: 62px;
     height: 62px;
+    top: 403px;
   }
 
   &__btn-right {
-    top: 34%;
-    right: 0;
+    right: 139px;
   }
 
   &__btn-left {
-    left: 0;
-    top: 34%;
+    left: 139px;
   }
 }
 
