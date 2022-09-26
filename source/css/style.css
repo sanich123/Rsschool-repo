@@ -440,7 +440,7 @@ a {
 }
 .promo::before {
   position: absolute;
-  content: '';
+  content: "";
   top: -80px;
   background-image: url("../img/photos/bg-big-panda.png");
   width: 1600px;
@@ -464,7 +464,7 @@ a {
   color: #FFEE2E;
 }
 .promo::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 465px;
   height: 465px;
@@ -551,7 +551,6 @@ a {
   grid-template-areas: "b svg" "p svg";
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  height: 60px;
 }
 .cards .animals-list .animal-description__wrapper b {
   text-transform: uppercase;
@@ -623,11 +622,11 @@ a {
   color: #333b41;
 }
 .purpose::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 293px;
   height: 605px;
-  background: url('../img/decorate/flower-1.png') no-repeat;
+  background: url("../img/decorate/flower-1.png") no-repeat;
   right: -89px;
   top: 12px;
 }
@@ -646,11 +645,6 @@ a {
 .purpose__anotherP {
   margin-top: 32px;
   font: 400 16px/1.4 Roboto;
-}
-.purpose__img {
-  margin-left: 8px;
-  margin-top: -1px;
-  backdrop-filter: blur(2px);
 }
 .scheme {
   width: 1600px;
@@ -813,11 +807,11 @@ a {
   color: #bdbdbd;
 }
 .testimonials .testimonials-list__item .person__location::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 3px;
   height: 3px;
-  background: #BDBDBD;
+  background: #bdbdbd;
   border-radius: 50%;
   right: 93px;
   top: 7px;
@@ -886,17 +880,20 @@ a {
   padding: 41px 220px;
 }
 .footer__wrapper {
-  background: black;
+  background: #111115;
 }
 .footer .email-label {
   font: 400 24px/120% Roboto;
   color: #ffffff;
+  margin-left: 12px;
 }
 .footer .logo-form__wrapper {
   display: grid;
-  grid-template-columns: 1fr 377px;
+  grid-template-columns: auto 384px;
 }
 .footer #email {
+  margin-top: 14px;
+  margin-left: 9px;
   width: 228px;
   height: 42px;
   padding: 10px 10px 16px 10px;
@@ -921,7 +918,8 @@ a {
   outline: none;
   border: none;
   cursor: pointer;
-  padding: 16px 30px;
+  display: inline-block;
+  padding: 16px 50px;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-radius: 5px;
   font-weight: 500;
@@ -931,6 +929,8 @@ a {
   text-transform: uppercase;
   color: #ffffff;
   min-width: 298px;
+  margin-top: 35px;
+  margin-bottom: -2px;
 }
 .footer__email-form--btn {
   background: #f1f3f2;
@@ -952,11 +952,12 @@ a {
 .lists__wrapper .social-list {
   display: grid;
   grid-auto-rows: auto;
-  gap: 20px;
+  gap: 13px;
   margin: 0;
   padding: 0;
   list-style: none;
   margin-top: 50px;
+  margin-left: 10px;
 }
 .lists__wrapper .social-list__item a {
   position: relative;
@@ -964,7 +965,7 @@ a {
 .lists__wrapper .social-list__item a span {
   margin-left: 30px;
   color: white;
-  font: 400 16px/140% Roboto;
+  font: 400 16px/1.4 Roboto;
 }
 .lists__wrapper .social-list__item a::before {
   content: "";
@@ -995,9 +996,15 @@ a {
   top: 1px;
 }
 .lists__wrapper .footer-nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-left: 12px;
+  margin-bottom: -3px;
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(4, auto);
   align-self: end;
+  column-gap: 45px;
 }
 .lists__wrapper .footer-nav-list a {
   color: white;
@@ -1008,8 +1015,14 @@ a {
   justify-self: end;
   color: white;
 }
-.lists__wrapper .contacts__wrapper a {
+.lists__wrapper .contacts__wrapper a,
+.lists__wrapper .contacts__wrapper span {
+  font: 100 16px/1.3 Roboto;
   color: white;
+}
+.lists__wrapper .contacts__wrapper a {
+  display: inline-block;
+  margin-top: -30px;
 }
 .donating {
   width: 1600px;
@@ -1017,18 +1030,22 @@ a {
   padding: 40px 220px 180px;
 }
 .donating__wrapper {
-  min-height: 1482px;
+  min-height: 1479px;
   background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #febdab 100.95%, rgba(254, 210, 144, 0.7) 106.36%);
 }
 .donating__h2 {
+  margin: -2px;
   font: 400 36px/1.3 Roboto;
   color: white;
 }
 .donating__p {
-  font: 500 16/1.4 Roboto;
+  margin-top: 10px;
+  font: 500 16px/1.4 Roboto;
   color: white;
 }
 .donating__h3 {
+  margin-top: 45px;
+  margin-bottom: 60px;
   font: 400 36px/1.3 Roboto;
   color: #fe9013;
 }
@@ -1042,25 +1059,29 @@ a {
   padding: 40px 92px;
 }
 .calculator__h3 {
-  font: 400 40px/1.2 Roboto;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: -12px;
+  font: 400 48px/1.2 Roboto;
   text-align: center;
   color: #fe9013;
 }
 .calculator__p {
+  margin-top: 20px;
   font: 400 24px/1.2 Roboto;
   color: #333b41;
 }
 .panda-diet__wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 463px auto;
   min-height: 246px;
 }
 .panda-diet__wrapper .number-pandas {
   position: relative;
-  display: grid;
-  grid-auto-rows: 2fr 1fr;
 }
 .panda-diet__wrapper .number-pandas strong {
+  margin-top: 142px;
+  margin-left: 125px;
   display: grid;
   align-items: end;
   font: 500 72px/0.8 Roboto;
@@ -1068,6 +1089,9 @@ a {
   text-transform: uppercase;
 }
 .panda-diet__wrapper .number-pandas span {
+  display: inline-block;
+  margin-left: 215px;
+  margin-top: 12px;
   color: #333b41;
   font: 400 16px/1.4 Roboto;
   text-align: center;
@@ -1077,11 +1101,14 @@ a {
   content: url("../img/icons/icon-decline.svg");
   width: 14px;
   height: 14px;
-  top: 50%;
-  right: 60px;
+  bottom: 102px;
+  right: 63px;
+}
+.panda-diet__wrapper svg {
+  margin-top: 35px;
 }
 .range__wrapper {
-  margin-top: 45px;
+  margin-top: 88px;
   background: #404950;
   height: 27px;
   border-radius: 2px;
@@ -1093,7 +1120,8 @@ a {
 }
 .range__wrapper label {
   position: absolute;
-  top: -30px;
+  top: -36px;
+  left: 5px;
 }
 .range__wrapper #amount {
   -webkit-appearance: none;
@@ -1128,23 +1156,21 @@ a {
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-top: 40px;
+  margin-top: 12px;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   justify-content: space-between;
 }
-.price-list__item {
-  font: 500 25px/1.4 Roboto;
-  text-transform: uppercase;
-  color: #333b41;
-  position: relative;
+.price-list .dollar__wrapper {
+  display: grid;
+  grid-template-columns: min-content auto;
 }
-.price-list__item::before {
-  content: "";
-  display: inline-block;
-  width: 10px;
-  height: 20px;
-  background: url("../img/icons/icon-dollar.svg");
+.price-list .dollar__wrapper svg {
+  display: grid;
+  align-self: center;
+}
+.price-list .dollar__wrapper span {
+  justify-content: start;
 }
 .price-list__item::after {
   content: "";
@@ -1153,15 +1179,60 @@ a {
   height: 10px;
   border-radius: 50%;
   background: #ffee2e;
-  top: -58px;
-  left: 20px;
+  top: -30px;
+  left: 25px;
+}
+.price-list .five-thousand {
+  margin-left: 0;
+}
+.price-list .two-thousand {
+  margin-left: 13px;
+}
+.price-list .one-thousand {
+  margin-left: 18px;
+}
+.price-list .five-hundred {
+  margin-left: 27px;
+}
+.price-list .two-hundred-fifty {
+  margin-left: 35px;
+}
+.price-list .one-hundred {
+  margin-left: 45px;
+}
+.price-list .fifty {
+  margin-left: 52px;
+}
+.price-list .twenty-five {
+  margin-left: 57px;
+}
+.price-list .orange {
+  color: #fe9013;
+}
+.price-list .orange svg path {
+  fill: #fe9013;
+}
+.price-list__item {
+  font: 500 25px/1.4 Roboto;
+  text-transform: uppercase;
+  color: #333b41;
+  position: relative;
+  margin-left: 15px;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+.label__input-number svg {
+  position: relative;
+  left: -20px;
+  top: 5px;
+}
+.label__input-number svg path {
+  fill: #929699;
+}
 .input__number {
-  margin-top: 50px;
+  margin-top: 52px;
   margin-left: 354px;
   border: 1px solid #929699;
   border-radius: 2px;
@@ -1176,45 +1247,38 @@ input::-webkit-inner-spin-button {
   font: 400 16px/1.4 Roboto;
   color: #929699;
 }
-.input__number::before {
-  content: "";
-  position: absolute;
-  display: inline-block;
-  width: 10px;
-  height: 20px;
-  background: url("../img/icons/icon-dollar.svg");
-  background-size: 10px 20px;
-  z-index: 100;
-}
 .radio-btns {
   margin-top: 25px;
-  padding-left: 381px;
+  padding-left: 351px;
 }
 .radio-btns label {
   position: relative;
   font: 400 16px/1.4 Roboto;
-  color: #333B41;
-  margin-left: 20px;
+  color: #333b41;
+  margin-left: 40px;
 }
 .radio-btns label::before {
   position: absolute;
-  content: '';
+  content: "";
   width: 16px;
   height: 16px;
-  border: 1px solid #FE9013;
+  border: 1px solid #fe9013;
   border-radius: 50%;
-  left: -20px;
+  left: -25px;
 }
 .radio-btns label::after {
   position: absolute;
-  content: '';
+  content: "";
   width: 6px;
   height: 6px;
-  background: #FE9013;
+  background: #fe9013;
   border-radius: 50%;
-  left: -15px;
+  left: -20px;
   top: 4px;
   display: none;
+}
+.radio-btns .second-label {
+  margin-left: 55px;
 }
 .radio-btns input {
   visibility: hidden;
@@ -1234,19 +1298,21 @@ input::-webkit-inner-spin-button {
   border-radius: 25px;
   color: white;
   text-transform: uppercase;
-  padding: 16px 40px;
+  padding: 17px 75px;
 }
 .donation__share {
   font: 400 16px/1.4 Roboto;
-  color: #333B41;
-  margin-left: 340px;
+  color: #333b41;
+  text-align: center;
+  margin-top: 31px;
 }
 .promo__crop {
+  position: relative;
   margin: 0 auto;
   width: 1600px;
   height: 390px;
   background-image: url("../img/photos/bg-big-panda-crop.png");
-  background-repeat: no-repeat;
-  background-size: 1600px 390px;
+  top: -3px;
+  z-index: -1;
 }
 /*# sourceMappingURL=style.css.map */
