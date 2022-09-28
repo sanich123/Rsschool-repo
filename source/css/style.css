@@ -397,14 +397,21 @@ a {
   cursor: pointer;
 }
 .header {
-  min-height: 80px;
-  padding: 2px 220px 0;
   width: 1600px;
   margin: 0 auto;
   background-color: #000000;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
+  min-height: 80px;
+  padding: 2px 220px 0;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .header {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 15px 30px;
+  }
 }
 .header__wrapper {
   background: #000000;
@@ -438,6 +445,13 @@ a {
   position: relative;
   min-height: 700px;
 }
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .promo {
+    width: 1000px;
+    margin: 0 auto;
+    min-height: 504px;
+  }
+}
 .promo::before {
   position: absolute;
   content: "";
@@ -446,6 +460,13 @@ a {
   width: 1600px;
   height: 780px;
   z-index: -5;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .promo::before {
+    background: url("../img/photos/bg-big-panda-small-desktop.png") no-repeat;
+    width: 1000px;
+    height: 584px;
+  }
 }
 .promo__h2 {
   width: 500.31px;
@@ -456,7 +477,14 @@ a {
   color: #ffffff;
   top: -2px;
   right: 220px;
-  z-index: 999;
+  z-index: 5;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .promo__h2 {
+    right: 50px;
+    top: -50px;
+    font-size: 85px;
+  }
 }
 .promo__h2--yellow {
   color: #ffee2e;
@@ -471,19 +499,34 @@ a {
   right: 328px;
   top: 13px;
 }
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .promo::after {
+    right: 128px;
+    top: -30px;
+    z-index: -5;
+    width: 367px;
+    height: 367px;
+  }
+}
 .promo__btn {
   position: absolute;
+  display: grid;
+  place-items: center;
   right: 320px;
   bottom: 100px;
   background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-radius: 25px;
-  display: grid;
-  place-items: center;
   min-width: 298px;
   min-height: 54px;
   font: 500 16px/1.4 Roboto;
   color: #ffffff;
   text-transform: uppercase;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .promo__btn {
+    bottom: 47px;
+    right: 150px;
+  }
 }
 @keyframes bottom-top {
   from {
@@ -496,25 +539,39 @@ a {
   }
 }
 .cards {
-  position: relative;
   width: 1600px;
   margin: 0 auto;
+  position: relative;
   padding: 0 220px;
   min-height: 1106px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .cards {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+}
+.cards__wrapper {
   background-image: url("../img/decorate/flower-2.svg"), url("../img/decorate/flower-3.svg");
   background-repeat: no-repeat, no-repeat;
   background-position: bottom right, bottom left;
   background-size: 368px 275px, 292px 460px;
 }
 .cards .animals-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
   column-gap: 30px;
   row-gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .cards .animals-list {
+    row-gap: 92px;
+  }
 }
 .cards .animals-list__item {
   position: relative;
@@ -523,6 +580,12 @@ a {
   border-image-slice: 1;
   width: 366px;
   min-height: 426px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .cards .animals-list__item {
+    width: 294px;
+    min-height: 354px;
+  }
 }
 .cards .animals-list__item .img__wrapper {
   display: inline-block;
@@ -571,11 +634,11 @@ a {
   margin-right: -7px;
 }
 .cards__btn {
-  position: absolute;
   background: transparent;
   outline: none;
   border: none;
   cursor: pointer;
+  position: absolute;
   background: #fe9013;
   border-radius: 25px;
   padding: 16px 58px;
@@ -585,6 +648,12 @@ a {
   text-align: center;
   left: 651px;
   bottom: 100px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .cards__btn {
+    bottom: 140px;
+    left: 351px;
+  }
 }
 .cards__btn-right,
 .cards__btn-left {
@@ -599,11 +668,27 @@ a {
   height: 62px;
   top: 403px;
 }
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .cards__btn-right,
+  .cards__btn-left {
+    top: 370px;
+  }
+}
 .cards__btn-right {
   right: 139px;
 }
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .cards__btn-right {
+    right: 350px;
+  }
+}
 .cards__btn-left {
   left: 139px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .cards__btn-left {
+    left: 350px;
+  }
 }
 .animal-description__wrapper {
   background: #ffffff;
@@ -619,6 +704,15 @@ a {
   gap: 85px;
   color: #333b41;
 }
+@media (min-width: 1000px) {
+  .purpose {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 100px 30px 142px;
+    grid-template-columns: repeat(2, 455px);
+    gap: 31px;
+  }
+}
 .purpose::before {
   content: "";
   position: absolute;
@@ -627,6 +721,11 @@ a {
   background: url("../img/decorate/flower-1.png") no-repeat;
   right: -89px;
   top: 12px;
+}
+@media (min-width: 1000px) {
+  .purpose::before {
+    display: none;
+  }
 }
 .purpose__h2 {
   margin: 0;
@@ -651,6 +750,14 @@ a {
   min-height: 1004px;
   border-radius: 20px;
 }
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .scheme {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 30px 30px 50px 30px;
+    min-height: 876px;
+  }
+}
 .scheme__wrapper {
   background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #febdab 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%);
   opacity: 0.9;
@@ -661,6 +768,13 @@ a {
   background: rgba(253, 253, 255, 0.52);
   padding: 41px 40px 59px 99px;
   border-radius: 20px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .scheme .text__wrapper {
+    min-width: 940px;
+    min-height: 796px;
+    padding: 30px 49px 50px;
+  }
 }
 .scheme__h2 {
   font: 400 48px/1.2 Roboto;
@@ -715,8 +829,7 @@ a {
 }
 .scheme .order-list .svg-wrapper {
   display: grid;
-  justify-content: center;
-  align-items: center;
+  place-items: center;
   width: 168px;
   height: 168px;
   background: #ffffff;

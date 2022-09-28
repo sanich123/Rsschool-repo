@@ -1,50 +1,63 @@
-section(class="cards")
-  ul(class="cards__list animals-list")
-    li(class="animals-list__item")
-      div(class="img__wrapper" data-title="Two-homosexual pandas, Southwest China")
-        img(src="img/photos/two-pandas.png" alt="Two homosexual pandas" width="366px" height="366px")
-      .animal-description__wrapper
-        b Giant Pandas
-        p Native to Southwest China
-        include ../../img/icons/banana.svg
-    li(class="animals-list__item")
-      div(class="img__wrapper" data-title="A fucking eagle, South America")
-        img(src="img/photos/eagle.png" alt="A flying eagle" width="366px" height="366px")
-      .animal-description__wrapper
-        b Eagles
-        p Native to South America
-        include ../../img/icons/meat.svg
-    li(class="animals-list__item")
-      div(class="img__wrapper" data-title="A huge fucking gorilla, Congo")
-        img(src="img/photos/gorilla.png" alt="A huge gorilla" width="366px" height="366px")
-      .animal-description__wrapper
-        b Gorillas
-        p Native to Congo
-        include ../../img/icons/banana.svg
-    li(class="animals-list__item")
-      div(class="img__wrapper" data-title="Fucking sloth, South America")
-        img(src="img/photos/sloth.png" alt="A sloth on the tree" width="366px" height="366px")
-      .animal-description__wrapper
-        b Two-toed Sloth
-        p Mesoamerica, South America
-        include ../../img/icons/banana.svg
-    li(class="animals-list__item")
-      div(class="img__wrapper" data-title="Chester любит читос, Africa")
-        img(src="img/photos/cheetahs.png" alt="Cheetahs" width="366px" height="366px")
-      .animal-description__wrapper
-        b Cheetahs
-        p Native to Africa
-        include ../../img/icons/meat.svg
-    li(class="animals-list__item")
-      div(class="img__wrapper" data-title="Fucking penguins, Antarctica")
-        img(src="img/photos/penguins.png" alt="A penguin in Antarctica" width="366px" height="366px")
-      .animal-description__wrapper
-        b Penguins
-        p Native to Antarctica
-        include ../../img/icons/meat.svg
-  button(class="cards__btn-left" type="button")
-    include ../../img/icons/icon-arrow-left.svg
-  button(class="cards__btn-right" type="button")
-    include ../../img/icons/icon-arrow-right.svg
-  button(class="cards__btn" type="button") Choose your favorite
+.cards__wrapper
+  section(class="cards")
+    ul(class="cards__list animals-list")
+      li(class="animals-list__item")
+        div(class="img__wrapper" data-title="Two-homosexual pandas, Southwest China")
+          picture
+            source(srcset="img/photos/two-pandas-small-desktop.png" media="(min-width: 1000px) and (max-width: 1599px)")
+            img(src="img/photos/two-pandas.png" alt="Two homosexual pandas")
+        .animal-description__wrapper
+          b Giant Pandas
+          p Native to Southwest China
+          include ../../img/icons/banana.svg
+      li(class="animals-list__item")
+        div(class="img__wrapper" data-title="A fucking eagle, South America")
+          picture
+            source(srcset="img/photos/eagle-small-desktop.png" media="(min-width: 1000px) and (max-width: 1599px)")
+            img(src="img/photos/eagle.png" alt="A flying eagle")
+        .animal-description__wrapper
+          b Eagles
+          p Native to South America
+          include ../../img/icons/meat.svg
+      li(class="animals-list__item")
+        div(class="img__wrapper" data-title="A huge fucking gorilla, Congo")
+          picture
+            source(srcset="img/photos/gorilla-small-desktop.png" media="(min-width: 1000px) and (max-width: 1599px)")
+            img(src="img/photos/gorilla.png" alt="A huge gorilla")
+        .animal-description__wrapper
+          b Gorillas
+          p Native to Congo
+          include ../../img/icons/banana.svg
+      li(class="animals-list__item")
+        div(class="img__wrapper" data-title="Fucking sloth, South America")
+          picture
+            source(srcset="img/photos/alligator-small-desktop.png" media="(min-width: 1000px) and (max-width: 1599px)")
+            img(src="img/photos/sloth.png" alt="A sloth on the tree")
+        .animal-description__wrapper
+          b Two-toed Sloth
+          p Mesoamerica, South America
+          include ../../img/icons/banana.svg
+      li(class="animals-list__item")
+        div(class="img__wrapper" data-title="Chester любит читос, Africa")
+          picture
+            source(srcset="img/photos/cheetahs-small-desktop.png" media="(min-width: 1000px) and (max-width: 1599px)")
+            img(src="img/photos/cheetahs.png" alt="Cheetahs")
+        .animal-description__wrapper
+          b Cheetahs
+          p Native to Africa
+          include ../../img/icons/meat.svg
+      li(class="animals-list__item")
+        div(class="img__wrapper" data-title="Fucking penguins, Antarctica")
+          picture
+            source(srcset="img/photos/penguins-small-desktop.png" media="(min-width: 1000px) and (max-width: 1599px)")
+            img(src="img/photos/penguins.png" alt="A penguin in Antarctica")
+        .animal-description__wrapper
+          b Penguins
+          p Native to Antarctica
+          include ../../img/icons/meat.svg
+    button(class="cards__btn-left" type="button")
+      include ../../img/icons/icon-arrow-left.svg
+    button(class="cards__btn-right" type="button")
+      include ../../img/icons/icon-arrow-right.svg
+    button(class="cards__btn" type="button") Choose your favorite
 

@@ -6,6 +6,15 @@
   display: grid;
   grid-template-columns: 609px 465px;
   gap: 85px;
+  color: @dark-grey;
+
+  @media (min-width: 1000px) {
+    .container(@small-desktop-width);
+    padding: 100px 30px 142px;
+    grid-template-columns: repeat(2, 455px);
+    gap: 31px;
+  }
+
 
   &::before {
     content: "";
@@ -15,8 +24,11 @@
     background: url("../img/decorate/flower-1.png") no-repeat;
     right: -89px;
     top: 12px;
+    @media (min-width: 1000px) {
+      display: none;
+    }
   }
-  color: @dark-grey;
+
 
   &__h2 {
     margin: 0;

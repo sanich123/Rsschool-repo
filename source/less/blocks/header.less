@@ -3,19 +3,22 @@
 
 .header {
   .container(@big-desktop-width);
+  background-color: @black;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
   min-height: 80px;
   padding: 2px 220px 0;
+
+  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop-width);
+    padding: 15px 30px;
+  }
 
   &__wrapper {
     background: @black;
     width: auto;
   }
-
-  .container(@big-desktop-width);
-  background-color: @black;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
 
   &__contact {
     margin-left: auto;

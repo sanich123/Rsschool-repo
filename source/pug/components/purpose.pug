@@ -1,10 +1,12 @@
 section(class="purpose")
-  img(
-    class="purpose__img"
-    src="img/photos/asian-man.jpg"
-    alt="The photo of an asian man"
-    width="609px"
-    height="403px")
+  picture
+    source(
+      srcset="img/photos/asian-man-small-desktop.png" media="(min-width: 1000px) and (max-width:1599px)")
+
+    img(
+      class="purpose__img"
+      src="img/photos/asian-man.jpg"
+      alt="The photo of an asian man")
   .purpose__text
     h2(class="purpose__h2") The Backstage of the Wilderness World
     p(class="purpose__p") The site was founded on the basis of a volunteer movement to protect and care for animals.

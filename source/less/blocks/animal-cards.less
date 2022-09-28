@@ -10,17 +10,35 @@
 }
 
 .cards {
-  position: relative;
   .container(@big-desktop-width);
+  position: relative;
   padding: 0 220px;
   min-height: 1106px;
-  background-image: url("../img/decorate/flower-2.svg"),
-    url("../img/decorate/flower-3.svg");
-  background-repeat: no-repeat, no-repeat;
-  background-position: bottom right, bottom left;
-  background-size: 368px 275px, 292px 460px;
+
+  @media (min-width: 1000px) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop-width);
+    padding: 0 30px;
+  }
+
+  &__wrapper {
+    background-image: url("../img/decorate/flower-2.svg"),
+      url("../img/decorate/flower-3.svg");
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom right, bottom left;
+    background-size: 368px 275px, 292px 460px;
+  }
 
   .animals-list {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    column-gap: 30px;
+    row-gap: 20px;
+    .reset-ul();
+
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      row-gap: 92px;
+    }
     &__item {
       position: relative;
       border: 1px solid;
@@ -28,6 +46,10 @@
       border-image-slice: 1;
       width: 366px;
       min-height: 426px;
+      @media (min-width: 1000px) and (max-width: @almost-big-desktop) {
+        width: 294px;
+        min-height: 354px;
+      }
 
       .img__wrapper {
         display: inline-block;
@@ -49,12 +71,7 @@
         right: 50px;
       }
     }
-    .reset-ul();
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-template-rows: repeat(2, auto);
-    column-gap: 30px;
-    row-gap: 20px;
+
     .animal-description__wrapper {
       padding: 8px 16px;
       display: grid;
@@ -86,9 +103,9 @@
     }
   }
   &__btn {
-    position: absolute;
     .reset-btn();
-    background: #fe9013;
+    position: absolute;
+    background: @orange;
     border-radius: 25px;
     padding: 16px 58px;
     font: 500 16px/1.4 Roboto;
@@ -97,6 +114,10 @@
     text-align: center;
     left: 651px;
     bottom: 100px;
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      bottom: 140px;
+      left: 351px;
+    }
   }
   &__btn-right,
   &__btn-left {
@@ -107,14 +128,23 @@
     width: 62px;
     height: 62px;
     top: 403px;
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      top: 370px;
+    }
   }
 
   &__btn-right {
     right: 139px;
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      right: 350px;
+    }
   }
 
   &__btn-left {
     left: 139px;
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      left: 350px;
+    }
   }
 }
 

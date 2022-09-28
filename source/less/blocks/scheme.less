@@ -2,8 +2,13 @@
   .container(@big-desktop-width);
   padding: 69px 220px 100px 220px;
   min-height: 1004px;
-
   border-radius: 20px;
+
+  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop-width);
+    padding: 30px 30px 50px 30px;
+    min-height: 876px;
+  }
 
   &__wrapper {
     background: @super-gradient;
@@ -16,6 +21,11 @@
     background: @another-grey;
     padding: 41px 40px 59px 99px;
     border-radius: 20px;
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      min-width: 940px;
+      min-height: 796px;
+      padding: 30px 49px 50px;
+    }
   }
 
   &__h2 {
@@ -76,8 +86,7 @@
 
     .svg-wrapper {
       display: grid;
-      justify-content: center;
-      align-items: center;
+      place-items: center;
       width: 168px;
       height: 168px;
       background: @white;
