@@ -401,7 +401,7 @@ a {
   padding: 2px 220px 0;
   width: 1600px;
   margin: 0 auto;
-  background-color: black;
+  background-color: #000000;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -422,10 +422,10 @@ a {
   margin-left: 24px;
 }
 .header .nav-list__item a {
-  color: white;
+  color: #ffffff;
 }
 .active {
-  background-color: black;
+  background-color: #000000;
   background-image: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -450,9 +450,7 @@ a {
 .promo__h2 {
   width: 500.31px;
   position: absolute;
-  font-weight: 700;
-  font-size: 106.496px;
-  line-height: 75%;
+  font: 700 106.496px/0.75 Roboto;
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
@@ -461,7 +459,7 @@ a {
   z-index: 999;
 }
 .promo__h2--yellow {
-  color: #FFEE2E;
+  color: #ffee2e;
 }
 .promo::after {
   content: "";
@@ -469,7 +467,7 @@ a {
   width: 465px;
   height: 465px;
   border-radius: 50%;
-  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   right: 328px;
   top: 13px;
 }
@@ -477,7 +475,7 @@ a {
   position: absolute;
   right: 320px;
   bottom: 100px;
-  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-radius: 25px;
   display: grid;
   place-items: center;
@@ -521,15 +519,15 @@ a {
 .cards .animals-list__item {
   position: relative;
   border: 1px solid;
-  border-image-source: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-image-source: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-image-slice: 1;
   width: 366px;
-  height: 426px;
+  min-height: 426px;
 }
 .cards .animals-list__item .img__wrapper {
   display: inline-block;
   position: relative;
-  background: white;
+  background: #ffffff;
 }
 .cards .animals-list__item .img__wrapper img:hover {
   transform: scale(1.03);
@@ -595,7 +593,7 @@ a {
   outline: none;
   border: none;
   cursor: pointer;
-  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-radius: 50%;
   width: 62px;
   height: 62px;
@@ -608,7 +606,7 @@ a {
   left: 139px;
 }
 .animal-description__wrapper {
-  background: white;
+  background: #ffffff;
 }
 .purpose {
   width: 1600px;
@@ -654,7 +652,7 @@ a {
   border-radius: 20px;
 }
 .scheme__wrapper {
-  background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #FEBDAB 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%);
+  background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #febdab 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%);
   opacity: 0.9;
 }
 .scheme .text__wrapper {
@@ -672,8 +670,7 @@ a {
   color: #fe9013;
 }
 .scheme__p {
-  margin-top: 30px;
-  margin-bottom: 42px;
+  margin: 30px 0 42px;
   font: 400 24px/1.2 Roboto;
   color: #333b41;
 }
@@ -717,16 +714,16 @@ a {
   margin-left: 100px;
 }
 .scheme .order-list .svg-wrapper {
+  display: grid;
+  justify-content: center;
+  align-items: center;
   width: 168px;
   height: 168px;
   background: #ffffff;
   border-radius: 5px;
   border: 1px solid;
-  border-image-source: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-image-source: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-image-slice: 1;
-  display: grid;
-  justify-content: center;
-  align-items: center;
 }
 .scheme .order-list__item {
   width: 168px;
@@ -752,7 +749,7 @@ a {
 }
 .scheme__btn {
   display: inline-block;
-  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-radius: 25px;
   padding: 16px 73px;
   font: 500 16px/1.4 Roboto;
@@ -842,7 +839,7 @@ a {
   border: none;
   cursor: pointer;
   padding: 16px 85px;
-  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-radius: 5px;
   font: 500 16px/1.4 Roboto;
   text-align: center;
@@ -883,7 +880,7 @@ a {
   background: #111115;
 }
 .footer .email-label {
-  font: 400 24px/120% Roboto;
+  font: 400 24px/1.2 Roboto;
   color: #ffffff;
   margin-left: 12px;
 }
@@ -900,11 +897,11 @@ a {
   border: 0.7px solid;
   border-image: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-image-slice: 1;
-  background: black;
-  color: white;
+  background: #000000;
+  color: #ffffff;
 }
 .footer #email::placeholder {
-  font: 400 16px/140% Roboto;
+  font: 400 16px/1.4 Roboto;
   color: #bdbdbd;
 }
 .footer__email-form {
@@ -920,11 +917,9 @@ a {
   cursor: pointer;
   display: inline-block;
   padding: 16px 50px;
-  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-radius: 5px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
+  font: 500 16px/1.4 Roboto;
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
@@ -964,7 +959,7 @@ a {
 }
 .lists__wrapper .social-list__item a span {
   margin-left: 30px;
-  color: white;
+  color: #ffffff;
   font: 400 16px/1.4 Roboto;
 }
 .lists__wrapper .social-list__item a::before {
@@ -1007,18 +1002,18 @@ a {
   column-gap: 45px;
 }
 .lists__wrapper .footer-nav-list a {
-  color: white;
+  color: #ffffff;
 }
 .lists__wrapper .contacts__wrapper {
   display: grid;
   grid-auto-rows: auto;
   justify-self: end;
-  color: white;
+  color: #ffffff;
 }
 .lists__wrapper .contacts__wrapper a,
 .lists__wrapper .contacts__wrapper span {
   font: 100 16px/1.3 Roboto;
-  color: white;
+  color: #ffffff;
 }
 .lists__wrapper .contacts__wrapper a {
   display: inline-block;
@@ -1031,7 +1026,7 @@ a {
 }
 .donating__wrapper {
   min-height: 1479px;
-  background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #febdab 100.95%, rgba(254, 210, 144, 0.7) 106.36%);
+  background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #febdab 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%);
 }
 .donating__h2 {
   margin: -2px;
@@ -1294,7 +1289,7 @@ input::-webkit-inner-spin-button {
   outline: none;
   border: none;
   cursor: pointer;
-  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
   border-radius: 25px;
   color: white;
   text-transform: uppercase;

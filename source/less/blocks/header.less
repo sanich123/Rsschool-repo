@@ -12,7 +12,7 @@
   }
 
   .container(@big-desktop-width);
-  background-color: black;
+  background-color: @black;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -31,15 +31,15 @@
 
     &__item {
       a {
-        color: white;
+        color: @white;
       }
     }
   }
 }
 
 .active {
-  background-color: black;
-  background-image: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+  background-color: @black;
+  background-image: @orange-gradient;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
