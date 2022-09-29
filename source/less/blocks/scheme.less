@@ -1,4 +1,9 @@
 .scheme {
+  &__wrapper {
+    background: @super-gradient;
+    opacity: 0.9;
+  }
+
   .container(@big-desktop-width);
   padding: 69px 220px 100px 220px;
   min-height: 1004px;
@@ -8,11 +13,6 @@
     .container(@small-desktop-width);
     padding: 30px 30px 50px 30px;
     min-height: 876px;
-  }
-
-  &__wrapper {
-    background: @super-gradient;
-    opacity: 0.9;
   }
 
   .text__wrapper {
@@ -84,6 +84,10 @@
     margin-top: 39px;
     margin-left: 100px;
 
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      margin-left: 25px;
+    }
+
     .svg-wrapper {
       display: grid;
       place-items: center;
@@ -133,5 +137,8 @@
     text-transform: uppercase;
     margin-top: 45px;
     margin-left: 332px;
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      margin-left: 261px;
+    }
   }
 }

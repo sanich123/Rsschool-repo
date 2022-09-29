@@ -1,10 +1,16 @@
 .testimonials {
+  &__wrapper {
+    background: no-repeat bottom -132px right url("../img/decorate/leaf.svg");
+  }
   .container(@big-desktop-width);
   padding: 140px 220px 104px;
-  background-image: url("../img/decorate/leaf.svg");
-  background-position: bottom -132px right;
-  background-repeat: no-repeat;
   min-height: 919px;
+
+  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop-width);
+    min-height: 842px;
+    padding: 100px 30px 140px;
+  }
 
   h2 {
     font: 400 36px/1.3 Roboto;
@@ -20,12 +26,19 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     &__item {
       background: @almost-white;
       border-radius: 20px;
       padding: 16px 15px 19px 16px;
       width: 268px;
-      height: 391px;
+      min-height: 391px;
+      @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+        width: 293px;
+      }
 
       b {
         font: 400 16px/1.2 Roboto;

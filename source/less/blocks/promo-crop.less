@@ -2,8 +2,24 @@
   position: relative;
   .container(@big-desktop-width);
   width: 1600px;
-  height: 390px;
-  background-image: url("../img/photos/bg-big-panda-crop.png");
-  top: -3px;
-  z-index: -1;
+  min-height: 390px;
+  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop-width);
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 1600px;
+    height: 390px;
+
+    background: url("../img/photos/bg-big-panda-crop.png");
+    top: -3px;
+    z-index: -1;
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      background: no-repeat
+        url("../img/photos/bg-big-panda-crop-small-desktop.png");
+      top: 0;
+    }
+  }
 }

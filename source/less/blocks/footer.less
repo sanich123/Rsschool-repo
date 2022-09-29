@@ -2,11 +2,17 @@
 @import "../mixins/mixins.less";
 
 .footer {
-  background: #111115;
+  &__wrapper {
+    background: @almost-black;
+  }
+
+  background: @almost-black;
   .container(@big-desktop-width);
   padding: 41px 220px;
-  &__wrapper {
-    background: #111115;
+
+  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop-width);
+    padding: 40px 43px 50px;
   }
 
   .email-label {
@@ -136,6 +142,9 @@
     column-gap: 45px;
     a {
       color: @white;
+    }
+    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      column-gap: 0;
     }
   }
 
