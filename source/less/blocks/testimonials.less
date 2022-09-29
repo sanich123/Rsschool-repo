@@ -11,8 +11,10 @@
     min-height: 842px;
     padding: 100px 30px 140px;
   }
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+    padding: 60px 20px 80px;
+    min-height: 668px;
   }
 
   h2 {
@@ -32,6 +34,10 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       grid-template-columns: repeat(3, 1fr);
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      grid-template-columns: none;
+      grid-template-rows: repeat(3, 1fr);
+    }
 
     &__item {
       background: @almost-white;
@@ -41,6 +47,12 @@
       min-height: 391px;
       @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         width: 293px;
+      }
+      @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+        min-height: 0;
+        width: 600px;
+        max-height: 109px;
+        overflow: hidden;
       }
 
       b {
@@ -104,6 +116,10 @@
     text-transform: uppercase;
     color: @white;
     margin-top: 25px;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      padding: 16px 50px;
+      margin-left: 180px;
+    }
   }
   &__range {
     margin-top: 24px;
@@ -112,6 +128,9 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      display: none;
+    }
 
     &::-webkit-slider-runnable-track {
       background: @almost-white2;

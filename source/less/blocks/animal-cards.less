@@ -15,12 +15,13 @@
   padding: 0 220px;
   min-height: 1106px;
 
-  @media (min-width: 1000px) and (max-width: @almost-big-desktop) {
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     .container(@small-desktop);
     padding: 0 30px;
   }
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-.container(@tablet);
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+    padding: 0 20px;
   }
 
   &__wrapper {
@@ -29,6 +30,14 @@
     background-repeat: no-repeat, no-repeat;
     background-position: bottom right, bottom left;
     background-size: 368px 275px, 292px 460px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      background-position: bottom right, bottom left -52px;
+      background-size: 241px 180px, 386px 202px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      background-position: bottom right, bottom left -122px;
+      background-size: 175px 130px, 385px 202px;
+    }
   }
 
   .animals-list {
@@ -39,8 +48,11 @@
     row-gap: 20px;
     .reset-ul();
 
-    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    @media (min-width: @tablet) and (max-width: @almost-big-desktop) {
       row-gap: 92px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      grid-template-columns: repeat(2, auto);
     }
     &__item {
       position: relative;
@@ -52,6 +64,10 @@
       @media (min-width: 1000px) and (max-width: @almost-big-desktop) {
         width: 294px;
         min-height: 354px;
+      }
+      @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+        width: 285px;
+        min-height: 332px;
       }
 
       .img__wrapper {
@@ -121,6 +137,9 @@
       bottom: 140px;
       left: 351px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      left: 180px;
+    }
   }
   &__btn-right,
   &__btn-left {
@@ -134,6 +153,9 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       top: 370px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      top: 360px;
+    }
   }
 
   &__btn-right {
@@ -141,12 +163,18 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       right: 350px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      right: 245px;
+    }
   }
 
   &__btn-left {
     left: 139px;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       left: 350px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      left: 245px;
     }
   }
 }
