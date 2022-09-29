@@ -7,12 +7,15 @@
   }
 
   background: @almost-black;
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   padding: 41px 220px;
 
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
-    .container(@small-desktop-width);
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
     padding: 40px 43px 50px;
+  }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+.container(@tablet);
   }
 
   .email-label {
@@ -143,7 +146,7 @@
     a {
       color: @white;
     }
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       column-gap: 0;
     }
   }

@@ -1,13 +1,17 @@
 @import "../global/variables.less";
 
 .promo {
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   position: relative;
   min-height: 700px;
 
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
-    .container(@small-desktop-width);
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
     min-height: 504px;
+  }
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+    min-height: 373px;
   }
 
   &::before {
@@ -19,10 +23,15 @@
     height: 780px;
     z-index: -5;
 
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       background: url("../img/photos/bg-big-panda-small-desktop.png") no-repeat;
       width: 1000px;
       height: 584px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      background: url("../img/photos/bg-big-panda-tablet.png") no-repeat;
+      width: 640px;
+      height: 373px;
     }
   }
 
@@ -37,10 +46,16 @@
     right: 220px;
     z-index: 5;
 
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       right: 50px;
       top: -50px;
       font-size: 85px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      font-size: 54px;
+      width: 255px;
+      height: 204px;
+      right: 70px;
     }
 
     &--yellow {
@@ -58,12 +73,17 @@
     right: 328px;
     top: 13px;
 
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       right: 128px;
       top: -30px;
       z-index: -5;
       width: 367px;
       height: 367px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      width: 237px;
+      height: 237px;
+      right: 50px;
     }
   }
 
@@ -81,7 +101,7 @@
     color: @white;
     text-transform: uppercase;
 
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       bottom: 47px;
       right: 150px;
     }

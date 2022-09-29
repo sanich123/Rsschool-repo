@@ -10,14 +10,17 @@
 }
 
 .cards {
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   position: relative;
   padding: 0 220px;
   min-height: 1106px;
 
   @media (min-width: 1000px) and (max-width: @almost-big-desktop) {
-    .container(@small-desktop-width);
+    .container(@small-desktop);
     padding: 0 30px;
+  }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+.container(@tablet);
   }
 
   &__wrapper {
@@ -36,7 +39,7 @@
     row-gap: 20px;
     .reset-ul();
 
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       row-gap: 92px;
     }
     &__item {
@@ -114,7 +117,7 @@
     text-align: center;
     left: 651px;
     bottom: 100px;
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       bottom: 140px;
       left: 351px;
     }
@@ -128,21 +131,21 @@
     width: 62px;
     height: 62px;
     top: 403px;
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       top: 370px;
     }
   }
 
   &__btn-right {
     right: 139px;
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       right: 350px;
     }
   }
 
   &__btn-left {
     left: 139px;
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       left: 350px;
     }
   }

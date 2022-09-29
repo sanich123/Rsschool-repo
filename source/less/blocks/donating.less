@@ -6,12 +6,15 @@
     background: @super-gradient;
   }
 
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   padding: 40px 220px 180px;
   margin-top: -3px;
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
-    .container(@small-desktop-width);
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
     padding: 40px 30px 30px;
+  }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+.container(@tablet);
   }
 
   &__h2 {
@@ -42,7 +45,7 @@
 
 .calculator {
   padding: 40px 92px;
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     padding: 20px 44px;
   }
   &__h3 {
@@ -76,7 +79,7 @@
       font: 500 72px/0.8 Roboto;
       text-align: center;
       text-transform: uppercase;
-      @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         text-align: left;
         margin-left: 230px;
       }
@@ -89,7 +92,7 @@
       color: @dark-grey;
       font: 400 16px/1.4 Roboto;
       text-align: center;
-      @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         margin-left: 170px;
       }
     }
@@ -101,7 +104,7 @@
       height: 14px;
       bottom: 102px;
       right: 63px;
-      @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         right: 90px;
       }
     }
@@ -122,7 +125,7 @@
   display: grid;
   align-items: center;
 
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     margin-left: 20px;
   }
 
@@ -144,7 +147,7 @@
       width: 915px;
       background: @light-blue;
       top: 13px;
-      @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         width: 785px;
       }
     }
@@ -170,7 +173,7 @@
   .reset-ul();
   margin-top: 12px;
   display: grid;
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     margin-left: 20px;
   }
 
@@ -262,7 +265,7 @@ input::-webkit-inner-spin-button {
   padding: 16px 0 16px 9px;
   background: @grey;
   position: relative;
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     margin-left: 300px;
   }
   &::placeholder {
@@ -274,7 +277,7 @@ input::-webkit-inner-spin-button {
 .radio-btns {
   margin-top: 25px;
   padding-left: 351px;
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     padding-left: 300px;
   }
   label {
@@ -327,7 +330,7 @@ input::-webkit-inner-spin-button {
   color: @white;
   text-transform: uppercase;
   padding: 17px 75px;
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     margin-left: 285px;
   }
 }

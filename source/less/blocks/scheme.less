@@ -4,15 +4,18 @@
     opacity: 0.9;
   }
 
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   padding: 69px 220px 100px 220px;
   min-height: 1004px;
   border-radius: 20px;
 
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
-    .container(@small-desktop-width);
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
     padding: 30px 30px 50px 30px;
     min-height: 876px;
+  }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+
   }
 
   .text__wrapper {
@@ -21,7 +24,7 @@
     background: @another-grey;
     padding: 41px 40px 59px 99px;
     border-radius: 20px;
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       min-width: 940px;
       min-height: 796px;
       padding: 30px 49px 50px;
@@ -84,7 +87,7 @@
     margin-top: 39px;
     margin-left: 100px;
 
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       margin-left: 25px;
     }
 
@@ -137,7 +140,7 @@
     text-transform: uppercase;
     margin-top: 45px;
     margin-left: 332px;
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       margin-left: 261px;
     }
   }

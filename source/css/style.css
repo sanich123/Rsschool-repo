@@ -411,6 +411,15 @@ a {
     width: 1000px;
     margin: 0 auto;
     padding: 15px 30px;
+    min-height: 34px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .header {
+    padding: 10px 20px;
+    width: 640px;
+    margin: 0 auto;
+    min-height: 34px;
   }
 }
 .header__wrapper {
@@ -421,6 +430,11 @@ a {
   margin-left: auto;
   color: #ffffff;
 }
+@media (min-width: 640px) and (max-width: 999px) {
+  .header__contact {
+    display: none;
+  }
+}
 .header .nav-list {
   display: grid;
   grid-template-columns: repeat(5, auto);
@@ -428,8 +442,37 @@ a {
   gap: 58px;
   margin-left: 24px;
 }
+@media (min-width: 640px) and (max-width: 999px) {
+  .header .nav-list {
+    display: none;
+  }
+}
 .header .nav-list__item a {
   color: #ffffff;
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .header__logo {
+    display: none;
+  }
+}
+.header__logo-tablet {
+  display: none;
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .header__logo-tablet {
+    display: inline-block;
+  }
+}
+.header__menu {
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .header__menu {
+    display: inline-block;
+  }
 }
 .active {
   background-color: #000000;
@@ -452,6 +495,13 @@ a {
     min-height: 504px;
   }
 }
+@media (min-width: 640px) and (max-width: 999px) {
+  .promo {
+    width: 640px;
+    margin: 0 auto;
+    min-height: 373px;
+  }
+}
 .promo::before {
   position: absolute;
   content: "";
@@ -466,6 +516,13 @@ a {
     background: url("../img/photos/bg-big-panda-small-desktop.png") no-repeat;
     width: 1000px;
     height: 584px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .promo::before {
+    background: url("../img/photos/bg-big-panda-tablet.png") no-repeat;
+    width: 640px;
+    height: 373px;
   }
 }
 .promo__h2 {
@@ -484,6 +541,14 @@ a {
     right: 50px;
     top: -50px;
     font-size: 85px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .promo__h2 {
+    font-size: 54px;
+    width: 255px;
+    height: 204px;
+    right: 70px;
   }
 }
 .promo__h2--yellow {
@@ -506,6 +571,13 @@ a {
     z-index: -5;
     width: 367px;
     height: 367px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .promo::after {
+    width: 237px;
+    height: 237px;
+    right: 50px;
   }
 }
 .promo__btn {
@@ -550,6 +622,12 @@ a {
     width: 1000px;
     margin: 0 auto;
     padding: 0 30px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .cards {
+    width: 640px;
+    margin: 0 auto;
   }
 }
 .cards__wrapper {
@@ -719,6 +797,17 @@ a {
     padding: 100px 30px 142px;
     grid-template-columns: repeat(2, 455px);
     gap: 31px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .purpose {
+    width: 640px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .purpose__img {
+    display: none;
   }
 }
 .purpose__h2 {
@@ -1021,6 +1110,12 @@ a {
     padding: 40px 43px 50px;
   }
 }
+@media (min-width: 640px) and (max-width: 999px) {
+  .footer {
+    width: 640px;
+    margin: 0 auto;
+  }
+}
 .footer .email-label {
   font: 400 24px/1.2 Roboto;
   color: #ffffff;
@@ -1181,6 +1276,12 @@ a {
     width: 1000px;
     margin: 0 auto;
     padding: 40px 30px 30px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .donating {
+    width: 640px;
+    margin: 0 auto;
   }
 }
 .donating__h2 {
@@ -1513,6 +1614,12 @@ input::-webkit-inner-spin-button {
 @media (min-width: 1000px) and (max-width: 1599px) {
   .promo__crop {
     width: 1000px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .promo__crop {
+    width: 640px;
     margin: 0 auto;
   }
 }

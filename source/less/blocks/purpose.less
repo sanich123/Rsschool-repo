@@ -1,11 +1,11 @@
 .purpose {
   &__wrapper {
     background: no-repeat right url("../img/decorate/flower-1.png");
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       background: none;
     }
   }
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   position: relative;
   padding: 140px 220px 0 220px;
   min-height: 723px;
@@ -14,11 +14,19 @@
   gap: 85px;
   color: @dark-grey;
 
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
-    .container(@small-desktop-width);
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
     padding: 100px 30px 142px;
     grid-template-columns: repeat(2, 455px);
     gap: 31px;
+  }
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+  }
+  &__img {
+      @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+        display: none;
+      }
   }
 
   &__h2 {

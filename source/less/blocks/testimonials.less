@@ -2,14 +2,17 @@
   &__wrapper {
     background: no-repeat bottom -132px right url("../img/decorate/leaf.svg");
   }
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   padding: 140px 220px 104px;
   min-height: 919px;
 
-  @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
-    .container(@small-desktop-width);
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
     min-height: 842px;
     padding: 100px 30px 140px;
+  }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+
   }
 
   h2 {
@@ -26,7 +29,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 
-    @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       grid-template-columns: repeat(3, 1fr);
     }
 
@@ -36,7 +39,7 @@
       padding: 16px 15px 19px 16px;
       width: 268px;
       min-height: 391px;
-      @media (min-width: @small-desktop-width) and (max-width: @almost-big-desktop) {
+      @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         width: 293px;
       }
 
