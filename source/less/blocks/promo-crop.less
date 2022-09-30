@@ -6,8 +6,9 @@
   @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     .container(@small-desktop);
   }
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-.container(@tablet);
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+    min-height: 332px;
   }
 
   &::after {
@@ -23,6 +24,9 @@
       background: no-repeat
         url("../img/photos/bg-big-panda-crop-small-desktop.png");
       top: 0;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      background: no-repeat url("../img/photos/bg-big-panda-tablet-crop.png");
     }
   }
 }

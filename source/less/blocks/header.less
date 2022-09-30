@@ -54,13 +54,13 @@
   }
   &__logo {
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-      display: none;
-    }
-  }
-  &__logo-tablet {
-    display: none;
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-      display: inline-block;
+      svg {
+        width: 46px;
+        height: 29px;
+        rect {
+          stroke: none;
+        }
+      }
     }
   }
 
@@ -89,12 +89,8 @@
   background: @white;
   grid-template-columns: none;
   grid-template-rows: repeat(3, auto);
-  .header__logo {
-    display: block;
-  }
-  .header__logo-tablet {
-    display: none;
-  }
+  padding: 10px 10px;
+
   .header__menu {
     display: none;
   }
@@ -111,6 +107,7 @@
     display: grid;
     color: @black;
     margin-left: 0;
+    margin-top: 15px;
   }
   .nav-list {
     display: grid;
