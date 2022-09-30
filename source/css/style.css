@@ -1898,11 +1898,13 @@ input::-webkit-inner-spin-button {
   .promo__crop::after {
     background: no-repeat url("../img/photos/bg-big-panda-crop-small-desktop.png");
     top: 0;
+    width: 1000px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .promo__crop::after {
     background: no-repeat url("../img/photos/bg-big-panda-tablet-crop.png");
+    width: 640px;
   }
 }
 /*# sourceMappingURL=style.css.map */
