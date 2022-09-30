@@ -399,6 +399,7 @@ a {
 .header {
   width: 1600px;
   margin: 0 auto;
+  position: relative;
   background-color: #000000;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -436,6 +437,9 @@ a {
   }
 }
 .header .nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(5, auto);
   justify-content: start;
@@ -482,6 +486,46 @@ a {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font: 500 16px/140% Roboto;
+}
+.open--menu {
+  margin: 0 auto;
+  width: 640px;
+  height: 329px;
+  background: #ffffff;
+  grid-template-columns: none;
+  grid-template-rows: repeat(3, auto);
+}
+.open--menu .header__logo {
+  display: block;
+}
+.open--menu .header__logo-tablet {
+  display: none;
+}
+.open--menu .header__menu {
+  display: none;
+}
+.open--menu .header__logo svg path {
+  fill: #fe9013;
+}
+.open--menu .header__logo svg rect {
+  stroke: #fe9013;
+}
+.open--menu .header__contact {
+  display: grid;
+  color: #000000;
+  margin-left: 0;
+}
+.open--menu .nav-list {
+  display: grid;
+  grid-template-columns: none;
+  grid-template-rows: repeat(5, auto);
+  row-gap: 15px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.open--menu .nav-list a {
+  color: #000000;
 }
 .promo {
   width: 1600px;
