@@ -25,8 +25,14 @@
     padding: 60px 20px 80px;
     grid-template-columns: 495px;
   }
+  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    .container(@mobile);
+    padding: 95px 10px 20px;
+    grid-template-columns: none;
+    min-height: 0;
+  }
   &__picture {
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
       display: none;
     }
   }
@@ -35,6 +41,9 @@
     margin: 0;
     margin-bottom: 23px;
     font: 400 48px/1.2 Roboto;
+    @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+      font-size: 24px;
+    }
   }
 
   &__p {

@@ -423,6 +423,14 @@ a {
     min-height: 34px;
   }
 }
+@media (min-width: 320px) and (max-width: 639px) {
+  .header {
+    width: 320px;
+    margin: 0 auto;
+    padding: 2px 10px;
+    min-height: 34px;
+  }
+}
 .header__wrapper {
   background: #000000;
   width: auto;
@@ -431,7 +439,7 @@ a {
   margin-left: auto;
   color: #ffffff;
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (min-width: 320px) and (max-width: 999px) {
   .header__contact {
     display: none;
   }
@@ -446,7 +454,7 @@ a {
   gap: 58px;
   margin-left: 24px;
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (min-width: 320px) and (max-width: 999px) {
   .header .nav-list {
     display: none;
   }
@@ -454,7 +462,7 @@ a {
 .header .nav-list__item a {
   color: #ffffff;
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (min-width: 320px) and (max-width: 999px) {
   .header__logo svg {
     width: 46px;
     height: 29px;
@@ -470,7 +478,7 @@ a {
   cursor: pointer;
   display: none;
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (min-width: 320px) and (max-width: 999px) {
   .header__menu {
     display: inline-block;
   }
@@ -539,6 +547,13 @@ a {
     min-height: 339px;
   }
 }
+@media (min-width: 320px) and (max-width: 639px) {
+  .promo {
+    width: 320px;
+    margin: 0 auto;
+    min-height: 187px;
+  }
+}
 .promo::before {
   position: absolute;
   content: "";
@@ -560,6 +575,14 @@ a {
     background: url("../img/photos/bg-big-panda-tablet.png") no-repeat;
     width: 640px;
     height: 373px;
+  }
+}
+@media (min-width: 320px) and (max-width: 639px) {
+  .promo::before {
+    background: url("../img/photos/bg-big-panda-mobile.png") no-repeat;
+    width: 383px;
+    height: 187px;
+    top: 0;
   }
 }
 .promo__h2 {
@@ -586,6 +609,14 @@ a {
     width: 255px;
     height: 204px;
     right: 70px;
+  }
+}
+@media (min-width: 320px) and (max-width: 639px) {
+  .promo__h2 {
+    font-size: 28px;
+    width: 128px;
+    height: 102px;
+    right: 20px;
   }
 }
 .promo__h2--yellow {
@@ -617,6 +648,13 @@ a {
     right: 50px;
   }
 }
+@media (min-width: 320px) and (max-width: 639px) {
+  .promo::after {
+    width: 119px;
+    height: 119px;
+    right: 40px;
+  }
+}
 .promo__btn {
   position: absolute;
   display: grid;
@@ -635,6 +673,12 @@ a {
   .promo__btn {
     bottom: 47px;
     right: 150px;
+  }
+}
+@media (min-width: 320px) and (max-width: 639px) {
+  .promo__btn {
+    bottom: -80px;
+    right: 15px;
   }
 }
 @keyframes bottom-top {
@@ -668,6 +712,14 @@ a {
     padding: 0 20px;
   }
 }
+@media (min-width: 320px) and (max-width: 639px) {
+  .cards {
+    width: 320px;
+    margin: 0 auto;
+    padding: 20px 25px 60px 10px;
+    min-height: 1562px;
+  }
+}
 .cards__wrapper {
   background-image: url("../img/decorate/flower-2.svg"), url("../img/decorate/flower-3.svg");
   background-repeat: no-repeat, no-repeat;
@@ -684,6 +736,12 @@ a {
   .cards__wrapper {
     background-position: bottom right, bottom left -122px;
     background-size: 175px 130px, 385px 202px;
+  }
+}
+@media (min-width: 320px) and (max-width: 639px) {
+  .cards__wrapper {
+    background-position: bottom right, bottom left;
+    background-size: 85px 71px, 138px 72px;
   }
 }
 .cards .animals-list {
@@ -706,6 +764,11 @@ a {
     grid-template-columns: repeat(2, auto);
   }
 }
+@media (min-width: 320px) and (max-width: 639px) {
+  .cards .animals-list {
+    grid-template-columns: auto;
+  }
+}
 .cards .animals-list__item {
   position: relative;
   border: 1px solid;
@@ -720,7 +783,7 @@ a {
     min-height: 354px;
   }
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (min-width: 320px) and (max-width: 999px) {
   .cards .animals-list__item {
     width: 285px;
     min-height: 332px;
@@ -799,6 +862,12 @@ a {
     left: 180px;
   }
 }
+@media (min-width: 320px) and (max-width: 639px) {
+  .cards__btn {
+    left: 0;
+    bottom: 30px;
+  }
+}
 .cards__btn-right,
 .cards__btn-left {
   position: absolute;
@@ -822,6 +891,12 @@ a {
   .cards__btn-right,
   .cards__btn-left {
     top: 360px;
+  }
+}
+@media (min-width: 320px) and (max-width: 639px) {
+  .cards__btn-right,
+  .cards__btn-left {
+    display: none;
   }
 }
 .cards__btn-right {
@@ -889,7 +964,16 @@ a {
     grid-template-columns: 495px;
   }
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (min-width: 320px) and (max-width: 639px) {
+  .purpose {
+    width: 320px;
+    margin: 0 auto;
+    padding: 95px 10px 20px;
+    grid-template-columns: none;
+    min-height: 0;
+  }
+}
+@media (min-width: 320px) and (max-width: 999px) {
   .purpose__picture {
     display: none;
   }
@@ -898,6 +982,11 @@ a {
   margin: 0;
   margin-bottom: 23px;
   font: 400 48px/1.2 Roboto;
+}
+@media (min-width: 320px) and (max-width: 999px) {
+  .purpose__h2 {
+    font-size: 24px;
+  }
 }
 .purpose__p {
   font: 400 16px/1.3 Roboto;
@@ -935,6 +1024,12 @@ a {
     margin: 0 auto;
     padding: 20px 0;
     min-height: 781px;
+  }
+}
+@media (min-width: 320px) and (max-width: 639px) {
+  .scheme {
+    width: 320px;
+    margin: 0 auto;
   }
 }
 .scheme .text__wrapper {
@@ -1108,6 +1203,11 @@ a {
 .testimonials__wrapper {
   background: no-repeat bottom -132px right url("../img/decorate/leaf.svg");
 }
+@media (min-width: 640px) and (max-width: 999px) {
+  .testimonials__wrapper {
+    background: no-repeat bottom -50px right -20px/150px 147px url("../img/decorate/leaf.svg");
+  }
+}
 @media (min-width: 1000px) and (max-width: 1599px) {
   .testimonials {
     width: 1000px;
@@ -1122,6 +1222,12 @@ a {
     margin: 0 auto;
     padding: 60px 20px 80px;
     min-height: 668px;
+  }
+}
+@media (min-width: 320px) and (max-width: 639px) {
+  .testimonials {
+    width: 320px;
+    margin: 0 auto;
   }
 }
 .testimonials h2 {

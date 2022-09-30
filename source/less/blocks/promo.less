@@ -13,6 +13,10 @@
     .container(@tablet);
     min-height: 339px;
   }
+  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    .container(@mobile);
+    min-height: 187px;
+  }
 
   &::before {
     position: absolute;
@@ -32,6 +36,12 @@
       background: url("../img/photos/bg-big-panda-tablet.png") no-repeat;
       width: 640px;
       height: 373px;
+    }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      background: url("../img/photos/bg-big-panda-mobile.png") no-repeat;
+      width: 383px;
+      height: 187px;
+      top: 0;
     }
   }
 
@@ -56,6 +66,12 @@
       width: 255px;
       height: 204px;
       right: 70px;
+    }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      font-size: 28px;
+      width: 128px;
+      height: 102px;
+      right: 20px;
     }
 
     &--yellow {
@@ -85,6 +101,11 @@
       height: 237px;
       right: 50px;
     }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      width: 119px;
+      height: 119px;
+      right: 40px;
+    }
   }
 
   &__btn {
@@ -104,6 +125,10 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       bottom: 47px;
       right: 150px;
+    }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      bottom: -80px;
+      right: 15px;
     }
   }
 }

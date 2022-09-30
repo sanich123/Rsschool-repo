@@ -1,6 +1,10 @@
 .testimonials {
   &__wrapper {
     background: no-repeat bottom -132px right url("../img/decorate/leaf.svg");
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      background: no-repeat bottom -50px right -20px/150px 147px
+        url("../img/decorate/leaf.svg");
+    }
   }
   .container(@big-desktop);
   padding: 140px 220px 104px;
@@ -15,6 +19,9 @@
     .container(@tablet);
     padding: 60px 20px 80px;
     min-height: 668px;
+  }
+  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    .container(@mobile);
   }
 
   h2 {
