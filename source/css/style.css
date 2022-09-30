@@ -1245,6 +1245,9 @@ a {
   .footer {
     width: 640px;
     margin: 0 auto;
+    padding: 12px 20px;
+    position: relative;
+    min-height: 282px;
   }
 }
 .footer .email-label {
@@ -1277,6 +1280,11 @@ a {
   grid-template-columns: auto auto;
   align-items: end;
   gap: 10px;
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .footer__email-form {
+    display: none;
+  }
 }
 .footer__donation-btn {
   background: transparent;
@@ -1312,6 +1320,13 @@ a {
   grid-template-columns: 1fr 1fr 1fr;
   align-items: end;
 }
+@media (min-width: 640px) and (max-width: 999px) {
+  .lists__wrapper {
+    width: 600px;
+    grid-template-columns: auto auto;
+    margin-top: 83px;
+  }
+}
 .lists__wrapper .social-list {
   display: grid;
   grid-auto-rows: auto;
@@ -1322,6 +1337,15 @@ a {
   margin-top: 50px;
   margin-left: 10px;
 }
+@media (min-width: 640px) and (max-width: 999px) {
+  .lists__wrapper .social-list {
+    position: absolute;
+    row-gap: 40px;
+    margin: 0;
+    top: 20px;
+    right: 20px;
+  }
+}
 .lists__wrapper .social-list__item a {
   position: relative;
 }
@@ -1329,6 +1353,11 @@ a {
   margin-left: 30px;
   color: #ffffff;
   font: 400 16px/1.4 Roboto;
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .lists__wrapper .social-list__item a span {
+    display: none;
+  }
 }
 .lists__wrapper .social-list__item a::before {
   content: "";
@@ -1375,6 +1404,14 @@ a {
 @media (min-width: 1000px) and (max-width: 1599px) {
   .lists__wrapper .footer-nav-list {
     column-gap: 0;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .lists__wrapper .footer-nav-list {
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+    margin-left: 0;
+    column-gap: 5px;
   }
 }
 .lists__wrapper .contacts__wrapper {

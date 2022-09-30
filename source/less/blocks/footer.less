@@ -14,8 +14,11 @@
     .container(@small-desktop);
     padding: 40px 43px 50px;
   }
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-.container(@tablet);
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+    padding: 12px 20px;
+    position: relative;
+    min-height: 282px;
   }
 
   .email-label {
@@ -52,6 +55,9 @@
     grid-template-columns: auto auto;
     align-items: end;
     gap: 10px;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      display: none;
+    }
   }
 
   &__donation-btn {
@@ -87,6 +93,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: end;
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    width: 600px;
+    grid-template-columns: auto auto;
+    margin-top: 83px;
+  }
 
   .social-list {
     display: grid;
@@ -95,6 +106,13 @@
     .reset-ul();
     margin-top: 50px;
     margin-left: 10px;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      position: absolute;
+      row-gap: 40px;
+      margin: 0;
+      top: 20px;
+      right: 20px;
+    }
     &__item a {
       position: relative;
 
@@ -102,6 +120,9 @@
         margin-left: 30px;
         color: @white;
         font: 400 16px/1.4 Roboto;
+        @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+          display: none;
+        }
       }
     }
     &__item a::before {
@@ -140,7 +161,7 @@
     margin-left: 12px;
     margin-bottom: -3px;
     display: grid;
-    grid-template-columns: repeat(4, auto;);
+    grid-template-columns: repeat(4, auto);
     align-self: end;
     column-gap: 45px;
     a {
@@ -148,6 +169,12 @@
     }
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       column-gap: 0;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      grid-template-columns: repeat(4, auto);
+      justify-content: space-between;
+      margin-left: 0;
+      column-gap: 5px;
     }
   }
 
