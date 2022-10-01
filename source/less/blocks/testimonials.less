@@ -5,6 +5,10 @@
       background: no-repeat bottom -50px right -20px/150px 147px
         url("../img/decorate/leaf.svg");
     }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      background: no-repeat bottom right/77px 75px
+        url("../img/decorate/leaf.svg");
+    }
   }
   .container(@big-desktop);
   padding: 140px 220px 104px;
@@ -22,6 +26,8 @@
   }
   @media (min-width: @mobile) and (max-width: @almost-tablet) {
     .container(@mobile);
+    padding: 30px 11px 60px;
+    min-height: 580px;
   }
 
   h2 {
@@ -30,6 +36,9 @@
     color: @dark-grey;
     margin-top: 0;
     margin-bottom: 46px;
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      font-size: 24px;
+    }
   }
 
   .testimonials-list {
@@ -41,9 +50,10 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       grid-template-columns: repeat(3, 1fr);
     }
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
       grid-template-columns: none;
       grid-template-rows: repeat(3, 1fr);
+      row-gap: 15px;
     }
 
     &__item {
@@ -55,11 +65,15 @@
       @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         width: 293px;
       }
-      @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
         min-height: 0;
         width: 600px;
         max-height: 109px;
         overflow: hidden;
+      }
+      @media (min-width: @mobile) and (max-width: @almost-tablet) {
+        min-height: 0;
+        width: 299px;
       }
 
       b {
@@ -127,6 +141,10 @@
       padding: 16px 50px;
       margin-left: 180px;
     }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      margin-left: 40px;
+      padding: 16px 40px;
+    }
   }
   &__range {
     margin-top: 24px;
@@ -135,7 +153,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
       display: none;
     }
 

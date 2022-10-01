@@ -20,6 +20,36 @@
     position: relative;
     min-height: 282px;
   }
+  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    position: relative;
+    .container(@mobile);
+    padding: 20px 9px;
+  }
+
+  &__logo svg {
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      display: none;
+    }
+  }
+  &__logo-mobile {
+    @media (min-width: @tablet) {
+      display: none;
+    }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      display: inline-block;
+      position: relative;
+      font: 400 19px/1.2 Roboto;
+      color: @white;
+      text-align: center;
+      width: 128px;
+      margin-left: 85px;
+      &::before {
+        position: absolute;
+        content: url("../img/svg/bamboo.svg");
+        left: 75px;
+      }
+    }
+  }
 
   .email-label {
     font: 400 24px/1.2 Roboto;
@@ -55,7 +85,7 @@
     grid-template-columns: auto auto;
     align-items: end;
     gap: 10px;
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
       display: none;
     }
   }
@@ -73,6 +103,9 @@
     min-width: 298px;
     margin-top: 35px;
     margin-bottom: -2px;
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      margin-top: 75px;
+    }
   }
 
   &__email-form--btn {
@@ -98,6 +131,13 @@
     grid-template-columns: auto auto;
     margin-top: 83px;
   }
+  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    width: auto;
+    grid-template-columns: none;
+    grid-template-rows: repeat(2, 1fr);
+    margin-top: 40px;
+    row-gap: 20px;
+  }
 
   .social-list {
     display: grid;
@@ -113,6 +153,14 @@
       top: 20px;
       right: 20px;
     }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      position: absolute;
+      top: 20px;
+      grid-auto-rows: initial;
+      grid-template-columns: repeat(4, auto);
+      column-gap: 60px;
+      margin-left: 60px;
+    }
     &__item a {
       position: relative;
 
@@ -120,7 +168,7 @@
         margin-left: 30px;
         color: @white;
         font: 400 16px/1.4 Roboto;
-        @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
           display: none;
         }
       }
@@ -176,6 +224,11 @@
       margin-left: 0;
       column-gap: 5px;
     }
+    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+      order: 2;
+      margin-left: 0;
+      column-gap: 0;
+    }
   }
 
   .contacts__wrapper {
@@ -192,5 +245,8 @@
       display: inline-block;
       margin-top: -30px;
     }
+  }
+  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    order: 1;
   }
 }
