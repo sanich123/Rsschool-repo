@@ -20,14 +20,14 @@
     position: relative;
     min-height: 282px;
   }
-  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+  @media (max-width: @almost-tablet) {
     position: relative;
     .container(@mobile);
     padding: 20px 9px;
   }
 
   &__logo svg {
-    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    @media (max-width: @almost-tablet) {
       display: none;
     }
   }
@@ -35,7 +35,7 @@
     @media (min-width: @tablet) {
       display: none;
     }
-    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    @media (max-width: @almost-tablet) {
       display: inline-block;
       position: relative;
       font: 400 19px/1.2 Roboto;
@@ -60,6 +60,9 @@
   .logo-form__wrapper {
     display: grid;
     grid-template-columns: auto 384px;
+    @media (max-width: @almost-tablet) {
+      grid-template-columns: auto;
+    }
   }
   #email {
     margin-top: 14px;
@@ -85,7 +88,7 @@
     grid-template-columns: auto auto;
     align-items: end;
     gap: 10px;
-    @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+    @media (max-width: @almost-small-desktop) {
       display: none;
     }
   }
@@ -103,7 +106,7 @@
     min-width: 298px;
     margin-top: 35px;
     margin-bottom: -2px;
-    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    @media (max-width: @almost-tablet) {
       margin-top: 75px;
     }
   }
@@ -131,7 +134,7 @@
     grid-template-columns: auto auto;
     margin-top: 83px;
   }
-  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+  @media (max-width: @almost-tablet) {
     width: auto;
     grid-template-columns: none;
     grid-template-rows: repeat(2, 1fr);
@@ -153,7 +156,7 @@
       top: 20px;
       right: 20px;
     }
-    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    @media (max-width: @almost-tablet) {
       position: absolute;
       top: 20px;
       grid-auto-rows: initial;
@@ -168,7 +171,7 @@
         margin-left: 30px;
         color: @white;
         font: 400 16px/1.4 Roboto;
-        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+        @media (max-width: @almost-small-desktop) {
           display: none;
         }
       }
@@ -224,7 +227,7 @@
       margin-left: 0;
       column-gap: 5px;
     }
-    @media (min-width: @mobile) and (max-width: @almost-tablet) {
+    @media (max-width: @almost-tablet) {
       order: 2;
       margin-left: 0;
       column-gap: 0;
@@ -246,7 +249,7 @@
       margin-top: -30px;
     }
   }
-  @media (min-width: @mobile) and (max-width: @almost-tablet) {
+  @media (max-width: @almost-tablet) {
     order: 1;
   }
 }
