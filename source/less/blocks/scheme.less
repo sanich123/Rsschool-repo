@@ -53,6 +53,9 @@
     margin-left: -52px;
     text-align: center;
     color: @orange;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-left: 0;
+    }
     @media (max-width: @almost-tablet) {
       font-size: 24px;
     }
@@ -62,31 +65,13 @@
     margin: 30px 0 42px;
     font: 400 24px/1.2 Roboto;
     color: @dark-grey;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-top: 20px;
+      margin-right: -5px;
+      margin-bottom: 20px;
+    }
     @media (max-width: @almost-tablet) {
       font-size: 18px;
-    }
-  }
-  &__h3 {
-    margin-top: 60px;
-    margin-left: -60px;
-    font: 400 36px/1.3 Roboto;
-    color: @dark-grey;
-    text-align: center;
-    @media (max-width: @almost-tablet) {
-      font-size: 24px;
-    }
-  }
-
-  &__smaller-normal {
-    width: 863px;
-    margin-top: 10px;
-    font: 400 16px/1.3 Roboto;
-    color: @dark-grey;
-    @media (max-width: @almost-small-desktop) {
-      width: auto;
-    }
-    @media (max-width: @almost-tablet) {
-      display: none;
     }
   }
 
@@ -95,6 +80,42 @@
     font: 500 16px/1.3 Roboto;
     @media (max-width: @almost-tablet) {
       display: none;
+    }
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      display: inline-block;
+      margin-top: 0;
+      width: 800px;
+    }
+  }
+
+  &__smaller-normal {
+    width: 863px;
+    margin-top: 10px;
+    font: 400 16px/1.3 Roboto;
+    color: @dark-grey;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-top: 11px;
+      width: 823px;
+    }
+    @media (max-width: @almost-small-desktop) {
+      width: auto;
+    }
+    @media (max-width: @almost-tablet) {
+      display: none;
+    }
+  }
+  &__h3 {
+    margin-top: 60px;
+    margin-left: -60px;
+    font: 400 36px/1.3 Roboto;
+    color: @dark-grey;
+    text-align: center;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-top: 40px;
+      margin-left: 0;
+    }
+    @media (max-width: @almost-tablet) {
+      font-size: 24px;
     }
   }
 
@@ -110,6 +131,9 @@
     height: 1px;
     background: @orange;
     bottom: -3px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      bottom: -1px;
+    }
   }
 
   .order-list {
@@ -121,7 +145,7 @@
     margin-left: 100px;
 
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
-      margin-left: 25px;
+      margin-left: 39px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       margin-left: 0;
@@ -140,9 +164,7 @@
       height: 168px;
       background: @white;
       border-radius: 5px;
-      border: 1px solid;
-      border-image-source: @orange-gradient;
-      border-image-slice: 1;
+      border: 1px solid @orange;
     }
     &__item {
       width: 168px;
@@ -160,7 +182,7 @@
         position: absolute;
         content: url("../img/icons/fat-arrow.svg");
         width: 69px;
-        height: 35.08px;
+        height: 35px;
         top: 61px;
         left: -99px;
         z-index: 2;
@@ -177,6 +199,10 @@
       &::after {
         top: 57px;
         left: 197px;
+        @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+          left: 193px;
+          top: 62px;
+        }
         @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
           top: -17px;
           left: 148px;
@@ -188,6 +214,9 @@
       }
       &::before {
         left: -70px;
+        @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+          left: -100px;
+        }
         @media (max-width: @almost-tablet) {
           top: -80px;
           left: 120px;
@@ -208,7 +237,8 @@
     margin-top: 45px;
     margin-left: 332px;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
-      margin-left: 261px;
+      margin-left: 271px;
+      margin-top: 56px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       margin-left: 151px;

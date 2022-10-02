@@ -1,6 +1,9 @@
 .testimonials {
   &__wrapper {
     background: no-repeat bottom -132px right url("../img/decorate/leaf.svg");
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      background: no-repeat bottom -55px right -50px/300px 295px url("../img/decorate/leaf.svg")
+    }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       background: no-repeat bottom -50px right -20px/150px 147px
         url("../img/decorate/leaf.svg");
@@ -38,6 +41,9 @@
     margin-bottom: 46px;
     @media (max-width: @almost-tablet) {
       font-size: 24px;
+    }
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-bottom: 28px;
     }
   }
 
@@ -146,6 +152,9 @@
     text-transform: uppercase;
     color: @white;
     margin-top: 25px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-top: 45px;
+    }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       padding: 16px 50px;
       margin-left: 180px;
@@ -159,9 +168,15 @@
     margin-top: 24px;
     margin-left: 280px;
     width: 599px;
+    height: 8px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-top: 22px;
+      margin-left: 270px;
+      width: 390px;
+    }
     @media (max-width: @almost-small-desktop) {
       display: none;
     }
@@ -180,6 +195,9 @@
       width: 115.19px;
       height: 6px;
       cursor: pointer;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      width: 75px;
+    }
     }
   }
 }

@@ -5,7 +5,8 @@
       background: none;
     }
     @media (max-width: @almost-tablet) {
-      background: no-repeat top right/105px 317px url('../img/decorate/flower-1.png')
+      background: no-repeat top right/105px 317px
+        url("../img/decorate/flower-1.png");
     }
   }
   .container(@big-desktop);
@@ -19,9 +20,10 @@
 
   @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     .container(@small-desktop);
-    padding: 100px 30px 142px;
+    padding: 100px 30px 124px;
     grid-template-columns: repeat(2, 455px);
     gap: 31px;
+    min-height: 0;
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
     .container(@tablet);
@@ -37,6 +39,9 @@
   &__picture {
     @media (max-width: @almost-small-desktop) {
       display: none;
+    }
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-top: 8px;
     }
   }
 
@@ -61,5 +66,8 @@
   &__anotherP {
     margin-top: 32px;
     font: 400 16px/1.4 Roboto;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      width: 454px;
+    }
   }
 }

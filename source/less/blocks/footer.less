@@ -12,7 +12,7 @@
 
   @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     .container(@small-desktop);
-    padding: 40px 43px 50px;
+    padding: 40px 30px 50px;
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
     .container(@tablet);
@@ -60,6 +60,9 @@
   .logo-form__wrapper {
     display: grid;
     grid-template-columns: auto 384px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      grid-template-columns: auto 420px;
+    }
     @media (max-width: @almost-tablet) {
       grid-template-columns: auto;
     }
@@ -90,6 +93,9 @@
     gap: 10px;
     @media (max-width: @almost-small-desktop) {
       display: none;
+    }
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      grid-template-columns: 1fr 1fr;
     }
   }
 
@@ -122,6 +128,9 @@
     font: 400 16px/140% Roboto;
     color: @green;
     cursor: pointer;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      color: @black;
+    }
   }
 }
 
@@ -129,6 +138,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: end;
+  // @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+  //   grid-template-columns:
+  // }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
     width: 600px;
     grid-template-columns: auto auto;
@@ -219,7 +231,8 @@
       color: @white;
     }
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
-      column-gap: 0;
+      margin-left: -22px;
+      column-gap: 45px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       grid-template-columns: repeat(4, auto);
@@ -248,6 +261,9 @@
       display: inline-block;
       margin-top: -30px;
     }
+  }
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    margin-top: 2px;
   }
   @media (max-width: @almost-tablet) {
     order: 1;
