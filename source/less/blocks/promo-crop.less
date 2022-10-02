@@ -10,6 +10,10 @@
     .container(@tablet);
     min-height: 332px;
   }
+  @media (max-width: @almost-tablet) {
+    .container(@mobile);
+    min-height: 187px;
+  }
 
   &::after {
     position: absolute;
@@ -29,6 +33,10 @@
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       background: no-repeat url("../img/photos/bg-big-panda-tablet-crop.png");
       width: @tablet;
+    }
+    @media (max-width: @almost-tablet) {
+      background: no-repeat url("../img/photos/bg-big-panda-mobile-crop.png");
+      width: @mobile;
     }
   }
 }
