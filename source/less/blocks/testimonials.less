@@ -2,11 +2,12 @@
   &__wrapper {
     background: no-repeat bottom -132px right url("../img/decorate/leaf.svg");
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
-      background: no-repeat bottom -55px right -50px/300px 295px url("../img/decorate/leaf.svg")
+      background: no-repeat bottom -55px right -50px/300px 295px
+        url("../img/decorate/leaf.svg");
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-      background: no-repeat bottom -50px right -20px/150px 147px
-        url("../img/decorate/leaf.svg");
+      background: no-repeat bottom -57px right -20px/145px 189px
+        url(../img/decorate/leaf.svg);
     }
     @media (max-width: @almost-tablet) {
       background: no-repeat bottom right/77px 75px
@@ -39,6 +40,9 @@
     color: @dark-grey;
     margin-top: 0;
     margin-bottom: 46px;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-bottom: 27px;
+    }
     @media (max-width: @almost-tablet) {
       font-size: 24px;
     }
@@ -156,7 +160,7 @@
       margin-top: 45px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-      padding: 16px 50px;
+      padding: 16px 54px;
       margin-left: 180px;
     }
     @media (max-width: @almost-tablet) {
@@ -195,9 +199,9 @@
       width: 115.19px;
       height: 6px;
       cursor: pointer;
-    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
-      width: 75px;
-    }
+      @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+        width: 75px;
+      }
     }
   }
 }

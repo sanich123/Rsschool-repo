@@ -1,6 +1,9 @@
 .purpose {
   &__wrapper {
     background: no-repeat right url("../img/decorate/flower-1.png");
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      background: no-repeat top right -20px/148px 476px url(../img/decorate/flower-1.png);
+    }
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       background: none;
     }
@@ -27,8 +30,9 @@
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
     .container(@tablet);
-    padding: 60px 20px 80px;
+    padding: 60px 20px 61px;
     grid-template-columns: 495px;
+    min-height: 0;
   }
   @media (max-width: @almost-tablet) {
     .container(@mobile);
@@ -49,7 +53,10 @@
     margin: 0;
     margin-bottom: 23px;
     font: 400 48px/1.2 Roboto;
-    @media (max-width: @almost-small-desktop) {
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-left: 3px;
+    }
+    @media (max-width: @almost-tablet) {
       font-size: 24px;
     }
   }
@@ -61,11 +68,19 @@
   &__h3 {
     margin-top: 54px;
     font: 400 24px/1.2 Roboto;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-top: 29px;
+      margin-left: 3px;
+      margin-bottom: 20px;
+    }
   }
 
   &__anotherP {
     margin-top: 32px;
     font: 400 16px/1.4 Roboto;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-top: 0;
+    }
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       width: 454px;
     }
