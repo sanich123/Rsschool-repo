@@ -1,9 +1,44 @@
 .promo__crop {
   position: relative;
-  .container(@big-desktop-width);
+  .container(@big-desktop);
   width: 1600px;
-  height: 390px;
-  background-image: url("../img/photos/bg-big-panda-crop.png");
-  top: -3px;
-  z-index: -1;
+  min-height: 390px;
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
+  }
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+    min-height: 334px;
+  }
+  @media (max-width: @almost-tablet) {
+    .container(@mobile);
+    min-height: 187px;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 1600px;
+    height: 390px;
+
+    background: url("../img/photos/bg-big-panda-crop.png");
+    top: -3px;
+    z-index: -1;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      background: no-repeat
+        url("../img/photos/bg-big-panda-crop-small-desktop.png");
+      top: 0;
+      width: @small-desktop;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      background: no-repeat url("../img/photos/bg-big-panda-tablet-crop.png");
+      width: @tablet;
+      top: -1px;
+    }
+    @media (max-width: @almost-tablet) {
+      background: no-repeat url("../img/photos/bg-big-panda-mobile-crop.png");
+      width: @mobile;
+      top: 0;
+    }
+  }
 }

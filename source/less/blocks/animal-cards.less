@@ -10,29 +10,87 @@
 }
 
 .cards {
+  .container(@big-desktop);
   position: relative;
-  .container(@big-desktop-width);
   padding: 0 220px;
   min-height: 1106px;
-  background-image: url("../img/decorate/flower-2.svg"),
-    url("../img/decorate/flower-3.svg");
-  background-repeat: no-repeat, no-repeat;
-  background-position: bottom right, bottom left;
-  background-size: 368px 275px, 292px 460px;
+
+  @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    .container(@small-desktop);
+    padding: 0 30px;
+    min-height: 1076px;
+  }
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+    padding: 0 20px;
+    min-height: 972px;
+  }
+  @media (max-width: @almost-tablet) {
+    .container(@mobile);
+    padding: 20px 25px 0 10px;
+    min-height: 1542px;
+  }
+
+  &__wrapper {
+    background-image: url("../img/decorate/flower-2.svg"),
+      url("../img/decorate/flower-3.svg");
+    background-repeat: no-repeat, no-repeat;
+    background-position: bottom right, bottom left;
+    background-size: 368px 275px, 292px 460px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      background-position: bottom right, bottom left -63px;
+      background-size: 241px 180px, 386px 202px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      background-position: bottom right, bottom left -122px;
+      background-size: 175px 130px, 385px 202px;
+    }
+    @media (max-width: @almost-tablet) {
+      background-position: bottom -2px right -15px, bottom left -32px;
+      background-size: 85px 71px, 138px 72px;
+    }
+  }
 
   .animals-list {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    column-gap: 30px;
+    row-gap: 20px;
+    .reset-ul();
+
+    @media (min-width: @tablet) and (max-width: @almost-big-desktop) {
+      row-gap: 92px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      grid-template-columns: repeat(2, auto);
+    }
+    @media (max-width: @almost-tablet) {
+      grid-template-columns: auto;
+    }
     &__item {
       position: relative;
-      border: 1px solid;
-      border-image-source: @orange-gradient;
-      border-image-slice: 1;
+      border: 1px solid @orange;
+      border-radius: 6px;
       width: 366px;
-      height: 426px;
+      min-height: 426px;
+      @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+        width: 294px;
+        min-height: 354px;
+      }
+      @media (max-width: @almost-small-desktop) {
+        width: 285px;
+        min-height: 332px;
+      }
+      img {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
 
       .img__wrapper {
         display: inline-block;
         position: relative;
-        background: white;
+        background: @white;
         img:hover {
           transform: scale(1.03);
         }
@@ -49,12 +107,7 @@
         right: 50px;
       }
     }
-    .reset-ul();
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-template-rows: repeat(2, auto);
-    column-gap: 30px;
-    row-gap: 20px;
+
     .animal-description__wrapper {
       padding: 8px 16px;
       display: grid;
@@ -63,11 +116,19 @@
         "p svg";
       grid-template-columns: auto auto;
       grid-template-rows: auto auto;
+      @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+        padding: 0 16px;
+      }
       b {
         text-transform: uppercase;
         grid-area: b;
         margin: 0;
         padding: 0;
+        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+          font: 500 12.5px/1.4 Roboto;
+          margin-left: -4px;
+          margin-top: 5px;
+        }
       }
       p {
         margin: 0;
@@ -76,19 +137,29 @@
         padding: 0;
         grid-area: p;
         font: 300 15px/1.2 Roboto;
+        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+          font: 300 11px/1.2 Roboto;
+          margin-left: -4px;
+          margin-top: -3px;
+        }
       }
       svg {
         grid-area: svg;
         justify-self: end;
         align-self: start;
         margin-right: -7px;
+        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+          width: 25px;
+          height: 22px;
+          margin-top: 9px;
+        }
       }
     }
   }
   &__btn {
-    position: absolute;
     .reset-btn();
-    background: #fe9013;
+    position: absolute;
+    background: @orange;
     border-radius: 25px;
     padding: 16px 58px;
     font: 500 16px/1.4 Roboto;
@@ -97,6 +168,17 @@
     text-align: center;
     left: 651px;
     bottom: 100px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      bottom: 140px;
+      left: 351px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      left: 172px;
+    }
+    @media (max-width: @almost-tablet) {
+      left: 10px;
+      bottom: 59px;
+    }
   }
   &__btn-right,
   &__btn-left {
@@ -107,17 +189,44 @@
     width: 62px;
     height: 62px;
     top: 403px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      top: 370px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      top: 342px;
+    }
+    @media (max-width: @almost-tablet) {
+      display: none;
+    }
   }
 
   &__btn-right {
     right: 139px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      right: 350px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      right: 245px;
+    }
   }
 
   &__btn-left {
     left: 139px;
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      left: 350px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      left: 245px;
+    }
   }
 }
 
 .animal-description__wrapper {
-  background: white;
+  background: @white;
+}
+
+@media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+  .penguin, .chester {
+    display: none;
+  }
 }
