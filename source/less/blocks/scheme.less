@@ -62,6 +62,7 @@
     }
     @media (max-width: @almost-tablet) {
       font-size: 24px;
+      margin-left: 0;
     }
   }
 
@@ -81,6 +82,10 @@
     }
     @media (max-width: @almost-tablet) {
       font-size: 18px;
+      margin-left: 0;
+      text-align: center;
+      margin-top: 12px;
+      margin-bottom: 18px;
     }
   }
 
@@ -130,6 +135,8 @@
     }
     @media (max-width: @almost-tablet) {
       font-size: 24px;
+      margin-left: 0;
+      margin-top: 10px;
     }
   }
 
@@ -170,6 +177,8 @@
       margin-left: 66px;
       grid-template-columns: none;
       grid-template-rows: repeat(3, auto);
+      margin-top: 0px;
+      row-gap: 19px;
     }
 
     .svg-wrapper {
@@ -188,6 +197,9 @@
         margin-top: 30px;
         font: 400 16px/1.4 Roboto;
         width: 168px;
+        @media (max-width: @almost-tablet) {
+          margin-top: 10px;
+        }
       }
     }
 
@@ -201,6 +213,7 @@
         top: 61px;
         left: -99px;
         z-index: 2;
+        transform: rotate(86deg);
         @media (max-width: @almost-small-desktop) {
           content: url("../img/icons/green-arrow.svg");
           width: 63.12px;
@@ -223,8 +236,9 @@
           left: 135px;
         }
         @media (max-width: @almost-tablet) {
+
           top: 165px;
-          left: 120px;
+          left: 130px;
         }
       }
       &::before {
@@ -233,8 +247,8 @@
           left: -100px;
         }
         @media (max-width: @almost-tablet) {
-          top: -80px;
-          left: 120px;
+          top: -81px;
+          left: 134px;
         }
       }
     }
@@ -261,6 +275,7 @@
     }
     @media (max-width: @almost-tablet) {
       margin-left: 0;
+      margin-top: 20px;
     }
   }
 }

@@ -24,6 +24,7 @@
     position: relative;
     .container(@mobile);
     padding: 20px 9px;
+    min-height: 334px;
   }
 
   &__logo svg {
@@ -116,7 +117,7 @@
       margin-top: 26px;
     }
     @media (max-width: @almost-tablet) {
-      margin-top: 75px;
+      margin-top: 86px;
     }
   }
 
@@ -170,11 +171,11 @@
     }
     @media (max-width: @almost-tablet) {
       position: absolute;
-      top: 20px;
+      top: 28px;
       grid-auto-rows: initial;
       grid-template-columns: repeat(4, auto);
-      column-gap: 60px;
-      margin-left: 60px;
+      column-gap: 56px;
+      margin-left: 62px;
     }
     &__item a {
       position: relative;
@@ -243,8 +244,9 @@
     }
     @media (max-width: @almost-tablet) {
       order: 2;
-      margin-left: 0;
-      column-gap: 0;
+      margin-left: 12px;
+      margin-top: 6px;
+      column-gap: 16px;
     }
   }
 
@@ -261,12 +263,17 @@
     a {
       display: inline-block;
       margin-top: -30px;
+      @media (min-width: @almost-tablet) {
+        margin-top: -22px;
+        margin-left: 5px;
+      }
     }
   }
   @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     margin-top: 2px;
   }
   @media (max-width: @almost-tablet) {
+    margin-top: 60px;
     order: 1;
   }
 }

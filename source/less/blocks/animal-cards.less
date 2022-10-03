@@ -27,8 +27,8 @@
   }
   @media (max-width: @almost-tablet) {
     .container(@mobile);
-    padding: 20px 25px 60px 10px;
-    min-height: 1562px;
+    padding: 20px 25px 0 10px;
+    min-height: 1542px;
   }
 
   &__wrapper {
@@ -46,7 +46,7 @@
       background-size: 175px 130px, 385px 202px;
     }
     @media (max-width: @almost-tablet) {
-      background-position: bottom right, bottom left;
+      background-position: bottom -2px right -15px, bottom left -32px;
       background-size: 85px 71px, 138px 72px;
     }
   }
@@ -116,7 +116,7 @@
         "p svg";
       grid-template-columns: auto auto;
       grid-template-rows: auto auto;
-      @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
         padding: 0 16px;
       }
       b {
@@ -124,7 +124,7 @@
         grid-area: b;
         margin: 0;
         padding: 0;
-        @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
           font: 500 12.5px/1.4 Roboto;
           margin-left: -4px;
           margin-top: 5px;
@@ -137,9 +137,10 @@
         padding: 0;
         grid-area: p;
         font: 300 15px/1.2 Roboto;
-        @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
           font: 300 11px/1.2 Roboto;
-          margin-left: -5px;
+          margin-left: -4px;
+          margin-top: -3px;
         }
       }
       svg {
@@ -147,6 +148,11 @@
         justify-self: end;
         align-self: start;
         margin-right: -7px;
+        @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
+          width: 25px;
+          height: 22px;
+          margin-top: 9px;
+        }
       }
     }
   }
@@ -170,8 +176,8 @@
       left: 172px;
     }
     @media (max-width: @almost-tablet) {
-      left: 0;
-      bottom: 30px;
+      left: 10px;
+      bottom: 59px;
     }
   }
   &__btn-right,

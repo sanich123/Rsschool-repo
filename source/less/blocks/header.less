@@ -23,7 +23,7 @@
   }
   @media (max-width: @almost-tablet) {
     .container(@mobile);
-    padding: 2px 10px;
+    padding: 0 10px;
     min-height: 34px;
   }
 
@@ -98,7 +98,15 @@
 
 .another__wrapper {
   position: relative;
-  .container(@tablet);
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    .container(@tablet);
+  }
+  @media (max-width: @almost-tablet) {
+    .container(@mobile);
+  }
+  @media (min-width: @small-desktop) {
+    display: none;
+  }
 }
 
 .open--menu {
