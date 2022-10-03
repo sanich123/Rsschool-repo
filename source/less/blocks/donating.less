@@ -10,6 +10,9 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       min-height: 0;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      min-height: 0;
+    }
   }
 
   .container(@big-desktop);
@@ -40,12 +43,16 @@
       margin-left: 1px;
       width: 778px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-top: 1px;
+      margin-bottom: 20px;
+    }
   }
 
   &__p {
     margin-top: 10px;
     font: 500 16px/1.4 Roboto;
-    color: white;
+    color: @white;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       margin-top: 32px;
     }
@@ -56,6 +63,10 @@
     margin-bottom: 60px;
     font: 400 36px/1.3 Roboto;
     color: @orange;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-top: 27px;
+      margin-bottom: 30px;
+    }
     @media (max-width: @almost-tablet) {
       font-size: 24px;
     }
@@ -74,6 +85,9 @@
     @media (max-width: @almost-tablet) {
       min-height: 0;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      min-height: 0;
+    }
   }
 }
 
@@ -83,7 +97,7 @@
     padding: 20px 44px;
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-    padding: 30px 0;
+    padding: 30px 0 14px;
   }
   @media (max-width: @almost-tablet) {
     padding: 20px 0;
@@ -95,6 +109,9 @@
     font: 400 48px/1.2 Roboto;
     text-align: center;
     color: @orange;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-left: 0;
+    }
     @media (max-width: @almost-tablet) {
       font-size: 24px;
     }
@@ -149,7 +166,8 @@
       }
       @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
         text-align: left;
-        margin-left: 65px;
+        margin-left: 85px;
+        margin-top: 132px;
       }
       @media (max-width: @almost-tablet) {
         font-size: 40px;
@@ -189,6 +207,10 @@
       @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
         right: 65px;
       }
+      @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+        bottom: 101px;
+        right: 39px;
+      }
       @media (max-width: @almost-tablet) {
         content: url("../img/icons/icon-decline-small.svg");
         width: 8px;
@@ -200,6 +222,10 @@
   }
   svg {
     margin-top: 35px;
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-top: 25px;
+      margin-left: 25px;
+    }
     @media (max-width: @almost-tablet) {
       width: 160px;
       height: 139px;
@@ -222,6 +248,9 @@
     width: 810px;
     margin-left: 20px;
   }
+  @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    margin-top: 71px;
+  }
   @media (max-width: @almost-tablet) {
     margin-left: 0;
     padding: 0;
@@ -236,6 +265,7 @@
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       left: 10px;
+      top: -26px;
     }
   }
 
@@ -257,6 +287,8 @@
       }
       @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
         width: 524px;
+        top: 12px;
+        left: 10px;
       }
       @media (max-width: @almost-tablet) {
         width: 262px;
@@ -332,11 +364,23 @@
       left: 6px;
       top: -31px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      top: -31px;
+      left: 17px;
+    }
+
     @media (max-width: @almost-tablet) {
       width: 5px;
       height: 5px;
       top: -28px;
       left: 10px;
+    }
+  }
+  .five-thousand,
+  .two-thousand,
+  .one-thousand {
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      display: none;
     }
   }
   .five-thousand {
@@ -359,6 +403,10 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       margin-left: 57px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      position: absolute;
+      left: -9px;
+    }
     @media (max-width: @almost-tablet) {
       margin-left: 8.5px;
     }
@@ -368,6 +416,10 @@
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       position: absolute;
       left: 360px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      position: absolute;
+      left: 112px;
     }
     @media (max-width: @almost-tablet) {
       margin-left: 30px;
@@ -379,6 +431,10 @@
       position: absolute;
       left: 481px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      position: absolute;
+      right: 269px;
+    }
     @media (max-width: @almost-tablet) {
       margin-left: 29px;
     }
@@ -389,15 +445,23 @@
       position: absolute;
       left: 603px;
     }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      position: absolute;
+      right: 153px;
+    }
     @media (max-width: @almost-tablet) {
       margin-left: 29px;
     }
   }
   .twenty-five {
     margin-left: 57px;
-        @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       position: absolute;
-      left: 727px;
+      right: 727px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      position: absolute;
+      right: 23px;
     }
     @media (max-width: @almost-tablet) {
       margin-left: 29px;
@@ -448,7 +512,11 @@ input::-webkit-inner-spin-button {
     margin-left: 292px;
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-    margin-left: 170px;
+    margin-top: 86px;
+    margin-left: 210px;
+    padding-left: 5px;
+    width: 180px;
+    height: 42px;
   }
   @media (max-width: @almost-tablet) {
     width: 180px;
@@ -469,7 +537,8 @@ input::-webkit-inner-spin-button {
     padding-left: 287px;
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-    padding-left: 170px;
+    margin-top: 32px;
+    padding-left: 160px;
   }
   @media (max-width: @almost-tablet) {
     padding-left: 25px;
@@ -528,7 +597,8 @@ input::-webkit-inner-spin-button {
     margin-left: 280px;
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-    margin-left: 150px;
+    margin-left: 152px;
+    margin-top: 29px;
   }
   @media (max-width: @almost-tablet) {
     margin-left: 0;

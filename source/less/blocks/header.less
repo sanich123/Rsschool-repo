@@ -19,7 +19,7 @@
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
     .container(@tablet);
     padding: 0 20px;
-    min-height: 34px;
+    min-height: 0;
   }
   @media (max-width: @almost-tablet) {
     .container(@mobile);
@@ -28,6 +28,7 @@
   }
 
   &__wrapper {
+    position: relative;
     background: @black;
     width: auto;
   }
@@ -65,8 +66,11 @@
   &__logo {
     @media (max-width: @almost-small-desktop) {
       svg {
-        width: 46px;
-        height: 29px;
+        width: 55px;
+        height: 34px;
+        margin-left: -5px;
+        margin-top: -3px;
+        padding-top: 2px;
         rect {
           stroke: none;
         }
@@ -92,7 +96,13 @@
   font: 500 16px/140% Roboto;
 }
 
+.another__wrapper {
+  position: relative;
+  .container(@tablet);
+}
+
 .open--menu {
+  position: absolute;
   .container(@tablet);
   width: 640px;
   height: 329px;
@@ -100,6 +110,7 @@
   grid-template-columns: none;
   grid-template-rows: repeat(3, auto);
   padding: 10px 10px;
+  z-index: 999;
 
   .header__menu {
     display: none;
