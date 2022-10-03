@@ -10,6 +10,7 @@
   align-items: center;
   min-height: 80px;
   padding: 2px 220px 0;
+  z-index: 999;
 
   @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
     .container(@small-desktop);
@@ -17,11 +18,13 @@
     min-height: 34px;
   }
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    position: fixed;
     .container(@tablet);
     padding: 0 20px;
     min-height: 0;
   }
   @media (max-width: @almost-tablet) {
+    position: fixed;
     .container(@mobile);
     padding: 0 10px;
     min-height: 34px;

@@ -352,6 +352,7 @@ template {
 }
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 img {
   display: block;
@@ -406,6 +407,7 @@ a {
   align-items: center;
   min-height: 80px;
   padding: 2px 220px 0;
+  z-index: 999;
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
   .header {
@@ -417,6 +419,7 @@ a {
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .header {
+    position: fixed;
     width: 640px;
     margin: 0 auto;
     padding: 0 20px;
@@ -425,6 +428,7 @@ a {
 }
 @media (max-width: 639px) {
   .header {
+    position: fixed;
     width: 320px;
     margin: 0 auto;
     padding: 0 10px;
@@ -573,6 +577,7 @@ a {
     width: 640px;
     margin: 0 auto;
     min-height: 339px;
+    margin-top: 34px;
   }
 }
 @media (max-width: 639px) {
@@ -580,6 +585,7 @@ a {
     width: 320px;
     margin: 0 auto;
     min-height: 187px;
+    margin-top: 34px;
   }
 }
 .promo::before {
@@ -997,6 +1003,12 @@ a {
 .animal-description__wrapper {
   background: #ffffff;
 }
+@media (min-width: 320px) and (max-width: 999px) {
+  .penguin,
+  .chester {
+    display: none;
+  }
+}
 .purpose {
   width: 1600px;
   margin: 0 auto;
@@ -1384,7 +1396,6 @@ a {
   top: 61px;
   left: -99px;
   z-index: 2;
-  transform: rotate(86deg);
 }
 @media (max-width: 999px) {
   .scheme .order-list .second-item::before,
@@ -1706,6 +1717,11 @@ a {
 @media (min-width: 1000px) and (max-width: 1599px) {
   .testimonials__range::-webkit-slider-thumb {
     width: 75px;
+  }
+}
+@media (max-width: 1599px) {
+  .last {
+    display: none;
   }
 }
 .footer {
