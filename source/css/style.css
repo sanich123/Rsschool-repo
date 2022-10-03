@@ -517,11 +517,6 @@ a {
     margin: 0 auto;
   }
 }
-@media (min-width: 1000px) {
-  .another__wrapper {
-    display: none;
-  }
-}
 .open--menu {
   position: absolute;
   margin: 0 auto;
@@ -2097,6 +2092,11 @@ a {
     margin-bottom: 20px;
   }
 }
+@media (max-width: 639px) {
+  .donating__h2 {
+    margin: 0;
+  }
+}
 .donating__p {
   margin-top: 10px;
   font: 500 16px/1.4 Roboto;
@@ -2105,6 +2105,11 @@ a {
 @media (min-width: 1000px) and (max-width: 1599px) {
   .donating__p {
     margin-top: 32px;
+  }
+}
+@media (max-width: 639px) {
+  .donating__p {
+    margin-top: 20px;
   }
 }
 .donating__h3 {
@@ -2127,6 +2132,12 @@ a {
 @media (min-width: 1000px) and (max-width: 1599px) {
   .donating__h3 {
     margin-bottom: 40px;
+  }
+}
+@media (max-width: 639px) {
+  .donating__h3 {
+    margin-top: 24px;
+    margin-bottom: 28px;
   }
 }
 .donating__calculator {
@@ -2175,7 +2186,7 @@ a {
   text-align: center;
   color: #fe9013;
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (max-width: 999px) {
   .calculator__h3 {
     margin-left: 0;
   }
@@ -2204,7 +2215,9 @@ a {
 @media (max-width: 639px) {
   .calculator__p {
     font-size: 16px;
+    line-height: 133%;
     text-align: center;
+    margin-top: 10px;
   }
 }
 .panda-diet__wrapper {
@@ -2256,8 +2269,8 @@ a {
 @media (max-width: 639px) {
   .panda-diet__wrapper .number-pandas strong {
     font-size: 40px;
-    margin-left: 40px;
-    margin-top: 90px;
+    margin-left: 33px;
+    margin-top: 55px;
     text-align: left;
   }
 }
@@ -2282,8 +2295,8 @@ a {
 @media (max-width: 639px) {
   .panda-diet__wrapper .number-pandas span {
     font-size: 9px;
-    margin-left: 5px;
-    margin-top: 0;
+    margin-left: 0;
+    margin-top: 8px;
   }
 }
 .panda-diet__wrapper .number-pandas::after {
@@ -2310,8 +2323,8 @@ a {
     content: url("../img/icons/icon-decline-small.svg");
     width: 8px;
     height: 8px;
-    right: 20px;
-    bottom: 70px;
+    right: 37px;
+    bottom: 63px;
   }
 }
 .panda-diet__wrapper svg {
@@ -2327,6 +2340,7 @@ a {
   .panda-diet__wrapper svg {
     width: 160px;
     height: 139px;
+    margin-top: -5px;
   }
 }
 .range__wrapper {
@@ -2354,7 +2368,9 @@ a {
 @media (max-width: 639px) {
   .range__wrapper {
     margin-left: 0;
+    margin-top: 34px;
     padding: 0;
+    height: 13.5px;
   }
 }
 .range__wrapper label {
@@ -2373,11 +2389,18 @@ a {
     top: -26px;
   }
 }
+@media (max-width: 639px) {
+  .range__wrapper label {
+    top: -28px;
+    left: 0px;
+  }
+}
 .range__wrapper #amount {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   position: relative;
+  height: 13.5px;
 }
 .range__wrapper #amount::before {
   position: absolute;
@@ -2404,12 +2427,18 @@ a {
   .range__wrapper #amount::before {
     width: 262px;
     right: 20px;
+    top: 6px;
   }
 }
 .range__wrapper #amount::-webkit-slider-runnable-track {
   height: 27px;
   background: #404950;
   cursor: pointer;
+}
+@media (max-width: 639px) {
+  .range__wrapper #amount::-webkit-slider-runnable-track {
+    height: 13.5px;
+  }
 }
 .range__wrapper #amount::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -2425,7 +2454,7 @@ a {
     background: url("../img/icons/icon-circles-small.svg");
     width: 20px;
     height: 20px;
-    top: 4px;
+    top: -3px;
   }
 }
 .price-list {
@@ -2496,14 +2525,19 @@ a {
   .price-list__item::after {
     width: 5px;
     height: 5px;
-    top: -28px;
+    top: -15px;
     left: 10px;
   }
 }
-@media (min-width: 640px) and (max-width: 999px) {
+@media (max-width: 999px) {
   .price-list .five-thousand,
   .price-list .two-thousand,
   .price-list .one-thousand {
+    display: none;
+  }
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .price-list .five-thousand {
     display: none;
   }
 }
@@ -2536,13 +2570,17 @@ a {
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .price-list .five-hundred {
+    margin-left: 0;
     position: absolute;
     left: -9px;
   }
 }
 @media (max-width: 639px) {
   .price-list .five-hundred {
-    margin-left: 8.5px;
+    margin-left: 0;
+    position: absolute;
+    top: -5px;
+    left: 9px;
   }
 }
 .price-list .two-hundred-fifty {
@@ -2556,13 +2594,17 @@ a {
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .price-list .two-hundred-fifty {
+    margin-left: 0;
     position: absolute;
     left: 112px;
   }
 }
 @media (max-width: 639px) {
   .price-list .two-hundred-fifty {
-    margin-left: 30px;
+    margin-left: 0;
+    position: absolute;
+    top: -5px;
+    left: 74px;
   }
 }
 .price-list .one-hundred {
@@ -2570,19 +2612,24 @@ a {
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
   .price-list .one-hundred {
+    margin-left: 0;
     position: absolute;
     left: 481px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .price-list .one-hundred {
+    margin-left: 0;
     position: absolute;
     right: 269px;
   }
 }
 @media (max-width: 639px) {
   .price-list .one-hundred {
-    margin-left: 29px;
+    margin-left: 0;
+    position: absolute;
+    top: -5px;
+    left: 139px;
   }
 }
 .price-list .fifty {
@@ -2590,19 +2637,24 @@ a {
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
   .price-list .fifty {
+    margin-left: 0;
     position: absolute;
     left: 603px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .price-list .fifty {
+    margin-left: 0;
     position: absolute;
     right: 153px;
   }
 }
 @media (max-width: 639px) {
   .price-list .fifty {
-    margin-left: 29px;
+    margin-left: 0;
+    position: absolute;
+    top: -5px;
+    left: 204px;
   }
 }
 .price-list .twenty-five {
@@ -2610,19 +2662,24 @@ a {
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
   .price-list .twenty-five {
+    margin-left: 0;
     position: absolute;
-    right: 727px;
+    right: 9px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .price-list .twenty-five {
+    margin-left: 0;
     position: absolute;
     right: 23px;
   }
 }
 @media (max-width: 639px) {
   .price-list .twenty-five {
-    margin-left: 29px;
+    margin-left: 0;
+    position: absolute;
+    top: -5px;
+    left: 269px;
   }
 }
 .price-list .orange {
@@ -2680,6 +2737,7 @@ input::-webkit-inner-spin-button {
     width: 180px;
     height: 42px;
     margin-left: 60px;
+    margin-top: 38px;
   }
 }
 .input__number::placeholder {
@@ -2704,7 +2762,8 @@ input::-webkit-inner-spin-button {
 }
 @media (max-width: 639px) {
   .radio-btns {
-    padding-left: 25px;
+    margin-top: 27px;
+    padding-left: 9px;
   }
 }
 .radio-btns label {
@@ -2770,7 +2829,8 @@ input::-webkit-inner-spin-button {
 @media (max-width: 639px) {
   .donation__btn {
     margin-left: 0;
-    padding: 17px 74px;
+    margin-top: 24px;
+    padding: 18px 74px;
   }
 }
 .donation__share {
@@ -2789,6 +2849,7 @@ input::-webkit-inner-spin-button {
     font-size: 15.9px;
     text-align: start;
     padding: 0;
+    margin-bottom: 0;
   }
 }
 .promo__crop {
@@ -2844,6 +2905,7 @@ input::-webkit-inner-spin-button {
   .promo__crop::after {
     background: no-repeat url("../img/photos/bg-big-panda-mobile-crop.png");
     width: 320px;
+    top: 0;
   }
 }
 /*# sourceMappingURL=style.css.map */

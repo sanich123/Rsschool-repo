@@ -47,6 +47,9 @@
       margin-top: 1px;
       margin-bottom: 20px;
     }
+    @media (max-width: @almost-tablet) {
+      margin: 0;
+    }
   }
 
   &__p {
@@ -55,6 +58,9 @@
     color: @white;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       margin-top: 32px;
+    }
+    @media (max-width: @almost-tablet) {
+      margin-top: 20px;
     }
   }
 
@@ -72,6 +78,10 @@
     }
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       margin-bottom: 40px;
+    }
+    @media (max-width: @almost-tablet) {
+      margin-top: 24px;
+      margin-bottom: 28px;
     }
   }
 
@@ -109,7 +119,7 @@
     font: 400 48px/1.2 Roboto;
     text-align: center;
     color: @orange;
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    @media (max-width: @almost-small-desktop) {
       margin-left: 0;
     }
     @media (max-width: @almost-tablet) {
@@ -129,7 +139,9 @@
     }
     @media (max-width: @almost-tablet) {
       font-size: 16px;
+      line-height: 133%;
       text-align: center;
+      margin-top: 10px;
     }
   }
 }
@@ -171,8 +183,8 @@
       }
       @media (max-width: @almost-tablet) {
         font-size: 40px;
-        margin-left: 40px;
-        margin-top: 90px;
+        margin-left: 33px;
+        margin-top: 55px;
         text-align: left;
       }
     }
@@ -192,8 +204,8 @@
       }
       @media (max-width: @almost-tablet) {
         font-size: 9px;
-        margin-left: 5px;
-        margin-top: 0;
+        margin-left: 0;
+        margin-top: 8px;
       }
     }
 
@@ -215,8 +227,8 @@
         content: url("../img/icons/icon-decline-small.svg");
         width: 8px;
         height: 8px;
-        right: 20px;
-        bottom: 70px;
+        right: 37px;
+        bottom: 63px;
       }
     }
   }
@@ -229,6 +241,7 @@
     @media (max-width: @almost-tablet) {
       width: 160px;
       height: 139px;
+      margin-top: -5px;
     }
   }
 }
@@ -253,7 +266,9 @@
   }
   @media (max-width: @almost-tablet) {
     margin-left: 0;
+    margin-top: 34px;
     padding: 0;
+    height: 13.5px;
   }
 
   label {
@@ -267,6 +282,10 @@
       left: 10px;
       top: -26px;
     }
+    @media (max-width: @almost-tablet) {
+      top: -28px;
+      left: 0px;
+    }
   }
 
   #amount {
@@ -274,6 +293,7 @@
     -moz-appearance: none;
     appearance: none;
     position: relative;
+    height: 13.5px;
     &::before {
       position: absolute;
       content: "";
@@ -293,6 +313,7 @@
       @media (max-width: @almost-tablet) {
         width: 262px;
         right: 20px;
+        top: 6px;
       }
     }
 
@@ -300,6 +321,9 @@
       height: 27px;
       background: @light-grey;
       cursor: pointer;
+      @media (max-width: @almost-tablet) {
+        height: 13.5px;
+      }
     }
 
     &::-webkit-slider-thumb {
@@ -314,7 +338,7 @@
         background: url("../img/icons/icon-circles-small.svg");
         width: 20px;
         height: 20px;
-        top: 4px;
+        top: -3px;
       }
     }
   }
@@ -372,14 +396,19 @@
     @media (max-width: @almost-tablet) {
       width: 5px;
       height: 5px;
-      top: -28px;
+      top: -15px;
       left: 10px;
     }
   }
   .five-thousand,
   .two-thousand,
   .one-thousand {
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+    @media (max-width: @almost-small-desktop) {
+      display: none;
+    }
+  }
+  .five-thousand {
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       display: none;
     }
   }
@@ -404,11 +433,15 @@
       margin-left: 57px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-left: 0;
       position: absolute;
       left: -9px;
     }
     @media (max-width: @almost-tablet) {
-      margin-left: 8.5px;
+      margin-left: 0;
+      position: absolute;
+      top: -5px;
+      left: 9px;
     }
   }
   .two-hundred-fifty {
@@ -418,53 +451,72 @@
       left: 360px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-left: 0;
       position: absolute;
       left: 112px;
     }
     @media (max-width: @almost-tablet) {
-      margin-left: 30px;
+      margin-left: 0;
+      position: absolute;
+      top: -5px;
+      left: 74px;
     }
   }
   .one-hundred {
     margin-left: 45px;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-left: 0;
       position: absolute;
       left: 481px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-left: 0;
       position: absolute;
       right: 269px;
     }
     @media (max-width: @almost-tablet) {
-      margin-left: 29px;
+      margin-left: 0;
+      position: absolute;
+      top: -5px;
+      left: 139px;
     }
   }
   .fifty {
     margin-left: 52px;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-left: 0;
       position: absolute;
       left: 603px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-left: 0;
       position: absolute;
       right: 153px;
     }
     @media (max-width: @almost-tablet) {
-      margin-left: 29px;
+      margin-left: 0;
+      position: absolute;
+      top: -5px;
+      left: 204px;
     }
   }
   .twenty-five {
     margin-left: 57px;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      margin-left: 0;
       position: absolute;
-      right: 727px;
+      right: 9px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      margin-left: 0;
       position: absolute;
       right: 23px;
     }
     @media (max-width: @almost-tablet) {
-      margin-left: 29px;
+      margin-left: 0;
+      position: absolute;
+      top: -5px;
+      left: 269px;
     }
   }
   .orange {
@@ -522,6 +574,7 @@ input::-webkit-inner-spin-button {
     width: 180px;
     height: 42px;
     margin-left: 60px;
+    margin-top: 38px;
   }
   &::placeholder {
     font: 400 16px/1.4 Roboto;
@@ -541,7 +594,8 @@ input::-webkit-inner-spin-button {
     padding-left: 160px;
   }
   @media (max-width: @almost-tablet) {
-    padding-left: 25px;
+    margin-top: 27px;
+    padding-left: 9px;
   }
   label {
     position: relative;
@@ -602,7 +656,8 @@ input::-webkit-inner-spin-button {
   }
   @media (max-width: @almost-tablet) {
     margin-left: 0;
-    padding: 17px 74px;
+    margin-top: 24px;
+    padding: 18px 74px;
   }
 }
 
@@ -618,5 +673,6 @@ input::-webkit-inner-spin-button {
     font-size: 15.9px;
     text-align: start;
     padding: 0;
+    margin-bottom: 0;
   }
 }
