@@ -2408,18 +2408,19 @@ a {
   height: 2px;
   width: 915px;
   background: #72828e;
-  top: 13px;
+  top: 7px;
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
   .range__wrapper #amount::before {
     width: 785px;
     left: -11px;
+    top: 6px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .range__wrapper #amount::before {
     width: 524px;
-    top: 12px;
+    top: 7px;
     left: 10px;
   }
 }
@@ -2572,7 +2573,7 @@ a {
   .price-list .five-hundred {
     margin-left: 0;
     position: absolute;
-    left: -9px;
+    left: 18px;
   }
 }
 @media (max-width: 639px) {
@@ -2596,7 +2597,7 @@ a {
   .price-list .two-hundred-fifty {
     margin-left: 0;
     position: absolute;
-    left: 112px;
+    left: 150px;
   }
 }
 @media (max-width: 639px) {
@@ -2614,7 +2615,7 @@ a {
   .price-list .one-hundred {
     margin-left: 0;
     position: absolute;
-    left: 481px;
+    left: 522px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
@@ -2639,7 +2640,7 @@ a {
   .price-list .fifty {
     margin-left: 0;
     position: absolute;
-    left: 603px;
+    left: 653px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
