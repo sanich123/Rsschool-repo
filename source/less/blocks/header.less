@@ -33,7 +33,8 @@
   &__wrapper {
     position: relative;
     background: @black;
-    width: auto;
+    width: 100%;
+    margin: 0 auto;
   }
 
   &__contact {
@@ -89,7 +90,14 @@
     }
   }
 }
-
+.header__close-btn {
+  position: absolute;
+  display: none;
+  .reset-btn();
+  width: 14px;
+  height: 14px;
+  right: 0;
+}
 .active {
   background-color: @black;
   background-image: @orange-gradient;
@@ -100,7 +108,6 @@
 }
 
 .another__wrapper {
-  position: relative;
   @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
     .container(@tablet);
   }
@@ -109,16 +116,30 @@
   }
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 998;
+  overflow-y: hidden;
+}
+
 .open--menu {
-  position: absolute;
+  position: fixed;
   .container(@tablet);
-  width: 640px;
-  height: 329px;
   background: @white;
   grid-template-columns: none;
   grid-template-rows: repeat(3, auto);
   padding: 10px 10px;
   z-index: 999;
+  @media (max-width: @almost-tablet) {
+    .container(@mobile);
+  }
 
   .header__menu {
     display: none;
@@ -131,7 +152,17 @@
       stroke: @orange;
     }
   }
-
+  .header__close-btn {
+    display: block;
+    top: 10px;
+    right: 30px;
+    svg path {
+      fill: @orange;
+    }
+    @media (max-width: @almost-tablet) {
+      right: 20px;
+    }
+  }
   .header__contact {
     display: grid;
     color: @black;
