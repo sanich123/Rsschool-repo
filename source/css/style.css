@@ -774,6 +774,22 @@ a {
     bottom: 30%;
   }
 }
+@keyframes left-center {
+  from {
+    left: -200px;
+  }
+  to {
+    left: 0;
+  }
+}
+@keyframes right-center {
+  from {
+    right: -200px;
+  }
+  to {
+    right: 0;
+  }
+}
 .cards {
   width: 1600px;
   margin: 0 auto;
@@ -1013,6 +1029,10 @@ a {
     display: none;
   }
 }
+.cards__btn-right:disabled,
+.cards__btn-left:disabled {
+  opacity: 0.5;
+}
 .cards__btn-right {
   right: 139px;
 }
@@ -1041,6 +1061,14 @@ a {
 }
 .animal-description__wrapper {
   background: #ffffff;
+}
+.slide-right {
+  position: absolute;
+  animation: 0.5s right-center;
+}
+.slide-left {
+  position: absolute;
+  animation: 0.5s left-center;
 }
 @media (min-width: 320px) and (max-width: 999px) {
   .turn-off {
