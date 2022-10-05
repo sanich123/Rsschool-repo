@@ -1043,8 +1043,7 @@ a {
   background: #ffffff;
 }
 @media (min-width: 320px) and (max-width: 999px) {
-  .penguin,
-  .chester {
+  .turn-off {
     display: none;
   }
 }
