@@ -1,3 +1,5 @@
+@import "../mixins/mixins.less";
+
 .testimonials {
   &__wrapper {
     background: no-repeat bottom -132px right url("../img/decorate/leaf.svg");
@@ -57,6 +59,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
+    position: relative;
 
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       grid-template-columns: repeat(3, 1fr);
@@ -146,7 +149,25 @@
         color: @another-grey2;
       }
     }
+    &__item.visible {
+      position: absolute;
+      margin: 0 auto;
+      min-height: initial;
+      max-height: initial;
+      height: auto;
+      z-index: 999;
+    }
   }
+  .visible__btn {
+    display: none;
+    .reset-btn();
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 14px;
+    height: 14px;
+  }
+
   &__btn {
     .reset-btn();
     padding: 16px 85px;
