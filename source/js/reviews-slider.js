@@ -71,12 +71,12 @@ function createComments(arr, slicedNumber, numberOfCards) {
       });
     }
   );
-  const closeBtn = document.querySelector(".visible .visible__btn");
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      document.querySelector(".visible .visible__btn").style.display = "none";
+  const closeBtns = document.querySelectorAll(".visible__btn");
+    closeBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+      document.querySelector(".visible__btn").style.display = "none";
     });
-  }
+  })
 }
 
 createComments(reviews, sliceNumber, numberOfCards);
