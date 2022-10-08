@@ -530,8 +530,7 @@ a {
     margin: 0 auto;
   }
 }
-.modal,
-.modal-review {
+.modal {
   display: none;
   position: fixed;
   width: 100%;
@@ -1733,6 +1732,9 @@ a {
   right: 20px;
   width: 14px;
   height: 14px;
+}
+.testimonials .is-none {
+  display: none;
 }
 .testimonials__btn {
   background: transparent;
