@@ -1,7 +1,6 @@
-import { currentLocation, mainPage, donatePage } from "./const.js";
-
+const currentLocation = window.location.href.slice(22);
+const donatePage = 'donate.html';
 const navLinks = document.querySelectorAll('.nav-list__item a')
-const footerLinks = document.querySelectorAll('.footer-nav-list__item a');
 
 for (let i = 0; i < navLinks.length; i++) {
   const current = navLinks[i];
