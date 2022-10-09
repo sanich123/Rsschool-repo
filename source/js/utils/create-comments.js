@@ -6,9 +6,10 @@ import {
   mainPage,
 } from "../const.js";
 
-const commentsList = document.querySelector(".testimonials-list");
+
 
 export function createComments(arr, slicedNumber, numberOfCards) {
+  const commentsList = document.querySelector(".testimonials-list");
   if (!commentsList) {
     return;
   } else {

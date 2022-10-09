@@ -1,5 +1,3 @@
-// import { smallDesktopWidth } from "./const.js";
-const smallDesktopWidth = "(min-width: 1000px) and (max-width: 1600px)";
 const burgerBtn = document.querySelector(".header__menu");
 const closeBtn = document.querySelector(".header__close-btn");
 const headerWrapper = document.querySelector(".another__wrapper");

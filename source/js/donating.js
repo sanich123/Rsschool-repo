@@ -1,5 +1,3 @@
-import { donatePage, currentLocation } from "./const.js";
-
 const amountBtns = document.querySelector(".price-list");
 const amountNumber = document.querySelector(".input__number");
 const btns = document.querySelectorAll(".amount-input");
