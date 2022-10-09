@@ -1,5 +1,3 @@
-const currentLocation = window.location.href.slice(22);
-const donatePage = 'donate.html';
 const navLinks = document.querySelectorAll('.nav-list__item a')
 
 for (let i = 0; i < navLinks.length; i++) {
