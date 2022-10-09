@@ -1,3 +1,5 @@
+import {pets} from '../js/const.js';
+
 function shufflePets(arr) {
   const cards = document.querySelector(".animals-list");
   if (cards) {
@@ -29,8 +31,8 @@ function shufflePets(arr) {
     return;
   }
 }
-
-if (currentLocation === mainPage || initialLocation === '/') {
+console.log(window.location.href[window.location.href.length - 1]);
+if (window.location.href.includes('index.html') || window.location.href[window.location.href.length - 1] === '/') {
 
   const cards = document.querySelector(".animals-list");
   const rightBtn = document.querySelector(".cards__btn-right");
