@@ -1,10 +1,12 @@
+import { currentLocation, donatePage } from "./const.js";
+
 const amountBtns = document.querySelector(".price-list");
 const amountNumber = document.querySelector(".input__number");
 const btns = document.querySelectorAll(".amount-input");
 const liNodes = document.querySelectorAll(".price-list__item");
 const mistakeShower = document.querySelector(".mistake__shower");
 
-if (currentLocation === donatePage) {
+if (currentLocation.includes(donatePage)) {
   amountBtns.addEventListener("click", (evt) => {
     amountNumber.value = evt.target.value;
     [...liNodes].map((node) => {

@@ -1,4 +1,4 @@
-import {currentLocation, initialLocation, reviews, desktopWidth, mainPage, almostSmallDesktopWidth} from '../js/const.js';
+import {currentLocation, initialLocation, reviews, desktopWidth, mainPage, almostSmallDesktopWidth, smallDesktopWidth} from '../js/const.js';
 
 function createComments(arr, slicedNumber, numberOfCards) {
   const commentsList = document.querySelector(".testimonials-list");
