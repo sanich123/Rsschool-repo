@@ -13,42 +13,59 @@
         include ../../img/icons/icon-big-panda.svg
       .range__wrapper
         label(class="amount-price" for="amount") Amount
-        input#amount(type="range" min="25" max="5000")
+
       ul(class="price-list")
         li(class="price-list__item five-thousand")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 5000
+            input#five-thousand(type='radio' name='amount' class="amount-input" value="5000")
+            label(class="amount-input-label" for="five-thousand") 5000
+
         li(class="price-list__item two-thousand")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 2000
+            input#two-thousand(type='radio' name='amount' class="amount-input" value="2000")
+            label(class="amount-input-label" for="two-thousand") 2000
+
         li(class="price-list__item one-thousand")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 1000
-        li(class="price-list__item five-hundred orange")
+            input#one-thousand(type='radio' name='amount' class="amount-input" value="1000")
+            label(class="amount-input-label" for="one-thousand") 1000
+
+        li(class="price-list__item five-hundred")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 500
+            input#five-hundred(type='radio' name='amount' class="amount-input" value="500")
+            label(class="amount-input-label" for="five-hundred") 500
+
         li(class="price-list__item two-hundred-fifty")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 250
-        li(class="price-list__item one-hundred")
+            input#two-hundred-fifty(type='radio' name='amount' class="amount-input" value="250")
+            label(class="amount-input-label" for="two-hundred-fifty") 250
+
+        li(class="price-list__item one-hundred orange")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 100
+            input#one-hundred(type='radio' name='amount' class="amount-input" value="100" checked)
+            label(class="amount-input-label" for="one-hundred") 100
+
         li(class="price-list__item fifty")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 50
+            input#fifty(type='radio' name='amount' class="amount-input" value="50")
+            label(class="amount-input-label" for="fifty") 50
+
         li(class="price-list__item twenty-five")
           .dollar__wrapper
             include ../../img/icons/icon-dollar.svg
-            span 25
+            input#twenty-five(type='radio' name='amount' class="amount-input" value="25")
+            label(class="amount-input-label" for="twenty-five") 25
+
       label(class="label__input-number")
-        input(class="input__number" type="number" placeholder="Another amount")
+        span(class="mistake__shower")
+        input(class="input__number" type="number" min="-9999" max="9999" placeholder="Another amount" value="100")
         include ../../img/icons/icon-dollar.svg
       .radio-btns
         input#monthly(type="radio" name="payment")

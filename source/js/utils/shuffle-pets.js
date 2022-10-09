@@ -1,8 +1,7 @@
 import { pets } from "../const.js";
-
-const cards = document.querySelector(".animals-list");
-
+const currentLocation = window.location.href.slice(22);
 export function shufflePets(arr) {
+  const cards = document.querySelector(".animals-list");
   cards.innerHTML = "";
 
   return arr.forEach(({ title, srcset, src, alt, b, p, svg, turnOff }) =>
@@ -28,5 +27,6 @@ export function shufflePets(arr) {
     )
   );
 }
-
-shufflePets(pets);
+if (currentLocation === "index.html") {
+  shufflePets(pets);
+}

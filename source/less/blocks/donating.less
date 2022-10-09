@@ -247,6 +247,7 @@
 }
 
 .range__wrapper {
+  position: relative;
   margin-top: 88px;
   background: @light-grey;
   height: 27px;
@@ -269,6 +270,25 @@
     margin-top: 34px;
     padding: 0;
     height: 13.5px;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 915px;
+    height: 2px;
+    background: #72828e;
+    top: 50%;
+    left: 31px;
+
+    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+      width: 785px;
+    }
+    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+      width: 524px;
+    }
+    @media (max-width: @almost-tablet) {
+      width: 262px;
+    }
   }
 
   label {
@@ -317,30 +337,9 @@
         top: 6px;
       }
     }
-
-    &::-webkit-slider-runnable-track {
-      height: 27px;
-      background: @light-grey;
-      cursor: pointer;
-      @media (max-width: @almost-tablet) {
-        height: 13.5px;
-      }
-    }
-
-    &::-webkit-slider-thumb {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
       -webkit-appearance: none;
-      cursor: pointer;
-      position: relative;
-      background: url("../img/icons/icon-circles.svg");
-      width: 40px;
-      height: 40px;
-      top: -7px;
-      @media (max-width: @almost-tablet) {
-        background: url("../img/icons/icon-circles-small.svg");
-        width: 20px;
-        height: 20px;
-        top: -3px;
-      }
     }
   }
 }
@@ -369,38 +368,68 @@
         height: 10px;
       }
     }
-    span {
+    label {
       justify-content: start;
       @media (max-width: @almost-tablet) {
         font-size: 13px;
       }
-    }
-  }
-  &__item::after {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: @yellow;
-    top: -30px;
-    left: 20px;
-    @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
-      left: 6px;
-      top: -31px;
-    }
-    @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
-      top: -31px;
-      left: 17px;
-    }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: @yellow;
+        top: -30px;
+        left: 20px;
+        @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+          left: 6px;
+          top: -31px;
+        }
+        @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+          top: -31px;
+          left: 17px;
+        }
 
-    @media (max-width: @almost-tablet) {
-      width: 5px;
-      height: 5px;
-      top: -15px;
-      left: 10px;
+        @media (max-width: @almost-tablet) {
+          width: 5px;
+          height: 5px;
+          top: -15px;
+          left: 10px;
+        }
+      }
+      &::before {
+        display: none;
+        content: url("../img/icons/icon-circles.svg");
+        cursor: pointer;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: -46px;
+        left: -9px;
+        @media (max-width: @almost-tablet) {
+          content: url("../img/icons/icon-circles-small.svg");
+          width: 20px;
+          height: 20px;
+          top: -3px;
+        }
+      }
+    }
+    #five-thousand:checked + label::before,
+    #two-thousand:checked + label::before,
+    #one-thousand:checked + label::before,
+    #five-hundred:checked + label::before,
+    #two-hundred-fifty:checked + label::before,
+    #one-hundred:checked + label::before,
+    #fifty:checked + label::before,
+    #twenty-five:checked + label::before {
+      display: block;
+    }
+    .amount-input {
+      display: none;
     }
   }
+
   .five-thousand,
   .two-thousand,
   .one-thousand {
@@ -417,9 +446,7 @@
     margin-left: 0;
   }
   .two-thousand {
-    margin-left: 13px;
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
-      margin-left: 5px;
     }
   }
   .one-thousand {
@@ -534,10 +561,6 @@
     position: relative;
     margin-left: 15px;
   }
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
 }
 
 .label__input-number {
