@@ -1,3 +1,5 @@
+import {currentLocation, initialLocation, reviews, desktopWidth, mainPage, almostSmallDesktopWidth} from '../js/const.js';
+
 function createComments(arr, slicedNumber, numberOfCards) {
   const commentsList = document.querySelector(".testimonials-list");
   if (!commentsList) {
@@ -41,10 +43,10 @@ if (window.matchMedia(desktopWidth).matches) {
 } else {
   numberOfCards = 3;
 }
-if (currentLocation === mainPage || initialLocation === "/") {
+if (currentLocation.includes(mainPage) || initialLocation === '/') {
   createComments(reviews, 0, numberOfCards);
 }
-if (currentLocation === mainPage || initialLocation === "/") {
+if (currentLocation.includes(mainPage) || initialLocation === '/') {
   const commentsList = document.querySelector(".testimonials-list");
   const rangeStick = document.querySelector(".testimonials__range");
   const modal = document.querySelector(".modal");
