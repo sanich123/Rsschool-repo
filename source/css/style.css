@@ -774,6 +774,22 @@ a {
     bottom: 30%;
   }
 }
+@keyframes left-center {
+  from {
+    left: -200px;
+  }
+  to {
+    left: 0;
+  }
+}
+@keyframes right-center {
+  from {
+    right: -200px;
+  }
+  to {
+    right: 0;
+  }
+}
 .cards {
   width: 1600px;
   margin: 0 auto;
@@ -1013,6 +1029,10 @@ a {
     display: none;
   }
 }
+.cards__btn-right:disabled,
+.cards__btn-left:disabled {
+  opacity: 0.5;
+}
 .cards__btn-right {
   right: 139px;
 }
@@ -1042,9 +1062,16 @@ a {
 .animal-description__wrapper {
   background: #ffffff;
 }
+.slide-right {
+  position: relative;
+  animation: 0.5s right-center;
+}
+.slide-left {
+  position: relative;
+  animation: 0.5s left-center;
+}
 @media (min-width: 320px) and (max-width: 999px) {
-  .penguin,
-  .chester {
+  .turn-off {
     display: none;
   }
 }
@@ -1595,6 +1622,7 @@ a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
+  position: relative;
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
   .testimonials .testimonials-list {
@@ -1684,6 +1712,29 @@ a {
   padding-top: 10px;
   font: 300 15px/1.2 Roboto;
   color: #767474;
+}
+.testimonials .testimonials-list__item.visible {
+  position: absolute;
+  margin: 0 auto;
+  min-height: initial;
+  max-height: initial;
+  height: auto;
+  z-index: 999;
+}
+.testimonials .visible__btn {
+  display: none;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 14px;
+  height: 14px;
+}
+.testimonials .is-none {
+  display: none;
 }
 .testimonials__btn {
   background: transparent;
@@ -2428,6 +2479,33 @@ a {
     height: 13.5px;
   }
 }
+.range__wrapper::before {
+  content: "";
+  position: absolute;
+  width: 915px;
+  height: 2px;
+  background: #72828e;
+  top: 50%;
+  left: 20px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .range__wrapper::before {
+    width: 785px;
+    left: 15px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .range__wrapper::before {
+    width: 524px;
+    left: 40px;
+    top: 13px;
+  }
+}
+@media (max-width: 639px) {
+  .range__wrapper::before {
+    width: 262px;
+  }
+}
 .range__wrapper label {
   position: absolute;
   top: -36px;
@@ -2486,32 +2564,9 @@ a {
     top: 6px;
   }
 }
-.range__wrapper #amount::-webkit-slider-runnable-track {
-  height: 27px;
-  background: #404950;
-  cursor: pointer;
-}
-@media (max-width: 639px) {
-  .range__wrapper #amount::-webkit-slider-runnable-track {
-    height: 13.5px;
-  }
-}
-.range__wrapper #amount::-webkit-slider-thumb {
+.range__wrapper #amount::-webkit-outer-spin-button,
+.range__wrapper #amount::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  cursor: pointer;
-  position: relative;
-  background: url("../img/icons/icon-circles.svg");
-  width: 40px;
-  height: 40px;
-  top: -7px;
-}
-@media (max-width: 639px) {
-  .range__wrapper #amount::-webkit-slider-thumb {
-    background: url("../img/icons/icon-circles-small.svg");
-    width: 20px;
-    height: 20px;
-    top: -3px;
-  }
 }
 .price-list {
   margin: 0;
@@ -2547,16 +2602,17 @@ a {
     height: 10px;
   }
 }
-.price-list .dollar__wrapper span {
+.price-list .dollar__wrapper label {
   justify-content: start;
 }
 @media (max-width: 639px) {
-  .price-list .dollar__wrapper span {
+  .price-list .dollar__wrapper label {
     font-size: 13px;
   }
 }
-.price-list__item::after {
+.price-list .dollar__wrapper label::after {
   content: "";
+  cursor: pointer;
   position: absolute;
   width: 10px;
   height: 10px;
@@ -2566,24 +2622,66 @@ a {
   left: 20px;
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
-  .price-list__item::after {
+  .price-list .dollar__wrapper label::after {
     left: 6px;
     top: -31px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
-  .price-list__item::after {
+  .price-list .dollar__wrapper label::after {
     top: -31px;
     left: 17px;
   }
 }
 @media (max-width: 639px) {
-  .price-list__item::after {
+  .price-list .dollar__wrapper label::after {
     width: 5px;
     height: 5px;
     top: -15px;
     left: 10px;
   }
+}
+.price-list .dollar__wrapper label::before {
+  display: none;
+  content: url("../img/icons/icon-circles.svg");
+  cursor: pointer;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: -45px;
+  left: 5px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .price-list .dollar__wrapper label::before {
+    left: -9px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .price-list .dollar__wrapper label::before {
+    left: 2px;
+  }
+}
+@media (max-width: 639px) {
+  .price-list .dollar__wrapper label::before {
+    content: url("../img/icons/icon-circles-small.svg");
+    width: 20px;
+    height: 20px;
+    top: -23px;
+    left: 2px;
+  }
+}
+.price-list .dollar__wrapper #five-thousand:checked + label::before,
+.price-list .dollar__wrapper #two-thousand:checked + label::before,
+.price-list .dollar__wrapper #one-thousand:checked + label::before,
+.price-list .dollar__wrapper #five-hundred:checked + label::before,
+.price-list .dollar__wrapper #two-hundred-fifty:checked + label::before,
+.price-list .dollar__wrapper #one-hundred:checked + label::before,
+.price-list .dollar__wrapper #fifty:checked + label::before,
+.price-list .dollar__wrapper #twenty-five:checked + label::before {
+  display: block;
+}
+.price-list .dollar__wrapper .amount-input {
+  display: none;
 }
 @media (max-width: 999px) {
   .price-list .five-thousand,
@@ -2599,14 +2697,6 @@ a {
 }
 .price-list .five-thousand {
   margin-left: 0;
-}
-.price-list .two-thousand {
-  margin-left: 13px;
-}
-@media (min-width: 1000px) and (max-width: 1599px) {
-  .price-list .two-thousand {
-    margin-left: 5px;
-  }
 }
 .price-list .one-thousand {
   margin-left: 18px;
@@ -2749,11 +2839,7 @@ a {
   text-transform: uppercase;
   color: #333b41;
   position: relative;
-  margin-left: 15px;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  margin-left: 8px;
 }
 .label__input-number svg {
   position: relative;
@@ -2829,6 +2915,7 @@ input::-webkit-inner-spin-button {
   margin-left: 40px;
 }
 .radio-btns label::before {
+  cursor: pointer;
   position: absolute;
   content: "";
   width: 16px;
@@ -2838,6 +2925,7 @@ input::-webkit-inner-spin-button {
   left: -25px;
 }
 .radio-btns label::after {
+  cursor: pointer;
   position: absolute;
   content: "";
   width: 16px;

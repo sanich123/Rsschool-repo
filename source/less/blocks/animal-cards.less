@@ -9,6 +9,25 @@
   }
 }
 
+@keyframes left-center {
+  from {
+    left: -200px;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes right-center {
+  from {
+    right: -200px;
+  }
+  to {
+    right: 0;
+  }
+}
+
 .cards {
   .container(@big-desktop);
   position: relative;
@@ -198,6 +217,9 @@
     @media (max-width: @almost-tablet) {
       display: none;
     }
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 
   &__btn-right {
@@ -225,8 +247,18 @@
   background: @white;
 }
 
+.slide-right {
+  position: relative;
+  animation: 0.5s right-center;
+}
+
+.slide-left {
+  position: relative;
+  animation: 0.5s left-center;
+}
+
 @media (min-width: @mobile) and (max-width: @almost-small-desktop) {
-  .penguin, .chester {
+  .turn-off {
     display: none;
   }
 }
