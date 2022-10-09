@@ -15,7 +15,7 @@ function shufflePets(arr) {
             <source
             srcset=${srcset}
             media="(min-width: 640px) and (max-width: 1599px)">
-            <img src=${src} alt="${alt}">
+            <img src=${src} alt="${alt} loading="lazy">
           </picture>
         </div>
         <div class="animal-description__wrapper">
