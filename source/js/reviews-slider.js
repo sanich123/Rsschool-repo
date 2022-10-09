@@ -1,8 +1,15 @@
-
-import { reviews, currentLocation, mainPage, desktopWidth } from "./const.js";
+import {
+  reviews,
+  currentLocation,
+  mainPage,
+  desktopWidth,
+  initialLocation,
+  almostSmallDesktopWidth,
+  smallDesktopWidth,
+} from "./const.js";
 import { createComments } from "./utils/create-comments.js";
 
-if (currentLocation === mainPage) {
+if (currentLocation === mainPage || initialLocation === "/") {
   const commentsList = document.querySelector(".testimonials-list");
   const rangeStick = document.querySelector(".testimonials__range");
   const modal = document.querySelector(".modal");
@@ -15,7 +22,7 @@ if (currentLocation === mainPage) {
   } else {
     numberOfCards = 3;
   }
-
+  createComments(reviews, sliceNumber, numberOfCards);
   rangeStick.addEventListener("change", ({ target }) => {
     sliceNumber = Number(target.value);
     commentsList.classList.add("slide-left");
@@ -27,31 +34,49 @@ if (currentLocation === mainPage) {
     if (window.matchMedia(desktopWidth).matches) {
       createComments(reviews, sliceNumber, 4);
       numberOfCards = 4;
-    } else {
+    }
+    if (window.matchMedia(smallDesktopWidth)) {
       createComments(reviews, sliceNumber, 3);
       numberOfCards = 3;
     }
+    if (window.matchMedia(almostSmallDesktopWidth).matches) {
+      createComments(reviews, sliceNumber, 3);
+      numberOfCards = 3;
+      [...document.querySelectorAll(".testimonials-list__item")].map(
+        (review) => {
+          review.addEventListener("click", (evt) => {
+            modal.style.display = "block";
+            evt.currentTarget.classList.add("visible");
+            document.querySelector(".visible .visible__btn").style.display =
+              "block";
+          });
+        }
+      );
+
+      [...document.querySelectorAll(".visible__btn")].map((btn) => {
+        btn.addEventListener("click", (evt) => {
+          // evt.target.parentNode.parentNode.parentNode.classList.remove('visible');
+          // createComments(reviews, sliceNumber, 3);
+        });
+      });
+    }
   });
 
-  createComments(reviews, sliceNumber, numberOfCards);
-  const comments = document.querySelectorAll(".testimonials-list__item");
-  [...comments].map(
-    (review) => {
+  if (window.matchMedia(almostSmallDesktopWidth).matches) {
+    [...document.querySelectorAll(".testimonials-list__item")].map((review) => {
       review.addEventListener("click", (evt) => {
         modal.style.display = "block";
         evt.currentTarget.classList.add("visible");
         document.querySelector(".visible .visible__btn").style.display =
           "block";
       });
-    }
-  );
-  const closeBtns = document.querySelectorAll(".visible__btn");
-
-  [...closeBtns].map((btn) => {
-    btn.addEventListener("click", () => {
-      const comments = document.querySelectorAll('.testimonials-list__item');
-      let visibleReview = [...comments].filter((review) => review.classList.contains('visible'));
-      visibleReview.classList.remove('visible');
     });
-  });
+
+    [...document.querySelectorAll(".visible__btn")].map((btn) => {
+      btn.addEventListener("click", (evt) => {
+        // evt.target.parentNode.parentNode.parentNode.classList.remove('visible');
+        // createComments(reviews, sliceNumber, 3);
+      });
+    });
+  }
 }

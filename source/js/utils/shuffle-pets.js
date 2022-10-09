@@ -1,13 +1,14 @@
 import { pets } from "../const.js";
-const currentLocation = window.location.href.slice(22);
+
 export function shufflePets(arr) {
   const cards = document.querySelector(".animals-list");
-  cards.innerHTML = "";
+  if (cards) {
+    cards.innerHTML = "";
 
-  return arr.forEach(({ title, srcset, src, alt, b, p, svg, turnOff }) =>
-    cards.insertAdjacentHTML(
-      "afterbegin",
-      `
+    return arr.forEach(({ title, srcset, src, alt, b, p, svg, turnOff }) =>
+      cards.insertAdjacentHTML(
+        "afterbegin",
+        `
       <li class="animals-list__item ${turnOff ? "turn-off" : ""}">
         <div class="img__wrapper" data-title="${title}">
           <picture>
@@ -24,9 +25,10 @@ export function shufflePets(arr) {
         </div>
       </li>
     `
-    )
-  );
+      )
+    );
+  } else {
+    return;
+  }
 }
-if (currentLocation === "index.html") {
-  shufflePets(pets);
-}
+shufflePets(pets);

@@ -2486,16 +2486,19 @@ a {
   height: 2px;
   background: #72828e;
   top: 50%;
-  left: 31px;
+  left: 20px;
 }
 @media (min-width: 1000px) and (max-width: 1599px) {
   .range__wrapper::before {
     width: 785px;
+    left: 15px;
   }
 }
 @media (min-width: 640px) and (max-width: 999px) {
   .range__wrapper::before {
     width: 524px;
+    left: 40px;
+    top: 13px;
   }
 }
 @media (max-width: 639px) {
@@ -2609,6 +2612,7 @@ a {
 }
 .price-list .dollar__wrapper label::after {
   content: "";
+  cursor: pointer;
   position: absolute;
   width: 10px;
   height: 10px;
@@ -2644,15 +2648,26 @@ a {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: -46px;
-  left: -9px;
+  top: -45px;
+  left: 5px;
+}
+@media (min-width: 1000px) and (max-width: 1599px) {
+  .price-list .dollar__wrapper label::before {
+    left: -9px;
+  }
+}
+@media (min-width: 640px) and (max-width: 999px) {
+  .price-list .dollar__wrapper label::before {
+    left: 2px;
+  }
 }
 @media (max-width: 639px) {
   .price-list .dollar__wrapper label::before {
     content: url("../img/icons/icon-circles-small.svg");
     width: 20px;
     height: 20px;
-    top: -3px;
+    top: -23px;
+    left: 2px;
   }
 }
 .price-list .dollar__wrapper #five-thousand:checked + label::before,
@@ -2824,7 +2839,7 @@ a {
   text-transform: uppercase;
   color: #333b41;
   position: relative;
-  margin-left: 15px;
+  margin-left: 8px;
 }
 .label__input-number svg {
   position: relative;
@@ -2900,6 +2915,7 @@ a {
   margin-left: 40px;
 }
 .radio-btns label::before {
+  cursor: pointer;
   position: absolute;
   content: "";
   width: 16px;
@@ -2909,6 +2925,7 @@ a {
   left: -25px;
 }
 .radio-btns label::after {
+  cursor: pointer;
   position: absolute;
   content: "";
   width: 16px;

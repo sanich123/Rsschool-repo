@@ -1,14 +1,25 @@
+import {
+  reviews,
+  desktopWidth,
+  currentLocation,
+  initialLocation,
+  mainPage,
+} from "../const.js";
+
 const commentsList = document.querySelector(".testimonials-list");
 
 export function createComments(arr, slicedNumber, numberOfCards) {
-  commentsList.innerHTML = "";
+  if (!commentsList) {
+    return;
+  } else {
+    commentsList.innerHTML = "";
 
-  arr
-    .slice(Number(slicedNumber), Number(slicedNumber) + numberOfCards)
-    .forEach(({ img, alt, b, location, time, comment }) =>
-      commentsList.insertAdjacentHTML(
-        "beforeend",
-        `<li class="testimonials-list__item">
+    return arr
+      .slice(Number(slicedNumber), Number(slicedNumber) + numberOfCards)
+      .forEach(({ img, alt, b, location, time, comment }) =>
+        commentsList.insertAdjacentHTML(
+          "beforeend",
+          `<li class="testimonials-list__item">
         <div class="person__wrapper">
           <img src=${img} alt=${alt} width="37px" height="37px">
           <b>${b}</b>
@@ -28,6 +39,17 @@ export function createComments(arr, slicedNumber, numberOfCards) {
         </button>
       </li>
       `
-      )
-    );
+        )
+      );
+  }
+}
+let numberOfCards;
+
+if (window.matchMedia(desktopWidth).matches) {
+  numberOfCards = 4;
+} else {
+  numberOfCards = 3;
+}
+if (currentLocation === mainPage || initialLocation === "/") {
+  createComments(reviews, 0, numberOfCards);
 }

@@ -9,6 +9,12 @@ const mistakeShower = document.querySelector(".mistake__shower");
 if (currentLocation === donatePage) {
   amountBtns.addEventListener("click", (evt) => {
     amountNumber.value = evt.target.value;
+    [...liNodes].map((node) => {
+      if (node.classList.contains("orange")) {
+        node.classList.remove("orange");
+      }
+    });
+    evt.target.parentNode.parentNode.classList.add("orange");
   });
 
   amountNumber.addEventListener("input", (evt) => {

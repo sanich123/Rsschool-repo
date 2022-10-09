@@ -1,10 +1,12 @@
-import { pets } from "../js/const.js";
+import { pets, mainPage, currentLocation, initialLocation } from "../js/const.js";
 import { shufflePets } from "./utils/shuffle-pets.js";
-const currentLocation = window.location.href.slice(22);
-if (currentLocation === "index.html") {
+
+if (currentLocation === mainPage || initialLocation === '/') {
+
   const cards = document.querySelector(".animals-list");
   const rightBtn = document.querySelector(".cards__btn-right");
   const leftBtn = document.querySelector(".cards__btn-left");
+  shufflePets(pets);
 
   rightBtn.addEventListener("click", () => {
     cards.classList.add("slide-right");

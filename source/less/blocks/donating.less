@@ -278,13 +278,16 @@
     height: 2px;
     background: #72828e;
     top: 50%;
-    left: 31px;
+    left: 20px;
 
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
       width: 785px;
+      left: 15px;
     }
     @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
       width: 524px;
+      left: 40px;
+      top: 13px;
     }
     @media (max-width: @almost-tablet) {
       width: 262px;
@@ -375,6 +378,7 @@
       }
       &::after {
         content: "";
+        cursor: pointer;
         position: absolute;
         width: 10px;
         height: 10px;
@@ -405,13 +409,20 @@
         position: absolute;
         width: 40px;
         height: 40px;
-        top: -46px;
-        left: -9px;
+        top: -45px;
+        left: 5px;
+        @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+          left: -9px;
+        }
+        @media (min-width: @tablet) and (max-width: @almost-small-desktop) {
+          left: 2px;
+        }
         @media (max-width: @almost-tablet) {
           content: url("../img/icons/icon-circles-small.svg");
           width: 20px;
           height: 20px;
-          top: -3px;
+          top: -23px;
+          left: 2px;
         }
       }
     }
@@ -447,6 +458,7 @@
   }
   .two-thousand {
     @media (min-width: @small-desktop) and (max-width: @almost-big-desktop) {
+
     }
   }
   .one-thousand {
@@ -559,7 +571,7 @@
     text-transform: uppercase;
     color: @dark-grey;
     position: relative;
-    margin-left: 15px;
+    margin-left: 8px;
   }
 }
 
@@ -628,6 +640,7 @@
     margin-left: 40px;
 
     &::before {
+      cursor: pointer;
       position: absolute;
       content: "";
       width: 16px;
@@ -638,6 +651,7 @@
     }
 
     &::after {
+      cursor: pointer;
       position: absolute;
       content: "";
       width: 16px;

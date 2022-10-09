@@ -1,3 +1,5 @@
+import { smallDesktopWidth } from "./const.js";
+
 const burgerBtn = document.querySelector(".header__menu");
 const closeBtn = document.querySelector(".header__close-btn");
 const headerWrapper = document.querySelector(".another__wrapper");
@@ -24,13 +26,25 @@ modal.addEventListener("click", () => {
   modal.style.display = "none";
   header.classList.add("header");
   header.classList.remove("open--menu");
-  const activeReview = document.querySelector('.visible');
-  const buttons = document.querySelectorAll('.visible__btn');
+  const activeReview = document.querySelector(".visible");
+  const buttons = document.querySelectorAll(".visible__btn");
   if (activeReview) {
-    activeReview.classList.remove('visible');
+    activeReview.classList.remove("visible");
   }
-  buttons.forEach((button) => button.style.display = 'none');
+  buttons.forEach((button) => (button.style.display = "none"));
 
   document.body.style.height = "";
   document.body.style.overflowY = "";
+});
+
+window.addEventListener("resize", () => {
+  if (window.matchMedia(smallDesktopWidth).matches) {
+    if (modal) {
+      document.querySelector(".modal").style.display = "none";
+      document.querySelector("header").classList.remove("open--menu");
+      document.querySelector("header").classList.add("header");
+      document.body.style.height = "";
+      document.body.style.overflowY = "";
+    }
+  }
 });
