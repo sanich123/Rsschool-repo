@@ -1,3 +1,4 @@
+import { smallDesktopWidth } from "./const.js";
 const burgerBtn = document.querySelector(".header__menu");
 const closeBtn = document.querySelector(".header__close-btn");
 const headerWrapper = document.querySelector(".another__wrapper");
