@@ -1,18 +1,16 @@
-import { reviews } from "./const.js";
+
+import { reviews, currentLocation, mainPage, desktopWidth } from "./const.js";
 import { createComments } from "./utils/create-comments.js";
 
-const currentLocation = window.location.href.slice(22);
-
-if (currentLocation === "index.html") {
+if (currentLocation === mainPage) {
   const commentsList = document.querySelector(".testimonials-list");
   const rangeStick = document.querySelector(".testimonials__range");
-  const desktop = "(min-width: 1600px)";
   const modal = document.querySelector(".modal");
 
   let numberOfCards;
   let sliceNumber = 0;
 
-  if (window.matchMedia(desktop).matches) {
+  if (window.matchMedia(desktopWidth).matches) {
     numberOfCards = 4;
   } else {
     numberOfCards = 3;
@@ -26,7 +24,7 @@ if (currentLocation === "index.html") {
   });
 
   window.addEventListener("resize", () => {
-    if (window.matchMedia(desktop).matches) {
+    if (window.matchMedia(desktopWidth).matches) {
       createComments(reviews, sliceNumber, 4);
       numberOfCards = 4;
     } else {
@@ -36,8 +34,8 @@ if (currentLocation === "index.html") {
   });
 
   createComments(reviews, sliceNumber, numberOfCards);
-
-  [...document.querySelectorAll(".testimonials-list__item")].forEach(
+  const comments = document.querySelectorAll(".testimonials-list__item");
+  [...comments].map(
     (review) => {
       review.addEventListener("click", (evt) => {
         modal.style.display = "block";
@@ -49,15 +47,11 @@ if (currentLocation === "index.html") {
   );
   const closeBtns = document.querySelectorAll(".visible__btn");
 
-  [...closeBtns].forEach((btn) => {
+  [...closeBtns].map((btn) => {
     btn.addEventListener("click", () => {
-      [...document.querySelectorAll(".testimonials-list__item")].forEach(
-        (review) => {
-          if (review.classList.contains("visible")) {
-            review.classList.remove("visible");
-          }
-        }
-      );
+      const comments = document.querySelectorAll('.testimonials-list__item');
+      let visibleReview = [...comments].filter((review) => review.classList.contains('visible'));
+      visibleReview.classList.remove('visible');
     });
   });
 }
