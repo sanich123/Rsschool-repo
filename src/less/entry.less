@@ -1,9 +1,29 @@
-@import './fonts.less';
+@import "./global/normalize";
+@import "./global/global";
+@import "./global/mixins";
+@import "./fonts/fonts.less";
 
-@green: green;
-
-body {
-    font-family: Roboto, sans-serif;
-    background: tomato;
-    user-select: none;
+.wrapper {
+  .container(320px);
+  margin-top: 200px;
 }
+
+.widgets {
+  .container(320px);
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+}
+
+.tiles-list {
+  .reset-ul();
+  .container(320px);
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  &__item {
+    width: 79px;
+    border: 1px solid black;
+  }
+}
+
+
