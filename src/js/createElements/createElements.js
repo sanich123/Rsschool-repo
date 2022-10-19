@@ -1,52 +1,31 @@
 /* eslint-disable linebreak-style */
+import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
+
 const body = document.querySelector('body');
 
-body.insertAdjacentHTML(
-  'afterbegin',
-  `
-<div class="wrapper">
-<div class="controls">
-<button type="button">Shuffle and start</button>
-<button type="button">Stop</button>
-<button type="button">Save</button>
-<button type="button">Results</button>
-</div>
-<div class="widgets">
-<span class="widgets__moves">Moves</span>
-<span class="widgets__moves--value"></span>
-<span class="widgets__time">Time</span>
-<span class="widgets__time--value"></span>
-</div>
-</div>
-`,
-);
+body.insertAdjacentHTML('afterbegin', controlsMaker());
+body.insertAdjacentHTML('beforeend', tilesMaker());
+body.insertAdjacentHTML('beforeend', frameChangers());
 
-body.insertAdjacentHTML('beforeend', `
-<ul class="tiles-list">
-${[...Array(16).keys()].sort(() => 0.5 - Math.random()).map((number) => `<li class="tiles-list__item">${number}</li>`).join('')}
-</ul>
-`);
-const tiles = document.querySelectorAll('.tiles-list__item');
-[...tiles].map((tile) => {
-  if (tile.textContent === '0') {
-    tile.classList.add('empty');
+const tilesList = document.body.querySelector('.tiles-list');
+
+tilesList.addEventListener('click', (e) => {
+  const emptyEl = document.querySelector('.tiles-list__item--empty');
+  const emptyRow = Number(emptyEl.dataset.row);
+  const emptyIndex = Number(emptyEl.dataset.col);
+  const currentRow = +e.target.dataset.row;
+  const currentCol = +e.target.dataset.col;
+  const isUp = currentRow === emptyRow - 1 && emptyIndex === currentCol;
+  const isDown = currentRow === emptyRow + 1 && emptyIndex === currentCol;
+  const isNext = e.target.dataset.first === 'false' && e.target === emptyEl.nextSibling;
+  const isPrevious = e.target.dataset.last === 'false' && e.target === emptyEl.previousSibling;
+
+  if (isUp || isDown || isPrevious || isNext) {
+    emptyEl.classList.remove('tiles-list__item--empty');
+    emptyEl.classList.add('tiles-list__item');
+    emptyEl.textContent = e.target.textContent;
+    e.target.classList.remove('tiles-list__item');
+    e.target.classList.add('tiles-list__item--empty');
+    e.target.textContent = '0';
   }
-  return tile;
 });
-body.insertAdjacentHTML('beforeend', `
-  <div class="size__wrapper">
-  <div class="frame-description__wrapper">
-  <span class="frame-description">Frame size</span>
-  <span class="frame-value">4 * 4</span>
-  </div>
-  <span class="frame-btns__description">Other sizes</span>
-  <div class="frame-btns__wrapper">
-  <button type="button" class="frame-size__btn">3 * 3</button>
-  <button type="button" class="frame-size__btn">4 * 4</button>
-  <button type="button" class="frame-size__btn">5 * 5</button>
-  <button type="button" class="frame-size__btn">6 * 6</button>
-  <button type="button" class="frame-size__btn">7 * 7</button>
-  <button type="button" class="frame-size__btn">8 * 8</button>
-  </div>
-  </div>
-`);
