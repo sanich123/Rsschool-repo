@@ -23,6 +23,30 @@ body.insertAdjacentHTML(
 
 body.insertAdjacentHTML('beforeend', `
 <ul class="tiles-list">
-${[...Array(15).keys()].sort(() => 0.5 - Math.random()).map((number) => `<li class="tiles-list__item">${number}</li>`).join('')}
+${[...Array(16).keys()].sort(() => 0.5 - Math.random()).map((number) => `<li class="tiles-list__item">${number}</li>`).join('')}
 </ul>
-`)
+`);
+const tiles = document.querySelectorAll('.tiles-list__item');
+[...tiles].map((tile) => {
+  if (tile.textContent === '0') {
+    tile.classList.add('empty');
+  }
+  return tile;
+});
+body.insertAdjacentHTML('beforeend', `
+  <div class="size__wrapper">
+  <div class="frame-description__wrapper">
+  <span class="frame-description">Frame size</span>
+  <span class="frame-value">4 * 4</span>
+  </div>
+  <span class="frame-btns__description">Other sizes</span>
+  <div class="frame-btns__wrapper">
+  <button type="button" class="frame-size__btn">3 * 3</button>
+  <button type="button" class="frame-size__btn">4 * 4</button>
+  <button type="button" class="frame-size__btn">5 * 5</button>
+  <button type="button" class="frame-size__btn">6 * 6</button>
+  <button type="button" class="frame-size__btn">7 * 7</button>
+  <button type="button" class="frame-size__btn">8 * 8</button>
+  </div>
+  </div>
+`);

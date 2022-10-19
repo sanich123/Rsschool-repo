@@ -2,27 +2,65 @@
 @import "./global/global";
 @import "./global/mixins";
 @import "./fonts/fonts.less";
+@import "./global/variables.less";
 
 .wrapper {
-  .container(320px);
-  margin-top: 200px;
+  .container(@mobile);
+  margin-top: 50px;
 }
 
 .widgets {
-  .container(320px);
+  .container(@mobile);
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
 }
 
 .tiles-list {
-  .reset-ul();
-  .container(320px);
+  list-style: none;
+  padding: 0;
+  .container(@mobile);
   display: grid;
   grid-template-columns: repeat(4, auto);
+  height: 320px;
   &__item {
+    display: grid;
+    align-items: center;
+    justify-content: center;
     width: 79px;
+    height: 79px;
     border: 1px solid black;
+  }
+  .empty {
+    background: black;
+  }
+  margin-bottom: 20px;
+}
+
+.size__wrapper {
+  .container(@mobile);
+  .frame-description__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    .frame-description {
+      display: grid;
+      place-content: center;
+    }
+    .frame-value {
+      display: grid;
+      place-content: center;
+    }
+  }
+  .frame-btns__description {
+    margin-top: 20px;
+    display: grid;
+    place-content: center;
+  }
+  .frame-btns__wrapper {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-content: space-between;
   }
 }
 
