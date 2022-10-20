@@ -1,10 +1,11 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable linebreak-style */
 export const controlsMaker = () => `
 <div class="wrapper">
 <div class="controls">
-<button type="button">Shuffle and start</button>
+<button type="button" class="shuffle__btn">Shuffle and start</button>
 <button type="button">Stop</button>
-<button type="button">Save</button>
+<button type="button" class="save__btn">Save</button>
 <button type="button">Results</button>
 </div>
 <div class="widgets">
@@ -15,6 +16,7 @@ export const controlsMaker = () => `
 </div>
 </div>
 `;
+
 function rowCollsMaker() {
   let result = '';
   const arr = [...Array(16).keys()].sort(() => 0.5 - Math.random());
@@ -29,13 +31,12 @@ function rowCollsMaker() {
   return result;
 }
 
-export const tilesMaker = () => (
-  `
-<ul class="tiles-list">
-${rowCollsMaker()}
-</ul>
-`
-);
+export const tilesMaker = () => {
+  if (localStorage.getItem('savedData')) {
+    return JSON.parse(localStorage.getItem('savedData')).tiles;
+  }
+  return `<ul class="tiles-list">${rowCollsMaker()}</ul>`;
+};
 
 export const frameChangers = () => (`
   <div class="size__wrapper">
