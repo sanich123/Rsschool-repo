@@ -1,15 +1,18 @@
 /* eslint-disable linebreak-style */
 import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
-import { newGame, storageData, continueGame } from '../utils/const';
+import {
+  newGame, storageData, continueGame, defaultValue,
+} from '../utils/const';
 import { zeroAdder } from '../utils/utils';
 
-export default function InitProject(isStarting) {
+export default function InitProject(isStarting, cols = 4) {
   let fromLocalStorage = !!localStorage.getItem(storageData);
   let continueTimer = false;
+  const colsForInnerNeeds = cols;
 
   const body = document.querySelector('body');
   body.insertAdjacentHTML('afterbegin', controlsMaker());
-  body.insertAdjacentHTML('beforeend', tilesMaker());
+  body.insertAdjacentHTML('beforeend', tilesMaker(colsForInnerNeeds));
   body.insertAdjacentHTML('beforeend', frameChangers());
 
   const tilesList = document.body.querySelector('.tiles-list');
@@ -20,6 +23,8 @@ export default function InitProject(isStarting) {
   const secondsBlock = document.body.querySelector('.seconds');
   const counter = document.body.querySelector('.widgets__moves--value');
   const notifications = document.body.querySelector('.notifications');
+  const frameSizeControls = document.body.querySelector('.frame-size__btns');
+  const showFramePanel = document.body.querySelector('.frame-value');
 
   let count = 0;
   let minutes = 0;
@@ -36,6 +41,8 @@ export default function InitProject(isStarting) {
       secondsBlock.innerHTML = zeroAdder(seconds);
     }, 1000);
   }
+  showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
+  tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
   minutesBlock.innerHTML = zeroAdder(minutes);
   secondsBlock.innerHTML = zeroAdder(seconds);
   counter.textContent = count;
@@ -86,11 +93,11 @@ export default function InitProject(isStarting) {
   shuffleBtn.addEventListener('click', () => {
     if (fromLocalStorage) {
       document.body.innerHTML = '';
-      InitProject(continueGame);
+      InitProject(continueGame, colsForInnerNeeds);
     } else {
       document.body.innerHTML = '';
       localStorage.clear();
-      InitProject(newGame);
+      InitProject(newGame, colsForInnerNeeds);
     }
   });
   saveBtn.addEventListener('click', () => {
@@ -116,5 +123,10 @@ export default function InitProject(isStarting) {
       stopBtn.innerHTML = 'Continue';
       continueTimer = true;
     }
+  });
+  frameSizeControls.addEventListener('click', (e) => {
+    body.innerHTML = '';
+    localStorage.clear();
+    InitProject(defaultValue, e.target.value);
   });
 }

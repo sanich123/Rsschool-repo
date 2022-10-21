@@ -8,8 +8,8 @@ export const controlsMaker = () => `
 <button type="button" class="stop__btn">Pause</button>
 <button type="button" class="save__btn">Save</button>
 <button type="button">Results</button>
-<div class="notifications"></div>
 </div>
+<div class="notifications"></div>
 <div class="widgets">
 <span class="widgets__moves">Moves</span>
 <span class="widgets__moves--value"></span>
@@ -22,25 +22,25 @@ export const controlsMaker = () => `
 </div>
 `;
 
-function rowCollsMaker() {
+function rowCollsMaker(n = 4) {
   let result = '';
-  const arr = [...Array(16).keys()].sort(() => 0.5 - Math.random());
+  const arr = [...Array(n * n).keys()].sort(() => 0.5 - Math.random());
 
   for (let i = 0, j = 0; i < arr.length; i++, j++) {
     const isEmpty = arr[i] === 0 ? 'tiles-list__item--empty' : 'tiles-list__item';
-    if (j === 4) {
+    if (j === n) {
       j = 0;
     }
-    result += `<li class=${isEmpty} data-row=${Math.floor(i / 4) + 1} data-col=${j + 1} data-last=${j === 3} data-first=${j === 0}>${arr[i]}</li>`;
+    result += `<li class=${isEmpty} data-row=${Math.floor(i / n) + 1} data-col=${j + 1} data-last=${j === n - 1} data-first=${j === 0}>${arr[i]}</li>`;
   }
   return result;
 }
 
-export const tilesMaker = () => {
+export const tilesMaker = (cols) => {
   if (localStorage.getItem('savedData')) {
     return JSON.parse(localStorage.getItem('savedData')).tiles;
   }
-  return `<ul class="tiles-list">${rowCollsMaker()}</ul>`;
+  return `<ul class="tiles-list">${rowCollsMaker(cols)}</ul>`;
 };
 
 export const frameChangers = () => (`
@@ -51,12 +51,14 @@ export const frameChangers = () => (`
   </div>
   <span class="frame-btns__description">Other sizes</span>
   <div class="frame-btns__wrapper">
+  <ul class="frame-size__btns">
   <button type="button" class="frame-size__btn" value="3">3*3</button>
   <button type="button" class="frame-size__btn" value="4">4*4</button>
   <button type="button" class="frame-size__btn" value="5">5*5</button>
   <button type="button" class="frame-size__btn" value="6">6*6</button>
   <button type="button" class="frame-size__btn" value="7">7*7</button>
   <button type="button" class="frame-size__btn" value="8">8*8</button>
+  </ul>
   </div>
   </div>
   `);
