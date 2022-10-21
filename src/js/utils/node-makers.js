@@ -4,10 +4,11 @@
 export const controlsMaker = () => `
 <div class="wrapper">
 <div class="controls">
-<button type="button" class="shuffle__btn">Shuffle and start</button>
-<button type="button" class="stop__btn">Stop</button>
+<button type="button" class="shuffle__btn">Start new</button>
+<button type="button" class="stop__btn">Pause</button>
 <button type="button" class="save__btn">Save</button>
 <button type="button">Results</button>
+<div class="notifications"></div>
 </div>
 <div class="widgets">
 <span class="widgets__moves">Moves</span>

@@ -1,9 +1,12 @@
 /* eslint-disable linebreak-style */
 import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
-import { newGame, storageData } from '../utils/const';
+import { newGame, storageData, continueGame } from '../utils/const';
 import { zeroAdder } from '../utils/utils';
 
 export default function InitProject(isStarting) {
+  let fromLocalStorage = !!localStorage.getItem(storageData);
+  let continueTimer = false;
+
   const body = document.querySelector('body');
   body.insertAdjacentHTML('afterbegin', controlsMaker());
   body.insertAdjacentHTML('beforeend', tilesMaker());
@@ -16,26 +19,13 @@ export default function InitProject(isStarting) {
   const minutesBlock = document.body.querySelector('.minutes');
   const secondsBlock = document.body.querySelector('.seconds');
   const counter = document.body.querySelector('.widgets__moves--value');
+  const notifications = document.body.querySelector('.notifications');
 
   let count = 0;
   let minutes = 0;
   let seconds = 0;
   let interval;
-
-  minutesBlock.innerHTML = zeroAdder(minutes);
-  secondsBlock.innerHTML = zeroAdder(seconds);
-  counter.textContent = count;
-
-  if (localStorage.getItem(storageData)) {
-    const { moves } = JSON.parse(localStorage.getItem(storageData));
-    const second = JSON.parse(localStorage.getItem(storageData)).seconds;
-    count = moves;
-    counter.textContent = count;
-    secondsBlock.innerHTML = zeroAdder(second);
-  }
-
-  if (isStarting === newGame) {
-    clearInterval(interval);
+  function timer() {
     interval = setInterval(() => {
       seconds += 1;
       if (seconds === 60) {
@@ -46,9 +36,31 @@ export default function InitProject(isStarting) {
       secondsBlock.innerHTML = zeroAdder(seconds);
     }, 1000);
   }
+  minutesBlock.innerHTML = zeroAdder(minutes);
+  secondsBlock.innerHTML = zeroAdder(seconds);
+  counter.textContent = count;
+
+  if (fromLocalStorage) {
+    const { moves, mins, secs } = JSON.parse(localStorage.getItem(storageData));
+    count = +moves;
+    seconds = secs;
+    minutes = mins;
+    counter.textContent = count;
+    secondsBlock.innerHTML = zeroAdder(secs);
+    minutesBlock.innerHTML = zeroAdder(mins);
+    shuffleBtn.textContent = 'Continue';
+  }
+
+  if (isStarting === newGame || isStarting === continueGame) {
+    timer();
+  }
+  if (isStarting === continueGame) {
+    shuffleBtn.innerHTML = 'Start new';
+    fromLocalStorage = false;
+  }
 
   tilesList.addEventListener('click', (e) => {
-    if (isStarting === newGame) {
+    if (isStarting === newGame || isStarting === continueGame) {
       const emptyEl = document.querySelector('.tiles-list__item--empty');
       const emptyRow = Number(emptyEl.dataset.row);
       const emptyIndex = Number(emptyEl.dataset.col);
@@ -72,9 +84,14 @@ export default function InitProject(isStarting) {
     }
   });
   shuffleBtn.addEventListener('click', () => {
-    document.body.innerHTML = '';
-    localStorage.clear();
-    InitProject(newGame);
+    if (fromLocalStorage) {
+      document.body.innerHTML = '';
+      InitProject(continueGame);
+    } else {
+      document.body.innerHTML = '';
+      localStorage.clear();
+      InitProject(newGame);
+    }
   });
   saveBtn.addEventListener('click', () => {
     const moves = counter.textContent;
@@ -82,11 +99,22 @@ export default function InitProject(isStarting) {
     localStorage.setItem(storageData, JSON.stringify({
       tiles: stringifiedNodes,
       moves,
-      seconds,
-      minutes,
+      secs: seconds,
+      mins: minutes,
     }));
+    notifications.innerHTML = 'The data was successfully saved';
+    setTimeout(() => { notifications.innerHTML = ''; }, 1000);
   });
   stopBtn.addEventListener('click', () => {
-    clearInterval(interval);
+    if (continueTimer) {
+      stopBtn.innerHTML = 'Pause';
+      continueTimer = false;
+      clearInterval(interval);
+      timer();
+    } else {
+      clearInterval(interval);
+      stopBtn.innerHTML = 'Continue';
+      continueTimer = true;
+    }
   });
 }
