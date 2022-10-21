@@ -4,7 +4,7 @@ export const controlsMaker = () => `
 <div class="wrapper">
 <div class="controls">
 <button type="button" class="shuffle__btn">Shuffle and start</button>
-<button type="button">Stop</button>
+<button type="button" class="stop__btn">Stop</button>
 <button type="button" class="save__btn">Save</button>
 <button type="button">Results</button>
 </div>
@@ -12,7 +12,10 @@ export const controlsMaker = () => `
 <span class="widgets__moves">Moves</span>
 <span class="widgets__moves--value"></span>
 <span class="widgets__time">Time</span>
-<span class="widgets__time--value"></span>
+<span class="widgets__time--value">
+<span class="minutes"></span>:
+<span class="seconds"></span>
+</span>
 </div>
 </div>
 `;

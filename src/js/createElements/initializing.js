@@ -1,6 +1,8 @@
 /* eslint-disable linebreak-style */
 import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
 
+import { zeroAdder } from '../utils/utils';
+
 export default function InitProject() {
   let count = 0;
   const body = document.querySelector('body');
@@ -18,6 +20,14 @@ export default function InitProject() {
   const tilesList = document.body.querySelector('.tiles-list');
   const shuffleBtn = document.body.querySelector('.shuffle__btn');
   const saveBtn = document.body.querySelector('.save__btn');
+  let minutes = 0;
+  let seconds = 0;
+
+  const minutesBlock = document.body.querySelector('.minutes');
+  const secondsBlock = document.body.querySelector('.seconds');
+
+  minutesBlock.innerHTML = zeroAdder(minutes);
+  secondsBlock.innerHTML = zeroAdder(seconds);
 
   tilesList.addEventListener('click', (e) => {
     const emptyEl = document.querySelector('.tiles-list__item--empty');
@@ -42,9 +52,28 @@ export default function InitProject() {
     }
   });
   shuffleBtn.addEventListener('click', () => {
+    let interval;
+    function timer() {
+      seconds++;
+      secondsBlock.innerHTML = zeroAdder(seconds);
+    }
+    function start() {
+      clearInterval(interval);
+      interval = setInterval(() => {
+        timer();
+      }, 1000);
+    }
+    function reset() {
+      clearInterval(interval);
+      minutes = 0;
+      seconds = 0;
+      minutesBlock.innerHTML = zeroAdder(minutes);
+      secondsBlock.innerHTML = zeroAdder(seconds);
+    }
     document.body.innerHTML = '';
     localStorage.clear();
     InitProject();
+    start();
   });
   saveBtn.addEventListener('click', () => {
     const moves = counter.textContent;
