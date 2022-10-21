@@ -77,7 +77,7 @@ export default function InitProject(isStarting, cols = 4) {
       const isDown = currentRow === emptyRow + 1 && emptyIndex === currentCol;
       const isNext = e.target.dataset.first === 'false' && e.target === emptyEl.nextSibling;
       const isPrevious = e.target.dataset.last === 'false' && e.target === emptyEl.previousSibling;
-
+      console.log(currentRow, currentCol, emptyIndex, emptyRow);
       if (isUp || isDown || isPrevious || isNext) {
         count += 1;
         counter.textContent = count;
@@ -127,6 +127,6 @@ export default function InitProject(isStarting, cols = 4) {
   frameSizeControls.addEventListener('click', (e) => {
     body.innerHTML = '';
     localStorage.clear();
-    InitProject(defaultValue, e.target.value);
+    InitProject(newGame, e.target.value);
   });
 }

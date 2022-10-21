@@ -28,7 +28,7 @@ function rowCollsMaker(n = 4) {
 
   for (let i = 0, j = 0; i < arr.length; i++, j++) {
     const isEmpty = arr[i] === 0 ? 'tiles-list__item--empty' : 'tiles-list__item';
-    if (j === n) {
+    if (j === +n) {
       j = 0;
     }
     result += `<li class=${isEmpty} data-row=${Math.floor(i / n) + 1} data-col=${j + 1} data-last=${j === n - 1} data-first=${j === 0}>${arr[i]}</li>`;
