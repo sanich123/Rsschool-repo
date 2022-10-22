@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
 import {
-  newGame, storageData, continueGame, defaultValue,
+  newGame, storageData, continueGame, defaultValue, almostTablet, almostDesktop, biggerDesktop,
 } from '../utils/const';
 import { zeroAdder, widthChanger } from '../utils/utils';
 
@@ -9,6 +9,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   let fromLocalStorage = !!localStorage.getItem(storageData);
   let continueTimer = false;
   let colsForInnerNeeds = cols;
+  const innerStarting = isStarting;
 
   const body = document.querySelector('body');
 
@@ -149,5 +150,26 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     body.innerHTML = '';
     localStorage.clear();
     CreateGame(defaultValue, e.target.value, width);
+  });
+  window.addEventListener('resize', () => {
+    const realWidth = document.documentElement.clientWidth;
+    const innerWidth = currentWidth;
+    if (window.matchMedia(almostTablet).matches) {
+      if (innerWidth > 767) {
+        body.innerHTML = '';
+        CreateGame(innerStarting, colsForInnerNeeds, realWidth);
+      }
+    }
+    if (window.matchMedia(almostDesktop).matches) {
+      if (innerWidth > 1279) {
+        body.innerHTML = '';
+        CreateGame(innerStarting, colsForInnerNeeds, realWidth);
+      }
+    } else if (window.matchMedia(biggerDesktop).matches) {
+      if (innerWidth < 1279) {
+        body.innerHTML = '';
+        CreateGame(innerStarting, colsForInnerNeeds, realWidth);
+      }
+    }
   });
 }
