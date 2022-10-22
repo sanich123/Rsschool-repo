@@ -165,7 +165,8 @@ export default function CreateGame(isStarting, cols, currentWidth) {
         body.innerHTML = '';
         CreateGame(innerStarting, colsForInnerNeeds, realWidth);
       }
-    } else if (window.matchMedia(biggerDesktop).matches) {
+    }
+    if (window.matchMedia(biggerDesktop).matches) {
       if (innerWidth < 1279) {
         body.innerHTML = '';
         CreateGame(innerStarting, colsForInnerNeeds, realWidth);

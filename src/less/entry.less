@@ -33,7 +33,7 @@
   padding: 0;
   @media (max-width: @lessThanTablet) {
     .container(@mobile);
-      height: @mobile;
+    height: @mobile;
   }
   @media (min-width: @tablet) and (max-width: @lessThanDesktop) {
     .container(@tablet);
@@ -53,11 +53,16 @@
     width: 79px;
     height: 79px;
     border: 1px solid black;
-      @media (min-width: @tablet) and (max-width: @lessThanDesktop) {
-        font-size: 3rem;
-        width: 192px;
-        height: 192px;
-      }
+    @media (min-width: @tablet) and (max-width: @lessThanDesktop) {
+      font-size: 3rem;
+      width: 192px;
+      height: 192px;
+    }
+    @media (min-width: @desktop) {
+      font-size: 3rem;
+      width: 300px;
+      height: 300px;
+    }
     &--empty {
       border: 1px solid black;
       background: white;
@@ -76,7 +81,7 @@
     .container(@tablet);
     display: grid;
   }
-    @media (min-width: @desktop) {
+  @media (min-width: @desktop) {
     .container(@desktop);
     height: @desktop;
   }
