@@ -3,22 +3,27 @@ import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
 import {
   newGame, storageData, continueGame, defaultValue,
 } from '../utils/const';
-import { zeroAdder } from '../utils/utils';
+import { zeroAdder, widthChanger } from '../utils/utils';
 
-export default function InitProject(isStarting, cols = 4) {
+export default function CreateGame(isStarting, cols, currentWidth) {
   let fromLocalStorage = !!localStorage.getItem(storageData);
   let continueTimer = false;
-  const colsForInnerNeeds = cols;
+  let colsForInnerNeeds = cols;
 
   const body = document.querySelector('body');
+
   body.insertAdjacentHTML('afterbegin', controlsMaker());
   body.insertAdjacentHTML('beforeend', tilesMaker(colsForInnerNeeds));
   body.insertAdjacentHTML('beforeend', frameChangers());
 
   const tilesList = document.body.querySelector('.tiles-list');
+  const tiles = document.body.querySelectorAll('.tiles-list__item');
+  const emptyTile = document.body.querySelectorAll('.tiles-list__item--empty');
+  const nodes = [...tiles, ...emptyTile];
   const shuffleBtn = document.body.querySelector('.shuffle__btn');
   const saveBtn = document.body.querySelector('.save__btn');
   const stopBtn = document.body.querySelector('.stop__btn');
+  const resultsBtn = document.body.querySelector('.results__btn');
   const minutesBlock = document.body.querySelector('.minutes');
   const secondsBlock = document.body.querySelector('.seconds');
   const counter = document.body.querySelector('.widgets__moves--value');
@@ -41,20 +46,34 @@ export default function InitProject(isStarting, cols = 4) {
       secondsBlock.innerHTML = zeroAdder(seconds);
     }, 1000);
   }
+
   showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
   tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
+  widthChanger(nodes, currentWidth, colsForInnerNeeds);
   minutesBlock.innerHTML = zeroAdder(minutes);
   secondsBlock.innerHTML = zeroAdder(seconds);
   counter.textContent = count;
 
+  if (isStarting === defaultValue) {
+    tilesList.style.opacity = 0.5;
+    stopBtn.disabled = true;
+    saveBtn.disabled = true;
+    resultsBtn.disabled = true;
+  }
+
   if (fromLocalStorage) {
-    const { moves, mins, secs } = JSON.parse(localStorage.getItem(storageData));
-    count = +moves;
+    const {
+      moves, mins, secs, columns,
+    } = JSON.parse(localStorage.getItem(storageData));
+    count = Number(moves);
     seconds = secs;
     minutes = mins;
     counter.textContent = count;
     secondsBlock.innerHTML = zeroAdder(secs);
     minutesBlock.innerHTML = zeroAdder(mins);
+    colsForInnerNeeds = columns;
+    showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
+    tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
     shuffleBtn.textContent = 'Continue';
   }
 
@@ -77,7 +96,7 @@ export default function InitProject(isStarting, cols = 4) {
       const isDown = currentRow === emptyRow + 1 && emptyIndex === currentCol;
       const isNext = e.target.dataset.first === 'false' && e.target === emptyEl.nextSibling;
       const isPrevious = e.target.dataset.last === 'false' && e.target === emptyEl.previousSibling;
-      console.log(currentRow, currentCol, emptyIndex, emptyRow);
+
       if (isUp || isDown || isPrevious || isNext) {
         count += 1;
         counter.textContent = count;
@@ -93,11 +112,11 @@ export default function InitProject(isStarting, cols = 4) {
   shuffleBtn.addEventListener('click', () => {
     if (fromLocalStorage) {
       document.body.innerHTML = '';
-      InitProject(continueGame, colsForInnerNeeds);
+      CreateGame(continueGame, colsForInnerNeeds, document.documentElement.clientWidth);
     } else {
       document.body.innerHTML = '';
       localStorage.clear();
-      InitProject(newGame, colsForInnerNeeds);
+      CreateGame(newGame, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   });
   saveBtn.addEventListener('click', () => {
@@ -108,6 +127,7 @@ export default function InitProject(isStarting, cols = 4) {
       moves,
       secs: seconds,
       mins: minutes,
+      columns: cols,
     }));
     notifications.innerHTML = 'The data was successfully saved';
     setTimeout(() => { notifications.innerHTML = ''; }, 1000);
@@ -125,8 +145,9 @@ export default function InitProject(isStarting, cols = 4) {
     }
   });
   frameSizeControls.addEventListener('click', (e) => {
+    const width = document.documentElement.clientWidth;
     body.innerHTML = '';
     localStorage.clear();
-    InitProject(newGame, e.target.value);
+    CreateGame(defaultValue, e.target.value, width);
   });
 }

@@ -1,5 +1,8 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-plusplus */
+
+import { storageData } from './const';
+
 /* eslint-disable linebreak-style */
 export const controlsMaker = () => `
 <div class="wrapper">
@@ -7,7 +10,7 @@ export const controlsMaker = () => `
 <button type="button" class="shuffle__btn">Start new</button>
 <button type="button" class="stop__btn">Pause</button>
 <button type="button" class="save__btn">Save</button>
-<button type="button">Results</button>
+<button type="button" class="results__btn">Results</button>
 </div>
 <div class="notifications"></div>
 <div class="widgets">
@@ -37,8 +40,8 @@ function rowCollsMaker(n = 4) {
 }
 
 export const tilesMaker = (cols) => {
-  if (localStorage.getItem('savedData')) {
-    return JSON.parse(localStorage.getItem('savedData')).tiles;
+  if (localStorage.getItem(storageData)) {
+    return JSON.parse(localStorage.getItem(storageData)).tiles;
   }
   return `<ul class="tiles-list">${rowCollsMaker(cols)}</ul>`;
 };
@@ -52,12 +55,7 @@ export const frameChangers = () => (`
   <span class="frame-btns__description">Other sizes</span>
   <div class="frame-btns__wrapper">
   <ul class="frame-size__btns">
-  <button type="button" class="frame-size__btn" value="3">3*3</button>
-  <button type="button" class="frame-size__btn" value="4">4*4</button>
-  <button type="button" class="frame-size__btn" value="5">5*5</button>
-  <button type="button" class="frame-size__btn" value="6">6*6</button>
-  <button type="button" class="frame-size__btn" value="7">7*7</button>
-  <button type="button" class="frame-size__btn" value="8">8*8</button>
+  ${[3, 4, 5, 6, 7, 8].map((el) => `<button type="button" class="frame-size__btn" value=${el}>${el}*${el}</button>`).join('')}
   </ul>
   </div>
   </div>
