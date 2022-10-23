@@ -151,26 +151,32 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     localStorage.clear();
     CreateGame(defaultValue, e.target.value, width);
   });
-  window.addEventListener('resize', () => {
-    const realWidth = document.documentElement.clientWidth;
-    const innerWidth = currentWidth;
-    if (window.matchMedia(almostTablet).matches) {
-      if (innerWidth > 767) {
-        body.innerHTML = '';
-        CreateGame(innerStarting, colsForInnerNeeds, realWidth);
-      }
+
+  const mobileWidth = window.matchMedia(almostTablet);
+  const tabletWidth = window.matchMedia(almostDesktop);
+  const desktopWidth = window.matchMedia(biggerDesktop);
+  function handleMobileWidth(e) {
+    if (e.matches && currentWidth > 767) {
+      body.innerHTML = '';
+      CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
-    if (window.matchMedia(almostDesktop).matches) {
-      if (innerWidth > 1279) {
-        body.innerHTML = '';
-        CreateGame(innerStarting, colsForInnerNeeds, realWidth);
-      }
+  }
+  function handleTabletWidth(e) {
+    if (e.matches && currentWidth > 1279) {
+      body.innerHTML = '';
+      CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
-    if (window.matchMedia(biggerDesktop).matches) {
-      if (innerWidth < 1279) {
-        body.innerHTML = '';
-        CreateGame(innerStarting, colsForInnerNeeds, realWidth);
-      }
+  }
+  function handleDesktopWidth(e) {
+    if (e.matches && currentWidth < 1279) {
+      body.innerHTML = '';
+      CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
-  });
+  }
+  mobileWidth.addListener(handleMobileWidth);
+  tabletWidth.addListener(handleTabletWidth);
+  desktopWidth.addListener(handleDesktopWidth);
+  handleMobileWidth(mobileWidth);
+  handleTabletWidth(tabletWidth);
+  handleDesktopWidth(desktopWidth);
 }

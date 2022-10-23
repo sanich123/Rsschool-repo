@@ -3,6 +3,7 @@
 @import "./global/mixins";
 @import "./fonts/fonts.less";
 @import "./global/variables.less";
+@import "./animations.less";
 
 .wrapper {
   @media (max-width: @lessThanTablet) {
@@ -11,6 +12,9 @@
 
   @media (min-width: @tablet) and (max-width: @lessThanDesktop) {
     .container(@tablet);
+  }
+  @media (min-width: @desktop) {
+    .container(@desktop);
   }
 
   margin-top: 50px;
@@ -60,8 +64,8 @@
     }
     @media (min-width: @desktop) {
       font-size: 3rem;
-      width: 300px;
-      height: 300px;
+      // width: 192px;
+      // height: 192px;
     }
     &--empty {
       border: 1px solid black;
@@ -88,6 +92,9 @@
   .frame-description__wrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    @media (min-width: @desktop) {
+      margin: 20px 200px;
+    }
     .frame-description {
       display: grid;
       place-content: center;
@@ -104,10 +111,10 @@
   }
   .frame-btns__wrapper {
     margin-top: 20px;
-    // display: grid;
-    // gap: 10px;
-    // grid-template-columns: repeat(6, 1fr);
     justify-content: space-between;
+    @media (min-width: @desktop) {
+      margin: 20px 200px;
+    }
   }
 }
 
@@ -115,6 +122,9 @@
   display: grid;
   grid-template-columns: repeat(4, auto);
   gap: 5px;
+  @media (min-width: @desktop) {
+    margin: 20px 200px;
+  }
 }
 
 .notifications {
@@ -124,6 +134,9 @@
 
 .widgets {
   margin-bottom: 10px;
+  @media (min-width: @desktop) {
+    margin: 20px 200px;
+  }
 }
 .frame-size__btns {
   min-width: 320px;
