@@ -10,7 +10,6 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   let continueTimer = false;
   let colsForInnerNeeds = cols;
   const innerStarting = isStarting;
-
   const body = document.querySelector('body');
 
   body.insertAdjacentHTML('afterbegin', controlsMaker());
