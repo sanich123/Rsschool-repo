@@ -12,6 +12,7 @@ export const controlsMaker = () => `
 <button type="button" class="save__btn">Save</button>
 <button type="button" class="results__btn">Results</button>
 </div>
+<ol class="results"></ol>
 <div class="notifications"></div>
 <div class="widgets">
 <span class="widgets__moves">Moves</span>
@@ -27,7 +28,9 @@ export const controlsMaker = () => `
 
 function rowCollsMaker(n = 4) {
   let result = '';
-  const arr = [...Array(n * n).keys()].sort(() => 0.5 - Math.random());
+  // const arr = [...Array(n * n).keys()].sort(() => 0.5 - Math.random());
+  const arr = [...Array(n * n - 1).keys()].map((el) => el + 1);
+  arr.push(0);
 
   for (let i = 0, j = 0; i < arr.length; i++, j++) {
     const isEmpty = arr[i] === 0 ? 'tiles-list__item--empty' : 'tiles-list__item';

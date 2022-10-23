@@ -9,3 +9,7 @@ export const desktop = 1280;
 export const almostTablet = '(max-width: 767px)';
 export const almostDesktop = '(min-width: 768px) and (max-width: 1279px)';
 export const biggerDesktop = '(min-width: 1280px)';
+export const leftToRight = 'fromLeftToRight';
+export const rightToLeft = 'fromRightToLeft';
+export const bottomToTop = 'fromBottomToTop';
+export const topToBottom = 'fromTopToBottom';

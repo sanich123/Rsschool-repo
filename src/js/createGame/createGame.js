@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
 import {
-  newGame, storageData, continueGame, defaultValue, almostTablet, almostDesktop, biggerDesktop,
+  newGame, storageData, continueGame, defaultValue, almostTablet, almostDesktop, biggerDesktop, rightToLeft, bottomToTop, leftToRight, topToBottom,
 } from '../utils/const';
 import { zeroAdder, widthChanger } from '../utils/utils';
 
@@ -29,6 +29,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   const secondsBlock = document.body.querySelector('.seconds');
   const counter = document.body.querySelector('.widgets__moves--value');
   const notifications = document.body.querySelector('.notifications');
+  const results = document.querySelector('.results');
   const frameSizeControls = document.body.querySelector('.frame-size__btns');
   const showFramePanel = document.body.querySelector('.frame-value');
 
@@ -47,7 +48,6 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       secondsBlock.innerHTML = zeroAdder(seconds);
     }, 1000);
   }
-
   showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
   tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
   widthChanger(nodes, currentWidth, colsForInnerNeeds);
@@ -97,26 +97,63 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       const isDown = currentRow === emptyRow + 1 && emptyIndex === currentCol;
       const isNext = e.target.dataset.first === 'false' && e.target === emptyEl.nextSibling;
       const isPrevious = e.target.dataset.last === 'false' && e.target === emptyEl.previousSibling;
-
+      let animation;
       if (isUp || isDown || isPrevious || isNext) {
         count += 1;
         counter.textContent = count;
-        emptyEl.classList.remove('tiles-list__item--empty');
-        emptyEl.classList.add('tiles-list__item');
-        emptyEl.textContent = e.target.textContent;
-        e.target.classList.remove('tiles-list__item');
-        e.target.classList.add('tiles-list__item--empty');
-        e.target.textContent = '0';
+        if (isDown) {
+          animation = bottomToTop;
+        }
+        if (isUp) {
+          animation = topToBottom;
+        }
+        if (isNext) {
+          animation = rightToLeft;
+        }
+        if (isPrevious) {
+          animation = leftToRight;
+        }
+        e.target.classList.add(animation);
+        setTimeout(() => {
+          emptyEl.classList.remove('tiles-list__item--empty');
+          emptyEl.classList.add('tiles-list__item');
+          emptyEl.textContent = e.target.textContent;
+          e.target.classList.remove('tiles-list__item');
+          e.target.classList.add('tiles-list__item--empty');
+          e.target.textContent = '0';
+        }, 500);
       }
+      setTimeout(() => nodes.forEach((node) => {
+        if (node.classList.contains(animation)) {
+          node.classList.remove(animation);
+        }
+      }), 1000);
+      const solution = `${[...Array(colsForInnerNeeds * colsForInnerNeeds).keys()].slice(1).join('')}0`;
+
+      setTimeout(() => {
+        const currentState = [...tilesList.children].slice().map((node) => (node.innerHTML)).join('');
+        if (solution === currentState) {
+          notifications.textContent = `Hooray! You solved the puzzle in ${minutes} minutes :${seconds} seconds and ${count} moves!`;
+          const result = { minutes, seconds, count };
+          if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify([result]));
+          } else {
+            const arr = JSON.parse(localStorage.getItem('results'));
+            arr.push(result);
+            localStorage.setItem('results', JSON.stringify(arr));
+          }
+        }
+      }, 600);
     }
   });
+
   shuffleBtn.addEventListener('click', () => {
     if (fromLocalStorage) {
       document.body.innerHTML = '';
       CreateGame(continueGame, colsForInnerNeeds, document.documentElement.clientWidth);
     } else {
       document.body.innerHTML = '';
-      localStorage.clear();
+      localStorage.removeItem(storageData);
       CreateGame(newGame, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   });
@@ -150,6 +187,18 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     body.innerHTML = '';
     localStorage.clear();
     CreateGame(defaultValue, e.target.value, width);
+  });
+  resultsBtn.addEventListener('click', () => {
+    if (localStorage.getItem('results')) {
+      const arr = JSON.parse(localStorage.getItem('results'));
+      const lis = arr.map((item) => `<li>${item.minutes} min : ${item.seconds} sec, ${item.count} moves</li>`).join('');
+      results.innerHTML = '';
+      results.insertAdjacentHTML('afterbegin', lis);
+      setTimeout(() => { results.innerHTML = ''; }, 2000);
+    } else {
+      results.innerHTML = 'Ты еще ни одной головоломки не собрал, че тыкаешь';
+      setTimeout(() => { results.innerHTML = ''; }, 2000);
+    }
   });
 
   const mobileWidth = window.matchMedia(almostTablet);
