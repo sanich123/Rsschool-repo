@@ -28,9 +28,7 @@ export const controlsMaker = () => `
 
 function rowCollsMaker(n = 4) {
   let result = '';
-  // const arr = [...Array(n * n).keys()].sort(() => 0.5 - Math.random());
-  const arr = [...Array(n * n - 1).keys()].map((el) => el + 1);
-  arr.push(0);
+  const arr = [...Array(n * n).keys()].sort(() => 0.5 - Math.random());
 
   for (let i = 0, j = 0; i < arr.length; i++, j++) {
     const isEmpty = arr[i] === 0 ? 'tiles-list__item--empty' : 'tiles-list__item';
