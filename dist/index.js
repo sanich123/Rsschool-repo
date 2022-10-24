@@ -63,32 +63,21 @@ __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerat
 
 /***/ }),
 
-/***/ "./src/js/createGame/createGame.js":
-/*!*****************************************!*\
-  !*** ./src/js/createGame/createGame.js ***!
-  \*****************************************/
+/***/ "./src/js/createGame/createElements.js":
+/*!*********************************************!*\
+  !*** ./src/js/createGame/createElements.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ CreateGame)
+/* harmony export */   "default": () => (/* binding */ createElements)
 /* harmony export */ });
 /* harmony import */ var _utils_node_makers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/node-makers */ "./src/js/utils/node-makers.js");
-/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
-/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/utils */ "./src/js/utils/utils.js");
-/* harmony import */ var _audio_listing_page_mp3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../audio/listing-page.mp3 */ "./src/audio/listing-page.mp3");
 /* eslint-disable linebreak-style */
 
-
-
-
-function CreateGame(isStarting, cols, currentWidth) {
-  let fromLocalStorage = !!localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_1__.storageData);
-  let continueTimer = false;
-  let colsForInnerNeeds = cols;
-  let isMuted = false;
-  const innerStarting = isStarting;
+function createElements(colsForInnerNeeds) {
   const body = document.querySelector('body');
   body.insertAdjacentHTML('afterbegin', (0,_utils_node_makers__WEBPACK_IMPORTED_MODULE_0__.controlsMaker)());
   body.insertAdjacentHTML('beforeend', (0,_utils_node_makers__WEBPACK_IMPORTED_MODULE_0__.tilesMaker)(colsForInnerNeeds));
@@ -109,10 +98,85 @@ function CreateGame(isStarting, cols, currentWidth) {
   const results = document.querySelector('.results');
   const frameSizeControls = document.body.querySelector('.frame-size__btns');
   const showFramePanel = document.body.querySelector('.frame-value');
+  return {
+    tilesList,
+    tiles,
+    emptyTile,
+    nodes,
+    shuffleBtn,
+    saveBtn,
+    stopBtn,
+    resultsBtn,
+    muteBtn,
+    minutesBlock,
+    secondsBlock,
+    counter,
+    notifications,
+    results,
+    frameSizeControls,
+    showFramePanel
+  };
+}
+
+/***/ }),
+
+/***/ "./src/js/createGame/createGame.js":
+/*!*****************************************!*\
+  !*** ./src/js/createGame/createGame.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CreateGame)
+/* harmony export */ });
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/utils */ "./src/js/utils/utils.js");
+/* harmony import */ var _audio_listing_page_mp3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../audio/listing-page.mp3 */ "./src/audio/listing-page.mp3");
+/* harmony import */ var _createElements__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./createElements */ "./src/js/createGame/createElements.js");
+/* eslint-disable linebreak-style */
+
+
+
+
+function CreateGame(isStarting, cols, currentWidth) {
+  let fromLocalStorage = !!localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.storageData);
+  let continueTimer = false;
+  let isMuted = false;
+  let colsForInnerNeeds = cols;
+  const innerStarting = isStarting;
+  const body = document.querySelector('body');
+  const {
+    tilesList,
+    nodes,
+    shuffleBtn,
+    saveBtn,
+    stopBtn,
+    resultsBtn,
+    muteBtn,
+    minutesBlock,
+    secondsBlock,
+    counter,
+    notifications,
+    results,
+    frameSizeControls,
+    showFramePanel
+  } = (0,_createElements__WEBPACK_IMPORTED_MODULE_3__["default"])(colsForInnerNeeds);
   let count = 0;
   let minutes = 0;
   let seconds = 0;
   let interval;
+  notifications.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.checkRightness)(nodes.map(el => +el.innerHTML));
+  setTimeout(() => {
+    notifications.innerHTML = '';
+  }, 2000);
+  showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
+  tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
+  (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.widthChanger)(nodes, currentWidth, colsForInnerNeeds);
+  minutesBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.zeroAdder)(minutes);
+  secondsBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.zeroAdder)(seconds);
+  counter.textContent = count;
   function timer() {
     interval = setInterval(() => {
       seconds += 1;
@@ -120,17 +184,11 @@ function CreateGame(isStarting, cols, currentWidth) {
         seconds = 0;
         minutes += 1;
       }
-      minutesBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.zeroAdder)(minutes);
-      secondsBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.zeroAdder)(seconds);
+      minutesBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.zeroAdder)(minutes);
+      secondsBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.zeroAdder)(seconds);
     }, 1000);
   }
-  showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
-  tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
-  (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.widthChanger)(nodes, currentWidth, colsForInnerNeeds);
-  minutesBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.zeroAdder)(minutes);
-  secondsBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.zeroAdder)(seconds);
-  counter.textContent = count;
-  if (isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_1__.defaultValue) {
+  if (isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_0__.defaultValue) {
     tilesList.style.opacity = 0.5;
     stopBtn.disabled = true;
     saveBtn.disabled = true;
@@ -142,29 +200,29 @@ function CreateGame(isStarting, cols, currentWidth) {
       mins,
       secs,
       columns
-    } = JSON.parse(localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_1__.storageData));
+    } = JSON.parse(localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.storageData));
     count = Number(moves);
     seconds = secs;
     minutes = mins;
     counter.textContent = count;
-    secondsBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.zeroAdder)(secs);
-    minutesBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_2__.zeroAdder)(mins);
+    secondsBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.zeroAdder)(secs);
+    minutesBlock.innerHTML = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.zeroAdder)(mins);
     colsForInnerNeeds = columns;
     showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
     tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
     shuffleBtn.textContent = 'Continue';
   }
-  if (isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_1__.newGame || isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_1__.continueGame) {
+  if (isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_0__.newGame || isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_0__.continueGame) {
     timer();
   }
-  if (isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_1__.continueGame) {
+  if (isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_0__.continueGame) {
     shuffleBtn.innerHTML = 'Start new';
     fromLocalStorage = false;
   }
   tilesList.addEventListener('click', e => {
-    if (isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_1__.newGame || isStarting === _utils_const__WEBPACK_IMPORTED_MODULE_1__.continueGame) {
+    if (isStarting !== _utils_const__WEBPACK_IMPORTED_MODULE_0__.defaultValue) {
       if (!isMuted) {
-        const audio = new Audio(_audio_listing_page_mp3__WEBPACK_IMPORTED_MODULE_3__);
+        const audio = new Audio(_audio_listing_page_mp3__WEBPACK_IMPORTED_MODULE_2__);
         audio.play();
       }
       const emptyEl = document.querySelector('.tiles-list__item--empty');
@@ -180,18 +238,10 @@ function CreateGame(isStarting, cols, currentWidth) {
       if (isUp || isDown || isPrevious || isNext) {
         count += 1;
         counter.textContent = count;
-        if (isDown) {
-          animation = _utils_const__WEBPACK_IMPORTED_MODULE_1__.bottomToTop;
-        }
-        if (isUp) {
-          animation = _utils_const__WEBPACK_IMPORTED_MODULE_1__.topToBottom;
-        }
-        if (isNext) {
-          animation = _utils_const__WEBPACK_IMPORTED_MODULE_1__.rightToLeft;
-        }
-        if (isPrevious) {
-          animation = _utils_const__WEBPACK_IMPORTED_MODULE_1__.leftToRight;
-        }
+        if (isDown) animation = _utils_const__WEBPACK_IMPORTED_MODULE_0__.bottomToTop;
+        if (isUp) animation = _utils_const__WEBPACK_IMPORTED_MODULE_0__.topToBottom;
+        if (isNext) animation = _utils_const__WEBPACK_IMPORTED_MODULE_0__.rightToLeft;
+        if (isPrevious) animation = _utils_const__WEBPACK_IMPORTED_MODULE_0__.leftToRight;
         e.target.classList.add(animation);
         setTimeout(() => {
           emptyEl.classList.remove('tiles-list__item--empty');
@@ -217,12 +267,12 @@ function CreateGame(isStarting, cols, currentWidth) {
             seconds,
             count
           };
-          if (!localStorage.getItem('results')) {
-            localStorage.setItem('results', JSON.stringify([result]));
+          if (!localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.resultsData)) {
+            localStorage.setItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.resultsData, JSON.stringify([result]));
           } else {
-            const arr = JSON.parse(localStorage.getItem('results'));
+            const arr = JSON.parse(localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.resultsData));
             arr.push(result);
-            localStorage.setItem('results', JSON.stringify(arr));
+            localStorage.setItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.resultsData, JSON.stringify(arr));
           }
         }
       }, 600);
@@ -231,24 +281,24 @@ function CreateGame(isStarting, cols, currentWidth) {
   shuffleBtn.addEventListener('click', () => {
     if (fromLocalStorage) {
       document.body.innerHTML = '';
-      CreateGame(_utils_const__WEBPACK_IMPORTED_MODULE_1__.continueGame, colsForInnerNeeds, document.documentElement.clientWidth);
+      CreateGame(_utils_const__WEBPACK_IMPORTED_MODULE_0__.continueGame, colsForInnerNeeds, document.documentElement.clientWidth);
     } else {
       document.body.innerHTML = '';
-      localStorage.removeItem(_utils_const__WEBPACK_IMPORTED_MODULE_1__.storageData);
-      CreateGame(_utils_const__WEBPACK_IMPORTED_MODULE_1__.newGame, colsForInnerNeeds, document.documentElement.clientWidth);
+      localStorage.removeItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.storageData);
+      CreateGame(_utils_const__WEBPACK_IMPORTED_MODULE_0__.newGame, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   });
   saveBtn.addEventListener('click', () => {
     const moves = counter.textContent;
     const stringifiedNodes = new XMLSerializer().serializeToString(tilesList);
-    localStorage.setItem(_utils_const__WEBPACK_IMPORTED_MODULE_1__.storageData, JSON.stringify({
+    localStorage.setItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.storageData, JSON.stringify({
       tiles: stringifiedNodes,
       moves,
       secs: seconds,
       mins: minutes,
       columns: cols
     }));
-    notifications.innerHTML = 'The data was successfully saved';
+    notifications.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_0__.saveLocalStorageSuccess;
     setTimeout(() => {
       notifications.innerHTML = '';
     }, 1000);
@@ -268,12 +318,11 @@ function CreateGame(isStarting, cols, currentWidth) {
   frameSizeControls.addEventListener('click', e => {
     const width = document.documentElement.clientWidth;
     body.innerHTML = '';
-    localStorage.clear();
-    CreateGame(_utils_const__WEBPACK_IMPORTED_MODULE_1__.defaultValue, e.target.value, width);
+    CreateGame(_utils_const__WEBPACK_IMPORTED_MODULE_0__.defaultValue, e.target.value, width);
   });
   resultsBtn.addEventListener('click', () => {
-    if (localStorage.getItem('results')) {
-      const arr = JSON.parse(localStorage.getItem('results'));
+    if (localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.resultsData)) {
+      const arr = JSON.parse(localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_0__.resultsData));
       const lis = arr.map(item => `<li>${item.minutes} min : ${item.seconds} sec, ${item.count} moves</li>`).join('');
       results.innerHTML = '';
       results.insertAdjacentHTML('afterbegin', lis);
@@ -281,7 +330,7 @@ function CreateGame(isStarting, cols, currentWidth) {
         results.innerHTML = '';
       }, 2000);
     } else {
-      results.innerHTML = 'Ты еще ни одной головоломки не собрал, че тыкаешь';
+      results.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_0__.nonSolved;
       setTimeout(() => {
         results.innerHTML = '';
       }, 2000);
@@ -290,39 +339,36 @@ function CreateGame(isStarting, cols, currentWidth) {
   muteBtn.addEventListener('click', () => {
     if (!isMuted) {
       isMuted = true;
-      muteBtn.innerHTML = 'Switch on sound';
+      muteBtn.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_0__.switchSound;
     } else {
       isMuted = false;
-      muteBtn.innerHTML = 'Mute sound';
+      muteBtn.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_0__.muteSound;
     }
   });
-  const mobileWidth = window.matchMedia(_utils_const__WEBPACK_IMPORTED_MODULE_1__.almostTablet);
-  const tabletWidth = window.matchMedia(_utils_const__WEBPACK_IMPORTED_MODULE_1__.almostDesktop);
-  const desktopWidth = window.matchMedia(_utils_const__WEBPACK_IMPORTED_MODULE_1__.biggerDesktop);
   function handleMobileWidth(e) {
-    if (e.matches && currentWidth > 767) {
+    if (e.matches && currentWidth > _utils_const__WEBPACK_IMPORTED_MODULE_0__.maxMobile) {
       body.innerHTML = '';
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
   function handleTabletWidth(e) {
-    if (e.matches && currentWidth > 1279) {
+    if (e.matches && currentWidth > _utils_const__WEBPACK_IMPORTED_MODULE_0__.maxTablet) {
       body.innerHTML = '';
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
   function handleDesktopWidth(e) {
-    if (e.matches && currentWidth < 1279) {
+    if (e.matches && currentWidth < _utils_const__WEBPACK_IMPORTED_MODULE_0__.maxTablet) {
       body.innerHTML = '';
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
-  mobileWidth.addListener(handleMobileWidth);
-  tabletWidth.addListener(handleTabletWidth);
-  desktopWidth.addListener(handleDesktopWidth);
-  handleMobileWidth(mobileWidth);
-  handleTabletWidth(tabletWidth);
-  handleDesktopWidth(desktopWidth);
+  _utils_const__WEBPACK_IMPORTED_MODULE_0__.mobileWidth.addListener(handleMobileWidth);
+  _utils_const__WEBPACK_IMPORTED_MODULE_0__.tabletWidth.addListener(handleTabletWidth);
+  _utils_const__WEBPACK_IMPORTED_MODULE_0__.desktopWidth.addListener(handleDesktopWidth);
+  handleMobileWidth(_utils_const__WEBPACK_IMPORTED_MODULE_0__.mobileWidth);
+  handleTabletWidth(_utils_const__WEBPACK_IMPORTED_MODULE_0__.tabletWidth);
+  handleDesktopWidth(_utils_const__WEBPACK_IMPORTED_MODULE_0__.desktopWidth);
 }
 
 /***/ }),
@@ -370,12 +416,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "continueGame": () => (/* binding */ continueGame),
 /* harmony export */   "defaultValue": () => (/* binding */ defaultValue),
 /* harmony export */   "desktop": () => (/* binding */ desktop),
+/* harmony export */   "desktopWidth": () => (/* binding */ desktopWidth),
 /* harmony export */   "leftToRight": () => (/* binding */ leftToRight),
+/* harmony export */   "maxMobile": () => (/* binding */ maxMobile),
+/* harmony export */   "maxTablet": () => (/* binding */ maxTablet),
 /* harmony export */   "mobile": () => (/* binding */ mobile),
+/* harmony export */   "mobileWidth": () => (/* binding */ mobileWidth),
+/* harmony export */   "muteSound": () => (/* binding */ muteSound),
 /* harmony export */   "newGame": () => (/* binding */ newGame),
+/* harmony export */   "nonSolved": () => (/* binding */ nonSolved),
+/* harmony export */   "resultsData": () => (/* binding */ resultsData),
 /* harmony export */   "rightToLeft": () => (/* binding */ rightToLeft),
+/* harmony export */   "saveLocalStorageSuccess": () => (/* binding */ saveLocalStorageSuccess),
 /* harmony export */   "storageData": () => (/* binding */ storageData),
+/* harmony export */   "switchSound": () => (/* binding */ switchSound),
 /* harmony export */   "tablet": () => (/* binding */ tablet),
+/* harmony export */   "tabletWidth": () => (/* binding */ tabletWidth),
 /* harmony export */   "topToBottom": () => (/* binding */ topToBottom)
 /* harmony export */ });
 /* eslint-disable linebreak-style */
@@ -383,8 +439,11 @@ const newGame = 'restart';
 const continueGame = 'continue';
 const defaultValue = 'default';
 const storageData = 'savedData';
+const resultsData = 'results';
 const mobile = 320;
 const tablet = 768;
+const maxMobile = 767;
+const maxTablet = 1279;
 const desktop = 1280;
 const almostTablet = '(max-width: 767px)';
 const almostDesktop = '(min-width: 768px) and (max-width: 1279px)';
@@ -393,6 +452,13 @@ const leftToRight = 'fromLeftToRight';
 const rightToLeft = 'fromRightToLeft';
 const bottomToTop = 'fromBottomToTop';
 const topToBottom = 'fromTopToBottom';
+const saveLocalStorageSuccess = 'The data was successfully saved';
+const nonSolved = 'Ты еще ни одной головоломки не собрал, че тыкаешь';
+const switchSound = 'Switch on sound';
+const muteSound = 'Mute sound';
+const mobileWidth = window.matchMedia(almostTablet);
+const tabletWidth = window.matchMedia(almostDesktop);
+const desktopWidth = window.matchMedia(biggerDesktop);
 
 /***/ }),
 
@@ -484,11 +550,13 @@ const frameChangers = () => `
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "checkRightness": () => (/* binding */ checkRightness),
 /* harmony export */   "widthChanger": () => (/* binding */ widthChanger),
 /* harmony export */   "widthMatcher": () => (/* binding */ widthMatcher),
 /* harmony export */   "zeroAdder": () => (/* binding */ zeroAdder)
 /* harmony export */ });
 /* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.js");
+/* eslint-disable no-param-reassign */
 /* eslint-disable linebreak-style */
 
 const zeroAdder = string => +string >= 10 ? string : `0${string}`;
@@ -508,6 +576,19 @@ const widthChanger = (nodes, currentWidth, colsForInnerNeeds) => {
     return el;
   });
 };
+function checkRightness(arr) {
+  let sum = 0;
+  const leftSide = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      sum += Math.floor(i / Math.sqrt(arr.length) + 1);
+    } else {
+      sum += arr[i] - 1 - leftSide.filter(e => e < arr[i]).length;
+      leftSide.push(arr[i]);
+    }
+  }
+  return sum % 2 === 0 ? 'Эту головоломку можно потыкать' : 'Эту головоломку нельзя решить, тыкни в новую игру';
+}
 
 /***/ }),
 
