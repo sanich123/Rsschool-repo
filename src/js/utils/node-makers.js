@@ -53,7 +53,9 @@ export const frameChangers = () => (`
   <span class="frame-description">Frame size</span>
   <span class="frame-value">4 * 4</span>
   </div>
-  <span class="frame-btns__description">Other sizes</span>
+  <div class="mute__btn--wrapper">
+  <button type="button" class="mute__btn">Mute sound</button>
+  </div>
   <div class="frame-btns__wrapper">
   <ul class="frame-size__btns">
   ${[3, 4, 5, 6, 7, 8].map((el) => `<button type="button" class="frame-size__btn" value=${el}>${el}*${el}</button>`).join('')}

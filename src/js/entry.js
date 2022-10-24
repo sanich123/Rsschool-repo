@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 
+import '../audio/listing-page.mp3';
 import '@babel/polyfill';
 import '../index.html';
 import '../less/entry.less';

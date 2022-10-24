@@ -4,11 +4,13 @@ import {
   newGame, storageData, continueGame, defaultValue, almostTablet, almostDesktop, biggerDesktop, rightToLeft, bottomToTop, leftToRight, topToBottom,
 } from '../utils/const';
 import { zeroAdder, widthChanger } from '../utils/utils';
+import soundFile from '../../audio/listing-page.mp3';
 
 export default function CreateGame(isStarting, cols, currentWidth) {
   let fromLocalStorage = !!localStorage.getItem(storageData);
   let continueTimer = false;
   let colsForInnerNeeds = cols;
+  let isMuted = false;
   const innerStarting = isStarting;
   const body = document.querySelector('body');
 
@@ -24,6 +26,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   const saveBtn = document.body.querySelector('.save__btn');
   const stopBtn = document.body.querySelector('.stop__btn');
   const resultsBtn = document.body.querySelector('.results__btn');
+  const muteBtn = document.querySelector('.mute__btn');
   const minutesBlock = document.body.querySelector('.minutes');
   const secondsBlock = document.body.querySelector('.seconds');
   const counter = document.body.querySelector('.widgets__moves--value');
@@ -60,7 +63,6 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     saveBtn.disabled = true;
     resultsBtn.disabled = true;
   }
-
   if (fromLocalStorage) {
     const {
       moves, mins, secs, columns,
@@ -76,7 +78,6 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
     shuffleBtn.textContent = 'Continue';
   }
-
   if (isStarting === newGame || isStarting === continueGame) {
     timer();
   }
@@ -84,9 +85,12 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     shuffleBtn.innerHTML = 'Start new';
     fromLocalStorage = false;
   }
-
   tilesList.addEventListener('click', (e) => {
     if (isStarting === newGame || isStarting === continueGame) {
+      if (!isMuted) {
+        const audio = new Audio(soundFile);
+        audio.play();
+      }
       const emptyEl = document.querySelector('.tiles-list__item--empty');
       const emptyRow = Number(emptyEl.dataset.row);
       const emptyIndex = Number(emptyEl.dataset.col);
@@ -145,7 +149,6 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       }, 600);
     }
   });
-
   shuffleBtn.addEventListener('click', () => {
     if (fromLocalStorage) {
       document.body.innerHTML = '';
@@ -197,6 +200,15 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     } else {
       results.innerHTML = 'Ты еще ни одной головоломки не собрал, че тыкаешь';
       setTimeout(() => { results.innerHTML = ''; }, 2000);
+    }
+  });
+  muteBtn.addEventListener('click', () => {
+    if (!isMuted) {
+      isMuted = true;
+      muteBtn.innerHTML = 'Switch on sound';
+    } else {
+      isMuted = false;
+      muteBtn.innerHTML = 'Mute sound';
     }
   });
 
