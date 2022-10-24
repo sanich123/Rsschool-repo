@@ -363,12 +363,15 @@ function CreateGame(isStarting, cols, currentWidth) {
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
-  _utils_const__WEBPACK_IMPORTED_MODULE_0__.mobileWidth.addListener(handleMobileWidth);
-  _utils_const__WEBPACK_IMPORTED_MODULE_0__.tabletWidth.addListener(handleTabletWidth);
-  _utils_const__WEBPACK_IMPORTED_MODULE_0__.desktopWidth.addListener(handleDesktopWidth);
-  handleMobileWidth(_utils_const__WEBPACK_IMPORTED_MODULE_0__.mobileWidth);
-  handleTabletWidth(_utils_const__WEBPACK_IMPORTED_MODULE_0__.tabletWidth);
-  handleDesktopWidth(_utils_const__WEBPACK_IMPORTED_MODULE_0__.desktopWidth);
+  const mobileWidth = window.matchMedia(_utils_const__WEBPACK_IMPORTED_MODULE_0__.almostTablet);
+  const tabletWidth = window.matchMedia(_utils_const__WEBPACK_IMPORTED_MODULE_0__.almostDesktop);
+  const desktopWidth = window.matchMedia(_utils_const__WEBPACK_IMPORTED_MODULE_0__.biggerDesktop);
+  mobileWidth.addListener(handleMobileWidth);
+  tabletWidth.addListener(handleTabletWidth);
+  desktopWidth.addListener(handleDesktopWidth);
+  handleMobileWidth(mobileWidth);
+  handleTabletWidth(tabletWidth);
+  handleDesktopWidth(desktopWidth);
 }
 
 /***/ }),
@@ -416,12 +419,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "continueGame": () => (/* binding */ continueGame),
 /* harmony export */   "defaultValue": () => (/* binding */ defaultValue),
 /* harmony export */   "desktop": () => (/* binding */ desktop),
-/* harmony export */   "desktopWidth": () => (/* binding */ desktopWidth),
 /* harmony export */   "leftToRight": () => (/* binding */ leftToRight),
 /* harmony export */   "maxMobile": () => (/* binding */ maxMobile),
 /* harmony export */   "maxTablet": () => (/* binding */ maxTablet),
 /* harmony export */   "mobile": () => (/* binding */ mobile),
-/* harmony export */   "mobileWidth": () => (/* binding */ mobileWidth),
 /* harmony export */   "muteSound": () => (/* binding */ muteSound),
 /* harmony export */   "newGame": () => (/* binding */ newGame),
 /* harmony export */   "nonSolved": () => (/* binding */ nonSolved),
@@ -431,7 +432,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "storageData": () => (/* binding */ storageData),
 /* harmony export */   "switchSound": () => (/* binding */ switchSound),
 /* harmony export */   "tablet": () => (/* binding */ tablet),
-/* harmony export */   "tabletWidth": () => (/* binding */ tabletWidth),
 /* harmony export */   "topToBottom": () => (/* binding */ topToBottom)
 /* harmony export */ });
 /* eslint-disable linebreak-style */
@@ -456,9 +456,6 @@ const saveLocalStorageSuccess = 'The data was successfully saved';
 const nonSolved = 'Ты еще ни одной головоломки не собрал, че тыкаешь';
 const switchSound = 'Switch on sound';
 const muteSound = 'Mute sound';
-const mobileWidth = window.matchMedia(almostTablet);
-const tabletWidth = window.matchMedia(almostDesktop);
-const desktopWidth = window.matchMedia(biggerDesktop);
 
 /***/ }),
 

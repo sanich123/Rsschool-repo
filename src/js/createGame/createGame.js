@@ -4,9 +4,9 @@ import {
   storageData,
   continueGame,
   defaultValue,
-  mobileWidth,
-  tabletWidth,
-  desktopWidth,
+  almostDesktop,
+  almostTablet,
+  biggerDesktop,
   rightToLeft,
   bottomToTop,
   leftToRight,
@@ -239,6 +239,9 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
+  const mobileWidth = window.matchMedia(almostTablet);
+  const tabletWidth = window.matchMedia(almostDesktop);
+  const desktopWidth = window.matchMedia(biggerDesktop);
   mobileWidth.addListener(handleMobileWidth);
   tabletWidth.addListener(handleTabletWidth);
   desktopWidth.addListener(handleDesktopWidth);

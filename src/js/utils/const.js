@@ -20,6 +20,4 @@ export const saveLocalStorageSuccess = 'The data was successfully saved';
 export const nonSolved = 'Ты еще ни одной головоломки не собрал, че тыкаешь';
 export const switchSound = 'Switch on sound';
 export const muteSound = 'Mute sound';
-export const mobileWidth = window.matchMedia(almostTablet);
-export const tabletWidth = window.matchMedia(almostDesktop);
-export const desktopWidth = window.matchMedia(biggerDesktop);
+
