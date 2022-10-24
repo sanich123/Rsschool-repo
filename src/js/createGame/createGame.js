@@ -1,55 +1,58 @@
 /* eslint-disable linebreak-style */
-import { controlsMaker, tilesMaker, frameChangers } from '../utils/node-makers';
 import {
-  newGame, storageData, continueGame, defaultValue, almostTablet, almostDesktop, biggerDesktop, rightToLeft, bottomToTop, leftToRight, topToBottom,
+  newGame,
+  storageData,
+  continueGame,
+  defaultValue,
+  almostTablet,
+  almostDesktop,
+  biggerDesktop,
+  rightToLeft,
+  bottomToTop,
+  leftToRight,
+  topToBottom,
+  resultsData,
+  saveLocalStorageSuccess,
+  nonSolved,
+  switchSound,
+  muteSound,
+  maxMobile,
+  maxTablet,
 } from '../utils/const';
-import { zeroAdder, widthChanger } from '../utils/utils';
+import { zeroAdder, widthChanger, timer } from '../utils/utils';
 import soundFile from '../../audio/listing-page.mp3';
+import createElements from './createElements';
 
 export default function CreateGame(isStarting, cols, currentWidth) {
   let fromLocalStorage = !!localStorage.getItem(storageData);
   let continueTimer = false;
-  let colsForInnerNeeds = cols;
   let isMuted = false;
+  let colsForInnerNeeds = cols;
   const innerStarting = isStarting;
+
   const body = document.querySelector('body');
-
-  body.insertAdjacentHTML('afterbegin', controlsMaker());
-  body.insertAdjacentHTML('beforeend', tilesMaker(colsForInnerNeeds));
-  body.insertAdjacentHTML('beforeend', frameChangers());
-
-  const tilesList = document.body.querySelector('.tiles-list');
-  const tiles = document.body.querySelectorAll('.tiles-list__item');
-  const emptyTile = document.body.querySelectorAll('.tiles-list__item--empty');
-  const nodes = [...tiles, ...emptyTile];
-  const shuffleBtn = document.body.querySelector('.shuffle__btn');
-  const saveBtn = document.body.querySelector('.save__btn');
-  const stopBtn = document.body.querySelector('.stop__btn');
-  const resultsBtn = document.body.querySelector('.results__btn');
-  const muteBtn = document.querySelector('.mute__btn');
-  const minutesBlock = document.body.querySelector('.minutes');
-  const secondsBlock = document.body.querySelector('.seconds');
-  const counter = document.body.querySelector('.widgets__moves--value');
-  const notifications = document.body.querySelector('.notifications');
-  const results = document.querySelector('.results');
-  const frameSizeControls = document.body.querySelector('.frame-size__btns');
-  const showFramePanel = document.body.querySelector('.frame-value');
+  const {
+    tilesList,
+    nodes,
+    shuffleBtn,
+    saveBtn,
+    stopBtn,
+    resultsBtn,
+    muteBtn,
+    minutesBlock,
+    secondsBlock,
+    counter,
+    notifications,
+    results,
+    frameSizeControls,
+    showFramePanel,
+  } = createElements(colsForInnerNeeds);
 
   let count = 0;
   let minutes = 0;
   let seconds = 0;
   let interval;
-  function timer() {
-    interval = setInterval(() => {
-      seconds += 1;
-      if (seconds === 60) {
-        seconds = 0;
-        minutes += 1;
-      }
-      minutesBlock.innerHTML = zeroAdder(minutes);
-      secondsBlock.innerHTML = zeroAdder(seconds);
-    }, 1000);
-  }
+
   showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
   tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
   widthChanger(nodes, currentWidth, colsForInnerNeeds);
@@ -79,14 +82,14 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     shuffleBtn.textContent = 'Continue';
   }
   if (isStarting === newGame || isStarting === continueGame) {
-    timer();
+    timer(interval, seconds, minutes, minutesBlock, secondsBlock);
   }
   if (isStarting === continueGame) {
     shuffleBtn.innerHTML = 'Start new';
     fromLocalStorage = false;
   }
   tilesList.addEventListener('click', (e) => {
-    if (isStarting === newGame || isStarting === continueGame) {
+    if (isStarting !== defaultValue) {
       if (!isMuted) {
         const audio = new Audio(soundFile);
         audio.play();
@@ -104,18 +107,10 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       if (isUp || isDown || isPrevious || isNext) {
         count += 1;
         counter.textContent = count;
-        if (isDown) {
-          animation = bottomToTop;
-        }
-        if (isUp) {
-          animation = topToBottom;
-        }
-        if (isNext) {
-          animation = rightToLeft;
-        }
-        if (isPrevious) {
-          animation = leftToRight;
-        }
+        if (isDown) animation = bottomToTop;
+        if (isUp) animation = topToBottom;
+        if (isNext) animation = rightToLeft;
+        if (isPrevious) animation = leftToRight;
         e.target.classList.add(animation);
         setTimeout(() => {
           emptyEl.classList.remove('tiles-list__item--empty');
@@ -138,12 +133,12 @@ export default function CreateGame(isStarting, cols, currentWidth) {
         if (solution === currentState) {
           notifications.textContent = `Hooray! You solved the puzzle in ${minutes} minutes :${seconds} seconds and ${count} moves!`;
           const result = { minutes, seconds, count };
-          if (!localStorage.getItem('results')) {
-            localStorage.setItem('results', JSON.stringify([result]));
+          if (!localStorage.getItem(resultsData)) {
+            localStorage.setItem(resultsData, JSON.stringify([result]));
           } else {
-            const arr = JSON.parse(localStorage.getItem('results'));
+            const arr = JSON.parse(localStorage.getItem(resultsData));
             arr.push(result);
-            localStorage.setItem('results', JSON.stringify(arr));
+            localStorage.setItem(resultsData, JSON.stringify(arr));
           }
         }
       }, 600);
@@ -169,7 +164,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       mins: minutes,
       columns: cols,
     }));
-    notifications.innerHTML = 'The data was successfully saved';
+    notifications.innerHTML = saveLocalStorageSuccess;
     setTimeout(() => { notifications.innerHTML = ''; }, 1000);
   });
   stopBtn.addEventListener('click', () => {
@@ -177,7 +172,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       stopBtn.innerHTML = 'Pause';
       continueTimer = false;
       clearInterval(interval);
-      timer();
+      timer(interval, seconds, minutes, minutesBlock, secondsBlock);
     } else {
       clearInterval(interval);
       stopBtn.innerHTML = 'Continue';
@@ -187,28 +182,27 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   frameSizeControls.addEventListener('click', (e) => {
     const width = document.documentElement.clientWidth;
     body.innerHTML = '';
-    localStorage.clear();
     CreateGame(defaultValue, e.target.value, width);
   });
   resultsBtn.addEventListener('click', () => {
-    if (localStorage.getItem('results')) {
-      const arr = JSON.parse(localStorage.getItem('results'));
+    if (localStorage.getItem(resultsData)) {
+      const arr = JSON.parse(localStorage.getItem(resultsData));
       const lis = arr.map((item) => `<li>${item.minutes} min : ${item.seconds} sec, ${item.count} moves</li>`).join('');
       results.innerHTML = '';
       results.insertAdjacentHTML('afterbegin', lis);
       setTimeout(() => { results.innerHTML = ''; }, 2000);
     } else {
-      results.innerHTML = 'Ты еще ни одной головоломки не собрал, че тыкаешь';
+      results.innerHTML = nonSolved;
       setTimeout(() => { results.innerHTML = ''; }, 2000);
     }
   });
   muteBtn.addEventListener('click', () => {
     if (!isMuted) {
       isMuted = true;
-      muteBtn.innerHTML = 'Switch on sound';
+      muteBtn.innerHTML = switchSound;
     } else {
       isMuted = false;
-      muteBtn.innerHTML = 'Mute sound';
+      muteBtn.innerHTML = muteSound;
     }
   });
 
@@ -216,19 +210,19 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   const tabletWidth = window.matchMedia(almostDesktop);
   const desktopWidth = window.matchMedia(biggerDesktop);
   function handleMobileWidth(e) {
-    if (e.matches && currentWidth > 767) {
+    if (e.matches && currentWidth > maxMobile) {
       body.innerHTML = '';
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
   function handleTabletWidth(e) {
-    if (e.matches && currentWidth > 1279) {
+    if (e.matches && currentWidth > maxTablet) {
       body.innerHTML = '';
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
   function handleDesktopWidth(e) {
-    if (e.matches && currentWidth < 1279) {
+    if (e.matches && currentWidth < maxTablet) {
       body.innerHTML = '';
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
