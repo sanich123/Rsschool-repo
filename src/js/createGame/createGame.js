@@ -19,7 +19,9 @@ import {
   maxMobile,
   maxTablet,
 } from '../utils/const';
-import { zeroAdder, widthChanger, timer } from '../utils/utils';
+import {
+  zeroAdder, widthChanger, checkRightness,
+} from '../utils/utils';
 import soundFile from '../../audio/listing-page.mp3';
 import createElements from './createElements';
 
@@ -53,13 +55,26 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   let seconds = 0;
   let interval;
 
+  notifications.innerHTML = checkRightness(nodes.map((el) => +el.innerHTML));
+  setTimeout(() => { notifications.innerHTML = ''; }, 2000);
+
   showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
   tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
   widthChanger(nodes, currentWidth, colsForInnerNeeds);
   minutesBlock.innerHTML = zeroAdder(minutes);
   secondsBlock.innerHTML = zeroAdder(seconds);
   counter.textContent = count;
-
+  function timer() {
+    interval = setInterval(() => {
+      seconds += 1;
+      if (seconds === 60) {
+        seconds = 0;
+        minutes += 1;
+      }
+      minutesBlock.innerHTML = zeroAdder(minutes);
+      secondsBlock.innerHTML = zeroAdder(seconds);
+    }, 1000);
+  }
   if (isStarting === defaultValue) {
     tilesList.style.opacity = 0.5;
     stopBtn.disabled = true;
@@ -82,7 +97,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     shuffleBtn.textContent = 'Continue';
   }
   if (isStarting === newGame || isStarting === continueGame) {
-    timer(interval, seconds, minutes, minutesBlock, secondsBlock);
+    timer();
   }
   if (isStarting === continueGame) {
     shuffleBtn.innerHTML = 'Start new';
@@ -172,7 +187,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       stopBtn.innerHTML = 'Pause';
       continueTimer = false;
       clearInterval(interval);
-      timer(interval, seconds, minutes, minutesBlock, secondsBlock);
+      timer();
     } else {
       clearInterval(interval);
       stopBtn.innerHTML = 'Continue';

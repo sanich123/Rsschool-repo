@@ -21,14 +21,16 @@ export const widthChanger = (nodes, currentWidth, colsForInnerNeeds) => {
   });
 };
 
-export function timer(interval, seconds, minutes, minutesBlock, secondsBlock) {
-  interval = setInterval(() => {
-    seconds += 1;
-    if (seconds === 60) {
-      seconds = 0;
-      minutes += 1;
+export function checkRightness(arr) {
+  let sum = 0;
+  const leftSide = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      sum += Math.floor(i / Math.sqrt(arr.length) + 1);
+    } else {
+      sum += arr[i] - 1 - leftSide.filter((e) => e < arr[i]).length;
+      leftSide.push(arr[i]);
     }
-    minutesBlock.innerHTML = zeroAdder(minutes);
-    secondsBlock.innerHTML = zeroAdder(seconds);
-  }, 1000);
+  }
+  return sum % 2 === 0 ? 'Эту головоломку можно потыкать' : 'Эту головоломку нельзя решить, тыкни в новую игру';
 }
