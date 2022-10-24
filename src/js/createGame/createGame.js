@@ -4,9 +4,9 @@ import {
   storageData,
   continueGame,
   defaultValue,
-  almostTablet,
-  almostDesktop,
-  biggerDesktop,
+  mobileWidth,
+  tabletWidth,
+  desktopWidth,
   rightToLeft,
   bottomToTop,
   leftToRight,
@@ -206,9 +206,6 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     }
   });
 
-  const mobileWidth = window.matchMedia(almostTablet);
-  const tabletWidth = window.matchMedia(almostDesktop);
-  const desktopWidth = window.matchMedia(biggerDesktop);
   function handleMobileWidth(e) {
     if (e.matches && currentWidth > maxMobile) {
       body.innerHTML = '';
