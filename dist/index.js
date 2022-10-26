@@ -353,6 +353,13 @@ function CreateGame(isStarting, cols, currentWidth) {
     }
   }
   const mobileWidth = window.matchMedia(_utils_const__WEBPACK_IMPORTED_MODULE_0__.almostTablet);
+  const tabletWidth = window.matchMedia('(min-width: 768px)');
+  tabletWidth.addListener(e => {
+    if (e.matches) {
+      body.innerHTML = '';
+      CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
+    }
+  });
   mobileWidth.addListener(handleMobileWidth);
   handleMobileWidth(mobileWidth);
 }
