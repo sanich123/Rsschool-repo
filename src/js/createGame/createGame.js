@@ -89,6 +89,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
     seconds = secs;
     minutes = mins;
     counter.textContent = count;
+    widthChanger(nodes, currentWidth, columns);
     secondsBlock.innerHTML = zeroAdder(secs);
     minutesBlock.innerHTML = zeroAdder(mins);
     colsForInnerNeeds = columns;
@@ -227,25 +228,8 @@ export default function CreateGame(isStarting, cols, currentWidth) {
       CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
     }
   }
-  function handleTabletWidth(e) {
-    if (e.matches && currentWidth > maxTablet) {
-      body.innerHTML = '';
-      CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
-    }
-  }
-  function handleDesktopWidth(e) {
-    if (e.matches && currentWidth < maxTablet) {
-      body.innerHTML = '';
-      CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
-    }
-  }
+
   const mobileWidth = window.matchMedia(almostTablet);
-  const tabletWidth = window.matchMedia(almostDesktop);
-  const desktopWidth = window.matchMedia(biggerDesktop);
   mobileWidth.addListener(handleMobileWidth);
-  tabletWidth.addListener(handleTabletWidth);
-  desktopWidth.addListener(handleDesktopWidth);
   handleMobileWidth(mobileWidth);
-  handleTabletWidth(tabletWidth);
-  handleDesktopWidth(desktopWidth);
 }

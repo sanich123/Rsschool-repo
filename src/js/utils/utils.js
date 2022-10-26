@@ -1,16 +1,13 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable linebreak-style */
-import { mobile, tablet, desktop } from './const';
+import { mobile, tablet } from './const';
 
 export const zeroAdder = (string) => (+string >= 10 ? string : `0${string}`);
 export const widthMatcher = (width) => {
   if (width < tablet) {
     return mobile;
   }
-  if (width >= tablet && width < desktop) {
-    return tablet;
-  }
-  return desktop;
+  return tablet;
 };
 
 export const widthChanger = (nodes, currentWidth, colsForInnerNeeds) => {

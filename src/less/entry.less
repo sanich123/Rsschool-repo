@@ -40,13 +40,9 @@
     .container(@mobile);
     height: @mobile;
   }
-  @media (min-width: @tablet) and (max-width: @lessThanDesktop) {
+  @media (min-width: @tablet) {
     .container(@tablet);
     height: @tablet;
-  }
-  @media (min-width: @desktop) {
-    .container(@desktop);
-    height: @desktop;
   }
   display: grid;
   grid-template-columns: repeat(4, auto);
@@ -58,15 +54,10 @@
     width: 79px;
     height: 79px;
     border: 1px solid black;
-    @media (min-width: @tablet) and (max-width: @lessThanDesktop) {
+    @media (min-width: @tablet) {
       font-size: 3rem;
       width: 192px;
       height: 192px;
-    }
-    @media (min-width: @desktop) {
-      font-size: 3rem;
-      // width: 192px;
-      // height: 192px;
     }
     &--empty {
       border: 1px solid black;
