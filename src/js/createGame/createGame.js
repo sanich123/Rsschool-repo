@@ -4,9 +4,7 @@ import {
   storageData,
   continueGame,
   defaultValue,
-  almostDesktop,
   almostTablet,
-  biggerDesktop,
   rightToLeft,
   bottomToTop,
   leftToRight,
@@ -17,11 +15,8 @@ import {
   switchSound,
   muteSound,
   maxMobile,
-  maxTablet,
 } from '../utils/const';
-import {
-  zeroAdder, widthChanger, checkRightness,
-} from '../utils/utils';
+import { zeroAdder, widthChanger, checkRightness } from '../utils/utils';
 import soundFile from '../../audio/listing-page.mp3';
 import createElements from './createElements';
 
@@ -60,6 +55,7 @@ export default function CreateGame(isStarting, cols, currentWidth) {
 
   showFramePanel.innerHTML = `${colsForInnerNeeds} * ${colsForInnerNeeds}`;
   tilesList.style.gridTemplateColumns = `repeat(${colsForInnerNeeds}, auto)`;
+
   widthChanger(nodes, currentWidth, colsForInnerNeeds);
   minutesBlock.innerHTML = zeroAdder(minutes);
   secondsBlock.innerHTML = zeroAdder(seconds);
@@ -230,6 +226,13 @@ export default function CreateGame(isStarting, cols, currentWidth) {
   }
 
   const mobileWidth = window.matchMedia(almostTablet);
+  const tabletWidth = window.matchMedia('(min-width: 768px)');
+  tabletWidth.addListener((e) => {
+    if (e.matches) {
+      body.innerHTML = '';
+      CreateGame(innerStarting, colsForInnerNeeds, document.documentElement.clientWidth);
+    }
+  });
   mobileWidth.addListener(handleMobileWidth);
   handleMobileWidth(mobileWidth);
 }
