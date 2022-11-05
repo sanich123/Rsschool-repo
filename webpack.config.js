@@ -21,16 +21,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-    filename: 'index.js',
+    filename: 'bundle.js',
     assetModuleFilename: 'asset/[ext]',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'styles.css',
-    }),
+    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new MiniCssExtractPlugin({ filename: 'styles.css' }),
   ],
   module: {
     rules: [
@@ -46,9 +42,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              postcssOptions: {
-                plugins: ['postcss-preset-env'],
-              },
+              postcssOptions: { plugins: ['postcss-preset-env'] },
             },
           },
           'less-loader',
@@ -57,54 +51,36 @@ module.exports = {
       {
         test: /\.woff2?$/i,
         type: 'asset/resource',
-        generator: {
-          filename: 'fonts/[name][ext]',
-        },
+        generator: { filename: 'fonts/[name][ext]' },
       },
       {
         test: /\.mp3$/i,
         type: 'asset/resource',
-        generator: {
-          filename: 'audio/[name][ext]',
-        },
+        generator: { filename: 'audio/[name][ext]' },
       },
       {
         test: /\.(jpe?g|png|svg|webp)$/i,
+        type: 'asset/resource',
+        generator: { filename: 'img/[name][ext]' },
         use: [
           {
             loader: 'image-webpack-loader',
             options: {
-              mozjpeg: {
-                progressive: true,
-              },
-              // optipng.enabled: false will disable optipng
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: [0.65, 0.9],
-                speed: 4,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 75,
-              },
+              mozjpeg: { progressive: true },
+              optipng: { enabled: false },
+              pngquant: { quality: [0.65, 0.9], speed: 4 },
+              gifsicle: { interlaced: false },
+              webp: { quality: 75 },
             },
           },
         ],
-        type: 'asset/resource',
       },
       {
-        test: /\.m?js$/,
+        test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
+          options: { presets: ['@babel/preset-env'] },
         },
       },
     ],

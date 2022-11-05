@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-
+import '../img/Фото резюме.jpg';
 import '../audio/listing-page.mp3';
 import '@babel/polyfill';
 import '../index.html';
