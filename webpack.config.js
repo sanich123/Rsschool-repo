@@ -8,7 +8,6 @@ const devMode = mode === 'development';
 const target = devMode ? 'web' : 'browserslist';
 const devtool = devMode ? 'source-map' : undefined;
 
-
 module.exports = {
   mode,
   target,
@@ -26,7 +25,8 @@ module.exports = {
     assetModuleFilename: 'asset/[ext]',
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ template: 'src/index.html', filename: 'index.html' }),
+    new HtmlWebpackPlugin({ template: 'src/game.html', filename: 'game.html' }),
     new MiniCssExtractPlugin({ filename: 'styles.css' }),
   ],
   module: {
