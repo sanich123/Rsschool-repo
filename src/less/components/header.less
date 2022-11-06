@@ -1,0 +1,38 @@
+.header {
+  .container(@mobile);
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  .logo__img {
+    width: 100px;
+  }
+  .nav-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+    place-items: center;
+    &__item a {
+      font: normal 20px/200% sans-serif;
+      text-transform: uppercase;
+      color: #00adff;
+      transition: all 0.6s ease;
+      &:hover {
+        color: orange;
+      }
+      &:focus {
+        color: red;
+      }
+    }
+  }
+  &__score {
+    justify-self: center;
+    font: normal 20px/200% sans-serif;
+    .score__value {
+      font: normal 30px/20px sans-serif;
+    }
+  }
+  @media (min-width: @tablet) and (max-width: @almost-desktop) {
+    .container(@tablet);
+  }
+}

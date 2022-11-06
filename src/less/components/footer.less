@@ -1,0 +1,24 @@
+.footer {
+  .container(@mobile);
+  padding: 30px;
+  .footer-list {
+    display: grid;
+    place-items: center;
+    gap: 25px;
+    &__item {
+      a img {
+        width: 340px;
+      }
+      .author-link {
+        font: normal 30px/20px sans-serif;
+        transition: all 0.6s ease;
+        &:hover {
+          color: orange;
+        }
+      }
+    }
+  }
+  @media (min-width: @tablet) and (max-width: @almost-desktop) {
+    .container(@tablet);
+  }
+}

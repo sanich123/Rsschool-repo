@@ -1,0 +1,42 @@
+.promo {
+  .container(@mobile);
+  display: grid;
+  place-items: center;
+  &__video {
+    width: @mobile;
+  }
+  &__sentence {
+    padding: 5px;
+    display: grid;
+    place-items: center;
+    font: italic 18px/20px sans-serif;
+    color: #01020182;
+  }
+  &__btn {
+    .reset-btn();
+    margin-top: 40px;
+    background: orangered;
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    color: white;
+    font: bold 35px/20px sans-serif;
+    text-transform: uppercase;
+    transition: 0.6s linear;
+  }
+  &__btn:hover {
+    color: yellow;
+    background: cyan;
+  }
+  @media (min-width: @tablet) and (max-width: @almost-desktop) {
+    .container(@tablet);
+    &__video {
+      width: @tablet;
+    }
+  }
+  @media (min-width: @desktop) {
+    .container(@desktop);
+    display: grid;
+    place-items: center;
+  }
+}
