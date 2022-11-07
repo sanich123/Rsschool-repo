@@ -3,6 +3,16 @@
   padding: 20px;
   display: grid;
   place-items: center;
+
+  @media (min-width: @tablet) and (max-width: @almost-desktop) {
+    .container(@tablet);
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+  @media (min-width: @desktop) {
+    .container(@desktop);
+    grid-template-columns: auto 1fr auto;
+  }
   .logo__img {
     width: 100px;
     @media (min-width: @tablet) and (max-width: @almost-desktop) {
@@ -30,7 +40,7 @@
         font: bold 40px/20px sans-serif;
       }
       &:hover {
-        color: orange;
+        color: @orange;
       }
       &:focus {
         color: red;
@@ -52,14 +62,5 @@
       margin-top: 10px;
       font: normal 40px/20px sans-serif;
     }
-  }
-
-  @media (min-width: @tablet) and (max-width: @almost-desktop) {
-    .container(@tablet);
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-  }
-  @media (min-width: @desktop) {
-    .container(@desktop);
   }
 }
