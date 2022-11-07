@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 
-import '../audio/listing-page.mp3';
 import '../img/svg/beethoven-icon.svg';
 import '../img/svg/rs-school-icon.svg';
 

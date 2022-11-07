@@ -26,8 +26,115 @@
           </li>
         </ul>
       </nav>
+      <div class="header__score score">
+        Score:
+        <span class="score__value">0</span>
+      </div>
     </header>
-    <p>SongBird is starting now</p>
+    <main class="game">
+      <ul class="game-list categories-list">
+        <li class="categories-list__item"><button>Барокко</button></li>
+        <li class="categories-list__item"><button>Классицизм</button></li>
+        <li class="categories-list__item"><button>Романтизм</button></li>
+        <li class="categories-list__item"><button>Модернизм</button></li>
+        <li class="categories-list__item"><button>Додекафония</button></li>
+        <li class="categories-list__item"><button>Неоклассика</button></li>
+      </ul>
+      <div class="question">
+        <img
+          src="img/svg/question-mark.svg"
+          width="50px"
+          alt=""
+          class="question__img"
+        />
+        <span class="question__name">**********</span>
+        <audio
+          class="question__audio"
+          src="audio/betkhoven-simfonija-5-allegro-con-brio.mp3"
+          controls
+        ></audio>
+      </div>
+      <form class="answers-list">
+        <label>
+          <input
+            type="radio"
+            class="answers-list__item"
+            value="Наверна Биткоин"
+            name="answers"
+          />
+          Наверна Биткоин
+        </label>
+        <label>
+          <input
+            type="radio"
+            class="answers-list__item"
+            value="Я батат и не хочу думать"
+            name="answers"
+          />
+          Я батат и не хочу думать
+        </label>
+        <label>
+          <input
+            type="radio"
+            class="answers-list__item"
+            value="Думаю, Чайковский"
+            name="answers"
+          />
+          Думаю, Чайковский
+        </label>
+        <label>
+          <input
+            type="radio"
+            class="answers-list__item"
+            value="Или Шостакович?"
+            name="answers"
+          />
+          Или Шостакович?
+        </label>
+        <label>
+          <input
+            type="radio"
+            class="answers-list__item"
+            value="Л.В.Бетховен"
+            name="answers"
+          />
+          Л.В.Бетховен
+        </label>
+        <label>
+          <input
+            type="radio"
+            class="answers-list__item"
+            value="Точняк, Шенберг"
+            name="answers"
+          />
+          Точняк, Шенберг
+        </label>
+      </form>
+      <div class="checked-answer">
+        <img src="img/jpg/tchaikovsky.jpg" alt="" class="checked-answer__img">
+        <span class="checked-answer__surname">Tchaikovsky</span>
+        <span class="checked-answer__description">Чайковский один из самых выдающихся русских композиторов. Как это ни странно, но творчество Чайковского по сей день интересно современникам не только из-за его нетрадиционной сексуальной ориентации, но в большей степени из-за того, что в отличие от многих других композиторов он писал музыку для всех инструментов и писал много. </span>
+        <audio src="audio/tchaikovsky-adagio.mp3" controls/>
+      </div>
+      <button class="next-level__btn" type="button">Жмяк и ты на следующем уровне</button>
+    </main>
+    <footer class="page__footer footer">
+      <ul class="footer__list footer-list">
+        <li class="footer-list__item list-item">
+          <a href="https://rs.school/js/">
+            <img src="img/svg/rs-school-icon.svg" alt="" />
+          </a>
+        </li>
+        <li class="footer-list__item list-item">
+          <a class="author-link" href="https://github.com/sanich123">
+            Связаться с автором
+          </a>
+        </li>
+        <li сlass="footer-list__item list-item">
+          <span class="list-item__year">2022 г.</span>
+        </li>
+      </ul>
+    </footer>
   </body>
   <script src="./js/entry.js"></script>
 </html>

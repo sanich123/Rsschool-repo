@@ -11,6 +11,9 @@
     place-items: center;
     font: italic 18px/20px sans-serif;
     color: #01020182;
+    @media (min-width: @tablet) and (max-width: @almost-desktop) {
+      font: italic 35px/20px sans-serif;
+    }
   }
   &__btn {
     .reset-btn();
@@ -24,6 +27,11 @@
     font: bold 35px/20px sans-serif;
     text-transform: uppercase;
     transition: 0.6s linear;
+    @media (min-width: @tablet) and (max-width: @almost-desktop) {
+      width: 360px;
+      height: 360px;
+      font: bold 55px/20px sans-serif;
+    }
   }
   &__btn:hover {
     color: yellow;
@@ -40,5 +48,8 @@
     .container(@desktop);
     display: grid;
     place-items: center;
+    &-rules__item p {
+      font: normal 25px/20px sans-serif;
+    }
   }
 }

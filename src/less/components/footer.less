@@ -5,6 +5,9 @@
     display: grid;
     place-items: center;
     gap: 25px;
+    @media (min-width: @desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
     &__item {
       a img {
         width: 340px;
@@ -23,5 +26,8 @@
   }
   @media (min-width: @tablet) and (max-width: @almost-desktop) {
     .container(@tablet);
+  }
+  @media (min-width: @desktop) {
+    .container(@desktop);
   }
 }
