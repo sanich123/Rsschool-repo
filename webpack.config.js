@@ -62,7 +62,7 @@ module.exports = {
         type: "asset/resource",
         generator: { filename: "audio/[name][ext]" },
       },
-            {
+      {
         test: /\.mp4$/i,
         type: "asset/resource",
         generator: { filename: "video/[name][ext]" },

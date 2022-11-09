@@ -1,10 +1,10 @@
-/* eslint-disable linebreak-style */
 import { navLinks, promoSentence, start, rulesText } from "../utils/const";
 import beethovenIcon from "../../img/svg/beethoven-icon.svg";
 import perGunt from "../../video/grig-per-gunt.mp4";
 import rsSchoolSvg from "../../img/svg/rs-school-icon.svg";
+import { createGamePage } from "../create-game/create-game";
 
-function createHeader() {
+export function createHeader() {
   const navLinksLayout = navLinks.map(({ href, text }) => `<li class="nav-list__item"><a href="${href}">${text}</a>`).join("");
 
   return `<header class="page__header header">
@@ -36,7 +36,7 @@ function createMain() {
     </main>`;
 }
 
-function createFooter() {
+export function createFooter() {
 
   return `<footer class="page__footer footer">
       <ul class="footer__list footer-list">
@@ -59,7 +59,19 @@ function createFooter() {
 
 export function createStartPage() {
   const body = document.querySelector(".page");
+
   const layout = `${createHeader()}${createMain()}${createFooter()}`;
   body.innerHTML = "";
   body.insertAdjacentHTML("afterbegin", layout);
+  const mainPage = document.querySelector('.nav-list__item a[href="index.html"]');
+  const gamePage = document.querySelector('.nav-list__item a[href="game.html"]');
+  const gameBtn = document.querySelector('.promo__btn');
+  gameBtn.addEventListener('click', () => {
+    window.history.pushState({urlPath: 'game.html'}, '', 'game.html');
+    createGamePage();
+  });
+
+  mainPage.addEventListener("click", () => createStartPage);
+  gamePage.addEventListener('click', () => createGamePage);
+
 }
