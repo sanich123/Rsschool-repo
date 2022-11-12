@@ -6,7 +6,19 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
     const categoriesList = categories.map((category) => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join('');
 
     const { audio: questionAudio, name: questionName, image: questionImage } = questionBird;
-    const [{ name, audio, image, description}] = checkedData;
+    let answerLayout;
+    if (checkedData.length > 0) {
+      const [{ name, audio, image, description}] = checkedData;
+      answerLayout = `<img src=${image} alt="" class="checked-answer__img" />
+        <span class="checked-answer__surname">${name}</span>
+        <p align="justify" class="checked-answer__description">
+            ${description}
+        </p>
+        <audio class="checked-answer__audio" src=${audio} controls />`;
+    } else {
+      answerLayout = `<div></div><p class="checked-answer__default">Выберите вариант ответа, и здесь появится информация по птице. А если угадаешь, то сверху вместо вопроса тоже появится личико птички</p>`
+    }
+    
     const isMatching = innerChecked === questionName;
 
     return `<main class="game">
@@ -22,12 +34,7 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
         ${answersVariants}
       </form>
       <div class="game__checked-answer checked-answer">
-        <img src=${image} alt="" class="checked-answer__img" />
-        <span class="checked-answer__surname">${name}</span>
-        <p align="justify" class="checked-answer__description">
-            ${description}
-        </p>
-        <audio class="checked-answer__audio" src=${audio} controls />
+        ${answerLayout}
       </div>
       <button class="game__next-btn next-btn" type="button" ${isMatching ? "" : 'disabled'}>
         ${isMatching ? 'Молодест, жмякай, чтобы перейти дальше' : nextBtnText}

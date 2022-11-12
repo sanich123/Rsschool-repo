@@ -4,7 +4,7 @@ import { createHeader } from '../layout-makers/create-header.js';
 import { createMainGame } from '../layout-makers/create-game-main.js';
 import { getRandomNumber } from '../utils/helpers.js';
 
-export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = 'Журавль', question = '') {
+export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = '', question = '') {
     let innerCounter = counter;
     let innerChecked = checkedAnswer;
     let innerQuestionBird;
@@ -14,11 +14,9 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = 'Ж
       innerQuestionBird = filtredBirds[getRandomNumber(filtredBirds.length)];
     } else {
       innerQuestionBird = question;
-    }
-    
+    } 
     
     const checkedData = filtredBirds.filter(({name}) => name === innerChecked);
-
     const body = document.querySelector('.page');
     body.innerHTML = '';
 
@@ -30,6 +28,7 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = 'Ж
     answersList.addEventListener('click', ({target}) => {
       createGamePage(innerCounter, birdsData, target.value, innerQuestionBird);
     });
+  
     navList.addEventListener('click', () => {
       const newCounter = ++innerCounter;
       const newData = birdsData[newCounter];
