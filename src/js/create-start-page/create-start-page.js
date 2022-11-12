@@ -12,13 +12,13 @@ export function createStartPage() {
   const mainPage = document.querySelector('.nav-list__item a[href="index.html"]');
   const gamePage = document.querySelector('.nav-list__item a[href="game.html"]');
   const gameBtn = document.querySelector('.promo__btn');
-  const video = document.querySelector('video');
-  video.autoplay = true;
-  const morningPlay = new Audio(morningTheme);
-  // morningPlay.play();
+  document.querySelector('video').play();
+  const audio = new Audio(morningTheme);
+  // audio.play();
 
   gameBtn.addEventListener('click', () => {
     window.history.pushState({urlPath: 'game.html'}, '', 'game.html');
+    // audio.pause();
     createGamePage();
   });
 
