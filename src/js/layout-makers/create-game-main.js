@@ -3,6 +3,7 @@ import questionIcon from '../../img/svg/question-mark.svg';
 
 export function createMainGame(filtredBirds, checkedData, questionBird, innerChecked) {
     const answersVariants = filtredBirds.map(({name}) => `<label class="answers-list__label"><input type="radio" class="answers-list__input" value=${name} name="answers"/>${name}</label>`).join('');
+    const answersVariants2 = filtredBirds.map(({name}) => `<button class="answers-list__btn" value=${name}>${name}</button>`).join('');
     const categoriesList = categories.map((category) => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join('');
 
     const { audio: questionAudio, name: questionName, image: questionImage } = questionBird;
@@ -31,7 +32,7 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
         <audio class="question__audio" src=${questionAudio} controls />
       </div>
       <form class="game__answers-list answers-list">
-        ${answersVariants}
+        ${answersVariants2}
       </form>
       <div class="game__checked-answer checked-answer">
         ${answerLayout}
