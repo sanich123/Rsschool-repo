@@ -63,7 +63,114 @@ __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerat
 
 /***/ }),
 
-/***/ "./src/js/entry.js?e8d0":
+/***/ "./src/js/create-game/create-game.js":
+/*!*******************************************!*\
+  !*** ./src/js/create-game/create-game.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createGamePage": () => (/* binding */ createGamePage)
+/* harmony export */ });
+/* harmony import */ var _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/mocks.js */ "./src/js/utils/mocks.js");
+/* harmony import */ var _layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-footer.js */ "./src/js/layout-makers/create-footer.js");
+/* harmony import */ var _layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layout-makers/create-header.js */ "./src/js/layout-makers/create-header.js");
+/* harmony import */ var _layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout-makers/create-game-main.js */ "./src/js/layout-makers/create-game-main.js");
+/* harmony import */ var _utils_helpers_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/helpers.js */ "./src/js/utils/helpers.js");
+
+
+
+
+
+function createGamePage() {
+  let counter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  let arr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__.birdsData;
+  let checkedAnswer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'Журавль';
+  let question = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  let innerCounter = counter;
+  let innerChecked = checkedAnswer;
+  let innerQuestionBird;
+  const filtredBirds = arr[counter];
+  if (!question) {
+    innerQuestionBird = filtredBirds[(0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_4__.getRandomNumber)(filtredBirds.length)];
+  } else {
+    innerQuestionBird = question;
+  }
+  const checkedData = filtredBirds.filter(_ref => {
+    let {
+      name
+    } = _ref;
+    return name === innerChecked;
+  });
+  const body = document.querySelector('.page');
+  body.innerHTML = '';
+  body.insertAdjacentHTML('afterbegin', `${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_2__.createHeader)()}${(0,_layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_3__.createMainGame)(filtredBirds, checkedData, innerQuestionBird, innerChecked)}${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_1__.createFooter)()}`);
+  const navList = document.querySelector('.game__list');
+  const answersList = document.querySelector('.answers-list');
+  answersList.addEventListener('click', _ref2 => {
+    let {
+      target
+    } = _ref2;
+    createGamePage(innerCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__.birdsData, target.value, innerQuestionBird);
+  });
+  navList.addEventListener('click', () => {
+    const newCounter = ++innerCounter;
+    const newData = _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__.birdsData[newCounter];
+    const defaultBird = newData[newCounter].name;
+    createGamePage(newCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__.birdsData, defaultBird, null);
+  });
+}
+
+/***/ }),
+
+/***/ "./src/js/create-start-page/create-start-page.js":
+/*!*******************************************************!*\
+  !*** ./src/js/create-start-page/create-start-page.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createStartPage": () => (/* binding */ createStartPage)
+/* harmony export */ });
+/* harmony import */ var _layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../layout-makers/create-footer.js */ "./src/js/layout-makers/create-footer.js");
+/* harmony import */ var _layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-header.js */ "./src/js/layout-makers/create-header.js");
+/* harmony import */ var _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../create-game/create-game.js */ "./src/js/create-game/create-game.js");
+/* harmony import */ var _layout_makers_create_start_main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout-makers/create-start-main.js */ "./src/js/layout-makers/create-start-main.js");
+/* harmony import */ var _audio_grig_morning_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../audio/grig-morning.mp3 */ "./src/audio/grig-morning.mp3");
+
+
+
+
+
+function createStartPage() {
+  const body = document.querySelector(".page");
+  body.innerHTML = "";
+  body.insertAdjacentHTML("afterbegin", `${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__.createHeader)()}${(0,_layout_makers_create_start_main_js__WEBPACK_IMPORTED_MODULE_3__.createStartMain)()}${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__.createFooter)()}`);
+  const mainPage = document.querySelector('.nav-list__item a[href="index.html"]');
+  const gamePage = document.querySelector('.nav-list__item a[href="game.html"]');
+  const gameBtn = document.querySelector('.promo__btn');
+  const video = document.querySelector('video');
+  video.autoplay = true;
+  const morningPlay = new Audio(_audio_grig_morning_mp3__WEBPACK_IMPORTED_MODULE_4__);
+  // morningPlay.play();
+
+  gameBtn.addEventListener('click', () => {
+    window.history.pushState({
+      urlPath: 'game.html'
+    }, '', 'game.html');
+    (0,_create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__.createGamePage)();
+  });
+  mainPage.addEventListener("click", () => createStartPage);
+  gamePage.addEventListener('click', () => _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__.createGamePage);
+}
+
+/***/ }),
+
+/***/ "./src/js/entry.js?7611":
 /*!*************************!*\
   !*** ./src/js/entry.js ***!
   \*************************/
@@ -71,38 +178,511 @@ __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerat
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _audio_listing_page_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../audio/listing-page.mp3 */ "./src/audio/listing-page.mp3");
-/* harmony import */ var _img_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/Фото резюме.jpg */ "./src/img/Фото резюме.jpg");
-/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
-/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./test */ "./src/js/test.js");
+/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
+/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _create_start_page_create_start_page_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-start-page/create-start-page.js */ "./src/js/create-start-page/create-start-page.js");
+/* harmony import */ var _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-game/create-game.js */ "./src/js/create-game/create-game.js");
+/* harmony import */ var _game_html__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../game.html */ "./src/game.html");
 /* harmony import */ var _index_html__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../index.html */ "./src/index.html");
 /* harmony import */ var _less_entry_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../less/entry.less */ "./src/less/entry.less");
-/* eslint-disable linebreak-style */
 
 
 
 
 
 
+const location = window.location.href;
+if (location.includes("index.html") || location.includes("/")) {
+  (0,_create_start_page_create_start_page_js__WEBPACK_IMPORTED_MODULE_1__.createStartPage)();
+}
+if (location.includes("game.html")) {
+  (0,_create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__.createGamePage)();
+}
 
 /***/ }),
 
-/***/ "./src/js/test.js":
-/*!************************!*\
-  !*** ./src/js/test.js ***!
-  \************************/
+/***/ "./src/js/layout-makers/create-footer.js":
+/*!***********************************************!*\
+  !*** ./src/js/layout-makers/create-footer.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _audio_listing_page_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../audio/listing-page.mp3 */ "./src/audio/listing-page.mp3");
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createFooter": () => (/* binding */ createFooter)
+/* harmony export */ });
+/* harmony import */ var _img_svg_rs_school_icon_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../img/svg/rs-school-icon.svg */ "./src/img/svg/rs-school-icon.svg");
 
-const p = document.querySelector('p');
-const audio = new Audio(_audio_listing_page_mp3__WEBPACK_IMPORTED_MODULE_0__);
-p.addEventListener('click', () => {
-  audio.play();
-});
+function createFooter() {
+  return `<footer class="page__footer footer">
+      <ul class="footer__list footer-list">
+        <li class="footer-list__item list-item">
+          <a href="https://rs.school/js/">
+            <img src=${_img_svg_rs_school_icon_svg__WEBPACK_IMPORTED_MODULE_0__} alt="" />
+          </a>
+        </li>
+        <li class="footer-list__item list-item">
+          <a class="author-link" href="https://github.com/sanich123">
+            Связаться с автором
+          </a>
+        </li>
+        <li сlass="footer-list__item list-item">
+          <span class="list-item__year">2022 г.</span>
+        </li>
+      </ul>
+    </footer>`;
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/create-game-main.js":
+/*!**************************************************!*\
+  !*** ./src/js/layout-makers/create-game-main.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createMainGame": () => (/* binding */ createMainGame)
+/* harmony export */ });
+/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
+/* harmony import */ var _img_svg_question_mark_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../img/svg/question-mark.svg */ "./src/img/svg/question-mark.svg");
+
+
+function createMainGame(filtredBirds, checkedData, questionBird, innerChecked) {
+  const answersVariants = filtredBirds.map(_ref => {
+    let {
+      name
+    } = _ref;
+    return `<label class="answers-list__label"><input type="radio" class="answers-list__input" value=${name} name="answers"/>${name}</label>`;
+  }).join('');
+  const categoriesList = _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.categories.map(category => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join('');
+  const {
+    audio: questionAudio,
+    name: questionName,
+    image: questionImage
+  } = questionBird;
+  const [{
+    name,
+    audio,
+    image,
+    description
+  }] = checkedData;
+  const isMatching = innerChecked === questionName;
+  return `<main class="game">
+      <ul class="game__list categories-list">
+       ${categoriesList}
+      </ul>
+      <div class="game__question question">
+        <img src=${isMatching ? questionImage : _img_svg_question_mark_svg__WEBPACK_IMPORTED_MODULE_1__} alt="" class="question__img" width="50px"/>
+        <span class="question__name">${isMatching ? questionName : '**********'}</span>
+        <audio class="question__audio" src=${questionAudio} controls />
+      </div>
+      <form class="game__answers-list answers-list">
+        ${answersVariants}
+      </form>
+      <div class="game__checked-answer checked-answer">
+        <img src=${image} alt="" class="checked-answer__img" />
+        <span class="checked-answer__surname">${name}</span>
+        <p align="justify" class="checked-answer__description">
+            ${description}
+        </p>
+        <audio class="checked-answer__audio" src=${audio} controls />
+      </div>
+      <button class="game__next-btn next-btn" type="button" ${isMatching ? "" : 'disabled'}>
+        ${isMatching ? 'Молодест, жмякай, чтобы перейти дальше' : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.nextBtnText}
+      </button>
+    </main>`;
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/create-header.js":
+/*!***********************************************!*\
+  !*** ./src/js/layout-makers/create-header.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createHeader": () => (/* binding */ createHeader)
+/* harmony export */ });
+/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
+/* harmony import */ var _img_svg_beethoven_icon_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../img/svg/beethoven-icon.svg */ "./src/img/svg/beethoven-icon.svg");
+
+
+function createHeader() {
+  const navLinksLayout = _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.navLinks.map(_ref => {
+    let {
+      href,
+      text
+    } = _ref;
+    return `<li class="nav-list__item"><a href="${href}">${text}</a>`;
+  }).join("");
+  return `<header class="page__header header">
+      <a class="header__logo logo" href="index.html">
+        <img class="logo__img" src=${_img_svg_beethoven_icon_svg__WEBPACK_IMPORTED_MODULE_1__} width="60px" height="60px" />
+      </a>
+      <nav class="header__nav nav">
+        <ul class="nav__list nav-list">
+          ${navLinksLayout}
+        </ul>
+      </nav>
+      <div class="header__score score">
+        Score:
+        <span class="score__value">0</span>
+      </div>
+    </header>`;
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/create-start-main.js":
+/*!***************************************************!*\
+  !*** ./src/js/layout-makers/create-start-main.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createStartMain": () => (/* binding */ createStartMain)
+/* harmony export */ });
+/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
+/* harmony import */ var _video_grig_per_gunt_mp4__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../video/grig-per-gunt.mp4 */ "./src/video/grig-per-gunt.mp4");
+
+
+function createStartMain() {
+  const rulesItems = _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.rulesText.map(text => `<li class="promo-rules__item"><p align="justify">${text}</p></li>`).join("");
+  return `<main class="page__main main">
+      <div class="promo">
+      <video class="promo__video" src=${_video_grig_per_gunt_mp4__WEBPACK_IMPORTED_MODULE_1__} controls></video>
+        <p class="promo__sentence">${_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.promoSentence}</p>
+        <button class="promo__btn">${_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.start}</button>
+        <ol class="promo__rules promo-rules">${rulesItems}</ol>
+      </div>
+    </main>`;
+}
+
+/***/ }),
+
+/***/ "./src/js/utils/const.js":
+/*!*******************************!*\
+  !*** ./src/js/utils/const.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "answers": () => (/* binding */ answers),
+/* harmony export */   "categories": () => (/* binding */ categories),
+/* harmony export */   "description": () => (/* binding */ description),
+/* harmony export */   "navLinks": () => (/* binding */ navLinks),
+/* harmony export */   "nextBtnText": () => (/* binding */ nextBtnText),
+/* harmony export */   "promoSentence": () => (/* binding */ promoSentence),
+/* harmony export */   "rulesText": () => (/* binding */ rulesText),
+/* harmony export */   "start": () => (/* binding */ start)
+/* harmony export */ });
+const navLinks = [{
+  href: "index.html",
+  text: "Main page"
+}, {
+  href: "game.html",
+  text: "Play game"
+}];
+const promoSentence = "Думаешь, что меломан? Посмотрим.";
+const start = "Начать";
+const rulesText = ["Когда вы кликаете по варианту музыки, выводится информация по этой музыке", "Если вы выбрали правильный ответ, в блоке с вопросом выводится название и изображение композитора", "Если игрок дал правильный ответ с первой попытки, его счёт увеличивается на 5 баллов, каждая следующая попытка даёт на один балл меньше, если правильный ответ дан только с последней, шестой попытки, игрок получает за него 0 баллов. Баллы за все вопросы cуммируются", "Для правильных и неправильных ответов игрока используется звуковая и цветовая индикация", 'Когда игрок дал правильный ответ, активируется кнопка "Дальше" и он получает возможность перейти к следующему вопросу', "После последнего вопроса выводится страница с результатами игры"];
+const categories = ['Разминка', 'Воробьиные', 'Лесные', 'Певчие', 'Хищные', 'Морские'];
+const answers = ['Наверна Биткоин', "Я батат и не хочу думать", "Думаю, Чайковский", "Или Шостакович?", "Л.В.Бетховен", "Точняк, Шенберг"];
+const description = 'Чайковский один из самых выдающихся русских композиторов. Как это ни странно, но творчество Чайковского по сей день интересно современникам не только из-за его нетрадиционной сексуальной ориентации, но в большей степени из-за того, что в отличие от многих других композиторов он писал музыку для всех инструментов и писал много.';
+const nextBtnText = 'Жмяк и ты на следующем уровне';
+
+/***/ }),
+
+/***/ "./src/js/utils/helpers.js":
+/*!*********************************!*\
+  !*** ./src/js/utils/helpers.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getRandomNumber": () => (/* binding */ getRandomNumber)
+/* harmony export */ });
+const getRandomNumber = max => Math.floor(Math.random() * max);
+
+/***/ }),
+
+/***/ "./src/js/utils/mocks.js":
+/*!*******************************!*\
+  !*** ./src/js/utils/mocks.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "birdsData": () => (/* binding */ birdsData)
+/* harmony export */ });
+const birdsData = [[{
+  id: 1,
+  name: "Ворон",
+  species: "Corvus corax",
+  description: "Ворон – крупная птица. Длина тела достигает 70 сантиметров, размах крыльев – до полутора метров. Вороны населяют окрестности Тауэра. В Англии бытует поверье, что в день, когда черные вороны улетят от Тауэра, монархия рухнет.",
+  image: "https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/XIQVMQVUPP/XC518684-Grands%20corbeaux%2009012020%20Suzon.mp3"
+}, {
+  id: 2,
+  name: "Журавль",
+  species: "Grus grus",
+  description: "Звуки, издаваемые журавлем, похожи на звонкое «кур-лы – кур-лы». Журавли чаще всего поют дуэтом – одна птица начинает запев со слога «кур», а вторая подхватывает «лы». Если птица поёт одна, то она издает только звук «кур».",
+  image: "https://live.staticflickr.com/65535/49221158846_b0b69a58f1.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC512582-190604_1087_Grus_tok.mp3"
+}, {
+  id: 3,
+  name: "Ласточка",
+  species: "Delichon urbicum",
+  description: "Для ласточек характерно негромкое щебетание. Песни ласточек не смолкают на протяжении всего лета. Исследователи различают у птиц до 6 щебечущих звуков: «вит», «ви-вит», «чивит», «чиривит» и т.п. Ласточки любят петь дуэтом.",
+  image: "https://live.staticflickr.com//65535//48539007512_5029d2a9a0.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489247-190724_09.10h_huiszwaluw_biesbosch_amaliahoeve_roep_100%2Bex_fouragerend_gezien_%20%282%29.mp3"
+}, {
+  id: 4,
+  name: "Козодой",
+  species: "Caprimulgus europaeus",
+  description: "Козодой – неприметная птица, известная благодаря своему голосу. Песня козодоя звучит как монотонная трель похожая на тарахтение мотоцикла. Такое дребезжание слышно от заката до рассвета, его тональность, частота и громкость изменяются. ",
+  image: "https://live.staticflickr.com/65535/48456345286_dbc8530027.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC486956-190623_22.37h_nachtzwaluw_rechte%20heide_zang_ad%20_2ex_gezien_.mp3"
+}, {
+  id: 5,
+  name: "Кукушка",
+  species: "Cuculus canorus",
+  description: "Кукушку назвали так из-за особенностей ее песен. Звонкое «ку-ку» не спутать ни с какой другой птицей. Кукушки не строят гнезда, их потомство выращивают другие виды пернатых, которым кукушки подбрасывают свои яйца.",
+  image: "https://live.staticflickr.com/65535/48377838151_e15f430ec1.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501461-190616_08.13h_koekoek_brabantse%20biesbosch%20jantjesplaat_roep_1%20ex_ad%20m_ter%20plaatse%20zingend_gezien_.mp3"
+}, {
+  id: 6,
+  name: "Синица",
+  species: "Parus major",
+  description: "В щебетании синиц различают более 40 различных звуковых сочетаний. Поют они практически круглый год, немного затихая только зимой. Синицы настоящие санитары леса. Одна пара синиц в период гнездования оберегает от вредителей десятки деревьев.",
+  image: "https://live.staticflickr.com//65535//49366042493_c48c81d58d.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/RFGQDPLDEC/XC518417-Kj%C3%B8ttmeis%20XC%20Helg%C3%B8ya%20Elias%20A.%20Ryberg20200108133922_079.mp3"
+}], [{
+  id: 1,
+  name: "Воробей",
+  species: "Passer domesticus",
+  description: "Воробьи являются самыми известными и узнаваемыми пернатыми. Их легко узнать по пестрому оперению и задорному чириканью. Воробьи относятся к синатропному виду — они селятся поблизости к человеческому жилищу.",
+  image: "https://live.staticflickr.com//65535//49366595303_06cf65b07e.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/CXFHOPIVAS/XC503224-191020_0134.mp3"
+}, {
+  id: 2,
+  name: "Грач",
+  species: "Corvus frugilegus",
+  description: "Грачи очень умные и сообразительные птицы. С помощью клюва они создают и используют простейшие орудия. У грачей развит рефлекс на звуки трактора. Услышав «тарахтение», они летят на звук – трактор пашет землю, значит, в этом месте много корма.",
+  image: "https://live.staticflickr.com//65535//49347123322_291c86b016.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/RLRHCUIPIY/XC512540-gawron%20Suble%2019.12.19%20%2012.35.mp3"
+}, {
+  id: 3,
+  name: "Галка",
+  species: "Coloeus monedula",
+  description: "Слово «галка» произошло из старославянского языка и переводится как «чёрный». Этим словом часто называют воронов или других черных птиц. Латинское название галки «monedula» связывают со словами монета за любовь птицы к блестящим и ярким вещам.",
+  image: "https://live.staticflickr.com//65535//49237149586_993cf685c5.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC510498-Coloeus%20monedula_2019.11.13_11.55_01.mp3"
+}, {
+  id: 4,
+  name: "Певчий дрозд",
+  species: "Turdus philomelos",
+  description: "Дрозд — лучший певец из отряда воробьиных. Песня состоит только из красивых звучных свистов и коротких трелей. Чаще всего её можно услышать в утреннее и вечернее время. Поют дрозды в течении всего периода гнездования.",
+  image: "https://live.staticflickr.com/65535/48979125763_e2534f54bd.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513326-190704_1146_TF-Glogow.mp3"
+}, {
+  id: 5,
+  name: "Сорока",
+  species: "Pica pica",
+  description: "Сорока очень трудолюбивая птица. Она строит до восьми гнёзд, а потом выбирает из них самое лучшее. Вход в гнездо сорок всегда обращен на юг, чтобы в жилище было теплее. Сороки являются единственными птицами, которые узнают себя в зеркале.",
+  image: "https://live.staticflickr.com//65535//49360363066_ff02bb6a73.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC500868-Pica%20pica2019.08.23_09.18_02.mp3"
+}, {
+  id: 6,
+  name: "Сойка",
+  species: "Garrulus glandarius",
+  description: "Когда сойка волнуется, хохолок на её голове взъерошивается. Птица старается создать устрашающее зрелище. Сойки умеют имитировать голоса других птиц, животных и звуки, которые создает человек. На зиму они делают большие запасы желудей и орехов.",
+  image: "https://live.staticflickr.com//65535//49369678956_9a7465c7f4.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/TFOGOENSTQ/XC501517-191008_1590%201300.%20Eichelh%C3%A4her%20D%2C%20NW%2C%20LEV.%20Stephan%20Risch.mp3"
+}], [{
+  id: 1,
+  name: "Зяблик",
+  species: "Fringilla coelebs",
+  description: "В дикой природе насчитывается 450 видов зябликов. Зимой зяблики ведут стайный образ жизни. Иногда в их семьях можно увидеть воробьев. Запевают зяблики весной, с наступлением брачного периода. Их пение – это заливистые многоминутные рулады.",
+  image: "https://live.staticflickr.com/65535/49143150817_2d3a2f6c1e.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC512407-150622_03%20zi%C4%99ba%20%282%29.mp3"
+}, {
+  id: 2,
+  name: "Клёст",
+  species: "Loxia curvirostra",
+  description: "Клестов называют «рождественскими» птицами. В естественных условиях они дают потомство зимой – в январе. Эти птицы утепляют свои гнезда мхом и шерстью животных, потому птенцам не холодно. В поисках шишек клесты могут улетать за 3500 км от гнезда.",
+  image: "https://live.staticflickr.com//65535//49365470123_f2de66bb35.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/OTVUCEGYZN/XC495381-Kruisbek%20roep%20NHD%20290619.mp3"
+}, {
+  id: 3,
+  name: "Горлица",
+  species: "Streptopelia turtur",
+  description: "Горлица обитает в смешанных и широколиственных лесах, а также в городских парках и поселках. Птицы часто выбирают места жизни рядом с человеком и легко привыкают к людям. Благодаря мелодичному приятному пению горлиц часто разводят в домашних условиях.",
+  image: "https://live.staticflickr.com/65535/48063004977_84252f9ceb.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC324106-Turkawka_Streptopelia_turtur_Poland_Jarek_Matusiak_2011625_07.mp3"
+}, {
+  id: 4,
+  name: "Дятел",
+  species: "Dendrocopos major",
+  description: "Дятел – заметная и шумная птица, часто живет рядом с человеком. С середины января до конца июня можно услышать «барабанную дробь» дятлов – трель от вибрации веток под быстрыми ударами клюва птицы. В хорошую погоду дробь слышна в радиусе 1,5 км.",
+  image: "https://live.staticflickr.com/65535/49339376578_e933426455.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC518928-AB-017%20dzi%C4%99cio%C5%82%20du%C5%BCy%20agresja%20%282%29.mp3"
+}, {
+  id: 5,
+  name: "Удод",
+  species: "Upupa epops",
+  description: "Удоды предпочитают жить на открытых ландшафтах с отдельными деревьями или рощами. Наиболее удобными для птицы являются лесостепь и саванна. Удод может выбирать места жительства рядом с человеком: пастбища, виноградники, фруктовые сады.",
+  image: "https://live.staticflickr.com//65535//49226383598_6f8be86a06.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC477326-dudek%20%282%29.mp3"
+}, {
+  id: 6,
+  name: "Стриж",
+  species: "Apus apus",
+  description: "Стрижа можно увидеть практически в каждом уголке планеты. Они обитают как в лесных зонах, так и на открытых местностях. Живут стрижи крупными стаями. Большие колонии этих птиц можно увидеть в городах или на прибрежных скалах.",
+  image: "https://live.staticflickr.com//65535//48386150031_7b749df74b.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/TMUAWSDHDJ/XC511871-G.mp3"
+}], [{
+  id: 1,
+  name: "Жаворонок",
+  species: "Alauda arvensis",
+  description: "Жаворонки — перелетные птицы. С начала сентября они отлетают на юг. Возвращаются они в начале марта, независимо от того, сошел снег или нет. По прилету жаворонков определяли наступление весны и пору, когда пора пахать землю.",
+  image: "https://live.staticflickr.com/65535/47105096764_f751fba568.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC462158-Skowronek_Alauda_arvensis_Poland_Jarek_Matusiak_%20-006%20skowronek%20%282%29.mp3"
+}, {
+  id: 2,
+  name: "Соловей",
+  species: "Luscinia luscinia",
+  description: "Соловьи поют с начала мая и до конца лета. Каждая песня соловья состоит из 12 повторяющихся элементов, которые еще называют коленами. Кроме собственных трелей, соловьи легко и хорошо перенимают пение других птиц.",
+  image: "https://live.staticflickr.com/7605/27669397735_f3c21758f2.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/HILVWSADVL/XC513809-R07_0052%20Thrush%20Nightingale%20Snipe.mp3"
+}, {
+  id: 3,
+  name: "Скворец",
+  species: "Sturnus vulgaris",
+  description: "Скворцы - перелётные птицы. Синхронный перелет больших стай скворцов называется мурмурацией. Это красивое и завораживающее явление – множество птиц будто танцуют в воздухе, образуя замысловатые фигуры, которые уменьшаются и увеличиваются в небе.",
+  image: "https://live.staticflickr.com/65535/49357593971_9509fe1d7c.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC515519-2020.01.01_17.24_01.MP3"
+}, {
+  id: 4,
+  name: "Иволга",
+  species: "Oriolus oriolus",
+  description: "Мелодичность голоса иволги сравнивают со звучанием флейты. Человеку сложно разглядеть иволгу, так как она обитает высоко на деревьях. Иволга не только очень красивая, но и  полезная птица. Она уничтожает ядовитых гусениц, которых не поедают другие птицы.",
+  image: "https://live.staticflickr.com/65535/47102184004_58a93380b9.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC491801-2019.07.07_06.28_01.mp3"
+}, {
+  id: 5,
+  name: "Свиристель",
+  species: "Bombycilla garrulus",
+  description: "У свиристели очень цепкие коготки, что помогает птице удерживаться на ветках и склевывать ягоды, которые труднее всего достать. В период ухаживаний самец предлагает самке ягоду или другое угощение. Если самка его принимает, то птицы создают пару.",
+  image: "https://live.staticflickr.com//65535//49367433842_1b06da0e6b.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC517421-AB-004%20%282%29%20jemio%C5%82uszka.mp3"
+}, {
+  id: 6,
+  name: "Щегол",
+  species: "Carduelis carduelis",
+  description: "Щеглы поют красиво и мелодично. И в природе, и в неволе они щебечут почти круглый год. В пении щегла различают более 20 переливчатых трелей. Щеглы привыкают к людям, и даже могут возвратиться к хозяину после того, как их выпустили на волю",
+  image: "https://live.staticflickr.com//65535//49366257253_db3ce48b9a.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489265-190724_07.58h_putter_biesbosch_%20boompjes%20langs%20open%20water_zang_1ex_ad_niet%20gezien_.mp3"
+}], [{
+  id: 1,
+  name: "Орёл",
+  species: "Aquila nipalensis",
+  description: "В древние времена орел был символом солнца. Орлы часто парят над землей, при этом скорость их перемещения может достигать 240 км/ч. Иллюзия медленного движения происходит из-за высоты полета – более 700 метров",
+  image: "https://live.staticflickr.com//4835//43867392960_7105d71e19.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/KTBTZAHSXF/10_Aquila_nipalensis_al02D85.mp3"
+}, {
+  id: 2,
+  name: "Коршун",
+  species: "Milvus migrans",
+  description: "Коршуны – крупные хищники, в высоту они достигают около полуметра, а вес взрослых особей достигает 1 кг. Крылья узкие и длинные, их размах составляет 1,5 м. Коршуны часто гнездятся большими стаями и даже образуют крупные колонии.",
+  image: "https://live.staticflickr.com//65535//48701190276_ee2a9ed594.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/SDPCHKOHRH/XC485740-2019-06-22%20Selenga%20Milan%20brun%20cris%20de%20quemandage%203.mp3"
+}, {
+  id: 3,
+  name: "Лунь",
+  species: "Circus cyaneus",
+  description: "Лунь – это небольшой сокол. Питается в основном мышевидными грызунами, основа его рациона – полёвки, хомяки, мыши. Оперение луня может быть пепельно-серым. С такой птицей связано сравнение «седой, как лунь».",
+  image: "https://live.staticflickr.com/4480/37240531151_b74619c99d.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513498-190709_1175_Cir.cyan-f.mp3"
+}, {
+  id: 4,
+  name: "Сокол",
+  species: "Falco peregrinus",
+  description: "Латинское название сокола Falco произошло от слова «серп» из-за серповидной формы крыльев. Длинные и широкие крылья позволяют соколу высоко подниматься в небо и свободно парить. Скорость полёта сокола достигает 280-320 километров в час.",
+  image: "https://live.staticflickr.com//65535//49310710607_92a3a145a9.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC496049-Pilgrimsfalk_06.mp3"
+}, {
+  id: 5,
+  name: "Ястреб",
+  species: "Accipiter gentilis",
+  description: "Для всех ястребов характерны широкие и короткие крылья. Ещё один отличительный признак - белые «брови» над глазами. Славянские дружинники размещали изображение ястреба на своих знаменах, как символ отваги, мощи и безжалостности к врагам.",
+  image: "https://live.staticflickr.com//65535//49024617331_b9d0d2c9b3.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC512740-Duvh%C3%B6k_09.mp3"
+}, {
+  id: 6,
+  name: "Филин",
+  species: "Bubo bubo",
+  description: "Полет филина бесшумный, зрение очень острое. Эти особенности делают птицу непревзойденным ночным охотником. У филина нет естественных врагов, ни один зверь не охотится на взрослых птиц. А вот на птенцов нападают лисы и волки.",
+  image: "https://live.staticflickr.com/65535/48137123012_393653c2e4.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/WNLIDKJKXT/XC518386-sense%20t%C3%ADtol.mp3"
+}], [{
+  id: 1,
+  name: "Альбатрос",
+  species: "Diomedea exulans",
+  description: "Альбатрос - самая крупная летающая птица в мире. Размах крыльев достигает три с половиной, вес - десять килограммов. Большую часть жизни альбатросы проводят в воздухе, покрывая над океанскими просторами огромные расстояния",
+  image: "https://live.staticflickr.com/7557/16260253965_8e9430cb66.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/WOEAFQRMUD/XC293087-Diomedea%20exulans151120_T254.mp3"
+}, {
+  id: 2,
+  name: "Олуша",
+  species: "Sula nebouxii",
+  description: "Особенностью голубоногой олуши является не только насыщенный ярко-синий цвет лапок, но еще и тот факт, что они очень теплые. В то время как другие виды птиц греют кладки своим телом, голубоногая олуша делает это с помощью лапок",
+  image: "https://live.staticflickr.com/800/40645471394_4422e69ed8.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/YHKQPPJDVP/XC411507-171217_1491%20BF%20Booby%205ft%20IDLP%201230%20mp3%20amp.mp3"
+}, {
+  id: 3,
+  name: "Буревестник",
+  species: "Puffinus griseus",
+  description: "Размеры буревестниковых разные. Самые маленькие из них в длину составляют до 25 см, самые большие - до 1 м, при размахе крыльев около 2 м. Существует поверье, что появление буревестника в воздухе предвещает бурю, о чем говорит само название птицы.",
+  image: "https://live.staticflickr.com//607//22136056020_935cb113f9.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/XQEVNREHJY/SHEARWATER%20Christmas%20Island_04_Motu_Isla%20de%20Pascua-Easter%20Island_CH_4MAR03_Alvaro%20Jaramillo.mp3"
+}, {
+  id: 4,
+  name: "Пеликан",
+  species: "Pelecanus",
+  description: "Пеликаны — обитатели морей и рек. Ходят они неуклюже, но хорошо летают и плавают. Питаются в основном рыбой, устраивают коллективные охоты — выстроившись полукругом хлопают по воде крыльями и клювами и вытесняют напуганную рыбу на мелководье.",
+  image: "https://live.staticflickr.com/65535/49159147156_dcbbb5c12a.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/XAMHIHFTZG/XC331138-call1.mp3"
+}, {
+  id: 5,
+  name: "Пингвин",
+  species: "Aptenodytes forsteri",
+  description: "Самец императорского пингвина достигает роста 130 см, его масса может приближаться к 50 кг. Из всех современных пингвинов этот вид – самый крупный. Питание пингвина состоит из рыбы, кальмаров и криля. Охотятся птицы в океане большими группами.",
+  image: "https://live.staticflickr.com/5202/5252413926_8e013a3efd.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/OOECIWCSWV/XC449827-LS100829%20King%20Penguin%20call%20A.mp3"
+}, {
+  id: 6,
+  name: "Чайка",
+  species: "Larus argentatus",
+  description: "Чайки населяют берега морей, озёр, рек, водохранилищ, болот, часто гнездятся на островах. С конца прошлого века чайки стали появляться в крупных городах, где устраивает гнёзда на крышах зданий. Все чайки ведут колониальный образ жизни.",
+  image: "https://live.staticflickr.com/65535/48577115317_7034201dde.jpg",
+  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501190-190801_06.50h_zilvermeeuw_duinen%20van%20goeree_roep_2ex_overvliegend_gezien_.mp3"
+}]];
 
 /***/ }),
 
@@ -9185,13 +9765,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../fonts/Roboto-400.woff */ "./src/fonts/Roboto-400.woff"), __webpack_require__.b);
 var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../fonts/Roboto-400.woff2 */ "./src/fonts/Roboto-400.woff2"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../img/Фото резюме.jpg */ "./src/img/Фото резюме.jpg"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
-var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline;\n  -webkit-text-decoration: underline dotted currentColor;\n          text-decoration: underline dotted currentColor;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + "), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n}\nbody {\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") no-repeat;\n}\n", "",{"version":3,"sources":["webpack://./src/less/entry.less","webpack://./src/less/global/normalize.less","webpack://./src/less/global/global.less","webpack://./src/less/global/mixins.less","webpack://./src/less/fonts/fonts.less","webpack://./src/less/components/test.less"],"names":[],"mappings":"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","sourcesContent":["/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url('../fonts/Roboto-400.woff'), url('../fonts/Roboto-400.woff2');\n}\nbody {\n  background: url('../img/Фото\\ резюме.jpg') no-repeat;\n}\n","/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n\n/* Document\n   ========================================================================== */\n\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\n\nhtml {\n  line-height: 1.15; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n\n/**\n * Remove the margin in all browsers.\n */\n\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\n\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n  box-sizing: content-box; /* 1 */\n  height: 0; /* 1 */\n  overflow: visible; /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\npre {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Remove the gray background on active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n  border-bottom: none; /* 1 */\n  text-decoration: underline; /* 2 */\n  text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\nsamp {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10.\n */\n\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  line-height: 1.15; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\n\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n  box-sizing: border-box; /* 1 */\n  color: inherit; /* 2 */\n  display: table; /* 1 */\n  max-width: 100%; /* 1 */\n  padding: 0; /* 3 */\n  white-space: normal; /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\n\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\n\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 10+.\n */\n\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n\n[hidden] {\n  display: none;\n}","*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n}\n\na {\n  text-decoration: none;\n}\n\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}",".container(@width) {\n  width: @width;\n  margin: 0 auto;\n}\n\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}","@font-face {\n    font-family: 'Roboto';\n    src: url('../../fonts/Roboto-400.woff'), \n    url('../../fonts/Roboto-400.woff2');\n}","body {\n    background: url('../../img/Фото\\ резюме.jpg') no-repeat;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline;\n  -webkit-text-decoration: underline dotted currentColor;\n          text-decoration: underline dotted currentColor;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + "), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n}\n.game .categories-list__item button:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .categories-list__item .active {\n  background: red;\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .question__audio {\n  margin-top: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__audio {\n    grid-area: audio;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__audio {\n    margin-top: 30px;\n    width: 100%;\n    grid-area: audio;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__label {\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__label:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__label {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list__input {\n  display: none;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 45px/20px sans-serif;\n  }\n}\n.game .checked-answer__audio {\n  margin-top: 20px;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__audio {\n    grid-area: audio;\n    width: 100%;\n  }\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  grid-gap: 25px;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n  }\n}\n.header .logo__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo__img {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo__img {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-gap: 30px;\n  gap: 30px;\n  margin-top: 20px;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.header .nav-list__item a {\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item a {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item a {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item a:hover {\n  color: orange;\n}\n.header .nav-list__item a:focus {\n  color: red;\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: rgba(1,2,1,0.5098);\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n", "",{"version":3,"sources":["webpack://./src/less/entry.less","webpack://./src/less/global/normalize.less","webpack://./src/less/global/global.less","webpack://./src/less/global/mixins.less","webpack://./src/less/fonts/fonts.less","webpack://./src/less/components/game.less","webpack://./src/less/components/footer.less","webpack://./src/less/components/header.less","webpack://./src/less/components/promo.less"],"names":[],"mappings":"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","sourcesContent":["/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url('../fonts/Roboto-400.woff'), url('../fonts/Roboto-400.woff2');\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n}\n.game .categories-list__item button:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .categories-list__item .active {\n  background: red;\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .question__audio {\n  margin-top: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__audio {\n    grid-area: audio;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__audio {\n    margin-top: 30px;\n    width: 100%;\n    grid-area: audio;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__label {\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__label:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__label {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list__input {\n  display: none;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 45px/20px sans-serif;\n  }\n}\n.game .checked-answer__audio {\n  margin-top: 20px;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__audio {\n    grid-area: audio;\n    width: 100%;\n  }\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  place-items: center;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n  }\n}\n.header .logo__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo__img {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo__img {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 30px;\n  margin-top: 20px;\n  place-items: center;\n}\n.header .nav-list__item a {\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item a {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item a {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item a:hover {\n  color: orange;\n}\n.header .nav-list__item a:focus {\n  color: red;\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: #01020182;\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n","/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n\n/* Document\n   ========================================================================== */\n\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\n\nhtml {\n  line-height: 1.15; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n\n/**\n * Remove the margin in all browsers.\n */\n\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\n\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n  box-sizing: content-box; /* 1 */\n  height: 0; /* 1 */\n  overflow: visible; /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\npre {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Remove the gray background on active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n  border-bottom: none; /* 1 */\n  text-decoration: underline; /* 2 */\n  text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\nsamp {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10.\n */\n\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  line-height: 1.15; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\n\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n  box-sizing: border-box; /* 1 */\n  color: inherit; /* 2 */\n  display: table; /* 1 */\n  max-width: 100%; /* 1 */\n  padding: 0; /* 3 */\n  white-space: normal; /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\n\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\n\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 10+.\n */\n\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n\n[hidden] {\n  display: none;\n}","*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\n\na {\n  text-decoration: none;\n}\n\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\n \nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}",".container(@width) {\n  width: @width;\n  margin: 0 auto;\n}\n\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}","@font-face {\n    font-family: 'Roboto';\n    src: url('../../fonts/Roboto-400.woff'), \n    url('../../fonts/Roboto-400.woff2');\n}",".game {\n  padding: 10px;\n  .container(@mobile);\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n  &__list {\n    display: grid;\n    grid-template-columns: repeat(3, auto);\n    grid-template-rows: auto auto;\n    justify-items: center;\n    align-items: center;\n    gap: 10px;\n    @media (min-width: @tablet) {\n      grid-template-columns: repeat(6, auto);\n      grid-template-rows: none;\n      gap: 0;\n    }\n  }\n  .categories-list__item {\n    button {\n      .reset-btn();\n      border-radius: 10px;\n      color: white;\n      background: @orange;\n      padding: 5px;\n      transition: all 0.6s ease;\n      &:hover {\n        background: @orangered;\n        color: whitesmoke;\n      }\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        padding: 10px 5px;\n        text-transform: uppercase;\n        font-size: 16px;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 40px;\n        text-transform: uppercase;\n        font-size: 18px;\n      }\n    }\n    .active {\n      background: red;\n    }\n  }\n\n  .question {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      grid-template-areas:\n        \"img name\"\n        \"img audio\";\n      margin: 40px 0;\n    }\n\n    &__img {\n      width: 100px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: img;\n        width: 200px;\n      }\n      @media (min-width: @desktop) {\n        width: 250px;\n        grid-area: img;\n      }\n    }\n    &__name {\n      margin-top: 20px;\n      font: normal 45px/20px sans-serif;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: name;\n      }\n      @media (min-width: @desktop) {\n        font: normal 95px/20px sans-serif;\n        grid-area: name;\n      }\n    }\n    &__audio {\n      margin-top: 10px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: audio;\n      }\n      @media (min-width: @desktop) {\n        margin-top: 30px;\n        width: 100%;\n        grid-area: audio;\n      }\n    }\n  }\n  .answers-list {\n    margin-top: 20px;\n    display: grid;\n    gap: 10px;\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      place-items: center;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 1fr 1fr;\n    }\n\n    &__label {\n      font: normal 20px/20px sans-serif;\n      width: @mobile;\n      border-radius: 10px;\n      background: @orange;\n      color: white;\n      padding: 10px;\n      cursor: pointer;\n      &:hover {\n        background: @orangered;\n        color: whitesmoke;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 30px;\n        font: bold 30px/20px sans-serif;\n        width: 600px;\n      }\n    }\n    &__input {\n      display: none;\n    }\n  }\n\n  .checked-answer {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      margin-top: 30px;\n      grid-template-areas:\n        \"img surname\"\n        \"img description\"\n        \"img audio\";\n      gap: 10px;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 30% 70%;\n      padding: 0 10px;\n    }\n\n    &__img {\n      @media (min-width: @tablet) {\n        grid-area: img;\n      }\n    }\n    &__description {\n      @media (min-width: @tablet) {\n        grid-area: description;\n        font: normal 20px/20px sans-serif;\n      }\n      @media (min-width: @desktop) {\n        padding: 10px 20px;\n      }\n    }\n    &__surname {\n      margin: 20px 0;\n      font: italic 30px/20px sans-serif;\n      @media (min-width: @tablet) {\n        grid-area: surname;\n        font: bold 45px/20px sans-serif;\n      }\n    }\n    &__audio {\n      margin-top: 20px;\n      @media (min-width: @tablet) {\n        grid-area: audio;\n        width: 100%;\n      }\n    }\n  }\n\n  .next-btn {\n    .reset-btn();\n    display: block;\n    margin: 20px auto;\n    background: @orange;\n    color: white;\n    border-radius: 10px;\n    padding: 10px;\n    text-transform: uppercase;\n    font: bold 16px/20px sans-serif;\n    transition: all 0.6s ease;\n    &:hover {\n      background: @orangered;\n      color: whitesmoke;\n    }\n    &:disabled {\n      background: grey;\n      color: whitesmoke;\n    }\n    @media (min-width: @tablet) {\n      margin: 40px auto;\n      padding: 20px 40px;\n      font: bold 20px/20px sans-serif;\n    }\n  }\n}\n",".footer {\n  .container(@mobile);\n  padding: 30px;\n  .footer-list {\n    display: grid;\n    place-items: center;\n    gap: 25px;\n    @media (min-width: @desktop) {\n      grid-template-columns: repeat(3, 1fr);\n    }\n    &__item {\n      a img {\n        width: 340px;\n      }\n      .author-link {\n        font: normal 30px/20px sans-serif;\n        transition: all 0.6s ease;\n        &:hover {\n          color: @orange;\n        }\n      }\n    }\n    .list-item__year {\n      font: bold 30px/20px sans-serif;\n    }\n  }\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n}\n",".header {\n  .container(@mobile);\n  padding: 20px;\n  display: grid;\n  place-items: center;\n\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n    grid-template-columns: auto 1fr auto;\n    align-items: center;\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    grid-template-columns: auto 1fr auto;\n  }\n  .logo__img {\n    width: 100px;\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      width: 150px;\n    }\n    @media (min-width: @desktop) {\n      width: 200px;\n    }\n  }\n  .nav-list {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 30px;\n    margin-top: 20px;\n    place-items: center;\n    &__item a {\n      font: normal 20px/200% sans-serif;\n      text-transform: uppercase;\n      color: #00adff;\n      transition: all 0.6s ease;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        font: bold 30px/200% sans-serif;\n      }\n      @media (min-width: @desktop) {\n        font: bold 40px/20px sans-serif;\n      }\n      &:hover {\n        color: @orange;\n      }\n      &:focus {\n        color: red;\n      }\n    }\n  }\n  &__score {\n    font: normal 20px/200% sans-serif;\n    .score__value {\n      font: normal 30px/20px sans-serif;\n      @media (min-width: @desktop) {\n        font: normal 40px/20px sans-serif;\n      }\n    }\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      margin-top: 15px;\n    }\n    @media (min-width: @desktop) {\n      margin-top: 10px;\n      font: normal 40px/20px sans-serif;\n    }\n  }\n}\n",".promo {\n  .container(@mobile);\n  display: grid;\n  place-items: center;\n  &__video {\n    width: @mobile;\n  }\n  &__sentence {\n    padding: 5px;\n    display: grid;\n    place-items: center;\n    font: italic 18px/20px sans-serif;\n    color: #01020182;\n    @media (min-width: @tablet) {\n      font: italic 35px/20px sans-serif;\n    }\n  }\n  &__btn {\n    .reset-btn();\n    margin-top: 40px;\n    margin-bottom: 20px;\n    background: @orangered;\n    border-radius: 50%;\n    width: 180px;\n    height: 180px;\n    color: white;\n    font: bold 35px/20px sans-serif;\n    text-transform: uppercase;\n    transition: 0.6s linear;\n    @media (min-width: @tablet) {\n      width: 360px;\n      height: 360px;\n      font: bold 55px/20px sans-serif;\n    }\n  }\n  &__btn:hover {\n    color: yellow;\n    background: cyan;\n  }\n\n  @media (min-width: @tablet) {\n    .container(@tablet);\n    &__video {\n      width: @tablet;\n    }\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    display: grid;\n    place-items: center;\n    &-rules__item p {\n      font: normal 25px/25px sans-serif;\n    }\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9381,6 +9959,30 @@ module.exports = function (item) {
 
 /***/ }),
 
+/***/ "./src/game.html":
+/*!***********************!*\
+  !*** ./src/game.html ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/html-loader/dist/runtime/getUrl.js */ "./node_modules/html-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./js/entry.js */ "./src/js/entry.js?cfda"), __webpack_require__.b);
+// Module
+var ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);
+var code = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    <title>SongBird</title>\r\n    <meta content=\"width=device-width, initial-scale=1\" name=\"viewport\" />\r\n    <meta content=\"ie=edge\" http-equiv=\"x-ua-compatible\" />\r\n    <meta content=\"SongBird application\" name=\"description\" />\r\n  </head>\r\n  <body class=\"page\">\r\n    <!-- <header class=\"page__header header\">\r\n      <a class=\"header__logo logo\" href=\"index.html\">\r\n        <img\r\n          class=\"logo__img\"\r\n          src=\"img/svg/beethoven-icon.svg\"\r\n          width=\"60px\"\r\n          height=\"60px\"\r\n        />\r\n      </a>\r\n      <nav class=\"header__nav nav\">\r\n        <ul class=\"nav__list nav-list\">\r\n          <li class=\"nav-list__item\">\r\n            <a href=\"game.html\">Play game</a>\r\n          </li>\r\n          <li class=\"nav-list__item\">\r\n            <a href=\"index.html\">Main page</a>\r\n          </li>\r\n        </ul>\r\n      </nav>\r\n      <div class=\"header__score score\">\r\n        Score:\r\n        <span class=\"score__value\">0</span>\r\n      </div>\r\n    </header> -->\r\n    <!-- <main class=\"game\">\r\n      <ul class=\"game__list categories-list\">\r\n        <li class=\"categories-list__item\">\r\n          <button class=\"categories-list__btn active\" type=\"button\">\r\n            Барокко\r\n          </button>\r\n        </li>\r\n        <li class=\"categories-list__item\">\r\n          <button class=\"categories-list__btn\">Классицизм</button>\r\n        </li>\r\n        <li class=\"categories-list__item\">\r\n          <button class=\"categories-list__btn\">Романтизм</button>\r\n        </li>\r\n        <li class=\"categories-list__item\">\r\n          <button class=\"categories-list__btn\">Модернизм</button>\r\n        </li>\r\n        <li class=\"categories-list__item\">\r\n          <button class=\"categories-list__btn\">Додекафония</button>\r\n        </li>\r\n        <li class=\"categories-list__item\">\r\n          <button class=\"categories-list__btn\">Неоклассика</button>\r\n        </li>\r\n      </ul>\r\n      <div class=\"game__question question\">\r\n        <img src=\"img/svg/question-mark.svg\" alt=\"\" class=\"question__img\" width=\"50px\"/>\r\n        <span class=\"question__name\">**********</span>\r\n        <audio\r\n          class=\"question__audio\"\r\n          src=\"audio/beethoven-5-symphony.mp3\"\r\n          controls\r\n        />\r\n      </div>\r\n      <form class=\"game__answers-list answers-list\">\r\n        <label class=\"answers-list__label\">\r\n          <input\r\n            type=\"radio\"\r\n            class=\"answers-list__input\"\r\n            value=\"Наверна Биткоин\"\r\n            name=\"answers\"\r\n          />\r\n          Наверна Биткоин\r\n        </label>\r\n        <label class=\"answers-list__label\">\r\n          <input\r\n            type=\"radio\"\r\n            class=\"answers-list__input\"\r\n            value=\"Я батат и не хочу думать\"\r\n            name=\"answers\"\r\n          />\r\n          Я батат и не хочу думать\r\n        </label>\r\n        <label class=\"answers-list__label\">\r\n          <input\r\n            type=\"radio\"\r\n            class=\"answers-list__input\"\r\n            value=\"Думаю, Чайковский\"\r\n            name=\"answers\"\r\n          />\r\n          Думаю, Чайковский\r\n        </label>\r\n        <label class=\"answers-list__label\">\r\n          <input\r\n            type=\"radio\"\r\n            class=\"answers-list__input\"\r\n            value=\"Или Шостакович?\"\r\n            name=\"answers\"\r\n          />\r\n          Или Шостакович?\r\n        </label>\r\n        <label class=\"answers-list__label\">\r\n          <input\r\n            type=\"radio\"\r\n            class=\"answers-list__input\"\r\n            value=\"Л.В.Бетховен\"\r\n            name=\"answers\"\r\n          />\r\n          Л.В.Бетховен\r\n        </label>\r\n        <label class=\"answers-list__label\">\r\n          <input\r\n            type=\"radio\"\r\n            class=\"answers-list__input\"\r\n            value=\"Точняк, Шенберг\"\r\n            name=\"answers\"\r\n          />\r\n          Точняк, Шенберг\r\n        </label>\r\n      </form>\r\n      <div class=\"game__checked-answer checked-answer\">\r\n        <img src=\"img/jpg/tchaikovsky.jpg\" alt=\"\" class=\"checked-answer__img\" />\r\n        <span class=\"checked-answer__surname\">Tchaikovsky</span>\r\n        <p align=\"justify\" class=\"checked-answer__description\">\r\n          Чайковский один из самых выдающихся русских композиторов. Как это ни\r\n          странно, но творчество Чайковского по сей день интересно современникам\r\n          не только из-за его нетрадиционной сексуальной ориентации, но в\r\n          большей степени из-за того, что в отличие от многих других\r\n          композиторов он писал музыку для всех инструментов и писал много.\r\n        </p>\r\n        <audio\r\n          class=\"checked-answer__audio\"\r\n          src=\"audio/tchaikovsky-adagio.mp3\"\r\n          controls\r\n        />\r\n      </div>\r\n      <button class=\"game__next-btn next-btn\" type=\"button\">\r\n        Жмяк и ты на следующем уровне\r\n      </button>\r\n    </main> -->\r\n    <!-- <footer class=\"page__footer footer\">\r\n      <ul class=\"footer__list footer-list\">\r\n        <li class=\"footer-list__item list-item\">\r\n          <a href=\"https://rs.school/js/\">\r\n            <img src=\"img/svg/rs-school-icon.svg\" alt=\"\" />\r\n          </a>\r\n        </li>\r\n        <li class=\"footer-list__item list-item\">\r\n          <a class=\"author-link\" href=\"https://github.com/sanich123\">\r\n            Связаться с автором\r\n          </a>\r\n        </li>\r\n        <li сlass=\"footer-list__item list-item\">\r\n          <span class=\"list-item__year\">2022 г.</span>\r\n        </li>\r\n      </ul>\r\n    </footer> -->\r\n  </body>\r\n  <" + "script src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\"><" + "/script>\r\n</html>\r\n";
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
+
+/***/ }),
+
 /***/ "./src/index.html":
 /*!************************!*\
   !*** ./src/index.html ***!
@@ -9396,10 +9998,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__);
 // Imports
 
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./js/entry.js */ "./src/js/entry.js?6ec2"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./js/entry.js */ "./src/js/entry.js?cfda"), __webpack_require__.b);
 // Module
 var ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);
-var code = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    <title>SongBird</title>\r\n    <meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"><meta content=\"ie=edge\" http-equiv=\"x-ua-compatible\">\r\n  </head>\r\n  <body>\r\n    <p>SongBird is starting now</p>\r\n  </body>\r\n  <" + "script src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\"><" + "/script>\r\n</html>\r\n";
+var code = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    <title>SongBird</title>\r\n    <meta content=\"width=device-width, initial-scale=1\" name=\"viewport\" />\r\n    <meta content=\"ie=edge\" http-equiv=\"x-ua-compatible\" />\r\n    <meta content=\"SongBird application\" name=\"description\" />\r\n  </head>\r\n  <body class=\"page\">\r\n  </body>\r\n  <" + "script src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\"><" + "/script>\r\n</html>\r\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
@@ -10578,7 +11180,7 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
-/***/ "./src/js/entry.js?6ec2":
+/***/ "./src/js/entry.js?cfda":
 /*!*************************!*\
   !*** ./src/js/entry.js ***!
   \*************************/
@@ -10589,25 +11191,47 @@ module.exports = __webpack_require__.p + "asset/.js";
 
 /***/ }),
 
-/***/ "./src/img/Фото резюме.jpg":
-/*!*********************************!*\
-  !*** ./src/img/Фото резюме.jpg ***!
-  \*********************************/
+/***/ "./src/img/svg/beethoven-icon.svg":
+/*!****************************************!*\
+  !*** ./src/img/svg/beethoven-icon.svg ***!
+  \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "img/Фото резюме.jpg";
+module.exports = __webpack_require__.p + "img/beethoven-icon.svg";
 
 /***/ }),
 
-/***/ "./src/audio/listing-page.mp3":
+/***/ "./src/img/svg/question-mark.svg":
+/*!***************************************!*\
+  !*** ./src/img/svg/question-mark.svg ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "img/question-mark.svg";
+
+/***/ }),
+
+/***/ "./src/img/svg/rs-school-icon.svg":
+/*!****************************************!*\
+  !*** ./src/img/svg/rs-school-icon.svg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "img/rs-school-icon.svg";
+
+/***/ }),
+
+/***/ "./src/audio/grig-morning.mp3":
 /*!************************************!*\
-  !*** ./src/audio/listing-page.mp3 ***!
+  !*** ./src/audio/grig-morning.mp3 ***!
   \************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "audio/listing-page.mp3";
+module.exports = __webpack_require__.p + "audio/grig-morning.mp3";
 
 /***/ }),
 
@@ -10630,6 +11254,17 @@ module.exports = __webpack_require__.p + "fonts/Roboto-400.woff";
 
 "use strict";
 module.exports = __webpack_require__.p + "fonts/Roboto-400.woff2";
+
+/***/ }),
+
+/***/ "./src/video/grig-per-gunt.mp4":
+/*!*************************************!*\
+  !*** ./src/video/grig-per-gunt.mp4 ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "video/grig-per-gunt.mp4";
 
 /***/ })
 
@@ -10772,7 +11407,7 @@ module.exports = __webpack_require__.p + "fonts/Roboto-400.woff2";
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__("./node_modules/@babel/polyfill/lib/index.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/entry.js?e8d0");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/entry.js?7611");
 /******/ 	
 /******/ })()
 ;
