@@ -59,7 +59,6 @@ export function createFooter() {
 
 export function createStartPage() {
   const body = document.querySelector(".page");
-
   const layout = `${createHeader()}${createMain()}${createFooter()}`;
   body.innerHTML = "";
   body.insertAdjacentHTML("afterbegin", layout);
