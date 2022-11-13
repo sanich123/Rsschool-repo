@@ -21,8 +21,6 @@ export function createStartPage() {
     // audio.pause();
     createGamePage();
   });
-
   mainPage.addEventListener("click", () => createStartPage);
   gamePage.addEventListener('click', () => createGamePage);
-
 }

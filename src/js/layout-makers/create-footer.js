@@ -1,7 +1,6 @@
-import rsSchoolSvg from '../../img/svg/rs-school-icon.svg';
+import rsSchoolSvg from "../../img/svg/rs-school-icon.svg";
 
 export function createFooter() {
-
   return `<footer class="page__footer footer">
       <ul class="footer__list footer-list">
         <li class="footer-list__item list-item">

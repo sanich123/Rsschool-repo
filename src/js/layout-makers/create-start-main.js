@@ -1,8 +1,13 @@
-import {rulesText, promoSentence, start} from '../utils/const.js';
-import perGunt from '../../video/grig-per-gunt.mp4';
+import { rulesText, promoSentence, start } from "../utils/const.js";
+import perGunt from "../../video/grig-per-gunt.mp4";
 
 export function createStartMain() {
-  const rulesItems = rulesText.map((text) => `<li class="promo-rules__item"><p align="justify">${text}</p></li>`).join("");
+  const rulesItems = rulesText
+    .map(
+      (text) =>
+        `<li class="promo-rules__item"><p align="justify">${text}</p></li>`
+    )
+    .join("");
 
   return `<main class="page__main main">
       <div class="promo">

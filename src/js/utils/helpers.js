@@ -41,13 +41,3 @@ export function addActiveToNavigation(innerCounter) {
     }
   });
 }
-
-export function setScore(
-  checkedAnswer,
-  innerQuestionBird,
-  totalScore,
-  innerScore
-) {
-
-  return totalScore;
-}
