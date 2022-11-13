@@ -2,16 +2,14 @@ import { birdsData } from '../utils/mocks.js';
 import { createFooter } from "../layout-makers/create-footer.js";
 import { createHeader } from '../layout-makers/create-header.js';
 import { createMainGame } from '../layout-makers/create-game-main.js';
-import { getRandomNumber } from '../utils/helpers.js';
-import failSound from '../../audio/fail.mp3';
-import successSound from '../../audio/success.mp3';
+import { addActiveToNavigation, getRandomNumber, setDeclineAcceptStyles, setScore } from '../utils/helpers.js';
 
-export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = '', question = '') {
+export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = '', question = '', score = 5, total = 0) {
     let innerCounter = counter;
     let innerChecked = checkedAnswer;
     let innerQuestionBird;
-    const fail = new Audio(failSound);
-    const success = new Audio(successSound);
+    let innerTotalScore = total;
+    let innerScore = score;
   
     const filtredBirds = arr[counter];
     if (!question) {
@@ -25,37 +23,24 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = '',
     body.innerHTML = '';
 
     body.insertAdjacentHTML('afterbegin', `${createHeader()}${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked)}${createFooter()}`);
-    const answersLabels = document.querySelectorAll('.answers-list__btn');
-    answersLabels.forEach((btn) => {
-      if (checkedAnswer === innerQuestionBird.name && btn.value === innerQuestionBird.name) {
-        success.play();
-        body.style.background = 'green';
-        btn.classList.add('accept');
-        setTimeout(() => body.style.background = '#ebe2e2', 50);
-      } else if (btn.value === checkedAnswer) {
-        fail.play();
-        body.style.background = 'orange';
-        btn.classList.add('decline');
-        btn.disabled = true;
-        setTimeout(() => body.style.background = '#ebe2e2', 50);
-     }
-    });
+    addActiveToNavigation(innerCounter);
+    setDeclineAcceptStyles(checkedAnswer, innerQuestionBird);
 
-    const navList = document.querySelector('.game__list');
+    const scoreMark = document.querySelector(".score__value");
+      if (checkedAnswer === innerQuestionBird.name) {
+        innerTotalScore = innerTotalScore + ++innerScore;
+        scoreMark.textContent = innerTotalScore;
+      } else {
+      scoreMark.textContent = innerTotalScore;
+     }
+    const nextBtn = document.querySelector('.next-btn');
     const answersList = document.querySelector('.answers-list');
   
     answersList.addEventListener('click', ({target}) => {
-      if (target.disabled) {
-        return;
+      if (!target.disabled) {
+        createGamePage(innerCounter, birdsData, target.value, innerQuestionBird, --innerScore, innerTotalScore);
       }
-      createGamePage(innerCounter, birdsData, target.value, innerQuestionBird);
     });
   
-    navList.addEventListener('click', () => {
-      const newCounter = ++innerCounter;
-      const newData = birdsData[newCounter];
-      const defaultBird = newData[newCounter].name;
-
-      createGamePage(newCounter, birdsData, defaultBird, null);
-    });
+    nextBtn.addEventListener('click', () => createGamePage(++innerCounter, birdsData, '', null, 5, innerTotalScore));
 }

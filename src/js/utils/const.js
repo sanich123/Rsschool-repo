@@ -22,4 +22,4 @@ export const rulesText = [
 
 export const categories = ['Разминка', 'Воробьиные', 'Лесные', 'Певчие', 'Хищные', 'Морские'];
 
-export const nextBtnText = 'Жмяк и ты на следующем уровне';
+export const nextBtnText = 'Правильно ответишь - я буду активной';
