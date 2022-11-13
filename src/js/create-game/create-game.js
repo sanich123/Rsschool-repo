@@ -7,6 +7,7 @@ import {
   getRandomNumber,
   setDeclineAcceptStyles,
 } from "../utils/helpers.js";
+import { createResults } from "../create-results/create-results.js";
 
 export function createGamePage(
   counter = 0,
@@ -50,6 +51,13 @@ export function createGamePage(
     } else {
       innerTotalScore = innerTotalScore + ++innerScore;
       scoreMark.textContent = innerTotalScore;
+      console.log(innerCounter);
+      if (innerCounter === 5) {
+        
+        window.history.pushState({urlPath: 'results.html'}, '', 'results.html');
+        createResults(innerTotalScore);
+        return;
+      }
     }
   } else {
     scoreMark.textContent = innerTotalScore;
@@ -81,7 +89,9 @@ export function createGamePage(
     }
   });
 
-  nextBtn.addEventListener("click", () =>
-    createGamePage(++innerCounter, birdsData, "", null, 5, innerTotalScore)
+  nextBtn.addEventListener("click", () => {
+    const nextCounter = innerCounter + 1;
+    createGamePage(nextCounter, birdsData, "", null, 5, innerTotalScore);
+  }
   );
 }

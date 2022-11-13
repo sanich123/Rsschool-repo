@@ -29,6 +29,7 @@ module.exports = {
       filename: "index.html",
     }),
     new HtmlWebpackPlugin({ template: "src/game.html", filename: "game.html" }),
+    new HtmlWebpackPlugin({template: 'src/results.html', filename: 'results.html'}),
     new MiniCssExtractPlugin({ filename: "styles.css" }),
   ],
   module: {
