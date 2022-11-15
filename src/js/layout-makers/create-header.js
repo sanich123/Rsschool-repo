@@ -2,12 +2,7 @@ import { navLinks } from "../utils/const.js";
 import logoIcon from "../../img/svg/logo-icon.svg";
 
 export function createHeader() {
-  const navLinksLayout = navLinks
-    .map(
-      ({ href, text }) =>
-        `<li class="nav-list__item"><a href="${href}">${text}</a>`
-    )
-    .join("");
+  const navLinksLayout = navLinks.map(({ href, text }) => `<li class="nav-list__item"><a href="${href}">${text}</a>`).join("");
 
   return `<header class="page__header header">
       <a class="header__logo logo" href="index.html">

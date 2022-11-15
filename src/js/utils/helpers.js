@@ -1,6 +1,7 @@
 import successSound from "../../audio/success.mp3";
 import failSound from "../../audio/fail.mp3";
 import { categories } from "./const";
+import { createResults } from "../create-results/create-results";
 
 export const getRandomNumber = (max) => Math.floor(Math.random() * max);
 

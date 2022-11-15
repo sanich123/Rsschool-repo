@@ -29,4 +29,6 @@ export const categories = [
   "Морские",
 ];
 
-export const nextBtnText = "Правильно ответишь - я буду активной";
+export const nextBtnTextDefault = "Правильно ответишь - я буду активной";
+export const nextBtnTextSuccess = "Молодест, жмякай, чтобы перейти дальше";
+export const defaultText = "Выберите вариант ответа, и здесь появится информация по птице. А если угадаешь, то сверху вместо вопроса тоже появится личико птички";
