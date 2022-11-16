@@ -78,8 +78,10 @@
     .audio-container {
       margin-top: 10px;
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto 1fr auto;
       grid-template-rows: auto auto;
+      gap: 10px;
+      align-items: center;
       @media (min-width: @tablet) and (max-width: @almost-desktop) {
         grid-area: audio;
       }
@@ -99,6 +101,21 @@
       .pause {
         background: url("../../img/svg/pause-icon.svg");
       }
+      &__mute-wrapper {
+        position: relative;
+      }
+      &__mute-btn {
+        .reset-btn();
+          width: 20px;
+          height: 20px;
+
+        }
+        .unmuted {
+          background: url('../../img/svg/unmuted-icon.svg')
+        }
+        .muted {
+          background: url('../../img/svg/muted-icon.svg');
+        }
     }
   }
   .answers-list {
@@ -236,7 +253,7 @@
     &__current-time,
     &__duration {
       position: absolute;
-      bottom: 0;
+      bottom: -20px;
     }
     &__duration {
       right: 0;
@@ -246,6 +263,14 @@
     }
     &__volume-changer {
       display: none;
+    }
+    .is-open {
+      display: block;
+      position: absolute;
+      transform: rotate(270deg);
+      right: -15px;
+      top: -30px;
+      width: 50px;
     }
   }
 }
