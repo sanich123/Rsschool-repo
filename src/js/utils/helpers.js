@@ -1,7 +1,6 @@
 import successSound from "../../audio/success.mp3";
 import failSound from "../../audio/fail.mp3";
 import { categories } from "./const";
-import { createResults } from "../create-results/create-results";
 
 export const getRandomNumber = (max) => Math.floor(Math.random() * max);
 
@@ -41,4 +40,10 @@ export function addActiveToNavigation(innerCounter) {
       category.style.background = "red";
     }
   });
+}
+
+export function getSeconds(secs) {
+  const mins = Math.trunc(Math.floor(secs) / 60);
+  const seconds = Math.floor(secs - (mins * 60));
+  return `${mins > 9 ? mins : `0${mins}`}:${seconds > 9 ? seconds : `0${seconds}`}`;
 }
