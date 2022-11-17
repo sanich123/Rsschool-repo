@@ -18,9 +18,14 @@ export function createStartPage() {
 
   gameBtn.addEventListener('click', () => {
     window.history.pushState({urlPath: 'game.html'}, '', 'game.html');
+    localStorage.removeItem('answers');
     // audio.pause();
     createGamePage();
   });
-  mainPage.addEventListener("click", () => createStartPage);
-  gamePage.addEventListener('click', () => createGamePage);
+  mainPage.addEventListener("click", () => {
+    localStorage.removeItem('answers');
+    createStartPage()});
+  gamePage.addEventListener('click', () => {
+    localStorage.removeItem('answers');
+    createGamePage()});
 }

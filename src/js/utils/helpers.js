@@ -5,6 +5,8 @@ import { categories } from "./const";
 export const getRandomNumber = (max) => Math.floor(Math.random() * max);
 
 export function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
+
+  const answersList = document.querySelector('.answers-list');
   const answersBtns = document.querySelectorAll(".answers-list__btn");
   const fail = new Audio(failSound);
   const success = new Audio(successSound);
@@ -31,6 +33,10 @@ export function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
       }
     });
   }
+
+  const stringifiedNodes = new XMLSerializer().serializeToString(answersList);
+
+ localStorage.setItem('answers', JSON.stringify(stringifiedNodes));
 }
 
 export function addActiveToNavigation(innerCounter) {

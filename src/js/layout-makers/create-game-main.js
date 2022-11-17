@@ -3,6 +3,7 @@ import questionIcon from "../../img/svg/question-mark.svg";
 import { createAudio } from "./create-audio.js";
 
 export function createMainGame(filtredBirds, checkedData, questionBird, innerChecked) {
+  const localStorageAnswers = JSON.parse(localStorage.getItem('answers'));
   const answersVariants = filtredBirds.map(({ name }) => `<button class="answers-list__btn" value="${name}">${name}</button>`).join("");
   const categoriesList = categories.map((category) => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join("");
 
@@ -25,7 +26,7 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
         <span class="question__name">${isMatching ? questionName : "**********"}</span>
       ${createAudio(questionAudio, 'question')}
       </div>
-      <ul class="game__answers-list answers-list">${answersVariants}</ul>
+      ${localStorageAnswers ? localStorageAnswers : `${`<ul class="game__answers-list answers-list">${answersVariants}</ul>`}`}
       <div class="game__checked-answer checked-answer">${answerLayout}</div>
       <button class="game__next-btn next-btn" type="button" ${isMatching ? "" : "disabled"}>
         ${isMatching ? nextBtnTextSuccess : nextBtnTextDefault}

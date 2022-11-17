@@ -2,7 +2,7 @@ import { birdsData } from "../utils/mocks.js";
 import { createFooter } from "../layout-makers/create-footer.js";
 import { createHeader } from "../layout-makers/create-header.js";
 import { createMainGame } from "../layout-makers/create-game-main.js";
-import { addActiveToNavigation, getRandomNumber, setDeclineAcceptStyles, setScore } from "../utils/helpers.js";
+import { addActiveToNavigation, getRandomNumber, setDeclineAcceptStyles } from "../utils/helpers.js";
 import { createResults } from "../create-results/create-results.js";
 import { setAudio } from "../manage-audio/manage-audio.js";
 
@@ -12,7 +12,7 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
   let innerQuestionBird;
   let innerTotalScore = total;
   let innerScore = score;
-
+  
   const filtredBirds = arr[counter];
   !question
     ? (innerQuestionBird = filtredBirds[getRandomNumber(filtredBirds.length)])
@@ -36,6 +36,7 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
       scoreMark.textContent = innerTotalScore;
       if (innerCounter === 5) {
         window.history.pushState({urlPath: 'results.html'}, '', 'results.html');
+        localStorage.removeItem('answers');
         createResults(innerTotalScore);
         return;
       }
@@ -59,6 +60,7 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
 
   nextBtn.addEventListener("click", () => {
     const nextCounter = innerCounter + 1;
+    localStorage.removeItem('answers');
     createGamePage(nextCounter, birdsData, "", null, 5, innerTotalScore);
   });
 }
