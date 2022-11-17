@@ -1,5 +1,5 @@
 import { getSeconds } from "../utils/helpers";
-import { getNodes } from "../layout-makers/getNodes";
+import { getNodes } from "../layout-makers/get-nodes.js";
 
 export function setAudio() {
   const {
