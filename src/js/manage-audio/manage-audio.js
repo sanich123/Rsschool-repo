@@ -1,56 +1,84 @@
 import { getSeconds } from "../utils/helpers";
+import { getNodes } from "../layout-makers/getNodes";
 
 export function setAudio() {
-  const questionAudio = document.querySelector(".question__audio");
-  const answerAudio = document.querySelector(".checked-answer__audio");
-  const questionPlay = document.querySelector(".question .audio-container__play");
-  const answerPlay = document.querySelector(".checked-answer .audio-container__play");
-  const totalDuration = document.querySelector(".question .audio-container__duration");
-  const currentDuration = document.querySelector('.question .audio-container__current-time');
-  const progress = document.querySelector('.audio-container__duration-changer');
-  const muteBtn = document.querySelector('.audio-container__mute-btn');
-  const volumeContainer = document.querySelector('.audio-container__mute-wrapper');
-  const audioProgress = document.querySelector('.audio-container__volume-changer');
+  const {
+    questionAudio,
+    questionPlay,
+    totalDuration,
+    currentDuration,
+    progress,
+    muteBtn,
+    volumeContainer,
+    audioProgress,
+    answerAudio,
+    answerPlay,
+    answerTotalDuration,
+    answerCurrentDuration,
+    answerProgress,
+    answerMuteBtn,
+    answerVolumeContainer,
+    answerAudioProgress,
+  } = getNodes();
 
-  muteBtn.addEventListener('click', () => {
-    if (muteBtn.classList.contains('unmuted')) {
-      muteBtn.classList.remove('unmuted');
-      muteBtn.classList.add('muted');
-      questionAudio.muted = true;
-    } else {
-      muteBtn.classList.remove('muted');
-      muteBtn.classList.add('unmuted');
-      questionAudio.muted = false;
-    }
-  });
-  volumeContainer.addEventListener('mouseenter', () => {
-    audioProgress.classList.add('is-open');
-  });
-  volumeContainer.addEventListener('mouseleave', () => {
-    audioProgress.classList.remove('is-open');
-  })
-  audioProgress.addEventListener('input', ({target}) => {
-    questionAudio.volume = target.value;
-    if (+target.value === 0) {
-      muteBtn.classList.remove('unmuted');
-      muteBtn.classList.add('muted');
-    } else if (muteBtn.classList.contains('muted')) {
-      muteBtn.classList.remove('muted');
-      muteBtn.classList.add('unmuted');
-    }
-  });
+  if (answerPlay) {
+    answerPlay.addEventListener("click", () => {
+      if (answerPlay.classList.contains("play")) {
+        answerPlay.classList.remove("play");
+        answerPlay.classList.add("pause");
+        answerAudio.play();
+        setInterval(() => {
+          answerProgress.value = answerAudio.currentTime;
+          answerCurrentDuration.textContent = getSeconds(answerAudio.currentTime);
+        }, 1000);
+      } else {
+        answerPlay.classList.remove("pause");
+        answerPlay.classList.add("play");
+        answerAudio.pause();
+      }
+    });
 
-  questionAudio.addEventListener("loadeddata", () => {
-    totalDuration.textContent = getSeconds(questionAudio.duration);
-    questionAudio.volume = '1';
-    progress.value = 0;
-    progress.max = Math.floor(+questionAudio.duration);
-    progress.step = questionAudio.duration / 100;
-  });
-  progress.addEventListener('input', ({target}) => {
-    questionAudio.currentTime = target.value;
-    currentDuration.textContent = getSeconds(target.value);
-  });
+    answerMuteBtn.addEventListener("click", () => {
+      if (answerMuteBtn.classList.contains("unmuted")) {
+        answerMuteBtn.classList.remove("unmuted");
+        answerMuteBtn.classList.add("muted");
+        answerAudio.muted = true;
+      } else {
+        answerMuteBtn.classList.remove("muted");
+        answerMuteBtn.classList.add("unmuted");
+        answerAudio.muted = false;
+      }
+    });
+
+    answerVolumeContainer.addEventListener("mouseenter", () =>
+      answerAudioProgress.classList.add("is-open")
+    );
+    answerVolumeContainer.addEventListener("mouseleave", () =>
+      answerAudioProgress.classList.remove("is-open")
+    );
+
+    answerAudioProgress.addEventListener("input", ({ target }) => {
+      answerAudio.volume = target.value;
+      if (+target.value === 0) {
+        answerMuteBtn.classList.remove("unmuted");
+        answerMuteBtn.classList.add("muted");
+      } else if (answerMuteBtn.classList.contains("muted")) {
+        answerMuteBtn.classList.remove("muted");
+        answerMuteBtn.classList.add("unmuted");
+      }
+    });
+    answerAudio.addEventListener("loadeddata", () => {
+      answerTotalDuration.textContent = getSeconds(answerAudio.duration);
+      answerAudio.volume = "1";
+      answerProgress.value = 0;
+      answerProgress.max = Math.floor(+answerAudio.duration);
+      answerProgress.step = answerAudio.duration / 100;
+    });
+    answerProgress.addEventListener("input", ({ target }) => {
+      answerAudio.currentTime = target.value;
+      answerCurrentDuration.textContent = getSeconds(target.value);
+    });
+  }
 
   questionPlay.addEventListener("click", () => {
     if (questionPlay.classList.contains("play")) {
@@ -68,9 +96,46 @@ export function setAudio() {
     }
   });
 
-  if (answerPlay) {
-    answerPlay.addEventListener("click", () => {
-      answerAudio.play();
-    });
-  }
+  muteBtn.addEventListener("click", () => {
+    if (muteBtn.classList.contains("unmuted")) {
+      muteBtn.classList.remove("unmuted");
+      muteBtn.classList.add("muted");
+      questionAudio.muted = true;
+    } else {
+      muteBtn.classList.remove("muted");
+      muteBtn.classList.add("unmuted");
+      questionAudio.muted = false;
+    }
+  });
+
+  volumeContainer.addEventListener("mouseenter", () =>
+    audioProgress.classList.add("is-open")
+  );
+  volumeContainer.addEventListener("mouseleave", () =>
+    audioProgress.classList.remove("is-open")
+  );
+
+  audioProgress.addEventListener("input", ({ target }) => {
+    questionAudio.volume = target.value;
+    if (+target.value === 0) {
+      muteBtn.classList.remove("unmuted");
+      muteBtn.classList.add("muted");
+    } else if (muteBtn.classList.contains("muted")) {
+      muteBtn.classList.remove("muted");
+      muteBtn.classList.add("unmuted");
+    }
+  });
+
+  questionAudio.addEventListener("loadeddata", () => {
+    totalDuration.textContent = getSeconds(questionAudio.duration);
+    questionAudio.volume = "1";
+    progress.value = 0;
+    progress.max = Math.floor(+questionAudio.duration);
+    progress.step = questionAudio.duration / 100;
+  });
+
+  progress.addEventListener("input", ({ target }) => {
+    questionAudio.currentTime = target.value;
+    currentDuration.textContent = getSeconds(target.value);
+  });
 }
