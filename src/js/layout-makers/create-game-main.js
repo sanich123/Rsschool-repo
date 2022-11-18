@@ -1,11 +1,12 @@
-import { categories, nextBtnTextDefault, nextBtnTextSuccess, defaultText } from "../utils/const.js";
+import { categories, nextBtnTextDefault, nextBtnTextSuccess, defaultText, categoriesUs } from "../utils/const.js";
 import questionIcon from "../../img/svg/question-mark.svg";
 import { createAudio } from "./create-audio.js";
+import { createAnswers, createCategories } from "./create-categories.js";
 
-export function createMainGame(filtredBirds, checkedData, questionBird, innerChecked) {
+export function createMainGame(filtredBirds, checkedData, questionBird, innerChecked, innerLang) {
   const localStorageAnswers = JSON.parse(localStorage.getItem('answers'));
-  const answersVariants = filtredBirds.map(({ name }) => `<button class="answers-list__btn" value="${name}">${name}</button>`).join("");
-  const categoriesList = categories.map((category) => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join("");
+  const answersVariants = createAnswers(filtredBirds);
+  const categoriesList = innerLang === 'ru' ? createCategories(categories) : createCategories(categoriesUs);
 
   const { audio: questionAudio, name: questionName, image: questionImage } = questionBird;
   let answerLayout;

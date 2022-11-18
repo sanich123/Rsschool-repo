@@ -32,6 +32,14 @@ export const categories = [
   "Хищные",
   "Морские",
 ];
+export const categoriesUs = [
+  'Warm-up',
+  'Vorobushky',
+  'Woody',
+  'Singers',
+  'Predators',
+  'Navy',
+]
 
 export const nextBtnTextDefault = "Правильно ответишь - я буду активной";
 export const nextBtnTextSuccess = "Молодест, жмякай, чтобы перейти дальше";

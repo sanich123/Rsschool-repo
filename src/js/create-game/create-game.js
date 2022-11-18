@@ -1,4 +1,4 @@
-import { birdsData } from "../utils/mocks.js";
+import { birdsData, birdsDataEn } from "../utils/mocks.js";
 import { createFooter } from "../layout-makers/create-footer.js";
 import { createHeader } from "../layout-makers/create-header.js";
 import { createMainGame } from "../layout-makers/create-game-main.js";
@@ -13,6 +13,8 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
   let innerQuestionBird;
   let innerTotalScore = total;
   let innerScore = score;
+  const innerLang = localStorage.getItem('language');
+  innerLang === 'ru' ? arr = birdsData : arr = birdsDataEn;
   
   const filtredBirds = arr[counter];
   !question
@@ -23,7 +25,7 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
   const body = document.querySelector(".page");
   body.innerHTML = "";
 
-  body.insertAdjacentHTML("afterbegin", `${createHeader()}${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked)}${createFooter()}`);
+  body.insertAdjacentHTML("afterbegin", `${createHeader(innerLang)}${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang)}${createFooter(innerLang)}`);
   addActiveToNavigation(innerCounter);
   setDeclineAcceptStyles(checkedAnswer, innerQuestionBird);
   setAudio();

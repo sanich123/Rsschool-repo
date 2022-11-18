@@ -1,6 +1,7 @@
 import rsSchoolSvg from "../../img/svg/rs-school-icon.svg";
 
-export function createFooter() {
+export function createFooter(innerLang) {
+
   return `<footer class="page__footer footer">
       <ul class="footer__list footer-list">
         <li class="footer-list__item list-item">
@@ -10,7 +11,7 @@ export function createFooter() {
         </li>
         <li class="footer-list__item list-item">
           <a class="author-link" href="https://github.com/sanich123">
-            Связаться с автором
+            ${innerLang === 'ru' ? 'Связаться с автором' : 'Contact the author'}
           </a>
         </li>
         <li сlass="footer-list__item list-item">

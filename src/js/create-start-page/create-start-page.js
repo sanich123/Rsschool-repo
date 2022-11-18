@@ -5,7 +5,7 @@ import { createStartMain } from '../layout-makers/create-start-main.js';
 import { getNavLinks } from "../layout-makers/get-nav-links.js";
 import morningTheme from '../../audio/grig-morning.mp3';
 
-export function createStartPage(language = 'ru') {
+export function createStartPage() {
   const innerLang = localStorage.getItem('language');
   const body = document.querySelector(".page");
   body.innerHTML = "";
