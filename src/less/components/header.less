@@ -24,11 +24,12 @@
   }
   .nav-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 30px;
     margin-top: 20px;
     place-items: center;
-    &__item a {
+    &__item button {
+      .reset-btn();
       font: normal 20px/200% sans-serif;
       text-transform: uppercase;
       color: #00adff;

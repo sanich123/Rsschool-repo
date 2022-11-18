@@ -1,8 +1,10 @@
-import { navLinks } from "../utils/const.js";
+import { navLinksRu, navLinksUs } from "../utils/const.js";
+import { createNavLinks } from "./create-nav-links.js";
 import logoIcon from "../../img/svg/logo-icon.svg";
 
-export function createHeader() {
-  const navLinksLayout = navLinks.map(({ href, text }) => `<li class="nav-list__item"><a href="${href}">${text}</a>`).join("");
+export function createHeader(lang = 'ru') {
+  const isRu = lang === 'ru';
+  const navLinksLayout = isRu ? createNavLinks(navLinksRu) : createNavLinks(navLinksUs);
 
   return `<header class="page__header header">
       <a class="header__logo logo" href="index.html">
@@ -14,7 +16,7 @@ export function createHeader() {
         </ul>
       </nav>
       <div class="header__score score">
-        Score:
+        ${isRu ? 'Счет' : 'Score'}:
         <span class="score__value">0</span>
       </div>
     </header>`;
