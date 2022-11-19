@@ -7,7 +7,7 @@ import { createResults } from "../create-results/create-results.js";
 import { setAudio } from "../manage-audio/manage-audio.js";
 import { getNavLinks } from "../layout-makers/get-nav-links.js";
 
-export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "", question = "", score = 5, total = 0, lang = 'ru') {
+export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "", question = "", score = 5, total = 0) {
   let innerCounter = counter;
   let innerChecked = checkedAnswer;
   let innerQuestionBird;
@@ -29,7 +29,7 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
   addActiveToNavigation(innerCounter, innerLang);
   setDeclineAcceptStyles(checkedAnswer, innerQuestionBird);
   setAudio();
-  getNavLinks(innerLang);
+  getNavLinks(innerLang, innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore);
 
   const scoreMark = document.querySelector(".score__value");
   if (checkedAnswer === innerQuestionBird.name) {

@@ -18,6 +18,7 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
     answerLayout = createCheckedAnswerDefault(innerLang);
 
   const isMatching = innerChecked === questionName;
+  const isRefreshing = localStorageAnswers && localStorageAnswers.includes('accept');
 
   return `<main class="game">
       <ul class="game__list categories-list">${categoriesList}</ul>
@@ -28,7 +29,7 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
       </div>
       ${localStorageAnswers ? localStorageAnswers : `${`<ul class="game__answers-list answers-list">${answersVariants}</ul>`}`}
       <div class="game__checked-answer checked-answer">${answerLayout}</div>
-      <button class="game__next-btn next-btn" type="button" ${isMatching ? "" : "disabled"}>
+      <button class="game__next-btn next-btn" type="button" ${isMatching || isRefreshing ? "" : "disabled"}>
         ${createNextBtn(innerLang, isMatching)}
       </button>
     </main>`;

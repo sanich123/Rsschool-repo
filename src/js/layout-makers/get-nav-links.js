@@ -3,8 +3,9 @@ import { createGamePage } from "../create-game/create-game";
 import { rusFlag, usFlag } from "../utils/const";
 import { navLinksRu, navLinksUs } from "../utils/const";
 
-export function getNavLinks(language = 'ru') {
+export function getNavLinks(language = 'ru', innerChecked, innerQuestionBird, innerScore, innerTotalScore) {
   const isRu = language === 'ru';
+  console.log(innerChecked, innerQuestionBird, innerScore, innerTotalScore);
 
   const mainPage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[0] : navLinksUs[0]}`);
   const gamePage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[1] : navLinksUs[1]}`);
@@ -25,7 +26,6 @@ export function getNavLinks(language = 'ru') {
     } else if (location.includes('game')) {
       createGamePage();
     }
-    
   });
   mainPage.addEventListener("click", () => {
     window.history.pushState({urlPath: 'main'}, '', 'main');
