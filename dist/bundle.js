@@ -80,6 +80,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout-makers/create-game-main.js */ "./src/js/layout-makers/create-game-main.js");
 /* harmony import */ var _utils_helpers_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/helpers.js */ "./src/js/utils/helpers.js");
 /* harmony import */ var _create_results_create_results_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../create-results/create-results.js */ "./src/js/create-results/create-results.js");
+/* harmony import */ var _manage_audio_manage_audio_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../manage-audio/manage-audio.js */ "./src/js/manage-audio/manage-audio.js");
+/* harmony import */ var _layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../layout-makers/get-nav-links.js */ "./src/js/layout-makers/get-nav-links.js");
+
+
 
 
 
@@ -98,6 +102,8 @@ function createGamePage() {
   let innerQuestionBird;
   let innerTotalScore = total;
   let innerScore = score;
+  const innerLang = localStorage.getItem('language');
+  innerLang === 'ru' ? arr = _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__.birdsData : arr = _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__.birdsDataEn;
   const filtredBirds = arr[counter];
   !question ? innerQuestionBird = filtredBirds[(0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_4__.getRandomNumber)(filtredBirds.length)] : innerQuestionBird = question;
   const checkedData = filtredBirds.filter(_ref => {
@@ -108,9 +114,11 @@ function createGamePage() {
   });
   const body = document.querySelector(".page");
   body.innerHTML = "";
-  body.insertAdjacentHTML("afterbegin", `${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_2__.createHeader)()}${(0,_layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_3__.createMainGame)(filtredBirds, checkedData, innerQuestionBird, innerChecked)}${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_1__.createFooter)()}`);
-  (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_4__.addActiveToNavigation)(innerCounter);
+  body.insertAdjacentHTML("afterbegin", `${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_2__.createHeader)(innerLang)}${(0,_layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_3__.createMainGame)(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_1__.createFooter)(innerLang)}`);
+  (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_4__.addActiveToNavigation)(innerCounter, innerLang);
   (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_4__.setDeclineAcceptStyles)(checkedAnswer, innerQuestionBird);
+  (0,_manage_audio_manage_audio_js__WEBPACK_IMPORTED_MODULE_6__.setAudio)();
+  (0,_layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_7__.getNavLinks)(innerLang, innerCounter, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
   const scoreMark = document.querySelector(".score__value");
   if (checkedAnswer === innerQuestionBird.name) {
     if (!innerScore) {
@@ -118,11 +126,11 @@ function createGamePage() {
     } else {
       innerTotalScore = innerTotalScore + ++innerScore;
       scoreMark.textContent = innerTotalScore;
-      console.log(innerCounter);
       if (innerCounter === 5) {
         window.history.pushState({
-          urlPath: 'results.html'
-        }, '', 'results.html');
+          urlPath: 'results'
+        }, '', 'results');
+        localStorage.removeItem('answers');
         (0,_create_results_create_results_js__WEBPACK_IMPORTED_MODULE_5__.createResults)(innerTotalScore);
         return;
       }
@@ -146,6 +154,7 @@ function createGamePage() {
   });
   nextBtn.addEventListener("click", () => {
     const nextCounter = innerCounter + 1;
+    localStorage.removeItem('answers');
     createGamePage(nextCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_0__.birdsData, "", null, 5, innerTotalScore);
   });
 }
@@ -167,29 +176,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_makers_create_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-header */ "./src/js/layout-makers/create-header.js");
 /* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
 /* harmony import */ var _create_game_create_game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../create-game/create-game */ "./src/js/create-game/create-game.js");
+/* harmony import */ var _layout_makers_get_nav_links__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layout-makers/get-nav-links */ "./src/js/layout-makers/get-nav-links.js");
+/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/helpers */ "./src/js/utils/helpers.js");
+
+
 
 
 
 
 function createResults(totalScore) {
+  const innerLang = localStorage.getItem('language');
   const maxScore = 30;
-  const message = totalScore === maxScore ? 'Очень поздравляем! Вы набрали максимальное количество баллов! Судя по всему, кукушка и дятел для вас не пустые слова! Не думаю, что вам захочется сыграть еще разок:(' : `Вы набрали ${totalScore} баллов. Судя по всему, вам надо немножко еще потренироваться определять разных птичек. Сыграем еще раз? Жмякай кнопку ниже, если хочешь еще разок`;
+  const message = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_5__.getRightCongratulations)(totalScore, maxScore, innerLang);
   const body = document.querySelector('.page');
   body.innerHTML = '';
-  body.innerHTML = `${(0,_layout_makers_create_header__WEBPACK_IMPORTED_MODULE_1__.createHeader)()}<main class="page__main main">
+  body.innerHTML = `${(0,_layout_makers_create_header__WEBPACK_IMPORTED_MODULE_1__.createHeader)(innerLang)}<main class="page__main main">
       <div class="promo">
         <p class="promo__results">${message}</p>
-        <button class="promo__btn">${_utils_const__WEBPACK_IMPORTED_MODULE_2__.start}</button>
+        <button class="promo__btn">${innerLang === 'ru' ? _utils_const__WEBPACK_IMPORTED_MODULE_2__.startRu : _utils_const__WEBPACK_IMPORTED_MODULE_2__.startUs}</button>
       </div>
-    </main>${(0,_layout_makers_create_footer__WEBPACK_IMPORTED_MODULE_0__.createFooter)()}
+    </main>${(0,_layout_makers_create_footer__WEBPACK_IMPORTED_MODULE_0__.createFooter)(innerLang)}
     `;
+  (0,_layout_makers_get_nav_links__WEBPACK_IMPORTED_MODULE_4__.getNavLinks)(innerLang, '', '', '', '', totalScore);
   const value = document.querySelector('.score__value');
   value.textContent = totalScore;
   const gameBtn = document.querySelector('.promo__btn');
   gameBtn.addEventListener('click', () => {
     window.history.pushState({
-      urlPath: 'game.html'
-    }, '', 'game.html');
+      urlPath: 'game'
+    }, '', 'game');
     (0,_create_game_create_game__WEBPACK_IMPORTED_MODULE_3__.createGamePage)();
   });
 }
@@ -211,32 +226,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-header.js */ "./src/js/layout-makers/create-header.js");
 /* harmony import */ var _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../create-game/create-game.js */ "./src/js/create-game/create-game.js");
 /* harmony import */ var _layout_makers_create_start_main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout-makers/create-start-main.js */ "./src/js/layout-makers/create-start-main.js");
-/* harmony import */ var _audio_grig_morning_mp3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../audio/grig-morning.mp3 */ "./src/audio/grig-morning.mp3");
+/* harmony import */ var _layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layout-makers/get-nav-links.js */ "./src/js/layout-makers/get-nav-links.js");
+/* harmony import */ var _audio_grig_morning_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../audio/grig-morning.mp3 */ "./src/audio/grig-morning.mp3");
+
 
 
 
 
 
 function createStartPage() {
+  const innerLang = localStorage.getItem('language');
   const body = document.querySelector(".page");
   body.innerHTML = "";
-  body.insertAdjacentHTML("afterbegin", `${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__.createHeader)()}${(0,_layout_makers_create_start_main_js__WEBPACK_IMPORTED_MODULE_3__.createStartMain)()}${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__.createFooter)()}`);
-  const mainPage = document.querySelector('.nav-list__item a[href="index.html"]');
-  const gamePage = document.querySelector('.nav-list__item a[href="game.html"]');
+  body.insertAdjacentHTML("afterbegin", `${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__.createHeader)(innerLang)}${(0,_layout_makers_create_start_main_js__WEBPACK_IMPORTED_MODULE_3__.createStartMain)(innerLang)}${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__.createFooter)(innerLang)}`);
+  (0,_layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_4__.getNavLinks)(innerLang);
   const gameBtn = document.querySelector('.promo__btn');
   document.querySelector('video').play();
-  const audio = new Audio(_audio_grig_morning_mp3__WEBPACK_IMPORTED_MODULE_4__);
+  const audio = new Audio(_audio_grig_morning_mp3__WEBPACK_IMPORTED_MODULE_5__);
   // audio.play();
 
+  window.history.pushState({
+    urlPath: 'main'
+  }, '', 'main');
   gameBtn.addEventListener('click', () => {
+    localStorage.removeItem('answers');
     window.history.pushState({
-      urlPath: 'game.html'
-    }, '', 'game.html');
+      urlPath: 'game'
+    }, '', 'game');
     // audio.pause();
     (0,_create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__.createGamePage)();
   });
-  mainPage.addEventListener("click", () => createStartPage);
-  gamePage.addEventListener('click', () => _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__.createGamePage);
 }
 
 /***/ }),
@@ -252,25 +271,107 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _create_start_page_create_start_page_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-start-page/create-start-page.js */ "./src/js/create-start-page/create-start-page.js");
-/* harmony import */ var _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-game/create-game.js */ "./src/js/create-game/create-game.js");
-/* harmony import */ var _create_results_create_results_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create-results/create-results.js */ "./src/js/create-results/create-results.js");
-/* harmony import */ var _game_html__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../game.html */ "./src/game.html");
-/* harmony import */ var _index_html__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../index.html */ "./src/index.html");
-/* harmony import */ var _less_entry_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../less/entry.less */ "./src/less/entry.less");
+/* harmony import */ var _index_html__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../index.html */ "./src/index.html");
+/* harmony import */ var _less_entry_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../less/entry.less */ "./src/less/entry.less");
 
 
 
 
+(0,_create_start_page_create_start_page_js__WEBPACK_IMPORTED_MODULE_1__.createStartPage)();
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/create-audio.js":
+/*!**********************************************!*\
+  !*** ./src/js/layout-makers/create-audio.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createAudio": () => (/* binding */ createAudio)
+/* harmony export */ });
+function createAudio(audio, place) {
+  return `
+  <div class="audio-container">
+    <button class="audio-container__play play"></button>
+    <div class="audio-container__duration-container">
+      <input class="audio-container__duration-changer" type="range" min="0" value="0" max="100" />
+      <span class="audio-container__duration">00:00</span>
+      <span class="audio-container__current-time">00:00</span>
+    </div>
+    <div class="audio-container__mute-wrapper">
+    <button class="audio-container__mute-btn unmuted"></button>
+    <input class="audio-container__volume-changer" type="range" value="0.75" min="0" step="0.1" max="1"/>
+    </div>
+    <audio class="${place}__audio" src="${audio}"><audio/>
+  </div>`;
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/create-categories.js":
+/*!***************************************************!*\
+  !*** ./src/js/layout-makers/create-categories.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createAnswers": () => (/* binding */ createAnswers),
+/* harmony export */   "createCategories": () => (/* binding */ createCategories),
+/* harmony export */   "createCheckedAnswerDefault": () => (/* binding */ createCheckedAnswerDefault),
+/* harmony export */   "createCheckedAnswerLayout": () => (/* binding */ createCheckedAnswerLayout),
+/* harmony export */   "createNextBtn": () => (/* binding */ createNextBtn)
+/* harmony export */ });
+/* harmony import */ var _create_audio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-audio */ "./src/js/layout-makers/create-audio.js");
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
 
 
-
-const location = window.location.href;
-if (location.includes("game.html")) {
-  (0,_create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__.createGamePage)();
-} else if (location.includes("results.html")) {
-  (0,_create_results_create_results_js__WEBPACK_IMPORTED_MODULE_3__.createResults)();
-} else {
-  (0,_create_start_page_create_start_page_js__WEBPACK_IMPORTED_MODULE_1__.createStartPage)();
+function createCategories(categories) {
+  return categories.map(category => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join("");
+}
+;
+function createAnswers(answers) {
+  return answers.map(_ref => {
+    let {
+      name
+    } = _ref;
+    return `<button class="answers-list__btn" value="${name}">${name}</button>`;
+  }).join("");
+}
+function createCheckedAnswerLayout(checkedData) {
+  const [{
+    name,
+    audio,
+    image,
+    description,
+    species
+  }] = checkedData;
+  return `<img src="${image}" alt="" class="checked-answer__img" />
+        <span class="checked-answer__surname">${name} (${species})</span>
+        <p align="justify" class="checked-answer__description">${description}</p>${(0,_create_audio__WEBPACK_IMPORTED_MODULE_0__.createAudio)(audio, "checked-answer")}`;
+}
+;
+function createCheckedAnswerDefault(innerLang) {
+  return `<div></div><p class="checked-answer__default">${innerLang === 'ru' ? _utils_const__WEBPACK_IMPORTED_MODULE_1__.defaultText : _utils_const__WEBPACK_IMPORTED_MODULE_1__.defaultTextUs}</p>`;
+}
+function createNextBtn(innerLang, isMatching) {
+  if (isMatching) {
+    if (innerLang === 'ru') {
+      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.nextBtnTextSuccessRu;
+    } else {
+      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.nextBtnTextSuccessUs;
+    }
+  } else {
+    if (innerLang === 'ru') {
+      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.nextBtnTextDefaultRu;
+    } else {
+      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.nextBtnTextDefaultUs;
+    }
+  }
 }
 
 /***/ }),
@@ -288,7 +389,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _img_svg_rs_school_icon_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../img/svg/rs-school-icon.svg */ "./src/img/svg/rs-school-icon.svg");
 
-function createFooter() {
+function createFooter(innerLang) {
   return `<footer class="page__footer footer">
       <ul class="footer__list footer-list">
         <li class="footer-list__item list-item">
@@ -298,7 +399,7 @@ function createFooter() {
         </li>
         <li class="footer-list__item list-item">
           <a class="author-link" href="https://github.com/sanich123">
-            Связаться с автором
+            ${innerLang === 'ru' ? 'Связаться с автором' : 'Contact the author'}
           </a>
         </li>
         <li сlass="footer-list__item list-item">
@@ -323,56 +424,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
 /* harmony import */ var _img_svg_question_mark_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../img/svg/question-mark.svg */ "./src/img/svg/question-mark.svg");
+/* harmony import */ var _create_audio_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-audio.js */ "./src/js/layout-makers/create-audio.js");
+/* harmony import */ var _create_categories_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create-categories.js */ "./src/js/layout-makers/create-categories.js");
+/* harmony import */ var _utils_mocks_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/mocks.js */ "./src/js/utils/mocks.js");
+/* harmony import */ var _utils_helpers_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/helpers.js */ "./src/js/utils/helpers.js");
 
 
-function createMainGame(filtredBirds, checkedData, questionBird, innerChecked) {
-  const answersVariants = filtredBirds.map(_ref => {
-    let {
-      name
-    } = _ref;
-    return `<button class="answers-list__btn" value=${name}>${name}</button>`;
-  }).join("");
-  const categoriesList = _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.categories.map(category => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join("");
+
+
+
+
+function createMainGame(filtredBirds, checkedData, questionBird, innerChecked, innerLang, innerCounter) {
+  const isRu = innerLang === 'ru';
+  const localStorageAnswers = JSON.parse(localStorage.getItem('answers'));
+  const answersVariants = (0,_create_categories_js__WEBPACK_IMPORTED_MODULE_3__.createAnswers)(filtredBirds);
+  const categoriesList = isRu ? (0,_create_categories_js__WEBPACK_IMPORTED_MODULE_3__.createCategories)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.categories) : (0,_create_categories_js__WEBPACK_IMPORTED_MODULE_3__.createCategories)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.categoriesUs);
   const {
     audio: questionAudio,
     name: questionName,
     image: questionImage
   } = questionBird;
   let answerLayout;
-  if (checkedData.length > 0) {
-    const [{
-      name,
-      audio,
-      image,
-      description
-    }] = checkedData;
-    answerLayout = `<img src=${image} alt="" class="checked-answer__img" />
-        <span class="checked-answer__surname">${name}</span>
-        <p align="justify" class="checked-answer__description">
-            ${description}
-        </p>
-        <audio class="checked-answer__audio" src=${audio} controls />`;
-  } else {
-    answerLayout = `<div></div><p class="checked-answer__default">Выберите вариант ответа, и здесь появится информация по птице. А если угадаешь, то сверху вместо вопроса тоже появится личико птички</p>`;
-  }
+  checkedData.length > 0 ? answerLayout = (0,_create_categories_js__WEBPACK_IMPORTED_MODULE_3__.createCheckedAnswerLayout)(checkedData) : answerLayout = (0,_create_categories_js__WEBPACK_IMPORTED_MODULE_3__.createCheckedAnswerDefault)(innerLang);
   const isMatching = innerChecked === questionName;
+  const isRefreshing = localStorageAnswers && localStorageAnswers.includes('accept');
   return `<main class="game">
-      <ul class="game__list categories-list">
-       ${categoriesList}
-      </ul>
+      <ul class="game__list categories-list">${categoriesList}</ul>
       <div class="game__question question">
-        <img src=${isMatching ? questionImage : _img_svg_question_mark_svg__WEBPACK_IMPORTED_MODULE_1__} alt="" class="question__img" width="50px"/>
+        <img src=${isMatching ? questionImage : _img_svg_question_mark_svg__WEBPACK_IMPORTED_MODULE_1__} alt="${isMatching ? questionName : ''}" class="question__img" width="50px"/>
         <span class="question__name">${isMatching ? questionName : "**********"}</span>
-        <audio class="question__audio" src=${questionAudio} controls />
+      ${(0,_create_audio_js__WEBPACK_IMPORTED_MODULE_2__.createAudio)(questionAudio, 'question')}
       </div>
-      <form class="game__answers-list answers-list">
-        ${answersVariants}
-      </form>
-      <div class="game__checked-answer checked-answer">
-        ${answerLayout}
-      </div>
-      <button class="game__next-btn next-btn" type="button" ${isMatching ? "" : "disabled"}>
-        ${isMatching ? "Молодест, жмякай, чтобы перейти дальше" : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.nextBtnText}
+      ${localStorageAnswers ? (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_5__.changeLanguageOnAnswers)(isRu, innerCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_4__.birdsData, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_4__.birdsDataEn, localStorageAnswers) : `${`<ul class="game__answers-list answers-list">${answersVariants}</ul>`}`}
+      <div class="game__checked-answer checked-answer">${answerLayout}</div>
+      <button class="game__next-btn next-btn" type="button" ${isMatching || isRefreshing ? "" : "disabled"}>
+        ${(0,_create_categories_js__WEBPACK_IMPORTED_MODULE_3__.createNextBtn)(innerLang, isMatching)}
       </button>
     </main>`;
 }
@@ -391,20 +477,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createHeader": () => (/* binding */ createHeader)
 /* harmony export */ });
 /* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
-/* harmony import */ var _img_svg_logo_icon_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../img/svg/logo-icon.svg */ "./src/img/svg/logo-icon.svg");
+/* harmony import */ var _create_nav_links_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-nav-links.js */ "./src/js/layout-makers/create-nav-links.js");
+/* harmony import */ var _img_svg_logo_icon_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../img/svg/logo-icon.svg */ "./src/img/svg/logo-icon.svg");
+
 
 
 function createHeader() {
-  const navLinksLayout = _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.navLinks.map(_ref => {
-    let {
-      href,
-      text
-    } = _ref;
-    return `<li class="nav-list__item"><a href="${href}">${text}</a>`;
-  }).join("");
+  let lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'ru';
+  const isRu = lang === 'ru';
+  const navLinksLayout = isRu ? (0,_create_nav_links_js__WEBPACK_IMPORTED_MODULE_1__.createNavLinks)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.navLinksRu) : (0,_create_nav_links_js__WEBPACK_IMPORTED_MODULE_1__.createNavLinks)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.navLinksUs);
   return `<header class="page__header header">
       <a class="header__logo logo" href="index.html">
-        <img class="logo__img" src=${_img_svg_logo_icon_svg__WEBPACK_IMPORTED_MODULE_1__} width="60px" height="60px" />
+        <img class="logo__img" src=${_img_svg_logo_icon_svg__WEBPACK_IMPORTED_MODULE_2__} width="60px" height="60px" />
       </a>
       <nav class="header__nav nav">
         <ul class="nav__list nav-list">
@@ -412,10 +496,44 @@ function createHeader() {
         </ul>
       </nav>
       <div class="header__score score">
-        Score:
+        ${isRu ? 'Счет' : 'Score'}:
         <span class="score__value">0</span>
       </div>
     </header>`;
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/create-nav-links.js":
+/*!**************************************************!*\
+  !*** ./src/js/layout-makers/create-nav-links.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createNavLinks": () => (/* binding */ createNavLinks)
+/* harmony export */ });
+function createNavLinks(arr) {
+  return arr.map(text => `<li class="nav-list__item"><button class="nav-list__btn--${text.length < 50 ? text : 'svg'}">${text}</button>`).join("");
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/create-rules.js":
+/*!**********************************************!*\
+  !*** ./src/js/layout-makers/create-rules.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createRules": () => (/* binding */ createRules)
+/* harmony export */ });
+function createRules(rules) {
+  return rules.map(text => `<li class="promo-rules__item"><p align="justify">${text}</p></li>`).join("");
 }
 
 /***/ }),
@@ -433,18 +551,290 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
 /* harmony import */ var _video_grig_per_gunt_mp4__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../video/grig-per-gunt.mp4 */ "./src/video/grig-per-gunt.mp4");
+/* harmony import */ var _create_rules_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-rules.js */ "./src/js/layout-makers/create-rules.js");
+
 
 
 function createStartMain() {
-  const rulesItems = _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.rulesText.map(text => `<li class="promo-rules__item"><p align="justify">${text}</p></li>`).join("");
+  let language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'ru';
+  const isRu = language === 'ru';
   return `<main class="page__main main">
       <div class="promo">
       <video class="promo__video" src=${_video_grig_per_gunt_mp4__WEBPACK_IMPORTED_MODULE_1__} controls></video>
-        <p class="promo__sentence">${_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.promoSentence}</p>
-        <button class="promo__btn">${_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.start}</button>
-        <ol class="promo__rules promo-rules">${rulesItems}</ol>
+        <p class="promo__sentence">${isRu ? _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.promoSentenceRu : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.promoSentenceUs}</p>
+        <button class="promo__btn">${isRu ? _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.startRu : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.startUs}</button>
+        <ol class="promo__rules promo-rules">${isRu ? (0,_create_rules_js__WEBPACK_IMPORTED_MODULE_2__.createRules)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.rulesTextRu) : (0,_create_rules_js__WEBPACK_IMPORTED_MODULE_2__.createRules)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.rulesTextUs)}</ol>
       </div>
     </main>`;
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/get-nav-links.js":
+/*!***********************************************!*\
+  !*** ./src/js/layout-makers/get-nav-links.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getNavLinks": () => (/* binding */ getNavLinks)
+/* harmony export */ });
+/* harmony import */ var _create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../create-start-page/create-start-page */ "./src/js/create-start-page/create-start-page.js");
+/* harmony import */ var _create_game_create_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../create-game/create-game */ "./src/js/create-game/create-game.js");
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
+/* harmony import */ var _utils_mocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/mocks */ "./src/js/utils/mocks.js");
+/* harmony import */ var _create_results_create_results__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../create-results/create-results */ "./src/js/create-results/create-results.js");
+
+
+
+
+
+
+function getNavLinks() {
+  let language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'ru';
+  let innerCounter = arguments.length > 1 ? arguments[1] : undefined;
+  let innerChecked = arguments.length > 2 ? arguments[2] : undefined;
+  let innerQuestionBird = arguments.length > 3 ? arguments[3] : undefined;
+  let innerScore = arguments.length > 4 ? arguments[4] : undefined;
+  let innerTotalScore = arguments.length > 5 ? arguments[5] : undefined;
+  const isRu = language === 'ru';
+  const mainPage = document.querySelector(`.nav-list__btn--${isRu ? _utils_const__WEBPACK_IMPORTED_MODULE_2__.navLinksRu[0] : _utils_const__WEBPACK_IMPORTED_MODULE_2__.navLinksUs[0]}`);
+  const gamePage = document.querySelector(`.nav-list__btn--${isRu ? _utils_const__WEBPACK_IMPORTED_MODULE_2__.navLinksRu[1] : _utils_const__WEBPACK_IMPORTED_MODULE_2__.navLinksUs[1]}`);
+  const gallery = document.querySelector(`.nav-list__btn--${isRu ? _utils_const__WEBPACK_IMPORTED_MODULE_2__.navLinksRu[2] : _utils_const__WEBPACK_IMPORTED_MODULE_2__.navLinksUs[2]}`);
+  const lang = document.querySelector('.nav-list__btn--svg');
+  lang.addEventListener('click', () => {
+    const location = window.location.href;
+    if (lang.innerHTML.includes('rus')) {
+      lang.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_2__.usFlag;
+    } else {
+      lang.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_2__.rusFlag;
+    }
+    const language = lang.innerHTML.includes('rus') ? 'ru' : 'us';
+    localStorage.setItem('language', language);
+    if (location.includes('main')) {
+      (0,_create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_0__.createStartPage)(language);
+    } else if (location.includes('game')) {
+      (0,_create_game_create_game__WEBPACK_IMPORTED_MODULE_1__.createGamePage)(innerCounter, _utils_mocks__WEBPACK_IMPORTED_MODULE_3__.birdsData, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
+    } else if (location.includes('results')) {
+      (0,_create_results_create_results__WEBPACK_IMPORTED_MODULE_4__.createResults)(innerTotalScore);
+    }
+  });
+  mainPage.addEventListener("click", () => {
+    window.history.pushState({
+      urlPath: 'main'
+    }, '', 'main');
+    localStorage.removeItem("answers");
+    (0,_create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_0__.createStartPage)();
+  });
+  gamePage.addEventListener("click", () => {
+    window.history.pushState({
+      urlPath: 'game'
+    }, '', 'game');
+    localStorage.removeItem("answers");
+    (0,_create_game_create_game__WEBPACK_IMPORTED_MODULE_1__.createGamePage)();
+  });
+}
+
+/***/ }),
+
+/***/ "./src/js/layout-makers/get-nodes.js":
+/*!*******************************************!*\
+  !*** ./src/js/layout-makers/get-nodes.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getNodes": () => (/* binding */ getNodes)
+/* harmony export */ });
+function getNodes() {
+  const questionAudio = document.querySelector(".question__audio");
+  const questionPlay = document.querySelector(".question .audio-container__play");
+  const totalDuration = document.querySelector(".question .audio-container__duration");
+  const currentDuration = document.querySelector(".question .audio-container__current-time");
+  const progress = document.querySelector(".question .audio-container__duration-changer");
+  const muteBtn = document.querySelector(".question .audio-container__mute-btn");
+  const volumeContainer = document.querySelector(".question .audio-container__mute-wrapper");
+  const audioProgress = document.querySelector(".question .audio-container__volume-changer");
+  const answerAudio = document.querySelector(".checked-answer__audio");
+  const answerPlay = document.querySelector(".checked-answer .audio-container__play");
+  const answerTotalDuration = document.querySelector(".checked-answer .audio-container__duration");
+  const answerCurrentDuration = document.querySelector(".checked-answer .audio-container__current-time");
+  const answerProgress = document.querySelector(".checked-answer .audio-container__duration-changer");
+  const answerMuteBtn = document.querySelector(".checked-answer .audio-container__mute-btn");
+  const answerVolumeContainer = document.querySelector(".checked-answer .audio-container__mute-wrapper");
+  const answerAudioProgress = document.querySelector(".checked-answer .audio-container__volume-changer");
+  return {
+    questionAudio,
+    questionPlay,
+    totalDuration,
+    currentDuration,
+    progress,
+    muteBtn,
+    volumeContainer,
+    audioProgress,
+    answerAudio,
+    answerPlay,
+    answerTotalDuration,
+    answerCurrentDuration,
+    answerProgress,
+    answerMuteBtn,
+    answerVolumeContainer,
+    answerAudioProgress
+  };
+}
+
+/***/ }),
+
+/***/ "./src/js/manage-audio/manage-audio.js":
+/*!*********************************************!*\
+  !*** ./src/js/manage-audio/manage-audio.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "setAudio": () => (/* binding */ setAudio)
+/* harmony export */ });
+/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/helpers */ "./src/js/utils/helpers.js");
+/* harmony import */ var _layout_makers_get_nodes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/get-nodes.js */ "./src/js/layout-makers/get-nodes.js");
+
+
+function setAudio() {
+  const {
+    questionAudio,
+    questionPlay,
+    totalDuration,
+    currentDuration,
+    progress,
+    muteBtn,
+    volumeContainer,
+    audioProgress,
+    answerAudio,
+    answerPlay,
+    answerTotalDuration,
+    answerCurrentDuration,
+    answerProgress,
+    answerMuteBtn,
+    answerVolumeContainer,
+    answerAudioProgress
+  } = (0,_layout_makers_get_nodes_js__WEBPACK_IMPORTED_MODULE_1__.getNodes)();
+  if (answerPlay) {
+    answerPlay.addEventListener("click", () => {
+      if (answerPlay.classList.contains("play")) {
+        answerPlay.classList.remove("play");
+        answerPlay.classList.add("pause");
+        answerAudio.play();
+        setInterval(() => {
+          answerProgress.value = answerAudio.currentTime;
+          answerCurrentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(answerAudio.currentTime);
+        }, 1000);
+      } else {
+        answerPlay.classList.remove("pause");
+        answerPlay.classList.add("play");
+        answerAudio.pause();
+      }
+    });
+    answerMuteBtn.addEventListener("click", () => {
+      if (answerMuteBtn.classList.contains("unmuted")) {
+        answerMuteBtn.classList.remove("unmuted");
+        answerMuteBtn.classList.add("muted");
+        answerAudio.muted = true;
+      } else {
+        answerMuteBtn.classList.remove("muted");
+        answerMuteBtn.classList.add("unmuted");
+        answerAudio.muted = false;
+      }
+    });
+    answerVolumeContainer.addEventListener("mouseenter", () => answerAudioProgress.classList.add("is-open"));
+    answerVolumeContainer.addEventListener("mouseleave", () => answerAudioProgress.classList.remove("is-open"));
+    answerAudioProgress.addEventListener("input", _ref => {
+      let {
+        target
+      } = _ref;
+      answerAudio.volume = target.value;
+      if (+target.value === 0) {
+        answerMuteBtn.classList.remove("unmuted");
+        answerMuteBtn.classList.add("muted");
+      } else if (answerMuteBtn.classList.contains("muted")) {
+        answerMuteBtn.classList.remove("muted");
+        answerMuteBtn.classList.add("unmuted");
+      }
+    });
+    answerAudio.addEventListener("loadeddata", () => {
+      answerTotalDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(answerAudio.duration);
+      answerAudio.volume = "1";
+      answerProgress.value = 0;
+      answerProgress.max = Math.floor(+answerAudio.duration);
+      answerProgress.step = answerAudio.duration / 100;
+    });
+    answerProgress.addEventListener("input", _ref2 => {
+      let {
+        target
+      } = _ref2;
+      answerAudio.currentTime = target.value;
+      answerCurrentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(target.value);
+    });
+  }
+  questionPlay.addEventListener("click", () => {
+    if (questionPlay.classList.contains("play")) {
+      questionPlay.classList.remove("play");
+      questionPlay.classList.add("pause");
+      questionAudio.play();
+      setInterval(() => {
+        progress.value = questionAudio.currentTime;
+        currentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(questionAudio.currentTime);
+      }, 1000);
+    } else {
+      questionPlay.classList.remove("pause");
+      questionPlay.classList.add("play");
+      questionAudio.pause();
+    }
+  });
+  muteBtn.addEventListener("click", () => {
+    if (muteBtn.classList.contains("unmuted")) {
+      muteBtn.classList.remove("unmuted");
+      muteBtn.classList.add("muted");
+      questionAudio.muted = true;
+    } else {
+      muteBtn.classList.remove("muted");
+      muteBtn.classList.add("unmuted");
+      questionAudio.muted = false;
+    }
+  });
+  volumeContainer.addEventListener("mouseenter", () => audioProgress.classList.add("is-open"));
+  volumeContainer.addEventListener("mouseleave", () => audioProgress.classList.remove("is-open"));
+  audioProgress.addEventListener("input", _ref3 => {
+    let {
+      target
+    } = _ref3;
+    questionAudio.volume = target.value;
+    if (+target.value === 0) {
+      muteBtn.classList.remove("unmuted");
+      muteBtn.classList.add("muted");
+    } else if (muteBtn.classList.contains("muted")) {
+      muteBtn.classList.remove("muted");
+      muteBtn.classList.add("unmuted");
+    }
+  });
+  questionAudio.addEventListener("loadeddata", () => {
+    totalDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(questionAudio.duration);
+    questionAudio.volume = "1";
+    progress.value = 0;
+    progress.max = Math.floor(+questionAudio.duration);
+    progress.step = questionAudio.duration / 100;
+  });
+  progress.addEventListener("input", _ref4 => {
+    let {
+      target
+    } = _ref4;
+    questionAudio.currentTime = target.value;
+    currentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(target.value);
+  });
 }
 
 /***/ }),
@@ -459,24 +849,46 @@ function createStartMain() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "categories": () => (/* binding */ categories),
-/* harmony export */   "navLinks": () => (/* binding */ navLinks),
-/* harmony export */   "nextBtnText": () => (/* binding */ nextBtnText),
-/* harmony export */   "promoSentence": () => (/* binding */ promoSentence),
-/* harmony export */   "rulesText": () => (/* binding */ rulesText),
-/* harmony export */   "start": () => (/* binding */ start)
+/* harmony export */   "categoriesUs": () => (/* binding */ categoriesUs),
+/* harmony export */   "congratulationsEn": () => (/* binding */ congratulationsEn),
+/* harmony export */   "congratulationsRu": () => (/* binding */ congratulationsRu),
+/* harmony export */   "defaultText": () => (/* binding */ defaultText),
+/* harmony export */   "defaultTextUs": () => (/* binding */ defaultTextUs),
+/* harmony export */   "navLinksRu": () => (/* binding */ navLinksRu),
+/* harmony export */   "navLinksUs": () => (/* binding */ navLinksUs),
+/* harmony export */   "nextBtnTextDefaultRu": () => (/* binding */ nextBtnTextDefaultRu),
+/* harmony export */   "nextBtnTextDefaultUs": () => (/* binding */ nextBtnTextDefaultUs),
+/* harmony export */   "nextBtnTextSuccessRu": () => (/* binding */ nextBtnTextSuccessRu),
+/* harmony export */   "nextBtnTextSuccessUs": () => (/* binding */ nextBtnTextSuccessUs),
+/* harmony export */   "promoSentenceRu": () => (/* binding */ promoSentenceRu),
+/* harmony export */   "promoSentenceUs": () => (/* binding */ promoSentenceUs),
+/* harmony export */   "rulesTextRu": () => (/* binding */ rulesTextRu),
+/* harmony export */   "rulesTextUs": () => (/* binding */ rulesTextUs),
+/* harmony export */   "rusFlag": () => (/* binding */ rusFlag),
+/* harmony export */   "startRu": () => (/* binding */ startRu),
+/* harmony export */   "startUs": () => (/* binding */ startUs),
+/* harmony export */   "usFlag": () => (/* binding */ usFlag)
 /* harmony export */ });
-const navLinks = [{
-  href: "index.html",
-  text: "Main page"
-}, {
-  href: "game.html",
-  text: "Play game"
-}];
-const promoSentence = "Думаешь, что меломан? Посмотрим.";
-const start = "Начать";
-const rulesText = ["Когда вы кликаете по варианту музыки, выводится информация по этой музыке", "Если вы выбрали правильный ответ, в блоке с вопросом выводится название и изображение композитора", "Если игрок дал правильный ответ с первой попытки, его счёт увеличивается на 5 баллов, каждая следующая попытка даёт на один балл меньше, если правильный ответ дан только с последней, шестой попытки, игрок получает за него 0 баллов. Баллы за все вопросы cуммируются", "Для правильных и неправильных ответов игрока используется звуковая и цветовая индикация", 'Когда игрок дал правильный ответ, активируется кнопка "Дальше" и он получает возможность перейти к следующему вопросу', "После последнего вопроса выводится страница с результатами игры"];
+const rusFlag = `<svg width="20" version="1.1" id="rus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55.32 38.52" style="enable-background:new 0 0 55.32 38.52" xml:space="preserve"><style type="text/css">.st0{fill:#FFFFFF;} .st1{fill:#D52B1E;} .st2{fill:#0039A6;} .st3{fill:none;stroke:#CCCCCC;stroke-width:0.1199;stroke-miterlimit:2.6131;}</style><g><path class="st0" d="M3.09,0.06h49.13c1.67,0,3.03,1.36,3.03,3.03v16.17H0.06V3.09C0.06,1.42,1.42,0.06,3.09,0.06L3.09,0.06z"/><path class="st1" d="M0.06,19.26h55.2v16.17c0,1.67-1.36,3.03-3.03,3.03H3.09c-1.67,0-3.03-1.37-3.03-3.03V19.26L0.06,19.26z"/><polygon class="st2" points="0.06,12.86 55.26,12.86 55.26,25.66 0.06,25.66 0.06,12.86"/><path class="st3" d="M3.09,0.06h49.13c1.67,0,3.03,1.36,3.03,3.03v32.33c0,1.67-1.36,3.03-3.03,3.03H3.09 c-1.67,0-3.03-1.37-3.03-3.03V3.09C0.06,1.42,1.42,0.06,3.09,0.06L3.09,0.06z"/></g></svg>`;
+const usFlag = `<svg width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55.2 38.4" style="enable-background:new 0 0 55.2 38.4" xml:space="preserve"><style type="text/css">.st0{fill:#B22234;} .st1{fill:#FFFFFF;} .st2{fill:#3C3B6E;}</style><g><path class="st0" d="M3.03,0h49.13c1.67,0,3.03,1.36,3.03,3.03v32.33c0,1.67-1.36,3.03-3.03,3.03H3.03C1.36,38.4,0,37.04,0,35.37 V3.03C0,1.36,1.36,0,3.03,0L3.03,0z"/><path class="st1" d="M0.02,2.73h55.17c0.01,0.1,0.02,0.2,0.02,0.31v2.94H0V3.03C0,2.93,0.01,2.83,0.02,2.73L0.02,2.73z M55.2,8.67 v3.24H0V8.67H55.2L55.2,8.67z M55.2,14.61v3.24H0v-3.24H55.2L55.2,14.61z M55.2,20.55v3.24H0v-3.24H55.2L55.2,20.55z M55.2,26.49 v3.24H0v-3.24H55.2L55.2,26.49z M55.2,32.43v2.93c0,0.1-0.01,0.21-0.02,0.31H0.02C0.01,35.58,0,35.47,0,35.37v-2.93H55.2 L55.2,32.43z"/><path class="st2" d="M20.8,0v20.68H0V3.03C0,1.36,1.36,0,3.03,0H20.8L20.8,0L20.8,0z"/><polygon class="st1" points="1.23,2.86 1.92,5.01 0.1,3.68 2.36,3.68 0.53,5.01 1.23,2.86"/><polygon class="st1" points="1.23,7.02 1.92,9.17 0.1,7.84 2.36,7.84 0.53,9.17 1.23,7.02"/><polygon class="st1" points="1.23,11.18 1.92,13.33 0.1,12 2.36,12 0.53,13.33 1.23,11.18"/><polygon class="st1" points="1.23,15.34 1.92,17.49 0.1,16.16 2.36,16.16 0.53,17.49 1.23,15.34"/><polygon class="st1" points="3.67,0.78 4.37,2.93 2.54,1.6 4.81,1.6 2.97,2.93 3.67,0.78"/><polygon class="st1" points="3.67,4.94 4.37,7.09 2.54,5.76 4.81,5.76 2.97,7.09 3.67,4.94"/><polygon class="st1" points="3.67,9.1 4.37,11.25 2.54,9.92 4.81,9.92 2.97,11.25 3.67,9.1"/><polygon class="st1" points="3.67,13.26 4.37,15.41 2.54,14.08 4.81,14.08 2.97,15.41 3.67,13.26"/><polygon class="st1" points="3.67,17.42 4.37,19.57 2.54,18.24 4.81,18.24 2.97,19.57 3.67,17.42"/><polygon class="st1" points="6.12,2.86 6.82,5.01 4.99,3.68 7.25,3.68 5.42,5.01 6.12,2.86"/><polygon class="st1" points="6.12,7.02 6.82,9.17 4.99,7.84 7.25,7.84 5.42,9.17 6.12,7.02"/><polygon class="st1" points="6.12,11.18 6.82,13.33 4.99,12 7.25,12 5.42,13.33 6.12,11.18"/><polygon class="st1" points="6.12,15.34 6.82,17.49 4.99,16.16 7.25,16.16 5.42,17.49 6.12,15.34"/><polygon class="st1" points="8.57,0.78 9.26,2.93 7.44,1.6 9.7,1.6 7.87,2.93 8.57,0.78"/><polygon class="st1" points="8.57,4.94 9.26,7.09 7.44,5.76 9.7,5.76 7.87,7.09 8.57,4.94"/><polygon class="st1" points="8.57,9.1 9.26,11.25 7.44,9.92 9.7,9.92 7.87,11.25 8.57,9.1"/><polygon class="st1" points="8.57,13.26 9.26,15.41 7.44,14.08 9.7,14.08 7.87,15.41 8.57,13.26"/><polygon class="st1" points="8.57,17.42 9.26,19.57 7.44,18.24 9.7,18.24 7.87,19.57 8.57,17.42"/><polygon class="st1" points="11.01,2.86 11.71,5.01 9.88,3.68 12.14,3.68 10.31,5.01 11.01,2.86"/><polygon class="st1" points="11.01,7.02 11.71,9.17 9.88,7.84 12.14,7.84 10.31,9.17 11.01,7.02"/><polygon class="st1" points="11.01,11.18 11.71,13.33 9.88,12 12.14,12 10.31,13.33 11.01,11.18"/><polygon class="st1" points="11.01,15.34 11.71,17.49 9.88,16.16 12.14,16.16 10.31,17.49 11.01,15.34"/><polygon class="st1" points="13.46,0.78 14.16,2.93 12.33,1.6 14.59,1.6 12.76,2.93 13.46,0.78"/><polygon class="st1" points="13.46,4.94 14.16,7.09 12.33,5.76 14.59,5.76 12.76,7.09 13.46,4.94"/><polygon class="st1" points="13.46,9.1 14.16,11.25 12.33,9.92 14.59,9.92 12.76,11.25 13.46,9.1"/><polygon class="st1" points="13.46,13.26 14.16,15.41 12.33,14.08 14.59,14.08 12.76,15.41 13.46,13.26"/><polygon class="st1" points="13.46,17.42 14.16,19.57 12.33,18.24 14.59,18.24 12.76,19.57 13.46,17.42"/><polygon class="st1" points="15.9,2.86 16.6,5.01 14.77,3.68 17.03,3.68 15.21,5.01 15.9,2.86"/><polygon class="st1" points="15.9,7.02 16.6,9.17 14.77,7.84 17.03,7.84 15.21,9.17 15.9,7.02"/><polygon class="st1" points="15.9,11.18 16.6,13.33 14.77,12 17.03,12 15.21,13.33 15.9,11.18"/><polygon class="st1" points="15.9,15.34 16.6,17.49 14.77,16.16 17.03,16.16 15.21,17.49 15.9,15.34"/><polygon class="st1" points="18.35,0.78 19.05,2.93 17.22,1.6 19.48,1.6 17.65,2.93 18.35,0.78"/><polygon class="st1" points="18.35,4.94 19.05,7.09 17.22,5.76 19.48,5.76 17.65,7.09 18.35,4.94"/><polygon class="st1" points="18.35,9.1 19.05,11.25 17.22,9.92 19.48,9.92 17.65,11.25 18.35,9.1"/><polygon class="st1" points="18.35,13.26 19.05,15.41 17.22,14.08 19.48,14.08 17.65,15.41 18.35,13.26"/><polygon class="st1" points="18.35,17.42 19.05,19.57 17.22,18.24 19.48,18.24 17.65,19.57 18.35,17.42"/></g></svg>`;
+const navLinksRu = ['дом', 'игра', 'галерея', rusFlag];
+const navLinksUs = ["home", "game", 'gallery', usFlag];
+const promoSentenceRu = "Думаешь, что знаешь птиц?";
+const promoSentenceUs = 'Do you think you know birds?';
+const startRu = "Начать";
+const startUs = 'Start';
+const rulesTextRu = ["Когда вы кликаете по варианту музыки, выводится информация по этой музыке", "Если вы выбрали правильный ответ, в блоке с вопросом выводится название и изображение композитора", "Если игрок дал правильный ответ с первой попытки, его счёт увеличивается на 5 баллов, каждая следующая попытка даёт на один балл меньше, если правильный ответ дан только с последней, шестой попытки, игрок получает за него 0 баллов. Баллы за все вопросы cуммируются", "Для правильных и неправильных ответов игрока используется звуковая и цветовая индикация", 'Когда игрок дал правильный ответ, активируется кнопка "Дальше" и он получает возможность перейти к следующему вопросу', "После последнего вопроса выводится страница с результатами игры"];
+const rulesTextUs = ['When you click on a music variant, information about that music is displayed', 'If you have chosen the correct answer, the name and image of the composer will be displayed in the question block', 'If the player gave the correct answer on the first attempt, his score increases by 5 points, each next attempt gives one point less, if the correct answer is given only on the last, sixth attempt, the player receives 0 points for it. Points for all questions are summed up.', 'Sound and color indication is used for correct and incorrect player answers', 'When the player has given the correct answer, the "Next" button is activated and he gets the opportunity to move on to the next question', 'After the last poll, a page with the results of the game is displayed'];
 const categories = ["Разминка", "Воробьиные", "Лесные", "Певчие", "Хищные", "Морские"];
-const nextBtnText = "Правильно ответишь - я буду активной";
+const categoriesUs = ['Warm-up', 'Vorobushky', 'Woody', 'Singers', 'Predators', 'Navy'];
+const nextBtnTextDefaultRu = "Правильно ответишь - я буду активной";
+const nextBtnTextSuccessRu = "Молодест, жмякай, чтобы перейти дальше";
+const nextBtnTextSuccessUs = "Youth, click to move on";
+const nextBtnTextDefaultUs = "Correct answer - I will be active";
+const defaultText = "Выберите вариант ответа, и здесь появится информация по птице. А если угадаешь, то сверху вместо вопроса тоже появится личико птички";
+const defaultTextUs = "Select an answer option, and information on the bird will appear here. And if you guess right, then instead of a question, a bird's face will also appear on top";
+const congratulationsRu = 'Очень поздравляем! Вы набрали максимальное количество баллов! Судя по всему, кукушка и дятел для вас не пустые слова! Не думаю, что вам захочется сыграть еще разок:(';
+const congratulationsEn = 'Congratulations! You have scored the maximum number of points! Apparently, the cuckoo and the woodpecker are not empty words for you! I don\'t think you\'ll want to play again :(';
 
 /***/ }),
 
@@ -490,7 +902,10 @@ const nextBtnText = "Правильно ответишь - я буду акти�
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addActiveToNavigation": () => (/* binding */ addActiveToNavigation),
+/* harmony export */   "changeLanguageOnAnswers": () => (/* binding */ changeLanguageOnAnswers),
 /* harmony export */   "getRandomNumber": () => (/* binding */ getRandomNumber),
+/* harmony export */   "getRightCongratulations": () => (/* binding */ getRightCongratulations),
+/* harmony export */   "getSeconds": () => (/* binding */ getSeconds),
 /* harmony export */   "setDeclineAcceptStyles": () => (/* binding */ setDeclineAcceptStyles)
 /* harmony export */ });
 /* harmony import */ var _audio_success_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../audio/success.mp3 */ "./src/audio/success.mp3");
@@ -501,6 +916,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const getRandomNumber = max => Math.floor(Math.random() * max);
 function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
+  const answersList = document.querySelector('.answers-list');
   const answersBtns = document.querySelectorAll(".answers-list__btn");
   const fail = new Audio(_audio_fail_mp3__WEBPACK_IMPORTED_MODULE_1__);
   const success = new Audio(_audio_success_mp3__WEBPACK_IMPORTED_MODULE_0__);
@@ -527,14 +943,64 @@ function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
       }
     });
   }
+  const stringifiedNodes = new XMLSerializer().serializeToString(answersList);
+  localStorage.setItem('answers', JSON.stringify(stringifiedNodes));
 }
-function addActiveToNavigation(innerCounter) {
+function addActiveToNavigation(innerCounter, innerLang) {
   const categoriesList = document.querySelectorAll(".categories-list__btn");
+  const isRu = innerLang === 'ru';
+  const categoriesMocks = isRu ? _const__WEBPACK_IMPORTED_MODULE_2__.categories : _const__WEBPACK_IMPORTED_MODULE_2__.categoriesUs;
   categoriesList.forEach(category => {
-    if (category.value === _const__WEBPACK_IMPORTED_MODULE_2__.categories[innerCounter]) {
+    if (category.value === categoriesMocks[innerCounter]) {
       category.style.background = "red";
     }
   });
+}
+function getSeconds(secs) {
+  const mins = Math.trunc(Math.floor(secs) / 60);
+  const seconds = Math.floor(secs - mins * 60);
+  return `${mins > 9 ? mins : `0${mins}`}:${seconds > 9 ? seconds : `0${seconds}`}`;
+}
+function changeLanguageOnAnswers(isRu, counter, ruMocks, enMocks, string) {
+  const namesRu = ruMocks[counter].map(_ref => {
+    let {
+      name
+    } = _ref;
+    return name;
+  });
+  const namesEn = enMocks[counter].map(_ref2 => {
+    let {
+      name
+    } = _ref2;
+    return name;
+  });
+  if (!isRu) {
+    for (let i = 0; i < namesRu.length; i++) {
+      string = string.replace(new RegExp(`${namesRu[i]}`, 'gi'), namesEn[i]);
+    }
+    return string;
+  } else {
+    for (let i = 0; i < namesEn.length; i++) {
+      string = string.replace(new RegExp(`${namesEn[i]}`, 'gi'), namesRu[i]);
+    }
+    return string;
+  }
+}
+function getRightCongratulations(totalScore, maxScore, innerLang) {
+  const isRu = innerLang === 'ru';
+  if (totalScore === maxScore) {
+    if (isRu) {
+      return _const__WEBPACK_IMPORTED_MODULE_2__.congratulationsRu;
+    } else {
+      return _const__WEBPACK_IMPORTED_MODULE_2__.congratulationsEn;
+    }
+  } else {
+    if (isRu) {
+      return `Вы набрали ${totalScore} баллов. Судя по всему, вам надо немножко еще потренироваться определять разных птичек. Сыграем еще раз? Жмякай кнопку ниже, если хочешь еще разок`;
+    } else {
+      return `You have collected ${totalScore} points. Apparently, you need to practice a little more to identify different birds. Shall we play again? Click the button below if you want more`;
+    }
+  }
 }
 
 /***/ }),
@@ -548,7 +1014,8 @@ function addActiveToNavigation(innerCounter) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "birdsData": () => (/* binding */ birdsData)
+/* harmony export */   "birdsData": () => (/* binding */ birdsData),
+/* harmony export */   "birdsDataEn": () => (/* binding */ birdsDataEn)
 /* harmony export */ });
 const birdsData = [[{
   id: 1,
@@ -802,6 +1269,259 @@ const birdsData = [[{
   description: "Чайки населяют берега морей, озёр, рек, водохранилищ, болот, часто гнездятся на островах. С конца прошлого века чайки стали появляться в крупных городах, где устраивает гнёзда на крышах зданий. Все чайки ведут колониальный образ жизни.",
   image: "https://live.staticflickr.com/65535/48577115317_7034201dde.jpg",
   audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501190-190801_06.50h_zilvermeeuw_duinen%20van%20goeree_roep_2ex_overvliegend_gezien_.mp3"
+}]];
+const birdsDataEn = [[{
+  id: 1,
+  name: 'Raven',
+  species: 'Corvus corax',
+  description: 'Raven is a large bird. The body length reaches 70 centimeters, the wingspan is up to one and a half meters. Ravens inhabit the vicinity of the Tower. There is a belief in England that the day the black crows fly away from the Tower, the monarchy will collapse.',
+  image: 'https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/XIQVMQVUPP/XC518684-Grands%20corbeaux%2009012020%20Suzon.mp3'
+}, {
+  id: 2,
+  name: 'Shadoof',
+  species: 'Grus grus',
+  description: 'The sounds made by the shadoof are similar to the voiced «kur-ly - kur-ly». Cranes most often sing in a duet - one bird begins the song with the syllable «kur», and the second picks up «ly». If a bird sings alone, then it makes only the sound of «chickens».',
+  image: 'https://live.staticflickr.com/65535/49221158846_b0b69a58f1.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC512582-190604_1087_Grus_tok.mp3'
+}, {
+  id: 3,
+  name: 'Swallow',
+  species: 'Delichon urbicum',
+  description: 'Swallows are characterized by a low chirping. The songs of the swallows do not stop throughout the summer. Researchers distinguish up to 6 chirping sounds in birds: “vit”, “vi-vit”, “chivit”, “chirivit”, etc. Swallows love to sing a duet.',
+  image: 'https://live.staticflickr.com//65535//48539007512_5029d2a9a0.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489247-190724_09.10h_huiszwaluw_biesbosch_amaliahoeve_roep_100%2Bex_fouragerend_gezien_%20%282%29.mp3'
+}, {
+  id: 4,
+  name: 'Nightjar',
+  species: 'Caprimulgus europaeus',
+  description: 'Nightjar is an inconspicuous bird known for its voice. The song of the nightjar sounds like a monotonous trill similar to the rattling of a motorcycle. Such rattling is heard from dusk to dawn, its tonality, frequency and volume change.',
+  image: 'https://live.staticflickr.com/65535/48456345286_dbc8530027.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC486956-190623_22.37h_nachtzwaluw_rechte%20heide_zang_ad%20_2ex_gezien_.mp3'
+}, {
+  id: 5,
+  name: 'Cuckoo',
+  species: 'Cuculus canorus',
+  description: 'The cuckoo was named so because of the peculiarities of its songs. The voiced “cuckoo” cannot be confused with any other bird. Cuckoos do not build nests, their offspring are raised by other species of birds, to which cuckoos throw their eggs.',
+  image: 'https://live.staticflickr.com/65535/48377838151_e15f430ec1.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501461-190616_08.13h_koekoek_brabantse%20biesbosch%20jantjesplaat_roep_1%20ex_ad%20m_ter%20plaatse%20zingend_gezien_.mp3'
+}, {
+  id: 6,
+  name: 'Tit',
+  species: 'Parus major',
+  description: 'More than 40 different sound combinations are distinguished in the chirping of tits. They sing almost all year round, fading a little only in winter. Tits are real orderlies of the forest. One pair of tits during the nesting period protects dozens of trees from pests.',
+  image: 'https://live.staticflickr.com//65535//49366042493_c48c81d58d.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/RFGQDPLDEC/XC518417-Kj%C3%B8ttmeis%20XC%20Helg%C3%B8ya%20Elias%20A.%20Ryberg20200108133922_079.mp3'
+}], [{
+  id: 1,
+  name: 'Sparrow',
+  species: 'Passer domesticus',
+  description: 'Sparrows are the most famous and recognizable birds. They are easily recognizable by their colorful plumage and perky chirping. Sparrows belong to the synotropic species - they settle close to human habitation.',
+  image: 'https://live.staticflickr.com//65535//49366595303_06cf65b07e.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/CXFHOPIVAS/XC503224-191020_0134.mp3'
+}, {
+  id: 2,
+  name: 'Rook',
+  species: 'Corvus frugilegus',
+  description: 'Rooks are very smart and quick-witted birds. With the help of a beak, they create and use the simplest tools. Rooks have a developed reflex to the sounds of a tractor. Hearing “rattling”, they fly to the sound - the tractor plows the ground, which means that there is a lot of food in this place.',
+  image: 'https://live.staticflickr.com//65535//49347123322_291c86b016.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/RLRHCUIPIY/XC512540-gawron%20Suble%2019.12.19%20%2012.35.mp3'
+}, {
+  id: 3,
+  name: 'Jackdaw',
+  species: 'Coloeus monedula',
+  description: 'The word “jackdaw” comes from word “jack” is translated as “black”. This word is often used to refer to ravens or other black birds. The Latin name of the jackdaw “monedula” is associated with the words coin for the bird\'s love for shiny and bright things.',
+  image: 'https://live.staticflickr.com//65535//49237149586_993cf685c5.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC510498-Coloeus%20monedula_2019.11.13_11.55_01.mp3'
+}, {
+  id: 4,
+  name: 'Songthrush',
+  species: 'Turdus philomelos',
+  description: 'Songthrush is the best singer from the sparrow squad. The song consists only of beautiful sonorous whistles and short trills. Most often it can be heard in the morning and evening. Thrushes sing during the entire nesting period.',
+  image: 'https://live.staticflickr.com/65535/48979125763_e2534f54bd.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513326-190704_1146_TF-Glogow.mp3'
+}, {
+  id: 5,
+  name: 'Magpie',
+  species: 'Pica pica',
+  description: 'Magpie is a very hardworking bird. She builds up to eight nests, and then chooses the best of them. The entrance to the nest of magpies is always facing south, so that it is warmer in the dwelling. Magpies are the only birds that recognize themselves in a mirror.',
+  image: 'https://live.staticflickr.com//65535//49360363066_ff02bb6a73.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC500868-Pica%20pica2019.08.23_09.18_02.mp3'
+}, {
+  id: 6,
+  name: 'Jay',
+  species: 'Garrulus glandarius',
+  description: 'When the jay is worried, the tuft on her head is ruffled. The bird tries to create a frightening sight. Jays are able to imitate the voices of other birds, animals and the sounds that humans create. For the winter they make large stocks of acorns and nuts.',
+  image: 'https://live.staticflickr.com//65535//49369678956_9a7465c7f4.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/TFOGOENSTQ/XC501517-191008_1590%201300.%20Eichelh%C3%A4her%20D%2C%20NW%2C%20LEV.%20Stephan%20Risch.mp3'
+}], [{
+  id: 1,
+  name: 'Finch',
+  species: 'Fringilla coelebs',
+  description: 'There are 450 species of finches in the wild. In winter, finches lead a flocking lifestyle. Sometimes sparrows can be seen in their families. Finches sing in the spring, with the onset of the mating season. Their singing is a gushing multi-minute roulades.',
+  image: 'https://live.staticflickr.com/65535/49143150817_2d3a2f6c1e.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC512407-150622_03%20zi%C4%99ba%20%282%29.mp3'
+}, {
+  id: 2,
+  name: 'Crossbill',
+  species: 'Loxia curvirostra',
+  description: 'Crossbills are called “Christmas” birds. Under exceptional conditions, they give birth in winter - in January. These birds insulate their nests with moss and animal hair, so the chicks are not cold. In search of cones crossbills can fly 3500 km from the nest.',
+  image: 'https://live.staticflickr.com//65535//49365470123_f2de66bb35.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/OTVUCEGYZN/XC495381-Kruisbek%20roep%20NHD%20290619.mp3'
+}, {
+  id: 3,
+  name: 'Turtledove',
+  species: 'Streptopelia turtur',
+  description: 'Turtledoves live in mixed and broad-leaved forests, as well as in city parks and towns. Birds often choose places of life next to humans and easily get used to people. Due to the melodic pleasant singing of turtle doves, they are often bred at home.',
+  image: 'https://live.staticflickr.com/65535/48063004977_84252f9ceb.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC324106-Turkawka_Streptopelia_turtur_Poland_Jarek_Matusiak_2011625_07.mp3'
+}, {
+  id: 4,
+  name: 'Woodpecker',
+  species: 'Dendrocopos major',
+  description: 'The woodpecker is a conspicuous and noisy bird that often lives next to humans. From mid-January to the end of June, you can hear the “drum roll” of woodpeckers - a trill from the vibration of branches under the quick beats of the bird\'s beak. In good weather, the shot can be heard within a radius of 1.5 km.',
+  image: 'https://live.staticflickr.com/65535/49339376578_e933426455.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC518928-AB-017%20dzi%C4%99cio%C5%82%20du%C5%BCy%20agresja%20%282%29.mp3'
+}, {
+  id: 5,
+  name: 'Hoopoe',
+  species: 'Upupa epops',
+  description: 'Hoopoes prefer to live in open landscapes with selected trees or groves. The most typical for birds are forest-steppe and savannah. A hoopoe can choose a place of residence next to a person: pastures, vineyards, orchards.',
+  image: 'https://live.staticflickr.com//65535//49226383598_6f8be86a06.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC477326-dudek%20%282%29.mp3'
+}, {
+  id: 6,
+  name: 'Swift',
+  species: 'Apus apus',
+  description: 'Swift can be seen in almost every corner of the planet. They live both in forest areas and in open areas. Swifts live in large flocks. Large colonies of these birds can be seen in cities or on coastal cliffs.',
+  image: 'https://live.staticflickr.com//65535//48386150031_7b749df74b.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/TMUAWSDHDJ/XC511871-G.mp3'
+}], [{
+  id: 1,
+  name: 'Lark',
+  species: 'Alauda arvensis',
+  description: 'Larks are migratory birds. From the beginning of September, they fly south. They return at the beginning of March, regardless of whether the snow has melted or not. By the arrival of the larks, they determined the onset of spring and the time when it was time to plow the land.',
+  image: 'https://live.staticflickr.com/65535/47105096764_f751fba568.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC462158-Skowronek_Alauda_arvensis_Poland_Jarek_Matusiak_%20-006%20skowronek%20%282%29.mp3'
+}, {
+  id: 2,
+  name: 'Nightingale',
+  species: 'Luscinia luscinia',
+  description: 'Nightingales sing from the beginning of May until the end of summer. Each song of the nightingale consists of 12 repeating elements, which are also called knees. In addition to their own trills, nightingales easily and well adopt the singing of other birds.',
+  image: 'https://live.staticflickr.com/7605/27669397735_f3c21758f2.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/HILVWSADVL/XC513809-R07_0052%20Thrush%20Nightingale%20Snipe.mp3'
+}, {
+  id: 3,
+  name: 'Starling',
+  species: 'Sturnus vulgaris',
+  description: 'Starlings are migratory birds. Synchronous flight of large flocks of starlings is called murmuration. This is a beautiful and mesmerizing phenomenon - many birds seem to dance in the air, forming intricate shapes that decrease and increase in the sky.',
+  image: 'https://live.staticflickr.com/65535/49357593971_9509fe1d7c.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC515519-2020.01.01_17.24_01.MP3'
+}, {
+  id: 4,
+  name: 'Oriole',
+  species: 'Oriolus oriolus',
+  description: 'The melody of the oriole\'s voice is compared to the sound of a flute. It is difficult for a person to see the oriole, as it lives high in the trees. The oriole is not only a very beautiful, but also a useful bird. It destroys poisonous caterpillars that other birds do not eat.',
+  image: 'https://live.staticflickr.com/65535/47102184004_58a93380b9.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC491801-2019.07.07_06.28_01.mp3'
+}, {
+  id: 5,
+  name: 'Waxwing',
+  species: 'Bombycilla garrulus',
+  description: 'The waxwing has very tenacious claws, which helps the bird to stay on the branches and peck at the berries that are the hardest to get. During courtship, the male offers the female a berry or other treat. If the female accepts it, then the birds create a pair.',
+  image: 'https://live.staticflickr.com//65535//49367433842_1b06da0e6b.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC517421-AB-004%20%282%29%20jemio%C5%82uszka.mp3'
+}, {
+  id: 6,
+  name: 'Goldfinch',
+  species: 'Carduelis carduelis',
+  description: 'Goldfinches sing beautifully and melodiously. Both in nature and in captivity, they chirp almost all year round. More than 20 iridescent trills are distinguished in the singing of the goldfinch. Goldfinches get used to people, and can even return to the owner after they are released into the wild.',
+  image: 'https://live.staticflickr.com//65535//49366257253_db3ce48b9a.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489265-190724_07.58h_putter_biesbosch_%20boompjes%20langs%20open%20water_zang_1ex_ad_niet%20gezien_.mp3'
+}], [{
+  id: 1,
+  name: 'Eagle',
+  species: 'Aquila nipalensis',
+  description: 'In ancient times, the eagle was a symbol of the sun. Eagles often soar above the ground, while their speed can reach 240 km/h. The illusion of slow movement is due to the flight altitude - more than 700 meters',
+  image: 'https://live.staticflickr.com//4835//43867392960_7105d71e19.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/KTBTZAHSXF/10_Aquila_nipalensis_al02D85.mp3'
+}, {
+  id: 2,
+  name: 'Kite',
+  species: 'Milvus migrans',
+  description: 'Kites are large predators, they reach a height of about half a meter, and the weight of adults reaches 1 kg. The wings are narrow and long, their span is 1.5 m. Kites often nest in large flocks and even form large colonies.',
+  image: 'https://live.staticflickr.com//65535//48701190276_ee2a9ed594.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/SDPCHKOHRH/XC485740-2019-06-22%20Selenga%20Milan%20brun%20cris%20de%20quemandage%203.mp3'
+}, {
+  id: 3,
+  name: 'Harrier',
+  species: 'Circus cyaneus',
+  description: 'Harrier is a small falcon. It feeds mainly on mouse-like rodents, the basis of its diet is voles, hamsters, and mice. The plumage of the Harrier may be ash grey. The comparison “gray-haired like a harrier” is associated with such a bird.',
+  image: 'https://live.staticflickr.com/4480/37240531151_b74619c99d.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513498-190709_1175_Cir.cyan-f.mp3'
+}, {
+  id: 4,
+  name: 'Falcon',
+  species: 'Falco peregrinus',
+  description: 'The Latin name of the falcon Falco comes from the word “sickle” because of the sickle-shaped wings. Long and wide wings allow the falcon to rise high into the sky and soar freely. The flight speed of the falcon reaches 280-320 kilometers per hour.',
+  image: 'https://live.staticflickr.com//65535//49310710607_92a3a145a9.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC496049-Pilgrimsfalk_06.mp3'
+}, {
+  id: 5,
+  name: 'Hawk',
+  species: 'Accipiter gentilis',
+  description: 'All hawks are characterized by wide and short wings. Another distinguishing feature is the white “eyebrows” above the eyes. Slavic warriors placed the image of a hawk on their banners as a symbol of courage, power and ruthlessness towards enemies.',
+  image: 'https://live.staticflickr.com//65535//49024617331_b9d0d2c9b3.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC512740-Duvh%C3%B6k_09.mp3'
+}, {
+  id: 6,
+  name: 'Eagle owl',
+  species: 'Bubo bubo',
+  description: 'The flight of the eagle owl is silent, the eyesight is very sharp. These features make the bird an unsurpassed night hunter. The eagle owl has no natural enemies, not a single animal preys on adult birds. But foxes and wolves attack the chicks.',
+  image: 'https://live.staticflickr.com/65535/48137123012_393653c2e4.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/WNLIDKJKXT/XC518386-sense%20t%C3%ADtol.mp3'
+}], [{
+  id: 1,
+  name: 'Albatross',
+  species: 'Diomedea exulans',
+  description: 'Albatross is the largest flying bird in the world. The wingspan reaches three and a half, weight - ten kilograms. Albatrosses spend most of their lives in the air, covering vast distances above the ocean.',
+  image: 'https://live.staticflickr.com/7557/16260253965_8e9430cb66.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/WOEAFQRMUD/XC293087-Diomedea%20exulans151120_T254.mp3'
+}, {
+  id: 2,
+  name: 'Gannet',
+  species: 'Sula nebouxii',
+  description: 'A feature of the blue-footed gannet is not only the rich bright blue color of the legs, but also the fact that they are very warm. While other species of birds warm the clutches with their bodies, the blue-footed booby does this with the help of its paws.',
+  image: 'https://live.staticflickr.com/800/40645471394_4422e69ed8.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/YHKQPPJDVP/XC411507-171217_1491%20BF%20Booby%205ft%20IDLP%201230%20mp3%20amp.mp3'
+}, {
+  id: 3,
+  name: 'Petrel',
+  species: 'Puffinus griseus',
+  description: 'The sizes of petrels are different. The smallest of them are up to 25 cm long, the largest - up to 1 m, with a wingspan of about 2 m. There is a belief that the appearance of a petrel in the air portends a storm, as the very name of the bird indicates.',
+  image: 'https://live.staticflickr.com//607//22136056020_935cb113f9.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/XQEVNREHJY/SHEARWATER%20Christmas%20Island_04_Motu_Isla%20de%20Pascua-Easter%20Island_CH_4MAR03_Alvaro%20Jaramillo.mp3'
+}, {
+  id: 4,
+  name: 'Pelican',
+  species: 'Pelecanus',
+  description: 'Pelicans are inhabitants of the seas and rivers. They walk awkwardly, but fly and swim well. They feed mainly on fish, organize collective hunts - lining up in a semicircle, they flap their wings and beaks on the water and force out the frightened fish in shallow water.',
+  image: 'https://i.ibb.co/mqqxpKB/89644134.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/XAMHIHFTZG/XC331138-call1.mp3'
+}, {
+  id: 5,
+  name: 'Penguin',
+  species: 'Aptenodytes forsteri',
+  description: 'The male emperor penguin reaches a height of 130 cm, its weight can approach 50 kg. Of all modern penguins, this species is the largest. The penguin\'s diet consists of fish, squid and krill. Birds hunt in the ocean in large groups.',
+  image: 'https://live.staticflickr.com/5202/5252413926_8e013a3efd.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/OOECIWCSWV/XC449827-LS100829%20King%20Penguin%20call%20A.mp3'
+}, {
+  id: 6,
+  name: 'Seagull',
+  species: 'Larus argentatus',
+  description: 'Seagulls inhabit the shores of the seas, lakes, rivers, reservoirs, swamps, often nest on islands. Since the end of the last century, seagulls began to appear in large cities, where they nest on the roofs of buildings. All seagulls lead a colonial lifestyle.',
+  image: 'https://live.staticflickr.com/65535/48577115317_7034201dde.jpg',
+  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501190-190801_06.50h_zilvermeeuw_duinen%20van%20goeree_roep_2ex_overvliegend_gezien_.mp3'
 }]];
 
 /***/ }),
@@ -9885,11 +10605,21 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../fonts/Roboto-400.woff */ "./src/fonts/Roboto-400.woff"), __webpack_require__.b);
 var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../fonts/Roboto-400.woff2 */ "./src/fonts/Roboto-400.woff2"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../img/svg/play-btn.svg */ "./src/img/svg/play-btn.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../img/svg/pause-icon.svg */ "./src/img/svg/pause-icon.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../img/svg/unmuted-icon.svg */ "./src/img/svg/unmuted-icon.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../img/svg/muted-icon.svg */ "./src/img/svg/muted-icon.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../img/svg/logo-icon.svg */ "./src/img/svg/logo-icon.svg"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
+var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_3___);
+var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_4___);
+var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_5___);
+var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_6___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline;\n  -webkit-text-decoration: underline dotted currentColor;\n          text-decoration: underline dotted currentColor;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + "), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n}\n.game .categories-list__item button:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .question__audio {\n  margin-top: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__audio {\n    grid-area: audio;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__audio {\n    margin-top: 30px;\n    width: 100%;\n    grid-area: audio;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .answers-list__btn:disabled {\n  opacity: 0.5;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__btn {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list .decline {\n  background: red;\n}\n.game .answers-list .accept {\n  background: green;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 45px/20px sans-serif;\n  }\n}\n.game .checked-answer__audio {\n  margin-top: 20px;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__audio {\n    grid-area: audio;\n    width: 100%;\n  }\n}\n.game .checked-answer__default {\n  font: normal 30px/40px sans-serif;\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  grid-gap: 25px;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n  }\n}\n.header .logo__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo__img {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo__img {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-gap: 30px;\n  gap: 30px;\n  margin-top: 20px;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.header .nav-list__item a {\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item a {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item a {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item a:hover {\n  color: orange;\n}\n.header .nav-list__item a:focus {\n  color: red;\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: rgba(1,2,1,0.5098);\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__results {\n  font: italic 35px/40px sans-serif;\n  text-align: center;\n  color: rgba(1,2,1,0.5098);\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n", "",{"version":3,"sources":["webpack://./src/less/entry.less","webpack://./src/less/global/normalize.less","webpack://./src/less/global/global.less","webpack://./src/less/global/mixins.less","webpack://./src/less/fonts/fonts.less","webpack://./src/less/components/game.less","webpack://./src/less/components/footer.less","webpack://./src/less/components/header.less","webpack://./src/less/components/promo.less"],"names":[],"mappings":"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","sourcesContent":["/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url('../fonts/Roboto-400.woff'), url('../fonts/Roboto-400.woff2');\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n}\n.game .categories-list__item button:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .question__audio {\n  margin-top: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__audio {\n    grid-area: audio;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__audio {\n    margin-top: 30px;\n    width: 100%;\n    grid-area: audio;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .answers-list__btn:disabled {\n  opacity: 0.5;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__btn {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list .decline {\n  background: red;\n}\n.game .answers-list .accept {\n  background: green;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 45px/20px sans-serif;\n  }\n}\n.game .checked-answer__audio {\n  margin-top: 20px;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__audio {\n    grid-area: audio;\n    width: 100%;\n  }\n}\n.game .checked-answer__default {\n  font: normal 30px/40px sans-serif;\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  place-items: center;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto;\n  }\n}\n.header .logo__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo__img {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo__img {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 30px;\n  margin-top: 20px;\n  place-items: center;\n}\n.header .nav-list__item a {\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item a {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item a {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item a:hover {\n  color: orange;\n}\n.header .nav-list__item a:focus {\n  color: red;\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: #01020182;\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__results {\n  font: italic 35px/40px sans-serif;\n  text-align: center;\n  color: #01020182;\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n","/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n\n/* Document\n   ========================================================================== */\n\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\n\nhtml {\n  line-height: 1.15; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n\n/**\n * Remove the margin in all browsers.\n */\n\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\n\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n  box-sizing: content-box; /* 1 */\n  height: 0; /* 1 */\n  overflow: visible; /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\npre {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Remove the gray background on active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n  border-bottom: none; /* 1 */\n  text-decoration: underline; /* 2 */\n  text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\nsamp {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10.\n */\n\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  line-height: 1.15; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\n\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n  box-sizing: border-box; /* 1 */\n  color: inherit; /* 2 */\n  display: table; /* 1 */\n  max-width: 100%; /* 1 */\n  padding: 0; /* 3 */\n  white-space: normal; /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\n\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\n\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 10+.\n */\n\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n\n[hidden] {\n  display: none;\n}","*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\n\na {\n  text-decoration: none;\n}\n\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\n \nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}",".container(@width) {\n  width: @width;\n  margin: 0 auto;\n}\n\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}","@font-face {\n    font-family: 'Roboto';\n    src: url('../../fonts/Roboto-400.woff'), \n    url('../../fonts/Roboto-400.woff2');\n}",".game {\n  padding: 10px;\n  .container(@mobile);\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n  &__list {\n    display: grid;\n    grid-template-columns: repeat(3, auto);\n    grid-template-rows: auto auto;\n    justify-items: center;\n    align-items: center;\n    gap: 10px;\n    @media (min-width: @tablet) {\n      grid-template-columns: repeat(6, auto);\n      grid-template-rows: none;\n      gap: 0;\n    }\n  }\n  .categories-list__item {\n    button {\n      .reset-btn();\n      border-radius: 10px;\n      color: white;\n      background: @orange;\n      padding: 5px;\n      transition: all 0.6s ease;\n      &:hover {\n        background: @orangered;\n        color: whitesmoke;\n      }\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        padding: 10px 5px;\n        text-transform: uppercase;\n        font-size: 16px;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 40px;\n        text-transform: uppercase;\n        font-size: 18px;\n      }\n    }\n  }\n\n  .question {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      grid-template-areas:\n        \"img name\"\n        \"img audio\";\n      margin: 40px 0;\n    }\n\n    &__img {\n      width: 100px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: img;\n        width: 200px;\n      }\n      @media (min-width: @desktop) {\n        width: 250px;\n        grid-area: img;\n      }\n    }\n    &__name {\n      margin-top: 20px;\n      font: normal 45px/20px sans-serif;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: name;\n      }\n      @media (min-width: @desktop) {\n        font: normal 95px/20px sans-serif;\n        grid-area: name;\n      }\n    }\n    &__audio {\n      margin-top: 10px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: audio;\n      }\n      @media (min-width: @desktop) {\n        margin-top: 30px;\n        width: 100%;\n        grid-area: audio;\n      }\n    }\n  }\n  .answers-list {\n    margin-top: 20px;\n    display: grid;\n    gap: 10px;\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      place-items: center;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 1fr 1fr;\n    }\n\n    &__btn {\n      .reset-btn();\n      font: normal 20px/20px sans-serif;\n      width: @mobile;\n      border-radius: 10px;\n      background: @orange;\n      color: white;\n      padding: 10px;\n      cursor: pointer;\n      &:hover {\n        background: @orangered;\n        color: whitesmoke;\n      }\n      &:disabled {\n        opacity: 0.5;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 30px;\n        font: bold 30px/20px sans-serif;\n        width: 600px;\n      }\n    }\n    .decline {\n      background: red;\n    }\n    .accept {\n      background: green;\n    }\n  }\n\n  .checked-answer {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      margin-top: 30px;\n      grid-template-areas:\n        \"img surname\"\n        \"img description\"\n        \"img audio\";\n      gap: 10px;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 30% 70%;\n      padding: 0 10px;\n    }\n\n    &__img {\n      @media (min-width: @tablet) {\n        grid-area: img;\n      }\n    }\n    &__description {\n      @media (min-width: @tablet) {\n        grid-area: description;\n        font: normal 20px/20px sans-serif;\n      }\n      @media (min-width: @desktop) {\n        padding: 10px 20px;\n      }\n    }\n    &__surname {\n      margin: 20px 0;\n      font: italic 30px/20px sans-serif;\n      @media (min-width: @tablet) {\n        grid-area: surname;\n        font: bold 45px/20px sans-serif;\n      }\n    }\n    &__audio {\n      margin-top: 20px;\n      @media (min-width: @tablet) {\n        grid-area: audio;\n        width: 100%;\n      }\n    }\n    &__default {\n      font: normal 30px/40px sans-serif;\n    }\n  }\n\n  .next-btn {\n    .reset-btn();\n    display: block;\n    margin: 20px auto;\n    background: @orange;\n    color: white;\n    border-radius: 10px;\n    padding: 10px;\n    text-transform: uppercase;\n    font: bold 16px/20px sans-serif;\n    transition: all 0.6s ease;\n    &:hover {\n      background: @orangered;\n      color: whitesmoke;\n    }\n    &:disabled {\n      background: grey;\n      color: whitesmoke;\n    }\n    @media (min-width: @tablet) {\n      margin: 40px auto;\n      padding: 20px 40px;\n      font: bold 20px/20px sans-serif;\n    }\n  }\n}\n",".footer {\n  .container(@mobile);\n  padding: 30px;\n  .footer-list {\n    display: grid;\n    place-items: center;\n    gap: 25px;\n    @media (min-width: @desktop) {\n      grid-template-columns: repeat(3, 1fr);\n    }\n    &__item {\n      a img {\n        width: 340px;\n      }\n      .author-link {\n        font: normal 30px/20px sans-serif;\n        transition: all 0.6s ease;\n        &:hover {\n          color: @orange;\n        }\n      }\n    }\n    .list-item__year {\n      font: bold 30px/20px sans-serif;\n    }\n  }\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n}\n",".header {\n  .container(@mobile);\n  padding: 20px;\n  display: grid;\n  place-items: center;\n\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n    grid-template-columns: auto 1fr auto;\n    align-items: center;\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    grid-template-columns: auto 1fr auto;\n  }\n  .logo__img {\n    width: 100px;\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      width: 150px;\n    }\n    @media (min-width: @desktop) {\n      width: 200px;\n    }\n  }\n  .nav-list {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 30px;\n    margin-top: 20px;\n    place-items: center;\n    &__item a {\n      font: normal 20px/200% sans-serif;\n      text-transform: uppercase;\n      color: #00adff;\n      transition: all 0.6s ease;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        font: bold 30px/200% sans-serif;\n      }\n      @media (min-width: @desktop) {\n        font: bold 40px/20px sans-serif;\n      }\n      &:hover {\n        color: @orange;\n      }\n      &:focus {\n        color: red;\n      }\n    }\n  }\n  &__score {\n    font: normal 20px/200% sans-serif;\n    .score__value {\n      font: normal 30px/20px sans-serif;\n      @media (min-width: @desktop) {\n        font: normal 40px/20px sans-serif;\n      }\n    }\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      margin-top: 15px;\n    }\n    @media (min-width: @desktop) {\n      margin-top: 10px;\n      font: normal 40px/20px sans-serif;\n    }\n  }\n}\n",".promo {\n  .container(@mobile);\n  display: grid;\n  place-items: center;\n  &__video {\n    width: @mobile;\n  }\n  &__sentence {\n    padding: 5px;\n    display: grid;\n    place-items: center;\n    font: italic 18px/20px sans-serif;\n    color: #01020182;\n    @media (min-width: @tablet) {\n      font: italic 35px/20px sans-serif;\n    }\n  }\n  &__results {\n    font: italic 35px/40px sans-serif;\n    text-align: center;\n    color: #01020182;\n  }\n  &__btn {\n    .reset-btn();\n    margin-top: 40px;\n    margin-bottom: 20px;\n    background: @orangered;\n    border-radius: 50%;\n    width: 180px;\n    height: 180px;\n    color: white;\n    font: bold 35px/20px sans-serif;\n    text-transform: uppercase;\n    transition: 0.6s linear;\n    @media (min-width: @tablet) {\n      width: 360px;\n      height: 360px;\n      font: bold 55px/20px sans-serif;\n    }\n  }\n  &__btn:hover {\n    color: yellow;\n    background: cyan;\n  }\n\n  @media (min-width: @tablet) {\n    .container(@tablet);\n    &__video {\n      width: @tablet;\n    }\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    display: grid;\n    place-items: center;\n    &-rules__item p {\n      font: normal 25px/25px sans-serif;\n    }\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline;\n  -webkit-text-decoration: underline dotted currentColor;\n          text-decoration: underline dotted currentColor;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + "), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n  -webkit-appearance: none;\n          appearance: none;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .answers-list__btn:disabled {\n  opacity: 0.5;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__btn {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list .decline {\n  background: red;\n}\n.game .answers-list .accept {\n  background: green;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 45px/20px sans-serif;\n  }\n}\n.game .checked-answer__default {\n  font: normal 30px/40px sans-serif;\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n  transform: scale(1.05);\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.game .audio-container {\n  margin-top: 10px;\n  display: grid;\n  grid-template-columns: auto 1fr auto;\n  grid-template-rows: auto auto;\n  grid-gap: 10px;\n  gap: 10px;\n  align-items: center;\n  width: 100%;\n}\n@media (min-width: 720px) {\n  .game .audio-container {\n    grid-area: audio;\n    margin-top: 30px;\n  }\n}\n.game .audio-container__play {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 50px;\n  height: 50px;\n}\n.game .audio-container .play {\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ");\n}\n.game .audio-container .play:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .pause {\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ");\n}\n.game .audio-container .pause:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container__mute-wrapper {\n  position: relative;\n}\n.game .audio-container__mute-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 20px;\n  height: 20px;\n}\n.game .audio-container .unmuted {\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ");\n}\n.game .audio-container .unmuted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .muted {\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ");\n}\n.game .audio-container .muted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .checked-answer .audio-container__duration-container,\n.game .question .audio-container__duration-container {\n  display: grid;\n  position: relative;\n}\n@media (min-width: 720px) {\n  .game .checked-answer .audio-container,\n  .game .question .audio-container {\n    grid-area: audio;\n  }\n}\n.game .checked-answer .audio-container__current-time,\n.game .question .audio-container__current-time,\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  position: absolute;\n  bottom: -30px;\n}\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  right: 0;\n}\n.game .checked-answer .audio-container__duration-changer,\n.game .question .audio-container__duration-changer {\n  width: 100%;\n}\n.game .checked-answer .audio-container__volume-changer,\n.game .question .audio-container__volume-changer {\n  display: none;\n}\n.game .checked-answer .audio-container .is-open,\n.game .question .audio-container .is-open {\n  display: block;\n  position: absolute;\n  transform: rotate(270deg);\n  right: -15px;\n  top: -30px;\n  width: 50px;\n}\n.audio-container__duration-changer,\n.audio-container__volume-changer {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 100%;\n  height: 10px;\n  background: rgba(199, 243, 40, 0.897);\n  border-radius: 5px;\n  outline: none;\n  opacity: 0.5;\n  transition: opacity 0.2s;\n}\n.audio-container__duration-changer:hover,\n.audio-container__volume-changer:hover {\n  opacity: 1;\n}\n.audio-container__duration-changer::-webkit-slider-thumb,\n.audio-container__volume-changer::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ");\n  cursor: pointer;\n}\n.audio-container__duration-changer::-webkit-slider-thumb:hover,\n.audio-container__volume-changer::-webkit-slider-thumb:hover {\n  transform: scale(1.2);\n  -webkit-transition: transform 0.2s;\n  transition: transform 0.2s;\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  grid-gap: 25px;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n  }\n}\n.header .logo__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo__img {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo__img {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  grid-gap: 30px;\n  gap: 30px;\n  margin-top: 20px;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.header .nav-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item button {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item button {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item button:hover {\n  color: orange;\n}\n.header .nav-list__item button:focus {\n  color: red;\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: rgba(1,2,1,0.5098);\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__results {\n  font: italic 35px/40px sans-serif;\n  text-align: center;\n  color: rgba(1,2,1,0.5098);\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n", "",{"version":3,"sources":["webpack://./src/less/entry.less","webpack://./src/less/global/normalize.less","webpack://./src/less/global/global.less","webpack://./src/less/global/mixins.less","webpack://./src/less/fonts/fonts.less","webpack://./src/less/components/game.less","webpack://./src/less/components/footer.less","webpack://./src/less/components/header.less","webpack://./src/less/components/promo.less"],"names":[],"mappings":"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","sourcesContent":["/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url('../fonts/Roboto-400.woff'), url('../fonts/Roboto-400.woff2');\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n  appearance: none;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .answers-list__btn:disabled {\n  opacity: 0.5;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__btn {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list .decline {\n  background: red;\n}\n.game .answers-list .accept {\n  background: green;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 45px/20px sans-serif;\n  }\n}\n.game .checked-answer__default {\n  font: normal 30px/40px sans-serif;\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n  transform: scale(1.05);\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.game .audio-container {\n  margin-top: 10px;\n  display: grid;\n  grid-template-columns: auto 1fr auto;\n  grid-template-rows: auto auto;\n  gap: 10px;\n  align-items: center;\n  width: 100%;\n}\n@media (min-width: 720px) {\n  .game .audio-container {\n    grid-area: audio;\n    margin-top: 30px;\n  }\n}\n.game .audio-container__play {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 50px;\n  height: 50px;\n}\n.game .audio-container .play {\n  background: url(\"../img/svg/play-btn.svg\");\n}\n.game .audio-container .play:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .pause {\n  background: url(\"../img/svg/pause-icon.svg\");\n}\n.game .audio-container .pause:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container__mute-wrapper {\n  position: relative;\n}\n.game .audio-container__mute-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 20px;\n  height: 20px;\n}\n.game .audio-container .unmuted {\n  background: url(\"../img/svg/unmuted-icon.svg\");\n}\n.game .audio-container .unmuted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .muted {\n  background: url(\"../img/svg/muted-icon.svg\");\n}\n.game .audio-container .muted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .checked-answer .audio-container__duration-container,\n.game .question .audio-container__duration-container {\n  display: grid;\n  position: relative;\n}\n@media (min-width: 720px) {\n  .game .checked-answer .audio-container,\n  .game .question .audio-container {\n    grid-area: audio;\n  }\n}\n.game .checked-answer .audio-container__current-time,\n.game .question .audio-container__current-time,\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  position: absolute;\n  bottom: -30px;\n}\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  right: 0;\n}\n.game .checked-answer .audio-container__duration-changer,\n.game .question .audio-container__duration-changer {\n  width: 100%;\n}\n.game .checked-answer .audio-container__volume-changer,\n.game .question .audio-container__volume-changer {\n  display: none;\n}\n.game .checked-answer .audio-container .is-open,\n.game .question .audio-container .is-open {\n  display: block;\n  position: absolute;\n  transform: rotate(270deg);\n  right: -15px;\n  top: -30px;\n  width: 50px;\n}\n.audio-container__duration-changer,\n.audio-container__volume-changer {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 100%;\n  height: 10px;\n  background: rgba(199, 243, 40, 0.897);\n  border-radius: 5px;\n  outline: none;\n  opacity: 0.5;\n  -webkit-transition: 0.2s;\n  transition: opacity 0.2s;\n}\n.audio-container__duration-changer:hover,\n.audio-container__volume-changer:hover {\n  opacity: 1;\n}\n.audio-container__duration-changer::-webkit-slider-thumb,\n.audio-container__volume-changer::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  background: url(\"../img/svg/logo-icon.svg\");\n  cursor: pointer;\n}\n.audio-container__duration-changer::-webkit-slider-thumb:hover,\n.audio-container__volume-changer::-webkit-slider-thumb:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  place-items: center;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n  }\n}\n.header .logo__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo__img {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo__img {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  gap: 30px;\n  margin-top: 20px;\n  place-items: center;\n}\n.header .nav-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item button {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item button {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item button:hover {\n  color: orange;\n}\n.header .nav-list__item button:focus {\n  color: red;\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: #01020182;\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__results {\n  font: italic 35px/40px sans-serif;\n  text-align: center;\n  color: #01020182;\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n","/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n\n/* Document\n   ========================================================================== */\n\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\n\nhtml {\n  line-height: 1.15; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n\n/**\n * Remove the margin in all browsers.\n */\n\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\n\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n  box-sizing: content-box; /* 1 */\n  height: 0; /* 1 */\n  overflow: visible; /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\npre {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Remove the gray background on active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n  border-bottom: none; /* 1 */\n  text-decoration: underline; /* 2 */\n  text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\nsamp {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10.\n */\n\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  line-height: 1.15; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\n\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n  box-sizing: border-box; /* 1 */\n  color: inherit; /* 2 */\n  display: table; /* 1 */\n  max-width: 100%; /* 1 */\n  padding: 0; /* 3 */\n  white-space: normal; /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\n\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\n\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 10+.\n */\n\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n\n[hidden] {\n  display: none;\n}","*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\n\na {\n  text-decoration: none;\n}\n\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\n \nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}",".container(@width) {\n  width: @width;\n  margin: 0 auto;\n}\n\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}","@font-face {\n    font-family: 'Roboto';\n    src: url('../../fonts/Roboto-400.woff'), \n    url('../../fonts/Roboto-400.woff2');\n}",".game {\n  padding: 10px;\n  .container(@mobile);\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n  &__list {\n    display: grid;\n    grid-template-columns: repeat(3, auto);\n    grid-template-rows: auto auto;\n    justify-items: center;\n    align-items: center;\n    gap: 10px;\n    @media (min-width: @tablet) {\n      grid-template-columns: repeat(6, auto);\n      grid-template-rows: none;\n      gap: 0;\n    }\n  }\n  .categories-list__item {\n    button {\n      .reset-btn();\n      border-radius: 10px;\n      color: white;\n      background: @orange;\n      padding: 5px;\n      transition: all 0.6s ease;\n      appearance: none;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        padding: 10px 5px;\n        text-transform: uppercase;\n        font-size: 16px;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 40px;\n        text-transform: uppercase;\n        font-size: 18px;\n      }\n    }\n  }\n\n  .question {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      grid-template-areas:\n        \"img name\"\n        \"img audio\";\n      margin: 40px 0;\n    }\n\n    &__img {\n      width: 100px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: img;\n        width: 200px;\n      }\n      @media (min-width: @desktop) {\n        width: 250px;\n        grid-area: img;\n      }\n    }\n    &__name {\n      margin-top: 20px;\n      font: normal 45px/20px sans-serif;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: name;\n      }\n      @media (min-width: @desktop) {\n        font: normal 95px/20px sans-serif;\n        grid-area: name;\n      }\n    }\n  }\n  .answers-list {\n    margin-top: 20px;\n    display: grid;\n    gap: 10px;\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      place-items: center;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 1fr 1fr;\n    }\n\n    &__btn {\n      .reset-btn();\n      font: normal 20px/20px sans-serif;\n      width: @mobile;\n      border-radius: 10px;\n      background: @orange;\n      color: white;\n      padding: 10px;\n      cursor: pointer;\n      &:hover {\n        background: @orangered;\n        color: whitesmoke;\n      }\n      &:disabled {\n        opacity: 0.5;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 30px;\n        font: bold 30px/20px sans-serif;\n        width: 600px;\n      }\n    }\n    .decline {\n      background: red;\n    }\n    .accept {\n      background: green;\n    }\n  }\n\n  .checked-answer {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      margin-top: 30px;\n      grid-template-areas:\n        \"img surname\"\n        \"img description\"\n        \"img audio\";\n      gap: 10px;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 30% 70%;\n      padding: 0 10px;\n    }\n\n    &__img {\n      @media (min-width: @tablet) {\n        grid-area: img;\n      }\n    }\n    &__description {\n      @media (min-width: @tablet) {\n        grid-area: description;\n        font: normal 20px/20px sans-serif;\n      }\n      @media (min-width: @desktop) {\n        padding: 10px 20px;\n      }\n    }\n    &__surname {\n      margin: 20px 0;\n      font: italic 30px/20px sans-serif;\n      @media (min-width: @tablet) {\n        grid-area: surname;\n        font: bold 45px/20px sans-serif;\n      }\n    }\n    &__default {\n      font: normal 30px/40px sans-serif;\n    }\n  }\n\n  .next-btn {\n    .reset-btn();\n    display: block;\n    margin: 20px auto;\n    background: @orange;\n    color: white;\n    border-radius: 10px;\n    padding: 10px;\n    text-transform: uppercase;\n    font: bold 16px/20px sans-serif;\n    transition: all 0.6s ease;\n    &:hover {\n      background: @orangered;\n      color: whitesmoke;\n      transform: scale(1.05);\n    }\n    &:disabled {\n      background: grey;\n      color: whitesmoke;\n    }\n    @media (min-width: @tablet) {\n      margin: 40px auto;\n      padding: 20px 40px;\n      font: bold 20px/20px sans-serif;\n    }\n  }\n  .audio-container {\n    margin-top: 10px;\n    display: grid;\n    grid-template-columns: auto 1fr auto;\n    grid-template-rows: auto auto;\n    gap: 10px;\n    align-items: center;\n    width: 100%;\n    @media (min-width: @tablet) {\n      grid-area: audio;\n      margin-top: 30px;\n    }\n    &__play {\n      .reset-btn();\n      width: 50px;\n      height: 50px;\n    }\n    .play {\n      background: url(\"../../img/svg/play-btn.svg\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n    .pause {\n      background: url(\"../../img/svg/pause-icon.svg\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n\n    &__mute-wrapper {\n      position: relative;\n    }\n    &__mute-btn {\n      .reset-btn();\n      width: 20px;\n      height: 20px;\n    }\n    .unmuted {\n      background: url(\"../../img/svg/unmuted-icon.svg\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n    .muted {\n      background: url(\"../../img/svg/muted-icon.svg\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n  }\n  .checked-answer .audio-container,\n  .question .audio-container {\n    &__duration-container {\n      display: grid;\n      position: relative;\n    }\n    @media (min-width: @tablet) {\n      grid-area: audio;\n    }\n    &__current-time,\n    &__duration {\n      position: absolute;\n      bottom: -30px;\n    }\n    &__duration {\n      right: 0;\n    }\n    &__duration-changer {\n      width: 100%;\n    }\n    &__volume-changer {\n      display: none;\n    }\n    .is-open {\n      display: block;\n      position: absolute;\n      transform: rotate(270deg);\n      right: -15px;\n      top: -30px;\n      width: 50px;\n    }\n  }\n}\n\n.audio-container__duration-changer,\n.audio-container__volume-changer {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 100%;\n  height: 10px;\n  background: rgba(199, 243, 40, 0.897);\n  border-radius: 5px;\n  outline: none;\n  opacity: 0.5;\n  -webkit-transition: 0.2s;\n  transition: opacity 0.2s;\n}\n.audio-container__duration-changer:hover,\n.audio-container__volume-changer:hover {\n  opacity: 1;\n}\n.audio-container__duration-changer::-webkit-slider-thumb,\n.audio-container__volume-changer::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  background: url(\"../../img/svg/logo-icon.svg\");\n  cursor: pointer;\n}\n.audio-container__duration-changer::-webkit-slider-thumb:hover,\n.audio-container__volume-changer::-webkit-slider-thumb:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n",".footer {\n  .container(@mobile);\n  padding: 30px;\n  .footer-list {\n    display: grid;\n    place-items: center;\n    gap: 25px;\n    @media (min-width: @desktop) {\n      grid-template-columns: repeat(3, 1fr);\n    }\n    &__item {\n      a img {\n        width: 340px;\n      }\n      .author-link {\n        font: normal 30px/20px sans-serif;\n        transition: all 0.6s ease;\n        &:hover {\n          color: @orange;\n        }\n      }\n    }\n    .list-item__year {\n      font: bold 30px/20px sans-serif;\n    }\n  }\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n}\n",".header {\n  .container(@mobile);\n  padding: 20px;\n  display: grid;\n  place-items: center;\n\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n    grid-template-columns: auto 1fr auto auto;\n    align-items: center;\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    grid-template-columns: auto 1fr auto auto;\n  }\n  .logo__img {\n    width: 100px;\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      width: 150px;\n    }\n    @media (min-width: @desktop) {\n      width: 200px;\n    }\n  }\n  .nav-list {\n    display: grid;\n    grid-template-columns: 1fr 1fr 1fr 1fr;\n    gap: 30px;\n    margin-top: 20px;\n    place-items: center;\n    &__item button {\n      .reset-btn();\n      font: normal 20px/200% sans-serif;\n      text-transform: uppercase;\n      color: #00adff;\n      transition: all 0.6s ease;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        font: bold 30px/200% sans-serif;\n      }\n      @media (min-width: @desktop) {\n        font: bold 40px/20px sans-serif;\n      }\n      &:hover {\n        color: @orange;\n      }\n      &:focus {\n        color: red;\n      }\n    }\n  }\n  &__score {\n    font: normal 20px/200% sans-serif;\n    .score__value {\n      font: normal 30px/20px sans-serif;\n      @media (min-width: @desktop) {\n        font: normal 40px/20px sans-serif;\n      }\n    }\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      margin-top: 15px;\n    }\n    @media (min-width: @desktop) {\n      margin-top: 10px;\n      font: normal 40px/20px sans-serif;\n    }\n  }\n}\n",".promo {\n  .container(@mobile);\n  display: grid;\n  place-items: center;\n  &__video {\n    width: @mobile;\n  }\n  &__sentence {\n    padding: 5px;\n    display: grid;\n    place-items: center;\n    font: italic 18px/20px sans-serif;\n    color: #01020182;\n    @media (min-width: @tablet) {\n      font: italic 35px/20px sans-serif;\n    }\n  }\n  &__results {\n    font: italic 35px/40px sans-serif;\n    text-align: center;\n    color: #01020182;\n  }\n  &__btn {\n    .reset-btn();\n    margin-top: 40px;\n    margin-bottom: 20px;\n    background: @orangered;\n    border-radius: 50%;\n    width: 180px;\n    height: 180px;\n    color: white;\n    font: bold 35px/20px sans-serif;\n    text-transform: uppercase;\n    transition: 0.6s linear;\n    @media (min-width: @tablet) {\n      width: 360px;\n      height: 360px;\n      font: bold 55px/20px sans-serif;\n    }\n  }\n  &__btn:hover {\n    color: yellow;\n    background: cyan;\n  }\n\n  @media (min-width: @tablet) {\n    .container(@tablet);\n    &__video {\n      width: @tablet;\n    }\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    display: grid;\n    place-items: center;\n    &-rules__item p {\n      font: normal 25px/25px sans-serif;\n    }\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10076,30 +10806,6 @@ module.exports = function (item) {
 
   return [content].join("\n");
 };
-
-/***/ }),
-
-/***/ "./src/game.html":
-/*!***********************!*\
-  !*** ./src/game.html ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/html-loader/dist/runtime/getUrl.js */ "./node_modules/html-loader/dist/runtime/getUrl.js");
-/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./js/entry.js */ "./src/js/entry.js?cfda"), __webpack_require__.b);
-// Module
-var ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);
-var code = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    <title>SongBird</title>\r\n    <meta content=\"width=device-width, initial-scale=1\" name=\"viewport\" />\r\n    <meta content=\"ie=edge\" http-equiv=\"x-ua-compatible\" />\r\n    <meta content=\"SongBird application\" name=\"description\" />\r\n  </head>\r\n  <body class=\"page\">\r\n\r\n  </body>\r\n  <" + "script src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\"><" + "/script>\r\n</html>\r\n";
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
 /***/ }),
 
@@ -11322,6 +12028,39 @@ module.exports = __webpack_require__.p + "img/logo-icon.svg";
 
 /***/ }),
 
+/***/ "./src/img/svg/muted-icon.svg":
+/*!************************************!*\
+  !*** ./src/img/svg/muted-icon.svg ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "img/muted-icon.svg";
+
+/***/ }),
+
+/***/ "./src/img/svg/pause-icon.svg":
+/*!************************************!*\
+  !*** ./src/img/svg/pause-icon.svg ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "img/pause-icon.svg";
+
+/***/ }),
+
+/***/ "./src/img/svg/play-btn.svg":
+/*!**********************************!*\
+  !*** ./src/img/svg/play-btn.svg ***!
+  \**********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "img/play-btn.svg";
+
+/***/ }),
+
 /***/ "./src/img/svg/question-mark.svg":
 /*!***************************************!*\
   !*** ./src/img/svg/question-mark.svg ***!
@@ -11341,6 +12080,17 @@ module.exports = __webpack_require__.p + "img/question-mark.svg";
 
 "use strict";
 module.exports = __webpack_require__.p + "img/rs-school-icon.svg";
+
+/***/ }),
+
+/***/ "./src/img/svg/unmuted-icon.svg":
+/*!**************************************!*\
+  !*** ./src/img/svg/unmuted-icon.svg ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "img/unmuted-icon.svg";
 
 /***/ }),
 
