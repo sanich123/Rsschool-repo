@@ -56,13 +56,20 @@ export function getSeconds(secs) {
   return `${mins > 9 ? mins : `0${mins}`}:${seconds > 9 ? seconds : `0${seconds}`}`;
 }
 
-function changeLanguageOnAnswers(data1, data2, string) {
-    const namesRu = data1.map(([{name}]) => name);
-    const namesEn = data2.map(([{name}]) => name);
+export function changeLanguageOnAnswers(isRu, counter, ruMocks, enMocks, string) {
+  const namesRu = ruMocks[counter].map(({ name }) => name);
+  const namesEn = enMocks[counter].map(({ name }) => name);
+  if (!isRu) {
     for (let i = 0; i < namesRu.length; i++) {
-       string = string.replace(new RegExp(`${namesRu[i]}`, 'gi'), namesEn[i]);
+      string = string.replace(new RegExp(`${namesRu[i]}`, 'gi'), namesEn[i]);
     }
     return string;
+  } else {
+    for (let i = 0; i < namesEn.length; i++) {
+      string = string.replace(new RegExp(`${namesEn[i]}`, 'gi'), namesRu[i]);
+    }
+    return string;
+  }
 }
 
 export function getRightCongratulations(totalScore, maxScore, innerLang) {

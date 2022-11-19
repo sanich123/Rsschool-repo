@@ -25,11 +25,11 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
   const body = document.querySelector(".page");
   body.innerHTML = "";
 
-  body.insertAdjacentHTML("afterbegin", `${createHeader(innerLang)}${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang)}${createFooter(innerLang)}`);
+  body.insertAdjacentHTML("afterbegin", `${createHeader(innerLang)}${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}${createFooter(innerLang)}`);
   addActiveToNavigation(innerCounter, innerLang);
   setDeclineAcceptStyles(checkedAnswer, innerQuestionBird);
   setAudio();
-  getNavLinks(innerLang, innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore);
+  getNavLinks(innerLang, innerCounter, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
 
   const scoreMark = document.querySelector(".score__value");
   if (checkedAnswer === innerQuestionBird.name) {

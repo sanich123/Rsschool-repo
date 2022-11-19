@@ -2,11 +2,11 @@ import { createStartPage } from "../create-start-page/create-start-page";
 import { createGamePage } from "../create-game/create-game";
 import { rusFlag, usFlag } from "../utils/const";
 import { navLinksRu, navLinksUs } from "../utils/const";
+import { birdsData } from "../utils/mocks";
+import { createResults } from "../create-results/create-results";
 
-export function getNavLinks(language = 'ru', innerChecked, innerQuestionBird, innerScore, innerTotalScore) {
+export function getNavLinks(language = 'ru', innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore) {
   const isRu = language === 'ru';
-  console.log(innerChecked, innerQuestionBird, innerScore, innerTotalScore);
-
   const mainPage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[0] : navLinksUs[0]}`);
   const gamePage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[1] : navLinksUs[1]}`);
   const gallery = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[2] : navLinksUs[2]}`);
@@ -24,7 +24,9 @@ export function getNavLinks(language = 'ru', innerChecked, innerQuestionBird, in
     if (location.includes('main')) {
       createStartPage(language);
     } else if (location.includes('game')) {
-      createGamePage();
+      createGamePage(innerCounter, birdsData, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
+    } else if (location.includes('results')) {
+      createResults(innerTotalScore);
     }
   });
   mainPage.addEventListener("click", () => {

@@ -18,11 +18,12 @@ export function createResults(totalScore) {
       </div>
     </main>${createFooter(innerLang)}
     `;
-    getNavLinks();
+    getNavLinks(innerLang, '', '', '', '', totalScore);
     const value = document.querySelector('.score__value');
     value.textContent = totalScore;
     const gameBtn = document.querySelector('.promo__btn');
     gameBtn.addEventListener('click', () => {
+    window.history.pushState({ urlPath: 'game' }, '', 'game');
     createGamePage();
   });
 }
