@@ -1,11 +1,10 @@
 import successSound from "../../audio/success.mp3";
 import failSound from "../../audio/fail.mp3";
-import { categories, categoriesUs, congratulationsEn, congratulationsRu } from "./const";
+import { CATEGORIES_RU, CATEGORIES_US, CONGRATULATIONS_EN, CONGRATULATIONS_RU, LOCAL_STORAGE_KEYS, LANGUAGES } from "./const";
 
 export const getRandomNumber = (max) => Math.floor(Math.random() * max);
 
 export function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
-
   const answersList = document.querySelector('.answers-list');
   const answersBtns = document.querySelectorAll(".answers-list__btn");
   const fail = new Audio(failSound);
@@ -33,16 +32,14 @@ export function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
       }
     });
   }
-
   const stringifiedNodes = new XMLSerializer().serializeToString(answersList);
-
- localStorage.setItem('answers', JSON.stringify(stringifiedNodes));
+  localStorage.setItem(LOCAL_STORAGE_KEYS.answers, JSON.stringify(stringifiedNodes));
 }
 
 export function addActiveToNavigation(innerCounter, innerLang) {
   const categoriesList = document.querySelectorAll(".categories-list__btn");
-  const isRu = innerLang === 'ru';
-  const categoriesMocks = isRu ? categories : categoriesUs;
+  const isRu = innerLang === LANGUAGES.ru;
+  const categoriesMocks = isRu ? CATEGORIES_RU : CATEGORIES_US;
   categoriesList.forEach((category) => {
     if (category.value === categoriesMocks[innerCounter]) {
       category.style.background = "red";
@@ -73,13 +70,13 @@ export function changeLanguageOnAnswers(isRu, counter, ruMocks, enMocks, string)
 }
 
 export function getRightCongratulations(totalScore, maxScore, innerLang) {
-  const isRu = innerLang === 'ru';
+  const isRu = innerLang === LANGUAGES.ru;
   if (totalScore === maxScore) {
-      if (isRu) {
-        return congratulationsRu;
-      } else {
-        return congratulationsEn;
-      }
+    if (isRu) {
+      return CONGRATULATIONS_RU;
+    } else {
+      return CONGRATULATIONS_EN;
+    }
   } else {
     if (isRu) {
       return `Вы набрали ${totalScore} баллов. Судя по всему, вам надо немножко еще потренироваться определять разных птичек. Сыграем еще раз? Жмякай кнопку ниже, если хочешь еще разок`;

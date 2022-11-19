@@ -1,4 +1,5 @@
 import rsSchoolSvg from "../../img/svg/rs-school-icon.svg";
+import { LANGUAGES, AUTHOR_LINK_RU, AUTHOR_LINK_US, GITHUB_ACCOUNT } from "../utils/const";
 
 export function createFooter(innerLang) {
 
@@ -10,8 +11,8 @@ export function createFooter(innerLang) {
           </a>
         </li>
         <li class="footer-list__item list-item">
-          <a class="author-link" href="https://github.com/sanich123">
-            ${innerLang === 'ru' ? 'Связаться с автором' : 'Contact the author'}
+          <a class="author-link" href="${GITHUB_ACCOUNT}">
+            ${innerLang === LANGUAGES.ru ? AUTHOR_LINK_RU : AUTHOR_LINK_US}
           </a>
         </li>
         <li сlass="footer-list__item list-item">

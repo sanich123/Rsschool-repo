@@ -1,5 +1,5 @@
 import { getSeconds } from "../utils/helpers";
-import { getNodes } from "../layout-makers/get-nodes.js";
+import { getAudioNodes } from "../layout-makers/get-nodes.js";
 
 export function setAudio() {
   const {
@@ -19,7 +19,7 @@ export function setAudio() {
     answerMuteBtn,
     answerVolumeContainer,
     answerAudioProgress,
-  } = getNodes();
+  } = getAudioNodes();
 
   if (answerPlay) {
     answerPlay.addEventListener("click", () => {

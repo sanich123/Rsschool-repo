@@ -1,4 +1,4 @@
-export const birdsData = [
+export const BIRDS_DATA_RU = [
   [
     {
       id: 1,
@@ -373,8 +373,8 @@ export const birdsData = [
   ],
 ];
 
-export const birdsDataEn = [
-  [       
+export const BIRDS_DATA_EN = [
+  [
     {
       id: 1,
       name: 'Raven',
@@ -640,7 +640,7 @@ export const birdsDataEn = [
       description: 'A feature of the blue-footed gannet is not only the rich bright blue color of the legs, but also the fact that they are very warm. While other species of birds warm the clutches with their bodies, the blue-footed booby does this with the help of its paws.',
       image: 'https://live.staticflickr.com/800/40645471394_4422e69ed8.jpg',
       audio: 'https://www.xeno-canto.org/sounds/uploaded/YHKQPPJDVP/XC411507-171217_1491%20BF%20Booby%205ft%20IDLP%201230%20mp3%20amp.mp3'
-    },    
+    },
     {
       id: 3,
       name: 'Petrel',

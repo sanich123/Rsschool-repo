@@ -1,42 +1,41 @@
 import { createStartPage } from "../create-start-page/create-start-page";
 import { createGamePage } from "../create-game/create-game";
-import { rusFlag, usFlag } from "../utils/const";
-import { navLinksRu, navLinksUs } from "../utils/const";
-import { birdsData } from "../utils/mocks";
 import { createResults } from "../create-results/create-results";
+import { RUS_FLAG, US_FLAG, LANGUAGES, NAV_LINKS_RU, NAV_LINKS_US, PATHS, LOCAL_STORAGE_KEYS } from "../utils/const";
+import { BIRDS_DATA_RU } from "../utils/mocks";
 
-export function getNavLinks(language = 'ru', innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore) {
-  const isRu = language === 'ru';
-  const mainPage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[0] : navLinksUs[0]}`);
-  const gamePage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[1] : navLinksUs[1]}`);
-  const gallery = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[2] : navLinksUs[2]}`);
+export function getNavLinks(language = LANGUAGES.ru, innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore) {
+  const isRu = language === LANGUAGES.ru;
+  const mainPage = document.querySelector(`.nav-list__btn--${isRu ? NAV_LINKS_RU[0] : NAV_LINKS_US[0]}`);
+  const gamePage = document.querySelector(`.nav-list__btn--${isRu ? NAV_LINKS_RU[1] : NAV_LINKS_US[1]}`);
+  const gallery = document.querySelector(`.nav-list__btn--${isRu ? NAV_LINKS_RU[2] : NAV_LINKS_US[2]}`);
   const lang = document.querySelector('.nav-list__btn--svg');
   lang.addEventListener('click', () => {
     const location = window.location.href;
     if (lang.innerHTML.includes('rus')) {
-      lang.innerHTML = usFlag;
+      lang.innerHTML = US_FLAG;
     } else {
-      lang.innerHTML = rusFlag;
+      lang.innerHTML = RUS_FLAG;
     }
-    const language = lang.innerHTML.includes('rus') ? 'ru' : 'us';
-    localStorage.setItem('language', language);
+    const language = lang.innerHTML.includes('rus') ? LANGUAGES.ru : LANGUAGES.us;
+    localStorage.setItem(LOCAL_STORAGE_KEYS.language, language);
 
-    if (location.includes('main')) {
+    if (location.includes(PATHS.main)) {
       createStartPage(language);
-    } else if (location.includes('game')) {
-      createGamePage(innerCounter, birdsData, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
-    } else if (location.includes('results')) {
+    } else if (location.includes(PATHS.game)) {
+      createGamePage(innerCounter, BIRDS_DATA_RU, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
+    } else if (location.includes(PATHS.results)) {
       createResults(innerTotalScore);
     }
   });
   mainPage.addEventListener("click", () => {
-    window.history.pushState({urlPath: 'main'}, '', 'main');
-    localStorage.removeItem("answers");
+    window.history.pushState({ urlPath: PATHS.main }, '', PATHS.main);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
     createStartPage();
   });
   gamePage.addEventListener("click", () => {
-    window.history.pushState({urlPath: 'game'}, '', 'game');
-    localStorage.removeItem("answers");
+    window.history.pushState({ urlPath: PATHS.game }, '', PATHS.game);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
     createGamePage();
   });
 }

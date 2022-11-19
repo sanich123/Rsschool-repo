@@ -1,4 +1,4 @@
-export function getNodes() {
+export function getAudioNodes() {
   const questionAudio = document.querySelector(".question__audio");
   const questionPlay = document.querySelector(
     ".question .audio-container__play"

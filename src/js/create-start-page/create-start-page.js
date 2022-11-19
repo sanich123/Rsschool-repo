@@ -4,9 +4,10 @@ import { createGamePage } from "../create-game/create-game.js";
 import { createStartMain } from '../layout-makers/create-start-main.js';
 import { getNavLinks } from "../layout-makers/get-nav-links.js";
 import morningTheme from '../../audio/grig-morning.mp3';
+import { PATHS, LOCAL_STORAGE_KEYS } from "../utils/const.js";
 
 export function createStartPage() {
-  const innerLang = localStorage.getItem('language');
+  const innerLang = localStorage.getItem(LOCAL_STORAGE_KEYS.language);
   const body = document.querySelector(".page");
   body.innerHTML = "";
   body.insertAdjacentHTML("afterbegin", `${createHeader(innerLang)}${createStartMain(innerLang)}${createFooter(innerLang)}`);
@@ -16,13 +17,13 @@ export function createStartPage() {
   const gameBtn = document.querySelector('.promo__btn');
   document.querySelector('video').play();
   const audio = new Audio(morningTheme);
-  // audio.play();
+  audio.play();
 
-  window.history.pushState({urlPath: 'main'}, '', 'main');
+  window.history.pushState({ urlPath: PATHS.main }, '', PATHS.main);
   gameBtn.addEventListener('click', () => {
-    localStorage.removeItem('answers');
-    window.history.pushState({urlPath: 'game'}, '', 'game');
-    // audio.pause();
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
+    window.history.pushState({ urlPath: PATHS.game }, '', PATHS.game);
+    audio.pause();
     createGamePage();
   });
 }

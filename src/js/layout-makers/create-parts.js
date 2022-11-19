@@ -1,5 +1,5 @@
 import { createAudio } from "./create-audio";
-import { defaultText, defaultTextUs, nextBtnTextSuccessRu, nextBtnTextDefaultRu, nextBtnTextDefaultUs, nextBtnTextSuccessUs  } from "../utils/const";
+import { DEFAULT_TEXT_RU, DEFAULT_TEXT_US, NEXT_BTN_TEXT_SUCCESS_RU, NEXT_BTN_TEXT_DEFAULT_RU, NEXT_BTN_TEXT_DEFAULT_US, NEXT_BTN_TEXT_SUCCESS_US, LANGUAGES } from "../utils/const";
 
 export function createCategories(categories) {
   return categories.map((category) => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join("");
@@ -17,21 +17,29 @@ export function createCheckedAnswerLayout(checkedData) {
 };
 
 export function createCheckedAnswerDefault(innerLang) {
-  return `<div></div><p class="checked-answer__default">${innerLang === 'ru' ? defaultText : defaultTextUs}</p>`;
+  return `<div></div><p class="checked-answer__default">${innerLang === LANGUAGES.ru ? DEFAULT_TEXT_RU : DEFAULT_TEXT_US}</p>`;
 }
 
 export function createNextBtn(innerLang, isMatching) {
   if (isMatching) {
-    if (innerLang === 'ru') {
-      return nextBtnTextSuccessRu;
+    if (innerLang === LANGUAGES.ru) {
+      return NEXT_BTN_TEXT_SUCCESS_RU;
     } else {
-      return nextBtnTextSuccessUs;
-    } 
+      return NEXT_BTN_TEXT_SUCCESS_US;
+    }
+  } else {
+    if (innerLang === LANGUAGES.ru) {
+      return NEXT_BTN_TEXT_DEFAULT_RU;
     } else {
-      if (innerLang === 'ru') {
-        return nextBtnTextDefaultRu;
-      } else {
-        return nextBtnTextDefaultUs;
-      } 
+      return NEXT_BTN_TEXT_DEFAULT_US;
     }
   }
+}
+
+export function createRules(rules) {
+  return rules.map((text) => `<li class="promo-rules__item"><p align="justify">${text}</p></li>`).join("");
+}
+
+export function createNavLinks(arr) {
+  return arr.map((text) => `<li class="nav-list__item"><button class="nav-list__btn--${text.length < 50 ? text : 'svg'}">${text}</button>`).join("");
+}
