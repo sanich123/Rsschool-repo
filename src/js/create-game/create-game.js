@@ -26,10 +26,10 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
   body.innerHTML = "";
 
   body.insertAdjacentHTML("afterbegin", `${createHeader(innerLang)}${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang)}${createFooter(innerLang)}`);
-  addActiveToNavigation(innerCounter);
+  addActiveToNavigation(innerCounter, innerLang);
   setDeclineAcceptStyles(checkedAnswer, innerQuestionBird);
   setAudio();
-  getNavLinks();
+  getNavLinks(innerLang);
 
   const scoreMark = document.querySelector(".score__value");
   if (checkedAnswer === innerQuestionBird.name) {
@@ -39,6 +39,7 @@ export function createGamePage(counter = 0, arr = birdsData, checkedAnswer = "",
       innerTotalScore = innerTotalScore + ++innerScore;
       scoreMark.textContent = innerTotalScore;
       if (innerCounter === 5) {
+        window.history.pushState({urlPath: 'results'}, '', 'results');
         localStorage.removeItem('answers');
         createResults(innerTotalScore);
         return;

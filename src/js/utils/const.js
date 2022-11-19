@@ -41,6 +41,12 @@ export const categoriesUs = [
   'Navy',
 ]
 
-export const nextBtnTextDefault = "Правильно ответишь - я буду активной";
-export const nextBtnTextSuccess = "Молодест, жмякай, чтобы перейти дальше";
+export const nextBtnTextDefaultRu = "Правильно ответишь - я буду активной";
+export const nextBtnTextSuccessRu = "Молодест, жмякай, чтобы перейти дальше";
+export const nextBtnTextSuccessUs = "Youth, click to move on";
+export const nextBtnTextDefaultUs = "Correct answer - I will be active";
 export const defaultText = "Выберите вариант ответа, и здесь появится информация по птице. А если угадаешь, то сверху вместо вопроса тоже появится личико птички";
+export const defaultTextUs = "Select an answer option, and information on the bird will appear here. And if you guess right, then instead of a question, a bird's face will also appear on top";
+
+export const congratulationsRu = 'Очень поздравляем! Вы набрали максимальное количество баллов! Судя по всему, кукушка и дятел для вас не пустые слова! Не думаю, что вам захочется сыграть еще разок:(';
+export const congratulationsEn = 'Congratulations! You have scored the maximum number of points! Apparently, the cuckoo and the woodpecker are not empty words for you! I don\'t think you\'ll want to play again :(';

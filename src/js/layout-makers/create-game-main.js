@@ -1,23 +1,22 @@
-import { categories, nextBtnTextDefault, nextBtnTextSuccess, defaultText, categoriesUs } from "../utils/const.js";
+import { categories, categoriesUs } from "../utils/const.js";
 import questionIcon from "../../img/svg/question-mark.svg";
 import { createAudio } from "./create-audio.js";
-import { createAnswers, createCategories } from "./create-categories.js";
+import { createAnswers, createCategories, createCheckedAnswerLayout, createCheckedAnswerDefault, createNextBtn } from "./create-categories.js";
 
 export function createMainGame(filtredBirds, checkedData, questionBird, innerChecked, innerLang) {
+  const isRu = innerLang === 'ru';
   const localStorageAnswers = JSON.parse(localStorage.getItem('answers'));
-  const answersVariants = createAnswers(filtredBirds);
-  const categoriesList = innerLang === 'ru' ? createCategories(categories) : createCategories(categoriesUs);
 
+  const answersVariants = createAnswers(filtredBirds);
+  const categoriesList = isRu ? createCategories(categories) : createCategories(categoriesUs);
   const { audio: questionAudio, name: questionName, image: questionImage } = questionBird;
+
   let answerLayout;
-  if (checkedData.length > 0) {
-    const [{ name, audio, image, description, species }] = checkedData;
-    answerLayout = `<img src=${image} alt="" class="checked-answer__img" />
-        <span class="checked-answer__surname">${name} (${species})</span>
-        <p align="justify" class="checked-answer__description">${description}</p>${createAudio(audio, 'checked-answer')}`;
-  } else {
-    answerLayout = `<div></div><p class="checked-answer__default">${defaultText}</p>`;
-  }
+
+  checkedData.length > 0 ?
+    answerLayout = createCheckedAnswerLayout(checkedData) :
+    answerLayout = createCheckedAnswerDefault(innerLang);
+
   const isMatching = innerChecked === questionName;
 
   return `<main class="game">
@@ -30,7 +29,7 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
       ${localStorageAnswers ? localStorageAnswers : `${`<ul class="game__answers-list answers-list">${answersVariants}</ul>`}`}
       <div class="game__checked-answer checked-answer">${answerLayout}</div>
       <button class="game__next-btn next-btn" type="button" ${isMatching ? "" : "disabled"}>
-        ${isMatching ? nextBtnTextSuccess : nextBtnTextDefault}
+        ${createNextBtn(innerLang, isMatching)}
       </button>
     </main>`;
 }

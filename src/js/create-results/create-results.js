@@ -1,20 +1,22 @@
 import { createFooter } from "../layout-makers/create-footer";
 import { createHeader } from "../layout-makers/create-header";
-import { startRu } from "../utils/const";
+import { startRu, startUs } from "../utils/const";
 import { createGamePage } from "../create-game/create-game";
 import { getNavLinks } from "../layout-makers/get-nav-links";
+import { getRightCongratulations } from "../utils/helpers";
 
 export function createResults(totalScore) {
+  const innerLang = localStorage.getItem('language');
     const maxScore = 30;
-    const message = totalScore === maxScore ? 'Очень поздравляем! Вы набрали максимальное количество баллов! Судя по всему, кукушка и дятел для вас не пустые слова! Не думаю, что вам захочется сыграть еще разок:(' : `Вы набрали ${totalScore} баллов. Судя по всему, вам надо немножко еще потренироваться определять разных птичек. Сыграем еще раз? Жмякай кнопку ниже, если хочешь еще разок`
+    const message = getRightCongratulations(totalScore, maxScore, innerLang);
     const body = document.querySelector('.page');
     body.innerHTML = '';
-    body.innerHTML = `${createHeader()}<main class="page__main main">
+    body.innerHTML = `${createHeader(innerLang)}<main class="page__main main">
       <div class="promo">
         <p class="promo__results">${message}</p>
-        <button class="promo__btn">${startRu}</button>
+        <button class="promo__btn">${innerLang === 'ru' ? startRu : startUs}</button>
       </div>
-    </main>${createFooter()}
+    </main>${createFooter(innerLang)}
     `;
     getNavLinks();
     const value = document.querySelector('.score__value');

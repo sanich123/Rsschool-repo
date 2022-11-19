@@ -5,6 +5,7 @@ import { navLinksRu, navLinksUs } from "../utils/const";
 
 export function getNavLinks(language = 'ru') {
   const isRu = language === 'ru';
+
   const mainPage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[0] : navLinksUs[0]}`);
   const gamePage = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[1] : navLinksUs[1]}`);
   const gallery = document.querySelector(`.nav-list__btn--${isRu ? navLinksRu[2] : navLinksUs[2]}`);
@@ -18,7 +19,13 @@ export function getNavLinks(language = 'ru') {
     }
     const language = lang.innerHTML.includes('rus') ? 'ru' : 'us';
     localStorage.setItem('language', language);
-    createStartPage(language);
+
+    if (location.includes('main')) {
+      createStartPage(language);
+    } else if (location.includes('game')) {
+      createGamePage();
+    }
+    
   });
   mainPage.addEventListener("click", () => {
     window.history.pushState({urlPath: 'main'}, '', 'main');
