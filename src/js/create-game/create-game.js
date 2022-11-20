@@ -54,7 +54,7 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   const answersList = document.querySelector(".answers-list");
 
   answersList.addEventListener("click", ({ target }) => {
-    if (!target.disabled) {
+    if (!target.disabled && target.tagName !== 'UL') {
       if (innerScore > 0) {
         createGamePage(innerCounter, BIRDS_DATA_RU, target.value, innerQuestionBird, --innerScore, innerTotalScore);
       } else {

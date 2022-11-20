@@ -12,9 +12,19 @@ export function createAnswers(answers) {
 export function createCheckedAnswerLayout(checkedData) {
   const [{ name, audio, image, description, species }] = checkedData;
   return `<img src="${image}" alt="" class="checked-answer__img" />
-        <span class="checked-answer__surname">${name} (${species})</span>
+                <div class="checked-answer__surname">
+        <span>${name}</span><span class="checked-answer__surname--species">(${species})</span></div>
         <p align="justify" class="checked-answer__description">${description}</p>${createAudio(audio, "checked-answer")}`;
 };
+
+export function createCheckedBirdLayout(checkedData) {
+  const { name, audio, image, description, species } = checkedData;
+  return `<img src="${image}" alt="" class="checked-answer__img" />
+        <div class="checked-answer__surname">
+        <span>${name}</span><span class="checked-answer__surname--species">(${species})</span></div>
+        <p align="justify" class="checked-answer__description">${description}</p>${createAudio(audio, "checked-answer")}`;
+}
+
 
 export function createCheckedAnswerDefault(innerLang) {
   return `<div></div><p class="checked-answer__default">${innerLang === LANGUAGES.ru ? DEFAULT_TEXT_RU : DEFAULT_TEXT_US}</p>`;

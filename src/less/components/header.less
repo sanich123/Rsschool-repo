@@ -13,13 +13,15 @@
     .container(@desktop);
     grid-template-columns: auto 1fr auto auto;
   }
-  .logo__img {
-    width: 100px;
-    @media (min-width: @tablet) and (max-width: @almost-desktop) {
-      width: 150px;
-    }
-    @media (min-width: @desktop) {
-      width: 200px;
+  .logo {
+    svg {
+      width: 100px;
+      @media (min-width: @tablet) and (max-width: @almost-desktop) {
+        width: 150px;
+      }
+      @media (min-width: @desktop) {
+        width: 200px;
+      }
     }
   }
   .nav-list {
@@ -45,6 +47,17 @@
       }
       &:focus {
         color: red;
+      }
+    }
+    &__btn--svg {
+      svg {
+        width: 23px;
+        @media (min-width: @tablet) and (max-width: @almost-desktop) {
+          width: 30px;
+        }
+        @media (min-width: @desktop) {
+          width: 50px;
+        }
       }
     }
   }

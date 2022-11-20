@@ -11,19 +11,19 @@ export function createStartPage() {
   const body = document.querySelector(".page");
   body.innerHTML = "";
   body.insertAdjacentHTML("afterbegin", `${createHeader(innerLang)}${createStartMain(innerLang)}${createFooter(innerLang)}`);
-
+  // const audio = new Audio(morningTheme);
+  // audio.play();
   getNavLinks(innerLang);
 
   const gameBtn = document.querySelector('.promo__btn');
   document.querySelector('video').play();
-  const audio = new Audio(morningTheme);
-  audio.play();
 
   window.history.pushState({ urlPath: PATHS.main }, '', PATHS.main);
+
   gameBtn.addEventListener('click', () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
     window.history.pushState({ urlPath: PATHS.game }, '', PATHS.game);
-    audio.pause();
+    // audio.pause();
     createGamePage();
   });
 }

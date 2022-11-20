@@ -1,6 +1,7 @@
 import { createStartPage } from "../create-start-page/create-start-page";
 import { createGamePage } from "../create-game/create-game";
 import { createResults } from "../create-results/create-results";
+import { createGalleryPage } from '../create-gallery/create-gallery'
 import { RUS_FLAG, US_FLAG, LANGUAGES, NAV_LINKS_RU, NAV_LINKS_US, PATHS, LOCAL_STORAGE_KEYS } from "../utils/const";
 import { BIRDS_DATA_RU } from "../utils/mocks";
 
@@ -26,6 +27,8 @@ export function getNavLinks(language = LANGUAGES.ru, innerCounter, innerChecked,
       createGamePage(innerCounter, BIRDS_DATA_RU, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
     } else if (location.includes(PATHS.results)) {
       createResults(innerTotalScore);
+    } else if (location.includes(PATHS.gallery)) {
+      createGalleryPage(innerCounter);
     }
   });
   mainPage.addEventListener("click", () => {
@@ -38,4 +41,10 @@ export function getNavLinks(language = LANGUAGES.ru, innerCounter, innerChecked,
     localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
     createGamePage();
   });
+
+  gallery.addEventListener('click', () => {
+    window.history.pushState({urlPath: PATHS.gallery}, '', PATHS.gallery);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
+    createGalleryPage();
+  })
 }

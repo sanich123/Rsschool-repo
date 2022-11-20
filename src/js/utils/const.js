@@ -74,3 +74,5 @@ export const LANGUAGES = {
 export const AUTHOR_LINK_RU = 'Связаться с автором';
 export const AUTHOR_LINK_US = 'Contact the author';
 export const GITHUB_ACCOUNT = "https://github.com/sanich123";
+
+export const INITIAL_COUNT = 0;

@@ -29,7 +29,9 @@ export function setAudio() {
         answerAudio.play();
         setInterval(() => {
           answerProgress.value = answerAudio.currentTime;
-          answerCurrentDuration.textContent = getSeconds(answerAudio.currentTime);
+          answerCurrentDuration.textContent = getSeconds(
+            answerAudio.currentTime
+          );
         }, 1000);
       } else {
         answerPlay.classList.remove("pause");
@@ -79,63 +81,64 @@ export function setAudio() {
       answerCurrentDuration.textContent = getSeconds(target.value);
     });
   }
+  if (questionPlay) {
+    questionPlay.addEventListener("click", () => {
+      if (questionPlay.classList.contains("play")) {
+        questionPlay.classList.remove("play");
+        questionPlay.classList.add("pause");
+        questionAudio.play();
+        setInterval(() => {
+          progress.value = questionAudio.currentTime;
+          currentDuration.textContent = getSeconds(questionAudio.currentTime);
+        }, 1000);
+      } else {
+        questionPlay.classList.remove("pause");
+        questionPlay.classList.add("play");
+        questionAudio.pause();
+      }
+    });
 
-  questionPlay.addEventListener("click", () => {
-    if (questionPlay.classList.contains("play")) {
-      questionPlay.classList.remove("play");
-      questionPlay.classList.add("pause");
-      questionAudio.play();
-      setInterval(() => {
-        progress.value = questionAudio.currentTime;
-        currentDuration.textContent = getSeconds(questionAudio.currentTime);
-      }, 1000);
-    } else {
-      questionPlay.classList.remove("pause");
-      questionPlay.classList.add("play");
-      questionAudio.pause();
-    }
-  });
+    muteBtn.addEventListener("click", () => {
+      if (muteBtn.classList.contains("unmuted")) {
+        muteBtn.classList.remove("unmuted");
+        muteBtn.classList.add("muted");
+        questionAudio.muted = true;
+      } else {
+        muteBtn.classList.remove("muted");
+        muteBtn.classList.add("unmuted");
+        questionAudio.muted = false;
+      }
+    });
 
-  muteBtn.addEventListener("click", () => {
-    if (muteBtn.classList.contains("unmuted")) {
-      muteBtn.classList.remove("unmuted");
-      muteBtn.classList.add("muted");
-      questionAudio.muted = true;
-    } else {
-      muteBtn.classList.remove("muted");
-      muteBtn.classList.add("unmuted");
-      questionAudio.muted = false;
-    }
-  });
+    volumeContainer.addEventListener("mouseenter", () =>
+      audioProgress.classList.add("is-open")
+    );
+    volumeContainer.addEventListener("mouseleave", () =>
+      audioProgress.classList.remove("is-open")
+    );
 
-  volumeContainer.addEventListener("mouseenter", () =>
-    audioProgress.classList.add("is-open")
-  );
-  volumeContainer.addEventListener("mouseleave", () =>
-    audioProgress.classList.remove("is-open")
-  );
+    audioProgress.addEventListener("input", ({ target }) => {
+      questionAudio.volume = target.value;
+      if (+target.value === 0) {
+        muteBtn.classList.remove("unmuted");
+        muteBtn.classList.add("muted");
+      } else if (muteBtn.classList.contains("muted")) {
+        muteBtn.classList.remove("muted");
+        muteBtn.classList.add("unmuted");
+      }
+    });
 
-  audioProgress.addEventListener("input", ({ target }) => {
-    questionAudio.volume = target.value;
-    if (+target.value === 0) {
-      muteBtn.classList.remove("unmuted");
-      muteBtn.classList.add("muted");
-    } else if (muteBtn.classList.contains("muted")) {
-      muteBtn.classList.remove("muted");
-      muteBtn.classList.add("unmuted");
-    }
-  });
+    questionAudio.addEventListener("loadeddata", () => {
+      totalDuration.textContent = getSeconds(questionAudio.duration);
+      questionAudio.volume = "1";
+      progress.value = 0;
+      progress.max = Math.floor(+questionAudio.duration);
+      progress.step = questionAudio.duration / 100;
+    });
 
-  questionAudio.addEventListener("loadeddata", () => {
-    totalDuration.textContent = getSeconds(questionAudio.duration);
-    questionAudio.volume = "1";
-    progress.value = 0;
-    progress.max = Math.floor(+questionAudio.duration);
-    progress.step = questionAudio.duration / 100;
-  });
-
-  progress.addEventListener("input", ({ target }) => {
-    questionAudio.currentTime = target.value;
-    currentDuration.textContent = getSeconds(target.value);
-  });
+    progress.addEventListener("input", ({ target }) => {
+      questionAudio.currentTime = target.value;
+      currentDuration.textContent = getSeconds(target.value);
+    });
+  }
 }

@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+export function createLeftArrow() {
+  return `<svg version="1.1" id="left-arrow" fill="orange" width="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve"><g><g><polygon points="332.668,490 82.631,244.996 332.668,0 407.369,76.493 235.402,244.996 407.369,413.507"/></g></svg>`;
+}
+export function createLogoIcon() {
+  return `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 <path d="M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658
 	c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499
@@ -45,34 +47,6 @@
 	c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278
 	c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607
 	C369.62,69.92,386.503,35.316,402.629,30.157z"/>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
+</svg>`
+}
+

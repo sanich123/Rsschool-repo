@@ -1,12 +1,12 @@
 import { NAV_LINKS_RU, NAV_LINKS_US, LANGUAGES } from "../utils/const.js";
 import { createNavLinks } from "./create-parts.js";
-import logoIcon from "../../img/svg/logo-icon.svg";
+import { createLogoIcon } from "./create-icons.js";
 
 export function createHeader(lang = LANGUAGES.ru) {
 
   return `<header class="page__header header">
       <a class="header__logo logo" href="index.html">
-        <img class="logo__img" src=${logoIcon} width="60px" height="60px" />
+        ${createLogoIcon()}
       </a>
       <nav class="header__nav nav">
         <ul class="nav__list nav-list">
@@ -19,3 +19,4 @@ export function createHeader(lang = LANGUAGES.ru) {
       </div>
     </header>`;
 }
+//<img class="logo__img" src=${logoIcon} width="60px" height="60px" />
