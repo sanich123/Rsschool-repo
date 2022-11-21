@@ -21,19 +21,22 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   !question
     ? (innerQuestionBird = filtredBirds[getRandomNumber(filtredBirds.length)])
     : (innerQuestionBird = question);
-  console.log(`cчетчик: ${innerCounter}, выбранная птица: ${innerChecked}, птица в вопросе: ${innerQuestionBird.name}, общий счет: ${innerTotalScore}, текущий счет: ${innerScore}, язык: ${innerLang}`);
 
   const checkedData = filtredBirds.filter(({ name }) => name === innerChecked);
   const body = document.querySelector(".page");
   body.innerHTML = "";
 
-  body.insertAdjacentHTML("afterbegin", `${createHeader(innerLang)}${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}${createFooter(innerLang)}`);
+  body.insertAdjacentHTML("afterbegin", `
+  ${createHeader(innerLang)}
+  ${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}
+  ${createFooter(innerLang)}`);
+
   addActiveToNavigation(innerCounter, innerLang);
   setDeclineAcceptStyles(checkedAnswer, innerQuestionBird);
   setAudio();
 
-
   const scoreMark = document.querySelector(".score__value");
+
   if (checkedAnswer === innerQuestionBird.name) {
     if (!innerScore) {
       scoreMark.textContent = innerTotalScore;
