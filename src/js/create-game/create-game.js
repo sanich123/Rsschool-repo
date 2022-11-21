@@ -16,11 +16,12 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   let innerScore = score;
   const innerLang = localStorage.getItem(LOCAL_STORAGE_KEYS.language);
   innerLang === LANGUAGES.ru ? arr = BIRDS_DATA_RU : arr = BIRDS_DATA_EN;
-
+  
   const filtredBirds = arr[counter];
   !question
     ? (innerQuestionBird = filtredBirds[getRandomNumber(filtredBirds.length)])
     : (innerQuestionBird = question);
+  console.log(`cчетчик: ${innerCounter}, выбранная птица: ${innerChecked}, птица в вопросе: ${innerQuestionBird.name}, общий счет: ${innerTotalScore}, текущий счет: ${innerScore}, язык: ${innerLang}`);
 
   const checkedData = filtredBirds.filter(({ name }) => name === innerChecked);
   const body = document.querySelector(".page");
@@ -30,12 +31,18 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   addActiveToNavigation(innerCounter, innerLang);
   setDeclineAcceptStyles(checkedAnswer, innerQuestionBird);
   setAudio();
-  getNavLinks(innerLang, innerCounter, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
+
 
   const scoreMark = document.querySelector(".score__value");
   if (checkedAnswer === innerQuestionBird.name) {
     if (!innerScore) {
       scoreMark.textContent = innerTotalScore;
+      if (innerCounter === LAST_GROUP) {
+        window.history.pushState({ urlPath: PATHS.results }, '', PATHS.results);
+        localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
+        createResults(innerTotalScore);
+        return;
+      }
     } else {
       innerTotalScore = innerTotalScore + ++innerScore;
       scoreMark.textContent = innerTotalScore;
@@ -49,6 +56,8 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   } else {
     scoreMark.textContent = innerTotalScore;
   }
+
+  getNavLinks(innerLang, innerCounter, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
 
   const nextBtn = document.querySelector(".next-btn");
   const answersList = document.querySelector(".answers-list");
