@@ -175,6 +175,10 @@ function createGamePage() {
   ${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__.createHeader)(innerLang)}
   ${(0,_layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_2__.createMainGame)(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}
   ${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__.createFooter)(innerLang)}`);
+  body.insertAdjacentHTML("afterbegin", `
+  ${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__.createHeader)(innerLang)}
+  ${(0,_layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_2__.createMainGame)(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}
+  ${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__.createFooter)(innerLang)}`);
   (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_3__.addActiveToNavigation)(innerCounter, innerLang);
   (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_3__.setDeclineAcceptStyles)(checkedAnswer, innerQuestionBird);
   (0,_manage_audio_manage_audio_js__WEBPACK_IMPORTED_MODULE_5__.setAudio)();
@@ -182,6 +186,14 @@ function createGamePage() {
   if (checkedAnswer === innerQuestionBird.name) {
     if (!innerScore) {
       scoreMark.textContent = innerTotalScore;
+      if (innerCounter === _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LAST_GROUP) {
+        window.history.pushState({
+          urlPath: _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.PATHS.results
+        }, '', _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.PATHS.results);
+        localStorage.removeItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LOCAL_STORAGE_KEYS.answers);
+        (0,_create_results_create_results_js__WEBPACK_IMPORTED_MODULE_4__.createResults)(innerTotalScore);
+        return;
+      }
       if (innerCounter === _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LAST_GROUP) {
         window.history.pushState({
           urlPath: _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.PATHS.results
