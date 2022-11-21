@@ -1,9 +1,10 @@
 import { createStartPage } from "../create-start-page/create-start-page";
 import { createGamePage } from "../create-game/create-game";
 import { createResults } from "../create-results/create-results";
-import { createGalleryPage } from '../create-gallery/create-gallery'
+import { createGalleryPage } from '../create-gallery/create-gallery';
+import { getBirdNameOnAnotherLang } from "../utils/helpers";
 import { RUS_FLAG, US_FLAG, LANGUAGES, NAV_LINKS_RU, NAV_LINKS_US, PATHS, LOCAL_STORAGE_KEYS } from "../utils/const";
-import { BIRDS_DATA_RU } from "../utils/mocks";
+import { BIRDS_DATA_EN, BIRDS_DATA_RU } from "../utils/mocks";
 
 export function getNavLinks(language = LANGUAGES.ru, innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore) {
   const isRu = language === LANGUAGES.ru;
@@ -24,7 +25,10 @@ export function getNavLinks(language = LANGUAGES.ru, innerCounter, innerChecked,
     if (location.includes(PATHS.main)) {
       createStartPage(language);
     } else if (location.includes(PATHS.game)) {
-      createGamePage(innerCounter, BIRDS_DATA_RU, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
+      // if (innerQuestionBird.name) {
+      //   innerQuestionBird.name = getBirdNameOnAnotherLang(BIRDS_DATA_RU, BIRDS_DATA_EN)[innerQuestionBird.name];
+      // } 
+      createGamePage(innerCounter, BIRDS_DATA_RU, innerChecked, innerQuestionBird, innerScore, innerTotalScore);
     } else if (location.includes(PATHS.results)) {
       createResults(innerTotalScore);
     } else if (location.includes(PATHS.gallery)) {

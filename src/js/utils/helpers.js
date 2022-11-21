@@ -32,6 +32,7 @@ export function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
       }
     });
   }
+
   const stringifiedNodes = new XMLSerializer().serializeToString(answersList);
   localStorage.setItem(LOCAL_STORAGE_KEYS.answers, JSON.stringify(stringifiedNodes));
 }
@@ -54,8 +55,9 @@ export function getSeconds(secs) {
 }
 
 export function changeLanguageOnAnswers(isRu, counter, ruMocks, enMocks, string) {
-  const namesRu = ruMocks[counter].map(({ name }) => name);
-  const namesEn = enMocks[counter].map(({ name }) => name);
+  const namesRu = ruMocks[counter].slice().map(({ name }) => name);
+  const namesEn = enMocks[counter].slice().map(({ name }) => name);
+
   if (!isRu) {
     for (let i = 0; i < namesRu.length; i++) {
       string = string.replace(new RegExp(`${namesRu[i]}`, 'gi'), namesEn[i]);
@@ -84,4 +86,17 @@ export function getRightCongratulations(totalScore, maxScore, innerLang) {
       return `You have collected ${totalScore} points. Apparently, you need to practice a little more to identify different birds. Shall we play again? Click the button below if you want more`
     }
   }
+}
+
+export function getBirdNameOnAnotherLang(ruBirds, enBirds) {
+  const flattedRu = ruBirds.slice().flat();
+  const flattedEn = enBirds.slice().flat();
+  const result = {};
+
+  for (let i = 0; i < flattedRu.length; i++) {
+    result[flattedRu[i].name] = flattedEn[i].name;
+    result[flattedEn[i].name] = flattedRu[i].name;
+
+  }
+  return result;
 }

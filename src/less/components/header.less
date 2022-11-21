@@ -26,8 +26,8 @@
   }
   .nav-list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 20px;
     margin-top: 20px;
     place-items: center;
     &__item button {
@@ -63,6 +63,7 @@
   }
   &__score {
     font: normal 20px/200% sans-serif;
+    width: 100px;
     .score__value {
       font: normal 30px/20px sans-serif;
       @media (min-width: @desktop) {
@@ -75,6 +76,7 @@
     @media (min-width: @desktop) {
       margin-top: 10px;
       font: normal 40px/20px sans-serif;
+      width: 150px;
     }
   }
 }

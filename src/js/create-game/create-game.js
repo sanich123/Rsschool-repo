@@ -8,7 +8,7 @@ import { getNavLinks } from "../layout-makers/get-nav-links.js";
 import { LANGUAGES, LAST_GROUP, LOCAL_STORAGE_KEYS, MAX_GAP_SCORE, MIN_COUNTER, PATHS } from "../utils/const.js";
 import { BIRDS_DATA_RU, BIRDS_DATA_EN } from "../utils/mocks.js";
 
-export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, checkedAnswer = "", question = "", score = MAX_GAP_SCORE, total = 0) {
+export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, checkedAnswer = "", question = {name: ''}, score = MAX_GAP_SCORE, total = 0) {
   let innerCounter = counter;
   let innerChecked = checkedAnswer;
   let innerQuestionBird;
@@ -18,14 +18,16 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   innerLang === LANGUAGES.ru ? arr = BIRDS_DATA_RU : arr = BIRDS_DATA_EN;
   
   const filtredBirds = arr[counter];
-  !question
-    ? (innerQuestionBird = filtredBirds[getRandomNumber(filtredBirds.length)])
-    : (innerQuestionBird = question);
+
+  if (!question.name) {
+    innerQuestionBird = filtredBirds[getRandomNumber(filtredBirds.length)];
+  } else {
+    innerQuestionBird = question;
+  }
 
   const checkedData = filtredBirds.filter(({ name }) => name === innerChecked);
   const body = document.querySelector(".page");
   body.innerHTML = "";
-
   body.insertAdjacentHTML("afterbegin", `
   ${createHeader(innerLang)}
   ${createMainGame(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}
@@ -60,10 +62,13 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
     scoreMark.textContent = innerTotalScore;
   }
 
-  getNavLinks(innerLang, innerCounter, innerChecked, innerQuestionBird.name, innerScore, innerTotalScore);
+  getNavLinks(innerLang, innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore);
 
   const nextBtn = document.querySelector(".next-btn");
   const answersList = document.querySelector(".answers-list");
+  const langBtn = document.querySelector('.nav-list__btn--svg');
+  langBtn.disabled = true;
+  langBtn.style.opacity = '0.5';
 
   answersList.addEventListener("click", ({ target }) => {
     if (!target.disabled && target.tagName !== 'UL') {
@@ -78,6 +83,6 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   nextBtn.addEventListener("click", () => {
     const nextCounter = innerCounter + 1;
     localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
-    createGamePage(nextCounter, BIRDS_DATA_RU, "", null, MAX_GAP_SCORE, innerTotalScore);
+    createGamePage(nextCounter, BIRDS_DATA_RU, "", { name: '' }, MAX_GAP_SCORE, innerTotalScore);
   });
 }

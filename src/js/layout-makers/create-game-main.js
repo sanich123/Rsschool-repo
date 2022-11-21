@@ -20,7 +20,7 @@ export function createMainGame(filtredBirds, checkedData, questionBird, innerChe
 
   const isMatching = innerChecked === questionName;
   const isRefreshing = localStorageAnswers && localStorageAnswers.includes('accept');
-
+  
   return `<main class="game">
       <ul class="game__list categories-list">${categoriesList}</ul>
       <div class="game__question question">
