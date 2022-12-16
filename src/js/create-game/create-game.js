@@ -7,6 +7,7 @@ import { setAudio } from "../manage-audio/manage-audio.js";
 import { getNavLinks } from "../layout-makers/get-nav-links.js";
 import { LANGUAGES, LAST_GROUP, LOCAL_STORAGE_KEYS, MAX_GAP_SCORE, MIN_COUNTER, PATHS } from "../utils/const.js";
 import { BIRDS_DATA_RU, BIRDS_DATA_EN } from "../utils/mocks.js";
+import { router } from "../utils/router.js";
 
 export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, checkedAnswer = "", question = {name: ''}, score = MAX_GAP_SCORE, total = 0) {
   let innerCounter = counter;
@@ -70,6 +71,7 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
   langBtn.disabled = true;
   langBtn.style.opacity = '0.5';
 
+
   answersList.addEventListener("click", ({ target }) => {
     if (!target.disabled && target.tagName !== 'UL') {
       if (innerScore > 0) {
@@ -84,5 +86,11 @@ export function createGamePage(counter = MIN_COUNTER, arr = BIRDS_DATA_RU, check
     const nextCounter = innerCounter + 1;
     localStorage.removeItem(LOCAL_STORAGE_KEYS.answers);
     createGamePage(nextCounter, BIRDS_DATA_RU, "", { name: '' }, MAX_GAP_SCORE, innerTotalScore);
+  });
+  window.addEventListener('hashchange', (event) => {
+    const indexHash = event.newURL.indexOf('#');
+    const newUrl = event.newURL.slice(indexHash);
+    window.history.pushState({ urlPath: newUrl }, '', newUrl);
+    router(newUrl);
   });
 }

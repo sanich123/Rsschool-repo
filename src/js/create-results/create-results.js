@@ -11,6 +11,7 @@ import {
   PATHS,
   LANGUAGES,
 } from "../utils/const";
+import { router } from "../utils/router";
 
 export function createResults(totalScore) {
   const innerLang = localStorage.getItem(LOCAL_STORAGE_KEYS.language);
@@ -34,5 +35,11 @@ export function createResults(totalScore) {
   gameBtn.addEventListener("click", () => {
     window.history.pushState({ urlPath: PATHS.game }, "", PATHS.game);
     createGamePage();
+  });
+  window.addEventListener('hashchange', (event) => {
+    const indexHash = event.newURL.indexOf('#');
+    const newUrl = event.newURL.slice(indexHash);
+    window.history.pushState({ urlPath: newUrl }, '', newUrl);
+    router(newUrl);
   });
 }

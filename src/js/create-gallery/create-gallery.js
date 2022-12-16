@@ -5,6 +5,7 @@ import { INITIAL_COUNT, LANGUAGES, LOCAL_STORAGE_KEYS } from "../utils/const";
 import { BIRDS_DATA_EN, BIRDS_DATA_RU } from '../utils/mocks';
 import { getNavLinks } from "../layout-makers/get-nav-links";
 import { setAudio } from "../manage-audio/manage-audio";
+import { router } from "../utils/router";
 
 export function createGalleryPage(counter = INITIAL_COUNT) {
     let innerCounter = counter;
@@ -25,5 +26,11 @@ export function createGalleryPage(counter = INITIAL_COUNT) {
     });
     rightBtn.addEventListener('click', () => {
         createGalleryPage(++innerCounter);
+    });
+    window.addEventListener('hashchange', (event) => {
+        const indexHash = event.newURL.indexOf('#');
+        const newUrl = event.newURL.slice(indexHash);
+        window.history.pushState({ urlPath: newUrl }, '', newUrl);
+        router(newUrl);
     });
 }

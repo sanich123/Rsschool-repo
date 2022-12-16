@@ -100,3 +100,11 @@ export function getBirdNameOnAnotherLang(ruBirds, enBirds) {
   }
   return result;
 }
+
+export function getUrl(string) {
+  return string.slice(string.indexOf('#'));
+}
+
+export function getSearchParams() {
+  
+}

@@ -53,10 +53,10 @@ export const CONGRATULATIONS_EN = 'Congratulations! You have scored the maximum 
 
 export const LAST_GROUP = 5;
 export const PATHS = {
-  main: 'main', 
-  game: 'game', 
-  gallery: 'gallery', 
-  results: 'results',
+  main: '#main', 
+  game: '#game', 
+  gallery: '#gallery', 
+  results: '#results',
 }
 export const MAX_SCORE = 30;
 export const MIN_COUNTER = 0;
