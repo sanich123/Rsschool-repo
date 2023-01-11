@@ -16,7 +16,10 @@ module.exports = {
     open: true,
     hot: true,
   },
-  entry: ["@babel/polyfill", path.resolve(__dirname, "src/js", "entry.js")],
+  entry: ["@babel/polyfill", path.resolve(__dirname, "src/js", "entry.ts")],
+  resolve: {
+    extensions: ['.js', '.tsx', '.ts'],
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
@@ -32,6 +35,11 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
       {
         test: /\.html$/i,
         loader: "html-loader",
