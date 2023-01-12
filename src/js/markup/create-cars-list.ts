@@ -9,8 +9,8 @@ export function createCarsList(carsList: CarsType[]) {
         <h2 class="cars__amount">IN GARAGE: ${carsList.length} cars</h2>
         ${createPagination()}
         <ul class="cars-list">
-        ${carsList.map(({ name, color }) => `<li class="cars-list__item list-item">
-          ${BTNS_VALUES.map((type) => `<button class="list-item__btn" name="${type}-btn">${type.toUpperCase()}</button>`).join('')}
+        ${carsList.map(({ name, color, id }) => `<li class="cars-list__item list-item">
+          ${BTNS_VALUES.map((type) => `<button class="list-item__btn" name="${type}-btn" value="${id}">${type.toUpperCase()}</button>`).join('')}
             <div class="list-item__name">${name}</div>
             ${createCarIcon(color)}
             ${startStopBtns()}
