@@ -1,0 +1,27 @@
+.header {
+  margin: 20px;
+  &-nav {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    gap: 20px;
+    &__nav-link {
+      color: blueviolet;
+      text-transform: uppercase;
+      font: bold 1.5rem/1.5 Arial, sans-serif;
+      border: 1px solid blueviolet;
+      padding: 0.3em;
+      border-radius: 0.3em;
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.5s;
+        color: burlywood;
+        border: 1px solid burlywood;
+      }
+    }
+    .active {
+      color: orange;
+      transform: scale(1.1);
+      background: orangered;
+    }
+  }
+}

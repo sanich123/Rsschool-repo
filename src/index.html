@@ -9,25 +9,25 @@
   <body class="page">
     <header class="header">
       <nav class="header__nav header-nav">
-        <a class="header-nav__nav-link" href="/#garage">To the garage</a>
-        <a class="header-nav__nav-link" href="/#winners">To winners</a>
+        <a class="header-nav__nav-link" href="/#garage">Garage</a>
+        <a class="header-nav__nav-link" href="/#winners">Winners</a>
       </nav>
     </header>
     <main class="page-main">
       <section class="create-section">
         <form class="create-section__create-car create-car">
-          <input class="create-car__name-input" type="text" />
+          <input class="create-car__name-input" type="text" placeholder="Type name of your car"/>
           <input class="create-car__color-input" type="color" value="#e66465" />
           <button class="create-car__btn" type="submit">CREATE</button>
         </form>
         <form class="create-section__update-car update-car">
-          <input class="update-car__name-input" type="text" />
+          <input class="update-car__name-input" type="text" placeholder="Type name of car to update"/>
           <input class="update-car__color-input" type="color" value="#e66465" />
           <button class="update-car__btn" type="submit">UPDATE</button>
         </form>
       </section>
       <section class="cars">
-        <h2 class="cars__amount">GARAGE: 102 cars</h2>
+        <h2 class="cars__amount">IN GARAGE: 102 cars</h2>
         <section class="pagination">
           <form class="pagination__page-btns page-btns">
             <button
@@ -45,7 +45,7 @@
               type="radio"
               value=""
             />
-            <label for="${number}-page-input" class="page-btns__label"></label>
+            <label for="${number}-page-input" class="page-btns__label">1</label>
             <button
               class="page-btns__label"
               type="button"
@@ -114,6 +114,7 @@
               <label for="stop-input" class="start-stop__label">Stop</label>
             </form>
             <svg
+            class="list-item__svg-finish"
             width="100"
               id="finish-icon"
               xmlns="http://www.w3.org/2000/svg"

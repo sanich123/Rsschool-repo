@@ -1,0 +1,48 @@
+.create-section {
+  display: grid;
+  gap: 1.5rem;
+  margin: 1.5rem;
+  .create-car,
+  .update-car {
+    display: grid;
+    grid-template-columns: repeat(3, min-content);
+    gap: 1.5rem;
+    align-items: center;
+    &__name-input {
+      width: 300px;
+      height: 50px;
+      border-radius: 5px;
+      padding: 10px;
+      &::placeholder {
+        font: italic 1rem/1.2 Arial, sans-serif;
+      }
+      &:focus {
+        background: gainsboro;
+      }
+    }
+    &__color-input {
+      width: 5rem;
+      height: 3rem;
+      border-radius: 0.3rem;
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.5s;
+      }
+    }
+    &__btn {
+      color: blueviolet;
+      text-transform: uppercase;
+      font: bold 1.5rem/1.5 Arial, sans-serif;
+      border: 1px solid blueviolet;
+      padding: 0.3em;
+      border-radius: 0.3em;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.5s;
+        color: burlywood;
+        border: 1px solid burlywood;
+      }
+    }
+  }
+}

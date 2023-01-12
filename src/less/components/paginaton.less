@@ -1,0 +1,36 @@
+  .pagination {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    &__page-btns {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      column-gap: 2px;
+    }
+    .page-btns__label {
+      .reset-btn();
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      background: orange;
+      transition: .5s ease;
+      color: white;
+      &:hover {
+        background: orangered;
+      }
+      &:disabled {
+        opacity: 0.5;
+        background: grey;
+        cursor: not-allowed;
+      }
+    }
+
+    .page-btns-number__input {
+      width: 40px;
+      height: 30px;
+    }
+    .checked {
+      background: green;
+    }
+  }
