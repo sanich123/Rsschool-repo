@@ -1,8 +1,7 @@
-import { createHeader } from "../markup/create-header";
 import { hashListener } from "../utils/router";
 
-export default function CreateWinners() {
+export default function Create404Page() {
     const body = document.querySelector('.page') as HTMLBodyElement;
-    body.innerHTML = `${createHeader()}`;
+    body.innerHTML = '<h1>We tried to find this page, but unfortunately we didnt find it</h1>';
     hashListener();
 }
