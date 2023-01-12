@@ -7,7 +7,8 @@
     margin-top: 2rem;
     position: relative;
     .list-item {
-        border-bottom: 0.5rem dashed blueviolet;
+      border-bottom: 0.5rem dashed blueviolet;
+      margin-top: 20px;
       &__btn {
         color: blueviolet;
         text-transform: uppercase;
@@ -32,15 +33,35 @@
         text-transform: uppercase;
         color: blueviolet;
       }
-      &__car {
-        g {
-            fill: orange;
-        }
-      }
       &__svg-finish {
         position: absolute;
         right: 0;
         top: 50%;
+      }
+      &__start-stop {
+        margin: 20px 0;
+        .start-stop__input {
+          display: none;
+        }
+        .start-stop__label {
+          font: normal 1.2rem/1.2 Arial sans-serif;
+          text-transform: uppercase;
+          border: 1px solid orange;
+          padding: 10px;
+          border-radius: 5px;
+          color: orange;
+          transition: 1s;
+          &:hover {
+            border: 1px solid orangered;
+            color: yellow;
+
+            cursor: pointer;
+            background: orange;
+          }
+        }
+        .start-stop__input:checked + label {
+          color: orange;
+        }
       }
     }
   }
