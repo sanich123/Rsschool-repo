@@ -1,7 +1,5 @@
-import Create404Page from "../pages/create-404-page";
-import CreateWinners from "../pages/create-winners";
 import { ROUTES } from "./const";
-import { getCars } from "./data-actions";
+import { getCars, getWinners } from "./data-actions";
 
 export default function Router() {
     const location = window.location.href;
@@ -9,9 +7,7 @@ export default function Router() {
         getCars();
     } 
     if (location.includes(ROUTES.winners)) {
-        CreateWinners();
-    } else {
-        Create404Page();
+        getWinners();
     }
     hashListener();
 }

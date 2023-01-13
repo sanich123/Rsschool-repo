@@ -18,7 +18,7 @@ export default function CreateGarage(carsList = []) {
       carsList
     )}</main>`;
     const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns } = getGarageNodes();
-    createCarForm.addEventListener("submit", async (e) => {
+    createCarForm?.addEventListener("submit", async (e) => {
       e.preventDefault();
       const { value: name } = createNameInput;
       const { value: color } = createColorInput;
@@ -27,7 +27,7 @@ export default function CreateGarage(carsList = []) {
         getCars();
       }
     });
-    carsListListener.addEventListener('click', async ({ target }) => {
+    carsListListener?.addEventListener('click', async ({ target }) => {
       if (target instanceof HTMLButtonElement) {
         const { name, value: id } = target;
         if (name.includes(BTNS_VALUES[1])) {
@@ -36,12 +36,12 @@ export default function CreateGarage(carsList = []) {
         }
         if (name.includes(BTNS_VALUES[0])) {
           updateCarBtn.value = id;
-          const [{name: carName}] = carsList.filter((car: CarsType) => car.id === Number(id));
+          const [{ name: carName }] = carsList.filter((car: CarsType) => car.id === Number(id));
           updateNameInput.value = carName;
         }
       }
     });
-    updateCarForm.addEventListener('submit', async (e) => {
+    updateCarForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const { value: name } = updateNameInput;
       const { value: color } = updateColorInput;
@@ -51,12 +51,12 @@ export default function CreateGarage(carsList = []) {
         getCars();
       }
     });
-    raceResetGenerateBtns?.addEventListener('click', async ({target}) => {
+    raceResetGenerateBtns?.addEventListener('click', async ({ target }) => {
       if (target instanceof HTMLButtonElement) {
         const { name } = target;
         if (name === 'generate') {
           const randomCars = CAR_BRANDS.map((carBrand) => ({ name: carBrand, color: getRandomColor() }));
-          randomCars.map((car) => createCar(car));
+          randomCars.forEach((car) => createCar(car));
           getCars();
         }
       }
