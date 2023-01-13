@@ -1,12 +1,12 @@
 import Create404Page from "../pages/create-404-page";
 import CreateWinners from "../pages/create-winners";
 import { ROUTES } from "./const";
-import { getData } from "./data-actions";
+import { getCars } from "./data-actions";
 
 export default function Router() {
     const location = window.location.href;
     if (location.includes(ROUTES.garage) || !location.includes('#')) {
-        getData();
+        getCars();
     } 
     if (location.includes(ROUTES.winners)) {
         CreateWinners();

@@ -3,9 +3,10 @@ import { createColorName } from "../markup/create-color-name";
 import { createHeader } from "../markup/create-header";
 import { createLoader } from "../markup/create-loader";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
-import { BTNS_VALUES } from "../utils/const";
-import { createCar, deleteCar, getData, updateCar } from "../utils/data-actions";
+import { BTNS_VALUES, CAR_BRANDS } from "../utils/const";
+import { createCar, deleteCar, getCars, updateCar } from "../utils/data-actions";
 import { CarsType } from "../utils/types";
+import { getRandomColor } from "../utils/utils";
 
 export default function CreateGarage(carsList = []) {
   const body = document.querySelector(".page") as HTMLBodyElement;
@@ -16,14 +17,14 @@ export default function CreateGarage(carsList = []) {
     body.innerHTML = `<main class="page-main">${createHeader()}${createColorName()}${createCarsList(
       carsList
     )}</main>`;
-    const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn } = getGarageNodes();
+    const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns } = getGarageNodes();
     createCarForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const { value: name } = createNameInput;
       const { value: color } = createColorInput;
       if (name) {
         createCar({ name, color });
-        getData();
+        getCars();
       }
     });
     carsListListener.addEventListener('click', async ({ target }) => {
@@ -31,7 +32,7 @@ export default function CreateGarage(carsList = []) {
         const { name, value: id } = target;
         if (name.includes(BTNS_VALUES[1])) {
           deleteCar(id);
-          getData();
+          getCars();
         }
         if (name.includes(BTNS_VALUES[0])) {
           updateCarBtn.value = id;
@@ -46,9 +47,18 @@ export default function CreateGarage(carsList = []) {
       const { value: color } = updateColorInput;
       const { value: id } = updateCarBtn;
       if (name) {
-        console.log(name, color, id);
         updateCar({name, color}, id);
-        getData();
+        getCars();
+      }
+    });
+    raceResetGenerateBtns?.addEventListener('click', async ({target}) => {
+      if (target instanceof HTMLButtonElement) {
+        const { name } = target;
+        if (name === 'generate') {
+          const randomCars = CAR_BRANDS.map((carBrand) => ({ name: carBrand, color: getRandomColor() }));
+          randomCars.map((car) => createCar(car));
+          getCars();
+        }
       }
     })
   }

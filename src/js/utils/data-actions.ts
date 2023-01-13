@@ -3,7 +3,7 @@ import CreateGarage from "../pages/create-garage";
 import { HEADERS_INFO, METHODS_HTTP, ROOT_URL } from "./const";
 import { CarsType } from "../utils/types";
 
-export async function getData() {
+export async function getCars() {
   const body = document.querySelector(".page") as HTMLBodyElement;
   body.innerHTML = createLoader();
   try {

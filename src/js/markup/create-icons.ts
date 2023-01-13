@@ -41,11 +41,11 @@ export function createFinishFlagIcon() {
               <g>
                 <g>
                   <rect x="256" y="160" fill="black" width="80" height="80" />
-                  <rect x="32" y="80" fill="#003B54" width="64" height="80" />
-                  <rect x="96" y="160" fill="#003B54" width="80" height="80" />
-                  <rect x="416" y="160" fill="#003B54" width="64" height="80" />
-                  <rect x="336" y="80" fill="#003B54" width="80" height="80" />
-                  <rect x="176" y="80" fill="#003B54" width="80" height="80" />
+                  <rect x="32" y="80" fill="black" width="64" height="80" />
+                  <rect x="96" y="160" fill="black" width="80" height="80" />
+                  <rect x="416" y="160" fill="black" width="64" height="80" />
+                  <rect x="336" y="80" fill="black" width="80" height="80" />
+                  <rect x="176" y="80" fill="black" width="80" height="80" />
                 </g>
               </g>
             </svg>`

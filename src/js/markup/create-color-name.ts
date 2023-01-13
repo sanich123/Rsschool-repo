@@ -10,5 +10,10 @@ export function createColorName() {
           <input class="update-car__color-input" type="color" value="#e66465" />
           <button class="update-car__btn" type="submit" value="">UPDATE</button>
         </form>
+        <form class="create-section__btns">
+        <button class="reset__btn" type="button" name="reset">RESET</button>
+        <button class="race__btn" type="button" name="race">RACE</button>
+        <button class="random-cars__btn" type="button" name="generate">GENERATE CARS</button>
+        </form>
       </section>`;
 }
