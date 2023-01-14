@@ -53,3 +53,11 @@ export const CAR_BRANDS_MODELS = [{ "brand": "Seat", "models": ["Alhambra", "Alt
 { "brand": "Smart", "models": ["Cabrio", "City-Coupé", "Compact Pulse", "Forfour", "Fortwo cabrio", "Fortwo coupé", "Roadster"] }]
 
 export const NETWORK_ERROR = '<h1>Произошла ошибка во время загрузки данных, проверьте ваше интернет-соединение</h1>';
+export const LS_KEYS = {
+    pageNumber: 'pageNumber',
+};
+export const INITIAL_NUMBER_PAGE = 1;
+export const DEFAULT_AMOUNT_OF_ITEMS = 7;
+export const PAGINATION_BTNS = {
+    next: 'next', previous: 'previous'
+}

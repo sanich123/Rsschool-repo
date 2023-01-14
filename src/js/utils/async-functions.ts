@@ -59,3 +59,7 @@ export async function getWinners() {
     body.innerHTML = NETWORK_ERROR;
   }
 }
+
+export async function sendCars(cars: Omit<CarsType, 'id'>[]) {
+  return Promise.all(cars.map((car) => createCar(car))).then(() => getCars());
+}

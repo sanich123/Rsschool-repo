@@ -1,11 +1,11 @@
 import { ROUTES } from "./const";
-import { getCars, getWinners } from "./async-funcitions";
+import { getCars, getWinners } from "./async-functions";
 
 export default function Router() {
     const location = window.location.href;
     if (location.includes(ROUTES.garage) || !location.includes('#')) {
         getCars();
-    } 
+    }
     if (location.includes(ROUTES.winners)) {
         getWinners();
     }

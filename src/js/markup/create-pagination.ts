@@ -1,11 +1,20 @@
-export function createPagination() {
-    return `<section class="pagination">
+import { LS_KEYS } from "../utils/const"
+import { getFromLocalStorage } from "../utils/local-storage"
+
+export function createPagination(amountPages: number) {
+  const page = Number(getFromLocalStorage(LS_KEYS.pageNumber));
+  const isFirstPage = page === 1 ? 'disabled' : '';
+  const isLastPage = page < amountPages ? '' : 'disabled';
+  const isOnePage = amountPages === 1 ? 'disabled' : '';
+  console.log(amountPages)
+  return `<section class="pagination">
           <form class="pagination__page-btns page-btns">
             <button
               class="page-btns__label"
               type="button"
               value="previous"
               name="prev-btn"
+              ${isFirstPage || isOnePage}
             >
               <
             </button>
@@ -16,21 +25,16 @@ export function createPagination() {
               type="radio"
               value=""
             />
-            <label for="number-page-input" class="page-btns__label">1</label>
+            <button for="number-page-input" class="page-btns__label" ${isOnePage}>${page}</button>
             <button
               class="page-btns__label"
               type="button"
               value="next"
               name="next-btn"
+              ${isLastPage || isOnePage}
             >
               >
             </button>
-            <input
-              class="page-btns-number__input"
-              type="number"
-              name="amount-items"
-              value=""
-            />
           </form>
         </section>`
 }
