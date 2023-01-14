@@ -1,5 +1,5 @@
 import { ROUTES } from "./const";
-import { getCars, getWinners } from "./data-actions";
+import { getCars, getWinners } from "./async-funcitions";
 
 export default function Router() {
     const location = window.location.href;

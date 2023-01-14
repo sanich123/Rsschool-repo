@@ -4,7 +4,7 @@ import { createHeader } from "../markup/create-header";
 import { createLoader } from "../markup/create-loader";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
 import { BTNS_VALUES, CAR_BRANDS } from "../utils/const";
-import { createCar, deleteCar, getCars, updateCar } from "../utils/data-actions";
+import { createCar, deleteCar, getCars, updateCar } from "../utils/async-funcitions";
 import { CarsType } from "../utils/types";
 import { getRandomColor } from "../utils/utils";
 
