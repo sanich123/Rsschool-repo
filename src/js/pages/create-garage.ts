@@ -3,10 +3,10 @@ import { createColorName } from "../markup/create-color-name";
 import { createHeader } from "../markup/create-header";
 import { createLoader } from "../markup/create-loader";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
-import { BTNS_VALUES, CAR_BRANDS } from "../utils/const";
+import { BTNS_VALUES } from "../utils/const";
 import { createCar, deleteCar, getCars, updateCar } from "../utils/async-funcitions";
 import { CarsType } from "../utils/types";
-import { getRandomColor } from "../utils/utils";
+import { getRandomCarsColors } from "../utils/utils";
 
 export default function CreateGarage(carsList = []) {
   const body = document.querySelector(".page") as HTMLBodyElement;
@@ -55,7 +55,7 @@ export default function CreateGarage(carsList = []) {
       if (target instanceof HTMLButtonElement) {
         const { name } = target;
         if (name === 'generate') {
-          const randomCars = CAR_BRANDS.map((carBrand) => ({ name: carBrand, color: getRandomColor() }));
+          const randomCars = getRandomCarsColors();
           randomCars.forEach((car) => createCar(car));
           getCars();
         }
