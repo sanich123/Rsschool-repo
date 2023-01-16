@@ -52,11 +52,11 @@ export async function updateCar(carData: Omit<CarsType, "id">, id: string) {
   } catch {}
 }
 
-export async function getWinners() {
+export async function getWinners(params = '') {
   const body = document.querySelector(".page") as HTMLBodyElement;
   body.innerHTML = createLoader();
   try {
-    const response = await fetch(`${ROOT_URL}/${URL_ROUTES.winners}`);
+    const response = await fetch(`${ROOT_URL}/${URL_ROUTES.winners}${params}`);
     const responseCars = await fetch(`${ROOT_URL}/${URL_ROUTES.garage}`);
     const cars = await responseCars.json();
     const winners = await response.json();

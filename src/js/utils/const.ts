@@ -60,8 +60,16 @@ export const LS_KEYS = {
 };
 export const INITIAL_NUMBER_PAGE = 1;
 export const DEFAULT_AMOUNT_OF_ITEMS = 7;
+export const DEFAULT_AMOUNT_OF_ITEMS_WINNERS = 10;
 export const PAGINATION_BTNS = {
     next: 'next', previous: 'previous'
 }
 export const CAR_ICON_WIDTH_SMALL = 50;
 export const CAR_ICON_HEIGHT_SMALL = 50;
+
+export const SEARCH_PARAMS = {
+    sort: '_sort',
+    time: 'time',
+    order: '_order',
+    wins: 'wins',
+}

@@ -3,9 +3,15 @@
     grid-auto-flow: row;
     &__item {
         display: grid;
-
         grid-template-columns: repeat(5, 1fr);
         place-items: center;
-        width: 400px;
+        width: 600px;
+        .winners-list-item__wins-count,
+        .winners-list-item__time {
+            .reset-btn();
+            display: grid;
+            grid-auto-flow: column;
+            place-items: center;
+        }
     }
 }
