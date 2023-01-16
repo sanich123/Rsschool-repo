@@ -5,7 +5,7 @@ import { createPagination } from "./create-pagination";
 import { startStopBtns } from "./start-stop-form";
 
 export function createCarsList(carsList: CarsType[], paginatedData: CarsType[], amountPages: number) {
-  console.log(paginatedData);
+
   return `<section class="cars">
         <h2 class="cars__amount">IN GARAGE: ${carsList.length} cars</h2>
         ${createPagination(amountPages)}

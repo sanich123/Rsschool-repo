@@ -9,12 +9,12 @@ import { getRandomCarsColors } from "../utils/utils";
 import { getPaginatedData } from "../utils/pagination";
 import { applyToLocalStorage, getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
 
-export default function CreateGarage(carsList = []) {
+export default async function CreateGarage(carsList = []) {
   const body = document.querySelector(".page") as HTMLBodyElement;
   setDefaultPageToLocalStorage(carsList.length);
   const { paginatedData, amountPages } = getPaginatedData(carsList, getFromLocalStorage(LS_KEYS.pageNumber));
 
-  body.innerHTML = `<main class="page-main">${createHeader()}${createColorName()}${createCarsList(carsList, paginatedData, amountPages)}</main>`;
+  body.innerHTML = `<main class="page-main">${createHeader()}${createColorName()}${createCarsList(carsList, paginatedData as CarsType[], amountPages)}</main>`;
   const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns } = getGarageNodes();
   createCarForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -59,14 +59,9 @@ export default function CreateGarage(carsList = []) {
     if (target instanceof HTMLButtonElement) {
       const { value } = target;
       const numberOfPage = Number(getFromLocalStorage(LS_KEYS.pageNumber));
-      if (value === PAGINATION_BTNS.next) {
-        applyToLocalStorage(LS_KEYS.pageNumber, numberOfPage + 1);
-        CreateGarage(carsList);
-      }
-      if (value === PAGINATION_BTNS.previous) {
-        applyToLocalStorage(LS_KEYS.pageNumber, numberOfPage - 1);
-        CreateGarage(carsList);
-      }
+      if (value === PAGINATION_BTNS.next) applyToLocalStorage(LS_KEYS.pageNumber, numberOfPage + 1);
+      if (value === PAGINATION_BTNS.previous) applyToLocalStorage(LS_KEYS.pageNumber, numberOfPage - 1);
+      CreateGarage(carsList);
     }
   });
 }
