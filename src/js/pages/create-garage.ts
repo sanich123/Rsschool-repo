@@ -2,7 +2,7 @@ import { createCarsList } from "../markup/create-cars-list";
 import { createColorName } from "../markup/create-color-name";
 import { createHeader } from "../markup/create-header";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
-import { BTNS_VALUES, LS_KEYS, PAGINATION_BTNS } from "../utils/const";
+import { BTNS_VALUES, CAR_ICON_WIDTH_DEFAULT, LS_KEYS, PAGINATION_BTNS } from "../utils/const";
 import { createCar, deleteCar, getCars, sendCars, updateCar } from "../utils/async-functions";
 import { CarsType } from "../utils/types";
 import { getRandomCarsColors } from "../utils/utils";
@@ -47,7 +47,7 @@ export default async function CreateGarage(carsList = []) {
           const style = Number(window.getComputedStyle(li).getPropertyValue('width').replace(/px/gi, ''));
           if (carIcon) {
             carIcon.style.transition = 'transform 3s ease-in';
-            carIcon.style.transform = `translateX(${style - 204}px)`;
+            carIcon.style.transform = `translateX(${style - (CAR_ICON_WIDTH_DEFAULT * 2)}px)`;
           }
           
         }
