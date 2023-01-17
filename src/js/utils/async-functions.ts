@@ -70,6 +70,7 @@ export async function getWinners(params = '') {
 export async function sendCars(cars: Omit<CarsType, "id">[]) {
   return Promise.all(cars.map((car) => createCar(car))).then(() => getCars());
 }
+
 export async function createWinner(winnersData: WinnersType) {
   try {
     await fetch(`${ROOT_URL}/${URL_ROUTES.winners}`, {
@@ -79,3 +80,5 @@ export async function createWinner(winnersData: WinnersType) {
     });
   } catch {}
 }
+//for testing winners functionality
+// [...Array(50).keys()].map((key) => ({wins: key, time: key, id: key})).forEach((winner) => createWinner(winner))

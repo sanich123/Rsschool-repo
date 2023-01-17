@@ -66,10 +66,14 @@ export const PAGINATION_BTNS = {
 }
 export const CAR_ICON_WIDTH_SMALL = 50;
 export const CAR_ICON_HEIGHT_SMALL = 50;
+export const CAR_ICON_WIDTH_DEFAULT = 104;
+export const CAR_ICON_HEIGHT_DEFAULT = 104;
 
 export const SEARCH_PARAMS = {
     sort: '_sort',
     time: 'time',
     order: '_order',
     wins: 'wins',
+    asc: 'ASC',
+    desc: 'DESC',
 }

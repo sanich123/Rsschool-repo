@@ -15,7 +15,8 @@ export default async function CreateGarage(carsList = []) {
   const { paginatedData, amountPages } = getPaginatedData(carsList, getFromLocalStorage(LS_KEYS.pageNumber));
 
   body.innerHTML = `<main class="page-main">${createHeader()}${createColorName()}${createCarsList(carsList, paginatedData as CarsType[], amountPages)}</main>`;
-  const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns } = getGarageNodes();
+  const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns} = getGarageNodes();
+
   createCarForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const { value: name } = createNameInput;
@@ -26,7 +27,7 @@ export default async function CreateGarage(carsList = []) {
     }
   });
   carsListListener?.addEventListener("click", async ({ target }) => {
-    if (target instanceof HTMLButtonElement) {
+      if (target instanceof HTMLButtonElement) {
       const { name, value: id } = target;
       if (name.includes(BTNS_VALUES[1])) {
         deleteCar(id);
@@ -37,7 +38,22 @@ export default async function CreateGarage(carsList = []) {
         const [{ name }] = carsList.filter((car: CarsType) => car.id === Number(id));
         updateNameInput.value = name;
       }
+      if (name.includes('start-stop')) {
+        const { value } = target;
+        if (value.includes('start')) {
+          const id = value.replace(/[a-z-]/gi, '');
+          const carIcon = document.getElementById(`car-${id}`);
+          const li = document.querySelector('.list-item') as HTMLLIElement;
+          const style = Number(window.getComputedStyle(li).getPropertyValue('width').replace(/px/gi, ''));
+          if (carIcon) {
+            carIcon.style.transition = 'transform 3s ease-in';
+            carIcon.style.transform = `translateX(${style - 204}px)`;
+          }
+          
+        }
+      }
     }
+
   });
   updateCarForm?.addEventListener("submit", async (e) => {
     e.preventDefault();

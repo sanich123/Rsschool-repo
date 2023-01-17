@@ -10,6 +10,6 @@ export interface WinnersType {
   time: number;
 }
 export interface CarsMocksType {
-  brand: string,
-  models: string[]
+  brand: string;
+  models: string[];
 }

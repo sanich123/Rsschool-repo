@@ -1,4 +1,4 @@
-import { BTNS_VALUES } from "../utils/const";
+import { BTNS_VALUES, CAR_ICON_HEIGHT_DEFAULT, CAR_ICON_WIDTH_DEFAULT } from "../utils/const";
 import { CarsType } from "../utils/types";
 import { createCarIcon, createFinishFlagIcon } from "./create-icons";
 import { createPagination } from "./create-pagination";
@@ -13,8 +13,8 @@ export function createCarsList(carsList: CarsType[], paginatedData: CarsType[], 
         ${paginatedData.slice().sort((a, b) => b.id - a.id).map(({ name, color, id }) => `<li class="cars-list__item list-item">
           ${BTNS_VALUES.map((type) => `<button class="list-item__btn" name="${type}-btn" value="${id}">${type.toUpperCase()}</button>`).join('')}
             <div class="list-item__name">${name}</div>
-            ${createCarIcon(color)}
-            ${startStopBtns()}
+            ${createCarIcon(color, CAR_ICON_WIDTH_DEFAULT, CAR_ICON_HEIGHT_DEFAULT, id)}
+            ${startStopBtns(id)}
             ${createFinishFlagIcon()}
           </li>`).join('')}
         </ul>
