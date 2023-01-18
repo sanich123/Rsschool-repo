@@ -9,7 +9,8 @@ export function getGarageNodes() {
     const updateCarBtn = document.querySelector('.update-car__btn') as HTMLButtonElement;
     const raceResetGenerateBtns = document.querySelector('.create-section__btns') as HTMLFormElement;
     const paginationBtns = document.querySelector('.page-btns') as HTMLFormElement;
+    const raceBtn = document.querySelector('.race__btn') as HTMLButtonElement;
     return {
-        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns,
+        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn,
     }
 }

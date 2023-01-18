@@ -4,7 +4,7 @@ import { createHeader } from "../markup/create-header";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
 import { BTNS_VALUES, LS_KEYS, PAGINATION_BTNS } from "../utils/const";
 import { createCar, deleteCar, getCars, receiveDriveMode, sendCars, startEngine, updateCar } from "../utils/async-functions";
-import { CarsType } from "../utils/types";
+import { CarsType, EngineResponse } from "../utils/types";
 import { getRandomCarsColors } from "../utils/utils";
 import { getPaginatedData } from "../utils/pagination";
 import { applyToLocalStorage, getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
@@ -16,7 +16,19 @@ export default async function CreateGarage(carsList = []) {
   const { paginatedData, amountPages } = getPaginatedData(carsList, getFromLocalStorage(LS_KEYS.pageNumber));
 
   body.innerHTML = `<main class="page-main">${createHeader()}${createColorName()}${createCarsList(carsList, paginatedData as CarsType[], amountPages)}</main>`;
-  const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns} = getGarageNodes();
+  const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn } = getGarageNodes();
+
+  raceBtn?.addEventListener('click', async () => {
+    const ids = paginatedData.map(({id}) => id);
+    const end = getLengthOfParentContainer();
+    Promise.all(ids.map((id) => startEngine(`${id}`))).then((response) => {
+      response.map(async ({velocity, distance}, index) => {
+        const duration = Math.floor(distance / velocity);
+        const carIcon = document.getElementById(`car-${ids[index]}`) as HTMLElement; 
+        await receiveDriveMode(`${ids[index]}`, carIcon, end, duration);
+      });
+    })
+  });
 
   createCarForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -50,11 +62,6 @@ export default async function CreateGarage(carsList = []) {
           const duration = Math.floor(distance / velocity);
           await receiveDriveMode(id, carIcon, end, duration);
         }
-        // if (value.includes('stop')) {
-        //   const response = await stopEngine(id);
-        //   console.log(response);
-        //   carIcon.style.transform = 'translateX(0)';
-        // }
       }
     }
   });

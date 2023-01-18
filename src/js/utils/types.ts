@@ -13,3 +13,8 @@ export interface CarsMocksType {
   brand: string;
   models: string[];
 }
+
+export interface EngineResponse {
+  velocity: number,
+  distance: number
+}
