@@ -60,11 +60,22 @@ export async function getWinners(params = "") {
   }
 }
 
+export async function getWinnersSimple(params = '') {
+  try {
+    const response = await fetch(`${ROOT_URL}/${URL_ROUTES.winners}${params}`);
+    const winners = await response.json();
+    return winners;
+  } catch {
+
+  }
+}
+
 export async function sendCars(cars: Omit<CarsType, "id">[]) {
   return Promise.all(cars.map((car) => createCar(car))).then(() => getCars());
 }
 
 export async function createWinner(winnersData: WinnersType) {
+  console.log(winnersData)
   try {
     await fetch(`${ROOT_URL}/${URL_ROUTES.winners}`, {
       method: METHODS_HTTP.post,
@@ -78,10 +89,7 @@ export async function startEngine(id: string) {
   try {
     const response = await fetch(
       `${ROOT_URL}/${URL_ROUTES.engine}?${SEARCH_PARAMS.id}=${id}&${SEARCH_PARAMS.status}=${SEARCH_PARAMS.started}`,
-      {
-        method: METHODS_HTTP.patch,
-      }
-    );
+      { method: METHODS_HTTP.patch });
     const data = await response.json();
     return data;
   } catch {}
@@ -100,12 +108,7 @@ export async function stopEngine(id: string) {
   } catch {}
 }
 
-export async function receiveDriveMode(
-  id: string,
-  node: HTMLElement,
-  end: number,
-  duration: number
-) {
+export async function receiveDriveMode(id: string, node: HTMLElement, end: number, duration: number) {
   let animationId = 0;
 
   function animatePosition(node: HTMLElement, end: number, duration: number) {
@@ -132,17 +135,15 @@ export async function receiveDriveMode(
   animatePosition(node, end, duration);
 
   try {
-    const response = await fetch(
-      `${ROOT_URL}/${URL_ROUTES.engine}?${SEARCH_PARAMS.id}=${id}&${SEARCH_PARAMS.status}=${SEARCH_PARAMS.drive}`,
-      {
-        method: METHODS_HTTP.patch,
-      }
-    );
+    const response = await fetch(`${ROOT_URL}/${URL_ROUTES.engine}?${SEARCH_PARAMS.id}=${id}&${SEARCH_PARAMS.status}=${SEARCH_PARAMS.drive}`,
+      { method: METHODS_HTTP.patch });
     const { status } = response;
     if (status === 500) {
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
+    } else {
+      return Number(id);
     }
   } catch {}
 }

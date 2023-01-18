@@ -3,8 +3,8 @@ import { createColorName } from "../markup/create-color-name";
 import { createHeader } from "../markup/create-header";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
 import { BTNS_VALUES, LS_KEYS, PAGINATION_BTNS } from "../utils/const";
-import { createCar, deleteCar, getCars, receiveDriveMode, sendCars, startEngine, updateCar } from "../utils/async-functions";
-import { CarsType, EngineResponse } from "../utils/types";
+import { createCar, createWinner, deleteCar, getCars, getWinnersSimple, receiveDriveMode, sendCars, startEngine, updateCar } from "../utils/async-functions";
+import { CarsType, WinnersType } from "../utils/types";
 import { getRandomCarsColors } from "../utils/utils";
 import { getPaginatedData } from "../utils/pagination";
 import { applyToLocalStorage, getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
@@ -19,15 +19,33 @@ export default async function CreateGarage(carsList = []) {
   const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn } = getGarageNodes();
 
   raceBtn?.addEventListener('click', async () => {
+    const topSpeeds: {id: number, duration: number}[] = [];
     const ids = paginatedData.map(({id}) => id);
     const end = getLengthOfParentContainer();
-    Promise.all(ids.map((id) => startEngine(`${id}`))).then((response) => {
-      response.map(async ({velocity, distance}, index) => {
-        const duration = Math.floor(distance / velocity);
-        const carIcon = document.getElementById(`car-${ids[index]}`) as HTMLElement; 
-        await receiveDriveMode(`${ids[index]}`, carIcon, end, duration);
-      });
-    })
+    const speedDistances = await Promise.all(ids.map((id) => startEngine(`${id}`)));
+    const finished = await Promise.all(speedDistances.map(async ({ velocity, distance }, i) => {
+      const duration = Math.floor(distance / velocity);
+      topSpeeds.push({id: ids[i], duration});
+      const carIcon = document.getElementById(`car-${ids[i]}`) as HTMLElement; 
+      return await receiveDriveMode(`${ids[i]}`, carIcon, end, duration);
+    }));
+    const filterWastedCars = finished.filter(Boolean);
+    const {id, duration: time} = topSpeeds.filter(({id}) => filterWastedCars.includes(id)).sort((a, b) => a.duration - b.duration)[0];
+    await createWinner({id, time, wins: 1});
+  //   const winners = await getWinnersSimple();
+  //   winners.map((winner: WinnersType) => {
+  //     if (winner.id === topSpeedCar.id) {
+  //       if (winner.time > topSpeedCar.duration) {
+  //         winner.time = topSpeedCar.duration;
+  //       }
+  //       winner.wins += 1;
+  //     }
+  //   return winner;
+  // });
+  // Promise.all(winners.map((winner: WinnersType) => createWinner(winner)));
+
+
+
   });
 
   createCarForm?.addEventListener("submit", async (e) => {
@@ -41,7 +59,6 @@ export default async function CreateGarage(carsList = []) {
   });
   carsListListener?.addEventListener("click", async ({ target }) => {
       if (target instanceof HTMLButtonElement) {
-      
       const { name, value: id } = target;
       if (name.includes(BTNS_VALUES[1])) {
         deleteCar(id);
