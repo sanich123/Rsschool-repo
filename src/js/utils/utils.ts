@@ -1,4 +1,5 @@
-import { CAR_BRANDS_MODELS, SEARCH_PARAMS } from "./const";
+import { SEARCH_PARAMS } from "./const";
+import { CAR_BRANDS_MODELS } from "./mocks";
 import { CarsMocksType } from "./types";
 
 export function getRandomColor() {

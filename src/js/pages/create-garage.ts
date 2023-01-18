@@ -2,12 +2,13 @@ import { createCarsList } from "../markup/create-cars-list";
 import { createColorName } from "../markup/create-color-name";
 import { createHeader } from "../markup/create-header";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
-import { BTNS_VALUES, CAR_ICON_WIDTH_DEFAULT, LS_KEYS, PAGINATION_BTNS } from "../utils/const";
-import { createCar, deleteCar, getCars, sendCars, updateCar } from "../utils/async-functions";
+import { BTNS_VALUES, LS_KEYS, PAGINATION_BTNS } from "../utils/const";
+import { createCar, deleteCar, getCars, receiveDriveMode, sendCars, startEngine, updateCar } from "../utils/async-functions";
 import { CarsType } from "../utils/types";
 import { getRandomCarsColors } from "../utils/utils";
 import { getPaginatedData } from "../utils/pagination";
 import { applyToLocalStorage, getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
+import { getLengthOfParentContainer } from "../utils/animations";
 
 export default async function CreateGarage(carsList = []) {
   const body = document.querySelector(".page") as HTMLBodyElement;
@@ -28,6 +29,7 @@ export default async function CreateGarage(carsList = []) {
   });
   carsListListener?.addEventListener("click", async ({ target }) => {
       if (target instanceof HTMLButtonElement) {
+      
       const { name, value: id } = target;
       if (name.includes(BTNS_VALUES[1])) {
         deleteCar(id);
@@ -40,20 +42,21 @@ export default async function CreateGarage(carsList = []) {
       }
       if (name.includes('start-stop')) {
         const { value } = target;
+        const id = value.replace(/[a-z-]/gi, '');
+        const carIcon = document.getElementById(`car-${id}`) as HTMLElement; 
         if (value.includes('start')) {
-          const id = value.replace(/[a-z-]/gi, '');
-          const carIcon = document.getElementById(`car-${id}`);
-          const li = document.querySelector('.list-item') as HTMLLIElement;
-          const style = Number(window.getComputedStyle(li).getPropertyValue('width').replace(/px/gi, ''));
-          if (carIcon) {
-            carIcon.style.transition = 'transform 3s ease-in';
-            carIcon.style.transform = `translateX(${style - (CAR_ICON_WIDTH_DEFAULT * 2)}px)`;
-          }
-          
+          const end = getLengthOfParentContainer();
+          const { velocity, distance } = await startEngine(id);
+          const duration = Math.floor(distance / velocity);
+          await receiveDriveMode(id, carIcon, end, duration);
         }
+        // if (value.includes('stop')) {
+        //   const response = await stopEngine(id);
+        //   console.log(response);
+        //   carIcon.style.transform = 'translateX(0)';
+        // }
       }
     }
-
   });
   updateCarForm?.addEventListener("submit", async (e) => {
     e.preventDefault();

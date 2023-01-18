@@ -1,13 +1,6 @@
 import { createLoader } from "../markup/create-loader";
 import CreateGarage from "../pages/create-garage";
-import {
-  HEADERS_INFO,
-  LS_KEYS,
-  METHODS_HTTP,
-  NETWORK_ERROR,
-  ROOT_URL,
-  URL_ROUTES,
-} from "./const";
+import { HEADERS_INFO, LS_KEYS, METHODS_HTTP, NETWORK_ERROR, ROOT_URL, SEARCH_PARAMS, URL_ROUTES } from "./const";
 import { CarsType, WinnersType } from "./types";
 import CreateWinners from "../pages/create-winners";
 import { applyToLocalStorage } from "./local-storage";
@@ -52,7 +45,7 @@ export async function updateCar(carData: Omit<CarsType, "id">, id: string) {
   } catch {}
 }
 
-export async function getWinners(params = '') {
+export async function getWinners(params = "") {
   const body = document.querySelector(".page") as HTMLBodyElement;
   body.innerHTML = createLoader();
   try {
@@ -80,5 +73,76 @@ export async function createWinner(winnersData: WinnersType) {
     });
   } catch {}
 }
-//for testing winners functionality
-// [...Array(50).keys()].map((key) => ({wins: key, time: key, id: key})).forEach((winner) => createWinner(winner))
+
+export async function startEngine(id: string) {
+  try {
+    const response = await fetch(
+      `${ROOT_URL}/${URL_ROUTES.engine}?${SEARCH_PARAMS.id}=${id}&${SEARCH_PARAMS.status}=${SEARCH_PARAMS.started}`,
+      {
+        method: METHODS_HTTP.patch,
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch {}
+}
+
+export async function stopEngine(id: string) {
+  try {
+    const response = await fetch(
+      `${ROOT_URL}/${URL_ROUTES.engine}?${SEARCH_PARAMS.id}=${id}&${SEARCH_PARAMS.status}=${SEARCH_PARAMS.stopped}`,
+      {
+        method: METHODS_HTTP.patch,
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch {}
+}
+
+export async function receiveDriveMode(
+  id: string,
+  node: HTMLElement,
+  end: number,
+  duration: number
+) {
+  let animationId = 0;
+
+  function animatePosition(node: HTMLElement, end: number, duration: number) {
+    let currentX = 104;
+    const framesCount = (duration / 1000) * 60;
+    const dx = (end - currentX) / framesCount;
+    const tick = () => {
+      currentX += dx;
+      node.style.transform = `translateX(${currentX}px)`;
+      if (currentX < end) {
+        animationId = requestAnimationFrame(tick);
+      }
+    };
+    tick();
+  }
+  const stopBtn = document.querySelector(`.stop-btn-${id}`);
+  stopBtn?.addEventListener("click", async () => {
+    await stopEngine(id);
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      node.style.transform = 'translateX(0)';
+    }
+  });
+  animatePosition(node, end, duration);
+
+  try {
+    const response = await fetch(
+      `${ROOT_URL}/${URL_ROUTES.engine}?${SEARCH_PARAMS.id}=${id}&${SEARCH_PARAMS.status}=${SEARCH_PARAMS.drive}`,
+      {
+        method: METHODS_HTTP.patch,
+      }
+    );
+    const { status } = response;
+    if (status === 500) {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    }
+  } catch {}
+}
