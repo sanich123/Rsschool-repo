@@ -1,15 +1,18 @@
+import { LS_KEYS } from "../utils/const";
+import { getFromLocalStorage } from "../utils/local-storage";
+
 export function createColorName() {
+  const createValue = getFromLocalStorage(LS_KEYS.createCarValue);
+  const updateValue = getFromLocalStorage(LS_KEYS.updateCarValue);
+  const createColor = getFromLocalStorage(LS_KEYS.createCarColor) || '#e66465';
+  const updateColor = getFromLocalStorage(LS_KEYS.updateCarColor) || '#e66465';
+
     return `<section class="create-section">
-        <form class="create-section__create-car create-car">
-          <input class="create-car__name-input" type="text" placeholder="Type name of your car"/>
-          <input class="create-car__color-input" type="color" value="#e66465" />
-          <button class="create-car__btn" type="submit">CREATE</button>
-        </form>
-        <form class="create-section__update-car update-car">
-          <input class="update-car__name-input" type="text" placeholder="Type name of car to update"/>
-          <input class="update-car__color-input" type="color" value="#e66465" />
-          <button class="update-car__btn" type="submit" value="">UPDATE</button>
-        </form>
+        ${['create', 'update'].map((word) => `<form class="${word}-section__${word}-car ${word}-car">
+          <input class="${word}-car__name-input" type="text" placeholder="Type name of your car" value="${word === 'create' ? (createValue || '') : (updateValue || '')}" name="${word}-car-name"/>
+          <input class="${word}-car__color-input" type="color" value="${word === 'create' ? createColor : updateColor}" name="${word}-car-color"/>
+          <button class="${word}-car__btn" type="submit">${word.toUpperCase()}</button>
+        </form>`).join('')}
         <form class="create-section__btns">
         <button class="reset__btn" type="button" name="reset">RESET</button>
         <button class="race__btn" type="button" name="race">RACE</button>

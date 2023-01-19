@@ -10,7 +10,11 @@ export function getGarageNodes() {
     const raceResetGenerateBtns = document.querySelector('.create-section__btns') as HTMLFormElement;
     const paginationBtns = document.querySelector('.page-btns') as HTMLFormElement;
     const raceBtn = document.querySelector('.race__btn') as HTMLButtonElement;
+    const startStopBtns = document.querySelectorAll('.start-stop__label') as NodeListOf<HTMLButtonElement>;
+    const generateCarsBtn = document.querySelector('.random-cars__btn') as HTMLButtonElement;
+    const resetCarsBtn = document.querySelector('.reset__btn') as HTMLButtonElement;
+    const selectDeleteBtns = document.querySelectorAll('.list-item__btn') as NodeListOf<HTMLButtonElement>;
     return {
-        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn,
+        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns,
     }
 }

@@ -18,3 +18,8 @@ export interface EngineResponse {
   velocity: number,
   distance: number
 }
+
+export interface TopSpeeds {
+  id: number,
+  duration: number,
+}

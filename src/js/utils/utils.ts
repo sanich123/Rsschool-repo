@@ -1,4 +1,6 @@
-import { SEARCH_PARAMS } from "./const";
+import { getCars } from "./async-functions";
+import { LS_KEYS, SEARCH_PARAMS } from "./const";
+import { applyToLocalStorage } from "./local-storage";
 import { CAR_BRANDS_MODELS } from "./mocks";
 import { CarsMocksType } from "./types";
 
@@ -28,5 +30,12 @@ export function getSearchParams() {
   const sortOrder = searchParams.get(SEARCH_PARAMS.order) || '';
   return {
      sortType, sortOrder, searchParams,
+  }
+}
+
+export function setRightPage(pageNumber: number, amountPages: number) {
+  if (pageNumber > amountPages) {
+    applyToLocalStorage(LS_KEYS.pageNumber, amountPages);
+    getCars();
   }
 }

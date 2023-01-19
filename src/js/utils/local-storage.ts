@@ -5,7 +5,7 @@ import {
   ROUTES,
 } from "./const";
 
-export function applyToLocalStorage(key: string, data: number) {
+export function applyToLocalStorage(key: string, data: number | string) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
