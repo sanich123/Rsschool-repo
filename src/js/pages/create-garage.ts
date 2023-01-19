@@ -3,8 +3,8 @@ import { createColorName } from "../markup/create-color-name";
 import { createHeader } from "../markup/create-header";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
 import { BTNS_VALUES, LS_KEYS, PAGINATION_BTNS } from "../utils/const";
-import { createCar, createWinner, deleteCar, getCars, getWinnersSimple, receiveDriveMode, sendCars, startEngine, updateCar } from "../utils/async-functions";
-import { CarsType, WinnersType } from "../utils/types";
+import { createCar, createWinner, deleteCar, getCars, getWinner, receiveDriveMode, sendCars, startEngine, updateCar, updateWinner } from "../utils/async-functions";
+import { CarsType } from "../utils/types";
 import { getRandomCarsColors } from "../utils/utils";
 import { getPaginatedData } from "../utils/pagination";
 import { applyToLocalStorage, getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
@@ -30,22 +30,16 @@ export default async function CreateGarage(carsList = []) {
       return await receiveDriveMode(`${ids[i]}`, carIcon, end, duration);
     }));
     const filterWastedCars = finished.filter(Boolean);
-    const {id, duration: time} = topSpeeds.filter(({id}) => filterWastedCars.includes(id)).sort((a, b) => a.duration - b.duration)[0];
-    await createWinner({id, time, wins: 1});
-  //   const winners = await getWinnersSimple();
-  //   winners.map((winner: WinnersType) => {
-  //     if (winner.id === topSpeedCar.id) {
-  //       if (winner.time > topSpeedCar.duration) {
-  //         winner.time = topSpeedCar.duration;
-  //       }
-  //       winner.wins += 1;
-  //     }
-  //   return winner;
-  // });
-  // Promise.all(winners.map((winner: WinnersType) => createWinner(winner)));
-
-
-
+    const {id, duration: currentTime} = topSpeeds.filter(({id}) => filterWastedCars.includes(id)).sort((a, b) => a.duration - b.duration)[0];
+    const winnerInfo = await getWinner(id);
+    if (!winnerInfo?.response.ok) {
+      await createWinner({ id, time: currentTime, wins: 1 });
+    } else {
+      const {id: availableId, wins: availableWins, time: availableTime} = winnerInfo?.data;
+      if (availableTime > (currentTime / 1000)) {
+        await updateWinner(availableId, {wins: availableWins + 1, time: (currentTime / 1000)})
+      }
+    }
   });
 
   createCarForm?.addEventListener("submit", async (e) => {

@@ -60,22 +60,11 @@ export async function getWinners(params = "") {
   }
 }
 
-export async function getWinnersSimple(params = '') {
-  try {
-    const response = await fetch(`${ROOT_URL}/${URL_ROUTES.winners}${params}`);
-    const winners = await response.json();
-    return winners;
-  } catch {
-
-  }
-}
-
 export async function sendCars(cars: Omit<CarsType, "id">[]) {
   return Promise.all(cars.map((car) => createCar(car))).then(() => getCars());
 }
 
 export async function createWinner(winnersData: WinnersType) {
-  console.log(winnersData)
   try {
     await fetch(`${ROOT_URL}/${URL_ROUTES.winners}`, {
       method: METHODS_HTTP.post,
@@ -146,4 +135,26 @@ export async function receiveDriveMode(id: string, node: HTMLElement, end: numbe
       return Number(id);
     }
   } catch {}
+}
+
+export async function getWinner(id: number) {
+  try {
+    const response = await fetch(`${ROOT_URL}/${URL_ROUTES.winners}/${id}`);
+    const data = await response.json();
+    return { response, data }
+  } catch {
+
+  }
+}
+
+export async function updateWinner(id: number, winnerData: {wins: number, time: number}) {
+  try {
+    await fetch(`${ROOT_URL}/${URL_ROUTES.winners}/${id}`, {
+      method: METHODS_HTTP.put,
+      headers: HEADERS_INFO,
+      body: JSON.stringify(winnerData),
+    });
+  } catch {
+
+  }
 }
