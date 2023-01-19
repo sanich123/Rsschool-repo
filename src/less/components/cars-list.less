@@ -54,9 +54,12 @@
           &:hover {
             border: 1px solid orangered;
             color: yellow;
-
             cursor: pointer;
             background: orange;
+          }
+          &:disabled {
+            background: gray;
+            cursor: not-allowed;
           }
         }
         .start-stop__input:checked + label {

@@ -99,7 +99,8 @@ export async function stopEngine(id: string) {
 
 export async function receiveDriveMode(id: string, node: HTMLElement, end: number, duration: number) {
   let animationId = 0;
-
+  const stopBtn = document.querySelector(`.stop-btn-${id}`) as HTMLButtonElement;
+  const startBtn = document.querySelector(`.start-btn-${id}`) as HTMLButtonElement;
   function animatePosition(node: HTMLElement, end: number, duration: number) {
     let currentX = 104;
     const framesCount = (duration / 1000) * 60;
@@ -113,12 +114,14 @@ export async function receiveDriveMode(id: string, node: HTMLElement, end: numbe
     };
     tick();
   }
-  const stopBtn = document.querySelector(`.stop-btn-${id}`);
+  
   stopBtn?.addEventListener("click", async () => {
     await stopEngine(id);
     if (animationId) {
       cancelAnimationFrame(animationId);
       node.style.transform = 'translateX(0)';
+      stopBtn.disabled = true;
+      startBtn.disabled = false;
     }
   });
   animatePosition(node, end, duration);

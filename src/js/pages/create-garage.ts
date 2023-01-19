@@ -64,8 +64,13 @@ export default async function CreateGarage(carsList = []) {
         updateNameInput.value = name;
       }
       if (name.includes('start-stop')) {
+
         const { value } = target;
         const id = value.replace(/[a-z-]/gi, '');
+        const stopBtn = document.querySelector(`.stop-btn-${id}`) as HTMLButtonElement;
+        const startBtn = document.querySelector(`.start-btn-${id}`) as HTMLButtonElement;
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
         const carIcon = document.getElementById(`car-${id}`) as HTMLElement; 
         if (value.includes('start')) {
           const end = getLengthOfParentContainer();
