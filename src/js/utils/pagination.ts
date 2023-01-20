@@ -10,7 +10,7 @@ import { applyToLocalStorage, getFromLocalStorage } from "./local-storage";
 import Router from "./router";
 import { CarsType, WinnersType } from "./types";
 
-function getPlace() {
+export function getPlace() {
   const location = window.location.href;
   return location.includes(ROUTES.garage) || !location.includes("#");
 }

@@ -54,3 +54,7 @@ export const SEARCH_PARAMS = {
     status: 'status',
     drive: 'drive',
 }
+
+export const DEFAULT_COLOR = '#000000';
+export const SUCCESS_UPDATE_CAR = 'Данные машинки успешно обновлены';
+export const FAILED_SEARCH = 'Машины с таким названием нет в базе';

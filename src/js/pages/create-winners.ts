@@ -8,7 +8,7 @@ import { getWinners } from "../utils/async-functions";
 import { LS_KEYS, ROUTES, SEARCH_PARAMS } from "../utils/const";
 import { getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
 import { getPaginatedData, incrementDecrementPage } from "../utils/pagination";
-import Router, { hashListener } from "../utils/router";
+import { hashListener, pushState } from "../utils/router";
 import { setSortSearchParamsWinners } from "../utils/search-params";
 import { WinnersType } from "../utils/types";
 import { getSearchParams } from "../utils/utils";
@@ -27,14 +27,8 @@ export default async function CreateWinners(sortParams = '') {
     ${await createWinnersList(paginatedData as WinnersType[])}</main>`;
   const { paginationBtns, garageLink, winnersLink } = getGarageNodes();
   const { timeBtn, winsBtn } = getWinnersNodes();
-  garageLink.addEventListener('click', () => {
-    window.history.pushState({}, '', ROUTES.garage);
-    Router();
-  });
-  winnersLink.addEventListener('click', () => {
-    window.history.pushState({}, '', ROUTES.winners);
-    Router();
-  });
+  garageLink.addEventListener('click', () => pushState(ROUTES.garage));
+  winnersLink.addEventListener('click', () => pushState(ROUTES.winners));
   winsBtn?.addEventListener("click", async ({ target }) => {
     if (target instanceof HTMLButtonElement) {
       const { value } = target;
@@ -50,11 +44,6 @@ export default async function CreateWinners(sortParams = '') {
   paginationBtns?.addEventListener("click", ({ target }) => {
     if (target instanceof HTMLButtonElement) {
       const { value } = target;
-      // if (value === PAGINATION_BTNS.next)
-      //   applyToLocalStorage(LS_KEYS.pageNumberWinners, pageNumberWinners + 1);
-      // if (value === PAGINATION_BTNS.previous)
-      //   applyToLocalStorage(LS_KEYS.pageNumberWinners, pageNumberWinners - 1);
-      // CreateWinners();
       incrementDecrementPage(value);
     }
   });

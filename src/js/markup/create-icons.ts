@@ -1,4 +1,6 @@
-export function createCarIcon(color = "blue", width = 104, height = 104, id: number) {
+import { CAR_ICON_HEIGHT_DEFAULT, CAR_ICON_WIDTH_DEFAULT } from "../utils/const";
+
+export function createCarIcon(color = "blue", width = CAR_ICON_WIDTH_DEFAULT, height = CAR_ICON_HEIGHT_DEFAULT, id: number) {
   return `<svg fill="${color}" height="${height}" width="${width}" id="car-${id}" class="car-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511 511" xml:space="preserve" transform="matrix(1, 0, 0, 1, 0, 0)">
 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>

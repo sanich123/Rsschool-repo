@@ -85,8 +85,7 @@ export async function stopEngine(id: string) {
         method: METHODS_HTTP.patch,
       }
     );
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch { }
 }
 

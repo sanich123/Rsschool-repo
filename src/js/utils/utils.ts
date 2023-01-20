@@ -2,7 +2,7 @@ import { getIdNodes } from "../nodes/get-nodes-by-id";
 import CreateGarage from "../pages/create-garage";
 import { getLengthOfParentContainer } from "./animations";
 import { createCar, createWinner, deleteCar, deleteWinner, getWinner, receiveDriveMode, sendCars, startEngine, updateCar, updateWinner } from "./async-functions";
-import { BTN_VALUES, LS_KEYS, MILLISECONDS_IN_SECONDS, SEARCH_PARAMS } from "./const";
+import { BTN_VALUES, LS_KEYS, MILLISECONDS_IN_SECONDS, SEARCH_PARAMS, SUCCESS_UPDATE_CAR } from "./const";
 import { applyToLocalStorage } from "./local-storage";
 import { CAR_BRANDS_MODELS } from "./mocks";
 import Router from "./router";
@@ -53,9 +53,10 @@ export async function generateResetCars(name: string, stopBtns: NodeListOf<HTMLB
   }
 }
 
-export async function updateCarFromForm(name: string, color: string, id: string) {
+export async function updateCarFromForm(name: string, color: string, id: string, successNode: HTMLSpanElement) {
   await updateCar({ name, color }, id);
-  Router();
+  successNode.textContent = SUCCESS_UPDATE_CAR;
+  setTimeout(() => Router(), 2000);
 }
 
 export async function createCarFromForm(name: string, color: string) {

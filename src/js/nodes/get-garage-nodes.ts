@@ -17,7 +17,8 @@ export function getGarageNodes() {
     const stopBtns = document.querySelectorAll('.stop-btn') as NodeListOf<HTMLButtonElement>;
     const garageLink = document.querySelector('.garage') as HTMLButtonElement;
     const winnersLink = document.querySelector('.winners') as HTMLButtonElement;
+    const labelUpdateCar = document.querySelector('.create-update-name-label') as HTMLSpanElement;
     return {
-        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns, stopBtns, garageLink, winnersLink,
+        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns, stopBtns, garageLink, winnersLink, labelUpdateCar
     }
 }

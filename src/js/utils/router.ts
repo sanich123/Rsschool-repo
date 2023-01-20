@@ -25,3 +25,8 @@ export function hashListener() {
 export function getUrl(string: string) {
     return string.slice(string.indexOf('#'));
 }
+
+export function pushState(url: string) {
+    window.history.pushState({}, '', url);
+    Router();
+}
