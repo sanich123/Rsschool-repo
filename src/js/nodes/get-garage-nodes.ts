@@ -14,7 +14,10 @@ export function getGarageNodes() {
     const generateCarsBtn = document.querySelector('.random-cars__btn') as HTMLButtonElement;
     const resetCarsBtn = document.querySelector('.reset__btn') as HTMLButtonElement;
     const selectDeleteBtns = document.querySelectorAll('.list-item__btn') as NodeListOf<HTMLButtonElement>;
+    const stopBtns = document.querySelectorAll('.stop-btn') as NodeListOf<HTMLButtonElement>;
+    const garageLink = document.querySelector('.garage') as HTMLButtonElement;
+    const winnersLink = document.querySelector('.winners') as HTMLButtonElement;
     return {
-        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns,
+        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns, stopBtns, garageLink, winnersLink,
     }
 }

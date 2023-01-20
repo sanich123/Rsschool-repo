@@ -10,11 +10,12 @@ export function createCarsList(carsList: CarsType[], paginatedData: CarsType[], 
         <h2 class="cars__amount">IN GARAGE: ${carsList.length} cars</h2>
         ${createPagination(amountPages)}
         <ul class="cars-list">
-        ${paginatedData.length ? paginatedData.map(({ name, color, id }) => `<li class="cars-list__item list-item">
+        ${paginatedData.length ? paginatedData.map(({ name, color, id }) => `<li class="cars-list__item list-item list-item-${id}">
           ${BTNS_VALUES.map((type) => `<button class="list-item__btn" name="${type}-btn" value="${id}">${type.toUpperCase()}</button>`).join('')}
             <div class="list-item__name">${name}</div>
             ${createCarIcon(color, CAR_ICON_WIDTH_DEFAULT, CAR_ICON_HEIGHT_DEFAULT, id)}
             ${startStopBtns(id)}
+            <div class="winners-message winners-message-${id}"></div>
             ${createFinishFlagIcon()}
           </li>`).join('') : EMPTY_CARSLIST}
         </ul>

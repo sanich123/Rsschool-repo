@@ -15,6 +15,7 @@ export default function Router() {
 export function hashListener() {
     return window.addEventListener('hashchange', (event) => {
         const { newURL } = event;
+        console.log(getUrl(newURL));
         window.history.pushState({}, '', getUrl(newURL));
         Router();
     });

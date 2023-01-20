@@ -1,8 +1,8 @@
 export function createHeader() {
     return `<header class="header">
       <nav class="header__nav header-nav">
-        <a class="header-nav__nav-link" href="/#garage">Garage</a>
-        <a class="header-nav__nav-link" href="/#winners">Winners</a>
+        <button class="header-nav__nav-link garage" type="button">Garage</button>
+        <button class="header-nav__nav-link winners" type="button">Winners</button>
       </nav>
     </header>`;
 }

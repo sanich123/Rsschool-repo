@@ -3,7 +3,7 @@ import { createPagination } from "../markup/create-pagination";
 import { createWinnersList } from "../markup/create-winners-list";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
 import { getWinnersNodes } from "../nodes/get-winners-nodes";
-import { getWinners } from "../utils/async-functions";
+import { getCars, getWinners } from "../utils/async-functions";
 import { LS_KEYS, PAGINATION_BTNS, ROUTES, SEARCH_PARAMS } from "../utils/const";
 import { applyToLocalStorage, getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
 import { getPaginatedData } from "../utils/pagination";
@@ -21,8 +21,16 @@ export default async function CreateWinners(winners: WinnersType[] = []) {
     ${createHeader()}
     ${createPagination(amountPages)}
     ${await createWinnersList(paginatedData as WinnersType[])}</main>`;
-  const { paginationBtns } = getGarageNodes();
+  const { paginationBtns, garageLink, winnersLink } = getGarageNodes();
   const { timeBtn, winsBtn } = getWinnersNodes();
+  garageLink.addEventListener('click', () => {
+    window.history.pushState({}, '', ROUTES.garage);
+    getCars();
+  });
+  winnersLink.addEventListener('click', () => {
+    window.history.pushState({}, '', ROUTES.winners);
+    getWinners();
+  });
   winsBtn?.addEventListener("click", async ({ target }) => {
     if (target instanceof HTMLButtonElement) {
       const { value } = target;

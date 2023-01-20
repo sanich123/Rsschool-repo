@@ -2,14 +2,15 @@ import { createCarsList } from "../markup/create-cars-list";
 import { createColorName } from "../markup/create-color-name";
 import { createHeader } from "../markup/create-header";
 import { getGarageNodes } from "../nodes/get-garage-nodes";
-import { BTN_VALUES, LS_KEYS, MILLISECONDS_IN_SECONDS, PAGINATION_BTNS } from "../utils/const";
-import { createCar, createWinner, deleteCar, deleteWinner, getCars, getWinner, receiveDriveMode, sendCars, startEngine, updateCar, updateWinner } from "../utils/async-functions";
+import { BTN_VALUES, LS_KEYS, MILLISECONDS_IN_SECONDS, PAGINATION_BTNS, ROUTES } from "../utils/const";
+import { createCar, createWinner, deleteCar, deleteWinner, getCars, getWinner, getWinners, receiveDriveMode, sendCars, startEngine, updateCar, updateWinner } from "../utils/async-functions";
 import { CarsType, TopSpeeds } from "../utils/types";
 import { getRandomCarsColors, setRightPage } from "../utils/utils";
 import { getPaginatedData } from "../utils/pagination";
 import { applyToLocalStorage, getFromLocalStorage, setDefaultPageToLocalStorage } from "../utils/local-storage";
 import { getLengthOfParentContainer } from "../utils/animations";
 import { getIdNodes } from "../nodes/get-nodes-by-id";
+import { disableNodes, enableNodes } from "../nodes/actions-with-nodes";
 
 export default async function CreateGarage(carsList = []) {
   const body = document.querySelector(".page") as HTMLBodyElement;
@@ -19,14 +20,18 @@ export default async function CreateGarage(carsList = []) {
   setRightPage(pageNumber, amountPages);
 
   body.innerHTML = `<main class="page-main">${createHeader()}${createColorName()}${createCarsList(carsList, paginatedData as CarsType[], amountPages)}</main>`;
-  const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns } = getGarageNodes();
+  const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns, stopBtns, garageLink, winnersLink } = getGarageNodes();
+  garageLink.addEventListener('click', () => {
+    window.history.pushState({}, '', ROUTES.garage);
+    getCars();
+  });
+  winnersLink.addEventListener('click', () => {
+    window.history.pushState({}, '', ROUTES.winners);
+    getWinners();
+  });
 
   raceBtn?.addEventListener('click', async () => {
-    generateCarsBtn.disabled = true;
-    resetCarsBtn.disabled = true;
-    startStopBtns.forEach((btn) => btn.disabled = true);
-    selectDeleteBtns.forEach((btn) => btn.disabled = true);
-    
+    disableNodes(generateCarsBtn, resetCarsBtn, startStopBtns, selectDeleteBtns)
     const topSpeeds: TopSpeeds[] = [];
     const ids = paginatedData.map(({id}) => id);
     const end = getLengthOfParentContainer();
@@ -49,10 +54,11 @@ export default async function CreateGarage(carsList = []) {
         await updateWinner(availableId, { wins: availableWins + 1, time: currentTimeSecs })
       }
     }
-    generateCarsBtn.disabled = false;
-    resetCarsBtn.disabled = false;
-    startStopBtns.forEach((btn) => btn.disabled = false);
-    selectDeleteBtns.forEach((btn) => btn.disabled = false);
+    const winnersListItem = document.querySelector(`.list-item-${id}`) as HTMLLIElement;
+    const winnersMessage = document.querySelector(`.winners-message-${id}`) as HTMLDivElement;
+    winnersListItem.style.border = '5px solid red';
+    winnersMessage.textContent = `The car with id ${id} and result ${currentTimeSecs}s have just won the race! Конгратулатионс!`
+    enableNodes(generateCarsBtn, resetCarsBtn, startStopBtns, selectDeleteBtns);
   });
   createCarForm?.addEventListener('input', ({target}) => {
     if (target instanceof HTMLInputElement) {
@@ -122,7 +128,7 @@ export default async function CreateGarage(carsList = []) {
       if (name === 'reset') {
         const cars = document.querySelectorAll('.car-icon') as NodeListOf<HTMLElement>;
         cars.forEach((car) => car.style.transform = 'translateX(0)');
-        startStopBtns.forEach((btn) => btn.disabled = false);
+        stopBtns.forEach((btn) => btn.disabled = true);
       }
     }
   });
