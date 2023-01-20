@@ -63,1783 +63,6 @@ __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerat
 
 /***/ }),
 
-/***/ "./src/js/create-gallery/create-gallery.js":
-/*!*************************************************!*\
-  !*** ./src/js/create-gallery/create-gallery.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createGalleryPage": () => (/* binding */ createGalleryPage)
-/* harmony export */ });
-/* harmony import */ var _layout_makers_create_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../layout-makers/create-header */ "./src/js/layout-makers/create-header.js");
-/* harmony import */ var _layout_makers_create_footer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-footer */ "./src/js/layout-makers/create-footer.js");
-/* harmony import */ var _layout_makers_create_gallery_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layout-makers/create-gallery-slider */ "./src/js/layout-makers/create-gallery-slider.js");
-/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
-/* harmony import */ var _utils_mocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/mocks */ "./src/js/utils/mocks.js");
-/* harmony import */ var _layout_makers_get_nav_links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../layout-makers/get-nav-links */ "./src/js/layout-makers/get-nav-links.js");
-/* harmony import */ var _manage_audio_manage_audio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../manage-audio/manage-audio */ "./src/js/manage-audio/manage-audio.js");
-/* harmony import */ var _utils_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/router */ "./src/js/utils/router.js");
-
-
-
-
-
-
-
-
-function createGalleryPage() {
-  let counter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _utils_const__WEBPACK_IMPORTED_MODULE_3__.INITIAL_COUNT;
-  let innerCounter = counter;
-  const body = document.querySelector('.page');
-  body.innerHTML = '';
-  const innerLang = localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_3__.LOCAL_STORAGE_KEYS.language);
-  const isRu = innerLang === _utils_const__WEBPACK_IMPORTED_MODULE_3__.LANGUAGES.ru;
-  const birds = isRu ? _utils_mocks__WEBPACK_IMPORTED_MODULE_4__.BIRDS_DATA_RU.flat() : _utils_mocks__WEBPACK_IMPORTED_MODULE_4__.BIRDS_DATA_EN.flat();
-  const chosenBird = birds[innerCounter];
-  body.insertAdjacentHTML('afterbegin', `${(0,_layout_makers_create_header__WEBPACK_IMPORTED_MODULE_0__.createHeader)(innerLang)}${(0,_layout_makers_create_gallery_slider__WEBPACK_IMPORTED_MODULE_2__.createGallerySlider)(chosenBird, innerCounter, birds.length)}${(0,_layout_makers_create_footer__WEBPACK_IMPORTED_MODULE_1__.createFooter)(innerLang)}`);
-  (0,_layout_makers_get_nav_links__WEBPACK_IMPORTED_MODULE_5__.getNavLinks)(innerLang, innerCounter);
-  (0,_manage_audio_manage_audio__WEBPACK_IMPORTED_MODULE_6__.setAudio)();
-  const leftBtn = document.querySelector('.left');
-  const rightBtn = document.querySelector('.right');
-  leftBtn.addEventListener('click', () => {
-    createGalleryPage(--innerCounter);
-  });
-  rightBtn.addEventListener('click', () => {
-    createGalleryPage(++innerCounter);
-  });
-  window.addEventListener('hashchange', event => {
-    const indexHash = event.newURL.indexOf('#');
-    const newUrl = event.newURL.slice(indexHash);
-    window.history.pushState({
-      urlPath: newUrl
-    }, '', newUrl);
-    (0,_utils_router__WEBPACK_IMPORTED_MODULE_7__.router)(newUrl);
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/create-game/create-game.js":
-/*!*******************************************!*\
-  !*** ./src/js/create-game/create-game.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createGamePage": () => (/* binding */ createGamePage)
-/* harmony export */ });
-/* harmony import */ var _layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../layout-makers/create-footer.js */ "./src/js/layout-makers/create-footer.js");
-/* harmony import */ var _layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-header.js */ "./src/js/layout-makers/create-header.js");
-/* harmony import */ var _layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layout-makers/create-game-main.js */ "./src/js/layout-makers/create-game-main.js");
-/* harmony import */ var _utils_helpers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/helpers.js */ "./src/js/utils/helpers.js");
-/* harmony import */ var _create_results_create_results_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../create-results/create-results.js */ "./src/js/create-results/create-results.js");
-/* harmony import */ var _manage_audio_manage_audio_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../manage-audio/manage-audio.js */ "./src/js/manage-audio/manage-audio.js");
-/* harmony import */ var _layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../layout-makers/get-nav-links.js */ "./src/js/layout-makers/get-nav-links.js");
-/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
-/* harmony import */ var _utils_mocks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/mocks.js */ "./src/js/utils/mocks.js");
-/* harmony import */ var _utils_router_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/router.js */ "./src/js/utils/router.js");
-
-
-
-
-
-
-
-
-
-
-function createGamePage() {
-  let counter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.MIN_COUNTER;
-  let arr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _utils_mocks_js__WEBPACK_IMPORTED_MODULE_8__.BIRDS_DATA_RU;
-  let checkedAnswer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
-  let question = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {
-    name: ''
-  };
-  let score = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.MAX_GAP_SCORE;
-  let total = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-  let innerCounter = counter;
-  let innerChecked = checkedAnswer;
-  let innerQuestionBird;
-  let innerTotalScore = total;
-  let innerScore = score;
-  const innerLang = localStorage.getItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LOCAL_STORAGE_KEYS.language);
-  innerLang === _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LANGUAGES.ru ? arr = _utils_mocks_js__WEBPACK_IMPORTED_MODULE_8__.BIRDS_DATA_RU : arr = _utils_mocks_js__WEBPACK_IMPORTED_MODULE_8__.BIRDS_DATA_EN;
-  const filtredBirds = arr[counter];
-  if (!question.name) {
-    innerQuestionBird = filtredBirds[(0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_3__.getRandomNumber)(filtredBirds.length)];
-  } else {
-    innerQuestionBird = question;
-  }
-  const checkedData = filtredBirds.filter(_ref => {
-    let {
-      name
-    } = _ref;
-    return name === innerChecked;
-  });
-  const body = document.querySelector(".page");
-  body.innerHTML = "";
-  body.insertAdjacentHTML("afterbegin", `
-  ${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__.createHeader)(innerLang)}
-  ${(0,_layout_makers_create_game_main_js__WEBPACK_IMPORTED_MODULE_2__.createMainGame)(filtredBirds, checkedData, innerQuestionBird, innerChecked, innerLang, innerCounter)}
-  ${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__.createFooter)(innerLang)}`);
-  (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_3__.addActiveToNavigation)(innerCounter, innerLang);
-  (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_3__.setDeclineAcceptStyles)(checkedAnswer, innerQuestionBird);
-  (0,_manage_audio_manage_audio_js__WEBPACK_IMPORTED_MODULE_5__.setAudio)();
-  const scoreMark = document.querySelector(".score__value");
-  if (checkedAnswer === innerQuestionBird.name) {
-    if (!innerScore) {
-      scoreMark.textContent = innerTotalScore;
-      if (innerCounter === _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LAST_GROUP) {
-        window.history.pushState({
-          urlPath: _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.PATHS.results
-        }, '', _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.PATHS.results);
-        localStorage.removeItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LOCAL_STORAGE_KEYS.answers);
-        (0,_create_results_create_results_js__WEBPACK_IMPORTED_MODULE_4__.createResults)(innerTotalScore);
-        return;
-      }
-    } else {
-      innerTotalScore = innerTotalScore + ++innerScore;
-      scoreMark.textContent = innerTotalScore;
-      if (innerCounter === _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LAST_GROUP) {
-        window.history.pushState({
-          urlPath: _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.PATHS.results
-        }, '', _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.PATHS.results);
-        localStorage.removeItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LOCAL_STORAGE_KEYS.answers);
-        (0,_create_results_create_results_js__WEBPACK_IMPORTED_MODULE_4__.createResults)(innerTotalScore);
-        return;
-      }
-    }
-  } else {
-    scoreMark.textContent = innerTotalScore;
-  }
-  (0,_layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_6__.getNavLinks)(innerLang, innerCounter, innerChecked, innerQuestionBird, innerScore, innerTotalScore);
-  const nextBtn = document.querySelector(".next-btn");
-  const answersList = document.querySelector(".answers-list");
-  const langBtn = document.querySelector('.nav-list__btn--svg');
-  langBtn.disabled = true;
-  langBtn.style.opacity = '0.5';
-  answersList.addEventListener("click", _ref2 => {
-    let {
-      target
-    } = _ref2;
-    if (!target.disabled && target.tagName !== 'UL') {
-      if (innerScore > 0) {
-        createGamePage(innerCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_8__.BIRDS_DATA_RU, target.value, innerQuestionBird, --innerScore, innerTotalScore);
-      } else {
-        createGamePage(innerCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_8__.BIRDS_DATA_RU, target.value, innerQuestionBird, innerScore, innerTotalScore);
-      }
-    }
-  });
-  nextBtn.addEventListener("click", () => {
-    const nextCounter = innerCounter + 1;
-    localStorage.removeItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_7__.LOCAL_STORAGE_KEYS.answers);
-    createGamePage(nextCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_8__.BIRDS_DATA_RU, "", {
-      name: ''
-    }, _utils_const_js__WEBPACK_IMPORTED_MODULE_7__.MAX_GAP_SCORE, innerTotalScore);
-  });
-  window.addEventListener('hashchange', event => {
-    const indexHash = event.newURL.indexOf('#');
-    const newUrl = event.newURL.slice(indexHash);
-    window.history.pushState({
-      urlPath: newUrl
-    }, '', newUrl);
-    (0,_utils_router_js__WEBPACK_IMPORTED_MODULE_9__.router)(newUrl);
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/create-results/create-results.js":
-/*!*************************************************!*\
-  !*** ./src/js/create-results/create-results.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createResults": () => (/* binding */ createResults)
-/* harmony export */ });
-/* harmony import */ var _layout_makers_create_footer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../layout-makers/create-footer */ "./src/js/layout-makers/create-footer.js");
-/* harmony import */ var _layout_makers_create_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-header */ "./src/js/layout-makers/create-header.js");
-/* harmony import */ var _create_game_create_game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../create-game/create-game */ "./src/js/create-game/create-game.js");
-/* harmony import */ var _layout_makers_get_nav_links__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout-makers/get-nav-links */ "./src/js/layout-makers/get-nav-links.js");
-/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/helpers */ "./src/js/utils/helpers.js");
-/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
-/* harmony import */ var _utils_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/router */ "./src/js/utils/router.js");
-
-
-
-
-
-
-
-function createResults(totalScore) {
-  const innerLang = localStorage.getItem(_utils_const__WEBPACK_IMPORTED_MODULE_5__.LOCAL_STORAGE_KEYS.language);
-  const message = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_4__.getRightCongratulations)(totalScore, _utils_const__WEBPACK_IMPORTED_MODULE_5__.MAX_SCORE, innerLang);
-  const body = document.querySelector(".page");
-  body.innerHTML = "";
-  body.innerHTML = `
-  ${(0,_layout_makers_create_header__WEBPACK_IMPORTED_MODULE_1__.createHeader)(innerLang)}
-  <main class="page__main main">
-  <div class="promo">
-  <p class="promo__results">${message}</p>
-  <button class="promo__btn">${innerLang === _utils_const__WEBPACK_IMPORTED_MODULE_5__.LANGUAGES.ru ? _utils_const__WEBPACK_IMPORTED_MODULE_5__.START_RU : _utils_const__WEBPACK_IMPORTED_MODULE_5__.START_US}</button>
-  </div>
-  </main>${(0,_layout_makers_create_footer__WEBPACK_IMPORTED_MODULE_0__.createFooter)(innerLang)}`;
-  (0,_layout_makers_get_nav_links__WEBPACK_IMPORTED_MODULE_3__.getNavLinks)(innerLang, "", "", "", "", totalScore);
-  const value = document.querySelector(".score__value");
-  value.textContent = totalScore;
-  const gameBtn = document.querySelector(".promo__btn");
-  gameBtn.addEventListener("click", () => {
-    window.history.pushState({
-      urlPath: _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.game
-    }, "", _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.game);
-    (0,_create_game_create_game__WEBPACK_IMPORTED_MODULE_2__.createGamePage)();
-  });
-  window.addEventListener('hashchange', event => {
-    const indexHash = event.newURL.indexOf('#');
-    const newUrl = event.newURL.slice(indexHash);
-    window.history.pushState({
-      urlPath: newUrl
-    }, '', newUrl);
-    (0,_utils_router__WEBPACK_IMPORTED_MODULE_6__.router)(newUrl);
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/create-start-page/create-start-page.js":
-/*!*******************************************************!*\
-  !*** ./src/js/create-start-page/create-start-page.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createStartPage": () => (/* binding */ createStartPage)
-/* harmony export */ });
-/* harmony import */ var _layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../layout-makers/create-footer.js */ "./src/js/layout-makers/create-footer.js");
-/* harmony import */ var _layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/create-header.js */ "./src/js/layout-makers/create-header.js");
-/* harmony import */ var _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../create-game/create-game.js */ "./src/js/create-game/create-game.js");
-/* harmony import */ var _layout_makers_create_start_main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layout-makers/create-start-main.js */ "./src/js/layout-makers/create-start-main.js");
-/* harmony import */ var _layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layout-makers/get-nav-links.js */ "./src/js/layout-makers/get-nav-links.js");
-/* harmony import */ var _audio_grig_morning_mp3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../audio/grig-morning.mp3 */ "./src/audio/grig-morning.mp3");
-/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
-/* harmony import */ var _utils_router_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/router.js */ "./src/js/utils/router.js");
-/* harmony import */ var _utils_helpers_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/helpers.js */ "./src/js/utils/helpers.js");
-
-
-
-
-
-
-
-
-
-function createStartPage() {
-  const location = window.location.href;
-  const url = new URL(location).hash;
-  const filtredParams = url.includes('?') ? url.slice(url.indexOf('?')) : '';
-  const searchParams = new URLSearchParams(filtredParams);
-  const result = {};
-  for (let [key, value] of searchParams) {
-    result[key] = value;
-  }
-  console.log(result);
-  const innerLang = localStorage.getItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_6__.LOCAL_STORAGE_KEYS.language);
-  const body = document.querySelector(".page");
-  body.innerHTML = "";
-  body.insertAdjacentHTML("afterbegin", `${(0,_layout_makers_create_header_js__WEBPACK_IMPORTED_MODULE_1__.createHeader)(innerLang)}${(0,_layout_makers_create_start_main_js__WEBPACK_IMPORTED_MODULE_3__.createStartMain)(innerLang)}${(0,_layout_makers_create_footer_js__WEBPACK_IMPORTED_MODULE_0__.createFooter)(innerLang)}`);
-  // const audio = new Audio(morningTheme);
-  // audio.play();
-  (0,_layout_makers_get_nav_links_js__WEBPACK_IMPORTED_MODULE_4__.getNavLinks)(innerLang);
-  const gameBtn = document.querySelector('.promo__btn');
-  document.querySelector('video').play();
-  window.history.pushState({
-    urlPath: (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_8__.getUrl)(location)
-  }, '', (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_8__.getUrl)(location));
-  window.addEventListener('hashchange', event => {
-    window.history.pushState({
-      urlPath: (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_8__.getUrl)(event.newURL)
-    }, '', (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_8__.getUrl)(event.newURL));
-    (0,_utils_router_js__WEBPACK_IMPORTED_MODULE_7__.router)((0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_8__.getUrl)(event.newURL));
-  });
-  gameBtn.addEventListener('click', () => {
-    localStorage.removeItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_6__.LOCAL_STORAGE_KEYS.answers);
-    window.history.pushState({
-      urlPath: _utils_const_js__WEBPACK_IMPORTED_MODULE_6__.PATHS.game
-    }, '', _utils_const_js__WEBPACK_IMPORTED_MODULE_6__.PATHS.game);
-    // audio.pause();
-    (0,_create_game_create_game_js__WEBPACK_IMPORTED_MODULE_2__.createGamePage)();
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/entry.js?7611":
-/*!*************************!*\
-  !*** ./src/js/entry.js ***!
-  \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
-/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _create_start_page_create_start_page_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-start-page/create-start-page.js */ "./src/js/create-start-page/create-start-page.js");
-/* harmony import */ var _index_html__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../index.html */ "./src/index.html");
-/* harmony import */ var _less_entry_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../less/entry.less */ "./src/less/entry.less");
-/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/const.js */ "./src/js/utils/const.js");
-/* harmony import */ var _create_game_create_game_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./create-game/create-game.js */ "./src/js/create-game/create-game.js");
-/* harmony import */ var _create_gallery_create_gallery_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./create-gallery/create-gallery.js */ "./src/js/create-gallery/create-gallery.js");
-/* harmony import */ var _utils_router_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/router.js */ "./src/js/utils/router.js");
-
-
-
-
-
-
-
-
-const location = window.location.href;
-(0,_utils_router_js__WEBPACK_IMPORTED_MODULE_7__.router)(location);
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-audio.js":
-/*!**********************************************!*\
-  !*** ./src/js/layout-makers/create-audio.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createAudio": () => (/* binding */ createAudio)
-/* harmony export */ });
-function createAudio(audio, place) {
-  return `
-  <div class="audio-container">
-    <button class="audio-container__play play"></button>
-    <div class="audio-container__duration-container">
-      <input class="audio-container__duration-changer" type="range" min="0" value="0" max="100" />
-      <span class="audio-container__duration">00:00</span>
-      <span class="audio-container__current-time">00:00</span>
-    </div>
-    <div class="audio-container__mute-wrapper">
-    <button class="audio-container__mute-btn unmuted"></button>
-    <input class="audio-container__volume-changer" type="range" value="0.75" min="0" step="0.1" max="1"/>
-    </div>
-    <audio class="${place}__audio" src="${audio}"><audio/>
-  </div>`;
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-footer.js":
-/*!***********************************************!*\
-  !*** ./src/js/layout-makers/create-footer.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createFooter": () => (/* binding */ createFooter)
-/* harmony export */ });
-/* harmony import */ var _img_svg_rs_school_icon_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../img/svg/rs-school-icon.svg */ "./src/img/svg/rs-school-icon.svg");
-/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
-
-
-function createFooter(innerLang) {
-  return `<footer class="page__footer footer">
-      <ul class="footer__list footer-list">
-        <li class="footer-list__item list-item">
-          <a href="https://rs.school/js/">
-            <img src=${_img_svg_rs_school_icon_svg__WEBPACK_IMPORTED_MODULE_0__} alt="" />
-          </a>
-        </li>
-        <li class="footer-list__item list-item">
-          <a class="author-link" href="${_utils_const__WEBPACK_IMPORTED_MODULE_1__.GITHUB_ACCOUNT}">
-            ${innerLang === _utils_const__WEBPACK_IMPORTED_MODULE_1__.LANGUAGES.ru ? _utils_const__WEBPACK_IMPORTED_MODULE_1__.AUTHOR_LINK_RU : _utils_const__WEBPACK_IMPORTED_MODULE_1__.AUTHOR_LINK_US}
-          </a>
-        </li>
-        <li сlass="footer-list__item list-item">
-          <span class="list-item__year">2022 г.</span>
-        </li>
-      </ul>
-    </footer>`;
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-gallery-slider.js":
-/*!*******************************************************!*\
-  !*** ./src/js/layout-makers/create-gallery-slider.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createGallerySlider": () => (/* binding */ createGallerySlider)
-/* harmony export */ });
-/* harmony import */ var _create_parts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-parts */ "./src/js/layout-makers/create-parts.js");
-/* harmony import */ var _create_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-icons */ "./src/js/layout-makers/create-icons.js");
-
-
-function createGallerySlider(checkedData, innerCounter, max) {
-  return `<main class="game"><div class="game__checked-answer checked-answer">${(0,_create_parts__WEBPACK_IMPORTED_MODULE_0__.createCheckedBirdLayout)(checkedData)}</div>
-    <div class="slider-controls">
-    <button class="slider-controls__btn left" type="button" ${innerCounter <= 0 ? 'disabled' : ''}>${(0,_create_icons__WEBPACK_IMPORTED_MODULE_1__.createLeftArrow)()}</button>
-    <button class="slider-controls__btn right" type="button" ${innerCounter === max - 1 ? 'disabled' : ''}>${(0,_create_icons__WEBPACK_IMPORTED_MODULE_1__.createLeftArrow)()}</button>
-    </div>
-    </main>`;
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-game-main.js":
-/*!**************************************************!*\
-  !*** ./src/js/layout-makers/create-game-main.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createMainGame": () => (/* binding */ createMainGame)
-/* harmony export */ });
-/* harmony import */ var _create_audio_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-audio.js */ "./src/js/layout-makers/create-audio.js");
-/* harmony import */ var _create_parts_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-parts.js */ "./src/js/layout-makers/create-parts.js");
-/* harmony import */ var _utils_helpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/helpers.js */ "./src/js/utils/helpers.js");
-/* harmony import */ var _utils_mocks_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/mocks.js */ "./src/js/utils/mocks.js");
-/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
-/* harmony import */ var _img_svg_question_mark_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../img/svg/question-mark.svg */ "./src/img/svg/question-mark.svg");
-
-
-
-
-
-
-function createMainGame(filtredBirds, checkedData, questionBird, innerChecked, innerLang, innerCounter) {
-  const isRu = innerLang === _utils_const_js__WEBPACK_IMPORTED_MODULE_4__.LANGUAGES.ru;
-  const localStorageAnswers = JSON.parse(localStorage.getItem(_utils_const_js__WEBPACK_IMPORTED_MODULE_4__.LOCAL_STORAGE_KEYS.answers));
-  const answersVariants = (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createAnswers)(filtredBirds);
-  const categoriesList = isRu ? (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createCategories)(_utils_const_js__WEBPACK_IMPORTED_MODULE_4__.CATEGORIES_RU) : (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createCategories)(_utils_const_js__WEBPACK_IMPORTED_MODULE_4__.CATEGORIES_US);
-  const {
-    audio: questionAudio,
-    name: questionName,
-    image: questionImage
-  } = questionBird;
-  let answerLayout;
-  checkedData.length > 0 ? answerLayout = (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createCheckedAnswerLayout)(checkedData) : answerLayout = (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createCheckedAnswerDefault)(innerLang);
-  const isMatching = innerChecked === questionName;
-  const isRefreshing = localStorageAnswers && localStorageAnswers.includes('accept');
-  return `<main class="game">
-      <ul class="game__list categories-list">${categoriesList}</ul>
-      <div class="game__question question">
-        <img src=${isMatching ? questionImage : _img_svg_question_mark_svg__WEBPACK_IMPORTED_MODULE_5__} alt="${isMatching ? questionName : ''}" class="question__img" width="50px"/>
-        <span class="question__name">${isMatching ? questionName : "**********"}</span>
-      ${(0,_create_audio_js__WEBPACK_IMPORTED_MODULE_0__.createAudio)(questionAudio, 'question')}
-      </div>
-      ${localStorageAnswers ? (0,_utils_helpers_js__WEBPACK_IMPORTED_MODULE_2__.changeLanguageOnAnswers)(isRu, innerCounter, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_3__.BIRDS_DATA_RU, _utils_mocks_js__WEBPACK_IMPORTED_MODULE_3__.BIRDS_DATA_EN, localStorageAnswers) : `${`<ul class="game__answers-list answers-list">${answersVariants}</ul>`}`}
-      <div class="game__checked-answer checked-answer">${answerLayout}</div>
-      <button class="game__next-btn next-btn" type="button" ${isMatching || isRefreshing ? "" : "disabled"}>
-        ${(0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createNextBtn)(innerLang, isMatching)}
-      </button>
-    </main>`;
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-header.js":
-/*!***********************************************!*\
-  !*** ./src/js/layout-makers/create-header.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createHeader": () => (/* binding */ createHeader)
-/* harmony export */ });
-/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
-/* harmony import */ var _create_parts_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-parts.js */ "./src/js/layout-makers/create-parts.js");
-/* harmony import */ var _create_icons_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-icons.js */ "./src/js/layout-makers/create-icons.js");
-
-
-
-function createHeader() {
-  let lang = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.LANGUAGES.ru;
-  return `<header class="page__header header">
-      <a class="header__logo logo" href="index.html">
-        ${(0,_create_icons_js__WEBPACK_IMPORTED_MODULE_2__.createLogoIcon)()}
-      </a>
-      <nav class="header__nav nav">
-        <ul class="nav__list nav-list">
-          ${lang === _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.LANGUAGES.ru ? (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createNavLinks)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.NAV_LINKS_RU) : (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_1__.createNavLinks)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.NAV_LINKS_US)}
-        </ul>
-      </nav>
-      <div class="header__score score">
-        ${lang === _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.LANGUAGES.ru ? 'Счет' : 'Score'}:
-        <span class="score__value">0</span>
-      </div>
-    </header>`;
-}
-//<img class="logo__img" src=${logoIcon} width="60px" height="60px" />
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-icons.js":
-/*!**********************************************!*\
-  !*** ./src/js/layout-makers/create-icons.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createLeftArrow": () => (/* binding */ createLeftArrow),
-/* harmony export */   "createLogoIcon": () => (/* binding */ createLogoIcon)
-/* harmony export */ });
-function createLeftArrow() {
-  return `<svg version="1.1" id="left-arrow" fill="orange" width="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve"><g><g><polygon points="332.668,490 82.631,244.996 332.668,0 407.369,76.493 235.402,244.996 407.369,413.507"/></g></svg>`;
-}
-function createLogoIcon() {
-  return `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<path d="M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658
-	c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499
-	c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737
-	C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861
-	c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328
-	c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956
-	h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307
-	c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77
-	c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743
-	C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738
-	c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741
-	c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z
-	 M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z"/>
-<path style="fill:#FFB8A7;" d="M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741
-	c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738
-	c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684
-	c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773
-	S234.694,199.684,242.3,199.684z"/>
-<path style="fill:#FF5F7B;" d="M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347
-	c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771
-	c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z"/>
-<circle cx="242.293" cy="213.457" r="13.773"/>
-<path style="fill:#D21E1E;" d="M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216
-	c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233
-	c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z"/>
-<path d="M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928
-	c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876
-	c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325
-	c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971
-	c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233
-	c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216
-	c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z"/>
-<path style="fill:#D21E1E;" d="M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326
-	c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895
-	c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z"/>
-<path d="M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904
-	c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559
-	c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474
-	c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325
-	C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221
-	c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278
-	c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607
-	C369.62,69.92,386.503,35.316,402.629,30.157z"/>
-</svg>`;
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-parts.js":
-/*!**********************************************!*\
-  !*** ./src/js/layout-makers/create-parts.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createAnswers": () => (/* binding */ createAnswers),
-/* harmony export */   "createCategories": () => (/* binding */ createCategories),
-/* harmony export */   "createCheckedAnswerDefault": () => (/* binding */ createCheckedAnswerDefault),
-/* harmony export */   "createCheckedAnswerLayout": () => (/* binding */ createCheckedAnswerLayout),
-/* harmony export */   "createCheckedBirdLayout": () => (/* binding */ createCheckedBirdLayout),
-/* harmony export */   "createNavLinks": () => (/* binding */ createNavLinks),
-/* harmony export */   "createNextBtn": () => (/* binding */ createNextBtn),
-/* harmony export */   "createRules": () => (/* binding */ createRules)
-/* harmony export */ });
-/* harmony import */ var _create_audio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-audio */ "./src/js/layout-makers/create-audio.js");
-/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
-
-
-function createCategories(categories) {
-  return categories.map(category => `<li class="categories-list__item"><button class="categories-list__btn" type="button" value="${category}">${category}</button></li>`).join("");
-}
-;
-function createAnswers(answers) {
-  return answers.map(_ref => {
-    let {
-      name
-    } = _ref;
-    return `<button class="answers-list__btn" value="${name}">${name}</button>`;
-  }).join("");
-}
-function createCheckedAnswerLayout(checkedData) {
-  const [{
-    name,
-    audio,
-    image,
-    description,
-    species
-  }] = checkedData;
-  return `<img src="${image}" alt="" class="checked-answer__img" />
-                <div class="checked-answer__surname">
-        <span>${name}</span><span class="checked-answer__surname--species">(${species})</span></div>
-        <p align="justify" class="checked-answer__description">${description}</p>${(0,_create_audio__WEBPACK_IMPORTED_MODULE_0__.createAudio)(audio, "checked-answer")}`;
-}
-;
-function createCheckedBirdLayout(checkedData) {
-  const {
-    name,
-    audio,
-    image,
-    description,
-    species
-  } = checkedData;
-  return `<img src="${image}" alt="" class="checked-answer__img" />
-        <div class="checked-answer__surname">
-        <span>${name}</span><span class="checked-answer__surname--species">(${species})</span></div>
-        <p align="justify" class="checked-answer__description">${description}</p>${(0,_create_audio__WEBPACK_IMPORTED_MODULE_0__.createAudio)(audio, "checked-answer")}`;
-}
-function createCheckedAnswerDefault(innerLang) {
-  return `<div></div><p class="checked-answer__default">${innerLang === _utils_const__WEBPACK_IMPORTED_MODULE_1__.LANGUAGES.ru ? _utils_const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_TEXT_RU : _utils_const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_TEXT_US}</p>`;
-}
-function createNextBtn(innerLang, isMatching) {
-  if (isMatching) {
-    if (innerLang === _utils_const__WEBPACK_IMPORTED_MODULE_1__.LANGUAGES.ru) {
-      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.NEXT_BTN_TEXT_SUCCESS_RU;
-    } else {
-      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.NEXT_BTN_TEXT_SUCCESS_US;
-    }
-  } else {
-    if (innerLang === _utils_const__WEBPACK_IMPORTED_MODULE_1__.LANGUAGES.ru) {
-      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.NEXT_BTN_TEXT_DEFAULT_RU;
-    } else {
-      return _utils_const__WEBPACK_IMPORTED_MODULE_1__.NEXT_BTN_TEXT_DEFAULT_US;
-    }
-  }
-}
-function createRules(rules) {
-  return rules.map(text => `<li class="promo-rules__item"><p align="justify">${text}</p></li>`).join("");
-}
-function createNavLinks(arr) {
-  return arr.map(text => `<li class="nav-list__item"><button class="nav-list__btn--${text.length < 50 ? text : 'svg'}">${text}</button>`).join("");
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/create-start-main.js":
-/*!***************************************************!*\
-  !*** ./src/js/layout-makers/create-start-main.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createStartMain": () => (/* binding */ createStartMain)
-/* harmony export */ });
-/* harmony import */ var _utils_const_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const.js */ "./src/js/utils/const.js");
-/* harmony import */ var _video_grig_per_gunt_mp4__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../video/grig-per-gunt.mp4 */ "./src/video/grig-per-gunt.mp4");
-/* harmony import */ var _create_parts_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-parts.js */ "./src/js/layout-makers/create-parts.js");
-
-
-
-function createStartMain() {
-  let language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.LANGUAGES.ru;
-  const isRu = language === _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.LANGUAGES.ru;
-  return `<main class="page__main main">
-      <div class="promo">
-      <video class="promo__video" src=${_video_grig_per_gunt_mp4__WEBPACK_IMPORTED_MODULE_1__} controls></video>
-        <p class="promo__sentence">${isRu ? _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.PROMO_SENTENCE_RU : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.PROMO_SENTENCE_US}</p>
-        <button class="promo__btn">${isRu ? _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.START_RU : _utils_const_js__WEBPACK_IMPORTED_MODULE_0__.START_US}</button>
-        <ol class="promo__rules promo-rules">${isRu ? (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_2__.createRules)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.RULES_TEXT_RU) : (0,_create_parts_js__WEBPACK_IMPORTED_MODULE_2__.createRules)(_utils_const_js__WEBPACK_IMPORTED_MODULE_0__.RULES_TEXT_US)}</ol>
-      </div>
-    </main>`;
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/get-nav-links.js":
-/*!***********************************************!*\
-  !*** ./src/js/layout-makers/get-nav-links.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getNavLinks": () => (/* binding */ getNavLinks)
-/* harmony export */ });
-/* harmony import */ var _create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../create-start-page/create-start-page */ "./src/js/create-start-page/create-start-page.js");
-/* harmony import */ var _create_game_create_game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../create-game/create-game */ "./src/js/create-game/create-game.js");
-/* harmony import */ var _create_results_create_results__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../create-results/create-results */ "./src/js/create-results/create-results.js");
-/* harmony import */ var _create_gallery_create_gallery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../create-gallery/create-gallery */ "./src/js/create-gallery/create-gallery.js");
-/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/helpers */ "./src/js/utils/helpers.js");
-/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.js");
-/* harmony import */ var _utils_mocks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/mocks */ "./src/js/utils/mocks.js");
-
-
-
-
-
-
-
-function getNavLinks() {
-  let language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _utils_const__WEBPACK_IMPORTED_MODULE_5__.LANGUAGES.ru;
-  let innerCounter = arguments.length > 1 ? arguments[1] : undefined;
-  let innerChecked = arguments.length > 2 ? arguments[2] : undefined;
-  let innerQuestionBird = arguments.length > 3 ? arguments[3] : undefined;
-  let innerScore = arguments.length > 4 ? arguments[4] : undefined;
-  let innerTotalScore = arguments.length > 5 ? arguments[5] : undefined;
-  const isRu = language === _utils_const__WEBPACK_IMPORTED_MODULE_5__.LANGUAGES.ru;
-  const mainPage = document.querySelector(`.nav-list__btn--${isRu ? _utils_const__WEBPACK_IMPORTED_MODULE_5__.NAV_LINKS_RU[0] : _utils_const__WEBPACK_IMPORTED_MODULE_5__.NAV_LINKS_US[0]}`);
-  const gamePage = document.querySelector(`.nav-list__btn--${isRu ? _utils_const__WEBPACK_IMPORTED_MODULE_5__.NAV_LINKS_RU[1] : _utils_const__WEBPACK_IMPORTED_MODULE_5__.NAV_LINKS_US[1]}`);
-  const gallery = document.querySelector(`.nav-list__btn--${isRu ? _utils_const__WEBPACK_IMPORTED_MODULE_5__.NAV_LINKS_RU[2] : _utils_const__WEBPACK_IMPORTED_MODULE_5__.NAV_LINKS_US[2]}`);
-  const lang = document.querySelector('.nav-list__btn--svg');
-  lang.addEventListener('click', () => {
-    const location = window.location.href;
-    if (lang.innerHTML.includes('rus')) {
-      lang.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_5__.US_FLAG;
-    } else {
-      lang.innerHTML = _utils_const__WEBPACK_IMPORTED_MODULE_5__.RUS_FLAG;
-    }
-    const language = lang.innerHTML.includes('rus') ? _utils_const__WEBPACK_IMPORTED_MODULE_5__.LANGUAGES.ru : _utils_const__WEBPACK_IMPORTED_MODULE_5__.LANGUAGES.us;
-    localStorage.setItem(_utils_const__WEBPACK_IMPORTED_MODULE_5__.LOCAL_STORAGE_KEYS.language, language);
-    if (location.includes(_utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.main)) {
-      (0,_create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_0__.createStartPage)(language);
-    } else if (location.includes(_utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.game)) {
-      // if (innerQuestionBird.name) {
-      //   innerQuestionBird.name = getBirdNameOnAnotherLang(BIRDS_DATA_RU, BIRDS_DATA_EN)[innerQuestionBird.name];
-      // } 
-      (0,_create_game_create_game__WEBPACK_IMPORTED_MODULE_1__.createGamePage)(innerCounter, _utils_mocks__WEBPACK_IMPORTED_MODULE_6__.BIRDS_DATA_RU, innerChecked, innerQuestionBird, innerScore, innerTotalScore);
-    } else if (location.includes(_utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.results)) {
-      (0,_create_results_create_results__WEBPACK_IMPORTED_MODULE_2__.createResults)(innerTotalScore);
-    } else if (location.includes(_utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.gallery)) {
-      (0,_create_gallery_create_gallery__WEBPACK_IMPORTED_MODULE_3__.createGalleryPage)(innerCounter);
-    }
-  });
-  mainPage.addEventListener("click", () => {
-    window.history.pushState({
-      urlPath: _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.main
-    }, '', _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.main);
-    localStorage.removeItem(_utils_const__WEBPACK_IMPORTED_MODULE_5__.LOCAL_STORAGE_KEYS.answers);
-    (0,_create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_0__.createStartPage)();
-  });
-  gamePage.addEventListener("click", () => {
-    window.history.pushState({
-      urlPath: _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.game
-    }, '', _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.game);
-    localStorage.removeItem(_utils_const__WEBPACK_IMPORTED_MODULE_5__.LOCAL_STORAGE_KEYS.answers);
-    (0,_create_game_create_game__WEBPACK_IMPORTED_MODULE_1__.createGamePage)();
-  });
-  gallery.addEventListener('click', () => {
-    window.history.pushState({
-      urlPath: _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.gallery
-    }, '', _utils_const__WEBPACK_IMPORTED_MODULE_5__.PATHS.gallery);
-    localStorage.removeItem(_utils_const__WEBPACK_IMPORTED_MODULE_5__.LOCAL_STORAGE_KEYS.answers);
-    (0,_create_gallery_create_gallery__WEBPACK_IMPORTED_MODULE_3__.createGalleryPage)();
-  });
-}
-
-/***/ }),
-
-/***/ "./src/js/layout-makers/get-nodes.js":
-/*!*******************************************!*\
-  !*** ./src/js/layout-makers/get-nodes.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getAudioNodes": () => (/* binding */ getAudioNodes)
-/* harmony export */ });
-function getAudioNodes() {
-  const questionAudio = document.querySelector(".question__audio");
-  const questionPlay = document.querySelector(".question .audio-container__play");
-  const totalDuration = document.querySelector(".question .audio-container__duration");
-  const currentDuration = document.querySelector(".question .audio-container__current-time");
-  const progress = document.querySelector(".question .audio-container__duration-changer");
-  const muteBtn = document.querySelector(".question .audio-container__mute-btn");
-  const volumeContainer = document.querySelector(".question .audio-container__mute-wrapper");
-  const audioProgress = document.querySelector(".question .audio-container__volume-changer");
-  const answerAudio = document.querySelector(".checked-answer__audio");
-  const answerPlay = document.querySelector(".checked-answer .audio-container__play");
-  const answerTotalDuration = document.querySelector(".checked-answer .audio-container__duration");
-  const answerCurrentDuration = document.querySelector(".checked-answer .audio-container__current-time");
-  const answerProgress = document.querySelector(".checked-answer .audio-container__duration-changer");
-  const answerMuteBtn = document.querySelector(".checked-answer .audio-container__mute-btn");
-  const answerVolumeContainer = document.querySelector(".checked-answer .audio-container__mute-wrapper");
-  const answerAudioProgress = document.querySelector(".checked-answer .audio-container__volume-changer");
-  return {
-    questionAudio,
-    questionPlay,
-    totalDuration,
-    currentDuration,
-    progress,
-    muteBtn,
-    volumeContainer,
-    audioProgress,
-    answerAudio,
-    answerPlay,
-    answerTotalDuration,
-    answerCurrentDuration,
-    answerProgress,
-    answerMuteBtn,
-    answerVolumeContainer,
-    answerAudioProgress
-  };
-}
-
-/***/ }),
-
-/***/ "./src/js/manage-audio/manage-audio.js":
-/*!*********************************************!*\
-  !*** ./src/js/manage-audio/manage-audio.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "setAudio": () => (/* binding */ setAudio)
-/* harmony export */ });
-/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/helpers */ "./src/js/utils/helpers.js");
-/* harmony import */ var _layout_makers_get_nodes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../layout-makers/get-nodes.js */ "./src/js/layout-makers/get-nodes.js");
-
-
-function setAudio() {
-  const {
-    questionAudio,
-    questionPlay,
-    totalDuration,
-    currentDuration,
-    progress,
-    muteBtn,
-    volumeContainer,
-    audioProgress,
-    answerAudio,
-    answerPlay,
-    answerTotalDuration,
-    answerCurrentDuration,
-    answerProgress,
-    answerMuteBtn,
-    answerVolumeContainer,
-    answerAudioProgress
-  } = (0,_layout_makers_get_nodes_js__WEBPACK_IMPORTED_MODULE_1__.getAudioNodes)();
-  if (answerPlay) {
-    answerPlay.addEventListener("click", () => {
-      if (answerPlay.classList.contains("play")) {
-        answerPlay.classList.remove("play");
-        answerPlay.classList.add("pause");
-        answerAudio.play();
-        setInterval(() => {
-          answerProgress.value = answerAudio.currentTime;
-          answerCurrentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(answerAudio.currentTime);
-        }, 1000);
-      } else {
-        answerPlay.classList.remove("pause");
-        answerPlay.classList.add("play");
-        answerAudio.pause();
-      }
-    });
-    answerMuteBtn.addEventListener("click", () => {
-      if (answerMuteBtn.classList.contains("unmuted")) {
-        answerMuteBtn.classList.remove("unmuted");
-        answerMuteBtn.classList.add("muted");
-        answerAudio.muted = true;
-      } else {
-        answerMuteBtn.classList.remove("muted");
-        answerMuteBtn.classList.add("unmuted");
-        answerAudio.muted = false;
-      }
-    });
-    answerVolumeContainer.addEventListener("mouseenter", () => answerAudioProgress.classList.add("is-open"));
-    answerVolumeContainer.addEventListener("mouseleave", () => answerAudioProgress.classList.remove("is-open"));
-    answerAudioProgress.addEventListener("input", _ref => {
-      let {
-        target
-      } = _ref;
-      answerAudio.volume = target.value;
-      if (+target.value === 0) {
-        answerMuteBtn.classList.remove("unmuted");
-        answerMuteBtn.classList.add("muted");
-      } else if (answerMuteBtn.classList.contains("muted")) {
-        answerMuteBtn.classList.remove("muted");
-        answerMuteBtn.classList.add("unmuted");
-      }
-    });
-    answerAudio.addEventListener("loadeddata", () => {
-      answerTotalDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(answerAudio.duration);
-      answerAudio.volume = "1";
-      answerProgress.value = 0;
-      answerProgress.max = Math.floor(+answerAudio.duration);
-      answerProgress.step = answerAudio.duration / 100;
-    });
-    answerProgress.addEventListener("input", _ref2 => {
-      let {
-        target
-      } = _ref2;
-      answerAudio.currentTime = target.value;
-      answerCurrentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(target.value);
-    });
-  }
-  if (questionPlay) {
-    questionPlay.addEventListener("click", () => {
-      if (questionPlay.classList.contains("play")) {
-        questionPlay.classList.remove("play");
-        questionPlay.classList.add("pause");
-        questionAudio.play();
-        setInterval(() => {
-          progress.value = questionAudio.currentTime;
-          currentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(questionAudio.currentTime);
-        }, 1000);
-      } else {
-        questionPlay.classList.remove("pause");
-        questionPlay.classList.add("play");
-        questionAudio.pause();
-      }
-    });
-    muteBtn.addEventListener("click", () => {
-      if (muteBtn.classList.contains("unmuted")) {
-        muteBtn.classList.remove("unmuted");
-        muteBtn.classList.add("muted");
-        questionAudio.muted = true;
-      } else {
-        muteBtn.classList.remove("muted");
-        muteBtn.classList.add("unmuted");
-        questionAudio.muted = false;
-      }
-    });
-    volumeContainer.addEventListener("mouseenter", () => audioProgress.classList.add("is-open"));
-    volumeContainer.addEventListener("mouseleave", () => audioProgress.classList.remove("is-open"));
-    audioProgress.addEventListener("input", _ref3 => {
-      let {
-        target
-      } = _ref3;
-      questionAudio.volume = target.value;
-      if (+target.value === 0) {
-        muteBtn.classList.remove("unmuted");
-        muteBtn.classList.add("muted");
-      } else if (muteBtn.classList.contains("muted")) {
-        muteBtn.classList.remove("muted");
-        muteBtn.classList.add("unmuted");
-      }
-    });
-    questionAudio.addEventListener("loadeddata", () => {
-      totalDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(questionAudio.duration);
-      questionAudio.volume = "1";
-      progress.value = 0;
-      progress.max = Math.floor(+questionAudio.duration);
-      progress.step = questionAudio.duration / 100;
-    });
-    progress.addEventListener("input", _ref4 => {
-      let {
-        target
-      } = _ref4;
-      questionAudio.currentTime = target.value;
-      currentDuration.textContent = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.getSeconds)(target.value);
-    });
-  }
-}
-
-/***/ }),
-
-/***/ "./src/js/utils/const.js":
-/*!*******************************!*\
-  !*** ./src/js/utils/const.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AUTHOR_LINK_RU": () => (/* binding */ AUTHOR_LINK_RU),
-/* harmony export */   "AUTHOR_LINK_US": () => (/* binding */ AUTHOR_LINK_US),
-/* harmony export */   "CATEGORIES_RU": () => (/* binding */ CATEGORIES_RU),
-/* harmony export */   "CATEGORIES_US": () => (/* binding */ CATEGORIES_US),
-/* harmony export */   "CONGRATULATIONS_EN": () => (/* binding */ CONGRATULATIONS_EN),
-/* harmony export */   "CONGRATULATIONS_RU": () => (/* binding */ CONGRATULATIONS_RU),
-/* harmony export */   "DEFAULT_TEXT_RU": () => (/* binding */ DEFAULT_TEXT_RU),
-/* harmony export */   "DEFAULT_TEXT_US": () => (/* binding */ DEFAULT_TEXT_US),
-/* harmony export */   "GITHUB_ACCOUNT": () => (/* binding */ GITHUB_ACCOUNT),
-/* harmony export */   "INITIAL_COUNT": () => (/* binding */ INITIAL_COUNT),
-/* harmony export */   "LANGUAGES": () => (/* binding */ LANGUAGES),
-/* harmony export */   "LAST_GROUP": () => (/* binding */ LAST_GROUP),
-/* harmony export */   "LOCAL_STORAGE_KEYS": () => (/* binding */ LOCAL_STORAGE_KEYS),
-/* harmony export */   "MAX_GAP_SCORE": () => (/* binding */ MAX_GAP_SCORE),
-/* harmony export */   "MAX_SCORE": () => (/* binding */ MAX_SCORE),
-/* harmony export */   "MIN_COUNTER": () => (/* binding */ MIN_COUNTER),
-/* harmony export */   "NAV_LINKS_RU": () => (/* binding */ NAV_LINKS_RU),
-/* harmony export */   "NAV_LINKS_US": () => (/* binding */ NAV_LINKS_US),
-/* harmony export */   "NEXT_BTN_TEXT_DEFAULT_RU": () => (/* binding */ NEXT_BTN_TEXT_DEFAULT_RU),
-/* harmony export */   "NEXT_BTN_TEXT_DEFAULT_US": () => (/* binding */ NEXT_BTN_TEXT_DEFAULT_US),
-/* harmony export */   "NEXT_BTN_TEXT_SUCCESS_RU": () => (/* binding */ NEXT_BTN_TEXT_SUCCESS_RU),
-/* harmony export */   "NEXT_BTN_TEXT_SUCCESS_US": () => (/* binding */ NEXT_BTN_TEXT_SUCCESS_US),
-/* harmony export */   "PATHS": () => (/* binding */ PATHS),
-/* harmony export */   "PROMO_SENTENCE_RU": () => (/* binding */ PROMO_SENTENCE_RU),
-/* harmony export */   "PROMO_SENTENCE_US": () => (/* binding */ PROMO_SENTENCE_US),
-/* harmony export */   "RULES_TEXT_RU": () => (/* binding */ RULES_TEXT_RU),
-/* harmony export */   "RULES_TEXT_US": () => (/* binding */ RULES_TEXT_US),
-/* harmony export */   "RUS_FLAG": () => (/* binding */ RUS_FLAG),
-/* harmony export */   "START_RU": () => (/* binding */ START_RU),
-/* harmony export */   "START_US": () => (/* binding */ START_US),
-/* harmony export */   "US_FLAG": () => (/* binding */ US_FLAG)
-/* harmony export */ });
-const RUS_FLAG = `<svg width="20" version="1.1" id="rus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55.32 38.52" style="enable-background:new 0 0 55.32 38.52" xml:space="preserve"><style type="text/css">.st0{fill:#FFFFFF;} .st1{fill:#D52B1E;} .st2{fill:#0039A6;} .st3{fill:none;stroke:#CCCCCC;stroke-width:0.1199;stroke-miterlimit:2.6131;}</style><g><path class="st0" d="M3.09,0.06h49.13c1.67,0,3.03,1.36,3.03,3.03v16.17H0.06V3.09C0.06,1.42,1.42,0.06,3.09,0.06L3.09,0.06z"/><path class="st1" d="M0.06,19.26h55.2v16.17c0,1.67-1.36,3.03-3.03,3.03H3.09c-1.67,0-3.03-1.37-3.03-3.03V19.26L0.06,19.26z"/><polygon class="st2" points="0.06,12.86 55.26,12.86 55.26,25.66 0.06,25.66 0.06,12.86"/><path class="st3" d="M3.09,0.06h49.13c1.67,0,3.03,1.36,3.03,3.03v32.33c0,1.67-1.36,3.03-3.03,3.03H3.09 c-1.67,0-3.03-1.37-3.03-3.03V3.09C0.06,1.42,1.42,0.06,3.09,0.06L3.09,0.06z"/></g></svg>`;
-const US_FLAG = `<svg width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55.2 38.4" style="enable-background:new 0 0 55.2 38.4" xml:space="preserve"><style type="text/css">.st0{fill:#B22234;} .st1{fill:#FFFFFF;} .st2{fill:#3C3B6E;}</style><g><path class="st0" d="M3.03,0h49.13c1.67,0,3.03,1.36,3.03,3.03v32.33c0,1.67-1.36,3.03-3.03,3.03H3.03C1.36,38.4,0,37.04,0,35.37 V3.03C0,1.36,1.36,0,3.03,0L3.03,0z"/><path class="st1" d="M0.02,2.73h55.17c0.01,0.1,0.02,0.2,0.02,0.31v2.94H0V3.03C0,2.93,0.01,2.83,0.02,2.73L0.02,2.73z M55.2,8.67 v3.24H0V8.67H55.2L55.2,8.67z M55.2,14.61v3.24H0v-3.24H55.2L55.2,14.61z M55.2,20.55v3.24H0v-3.24H55.2L55.2,20.55z M55.2,26.49 v3.24H0v-3.24H55.2L55.2,26.49z M55.2,32.43v2.93c0,0.1-0.01,0.21-0.02,0.31H0.02C0.01,35.58,0,35.47,0,35.37v-2.93H55.2 L55.2,32.43z"/><path class="st2" d="M20.8,0v20.68H0V3.03C0,1.36,1.36,0,3.03,0H20.8L20.8,0L20.8,0z"/><polygon class="st1" points="1.23,2.86 1.92,5.01 0.1,3.68 2.36,3.68 0.53,5.01 1.23,2.86"/><polygon class="st1" points="1.23,7.02 1.92,9.17 0.1,7.84 2.36,7.84 0.53,9.17 1.23,7.02"/><polygon class="st1" points="1.23,11.18 1.92,13.33 0.1,12 2.36,12 0.53,13.33 1.23,11.18"/><polygon class="st1" points="1.23,15.34 1.92,17.49 0.1,16.16 2.36,16.16 0.53,17.49 1.23,15.34"/><polygon class="st1" points="3.67,0.78 4.37,2.93 2.54,1.6 4.81,1.6 2.97,2.93 3.67,0.78"/><polygon class="st1" points="3.67,4.94 4.37,7.09 2.54,5.76 4.81,5.76 2.97,7.09 3.67,4.94"/><polygon class="st1" points="3.67,9.1 4.37,11.25 2.54,9.92 4.81,9.92 2.97,11.25 3.67,9.1"/><polygon class="st1" points="3.67,13.26 4.37,15.41 2.54,14.08 4.81,14.08 2.97,15.41 3.67,13.26"/><polygon class="st1" points="3.67,17.42 4.37,19.57 2.54,18.24 4.81,18.24 2.97,19.57 3.67,17.42"/><polygon class="st1" points="6.12,2.86 6.82,5.01 4.99,3.68 7.25,3.68 5.42,5.01 6.12,2.86"/><polygon class="st1" points="6.12,7.02 6.82,9.17 4.99,7.84 7.25,7.84 5.42,9.17 6.12,7.02"/><polygon class="st1" points="6.12,11.18 6.82,13.33 4.99,12 7.25,12 5.42,13.33 6.12,11.18"/><polygon class="st1" points="6.12,15.34 6.82,17.49 4.99,16.16 7.25,16.16 5.42,17.49 6.12,15.34"/><polygon class="st1" points="8.57,0.78 9.26,2.93 7.44,1.6 9.7,1.6 7.87,2.93 8.57,0.78"/><polygon class="st1" points="8.57,4.94 9.26,7.09 7.44,5.76 9.7,5.76 7.87,7.09 8.57,4.94"/><polygon class="st1" points="8.57,9.1 9.26,11.25 7.44,9.92 9.7,9.92 7.87,11.25 8.57,9.1"/><polygon class="st1" points="8.57,13.26 9.26,15.41 7.44,14.08 9.7,14.08 7.87,15.41 8.57,13.26"/><polygon class="st1" points="8.57,17.42 9.26,19.57 7.44,18.24 9.7,18.24 7.87,19.57 8.57,17.42"/><polygon class="st1" points="11.01,2.86 11.71,5.01 9.88,3.68 12.14,3.68 10.31,5.01 11.01,2.86"/><polygon class="st1" points="11.01,7.02 11.71,9.17 9.88,7.84 12.14,7.84 10.31,9.17 11.01,7.02"/><polygon class="st1" points="11.01,11.18 11.71,13.33 9.88,12 12.14,12 10.31,13.33 11.01,11.18"/><polygon class="st1" points="11.01,15.34 11.71,17.49 9.88,16.16 12.14,16.16 10.31,17.49 11.01,15.34"/><polygon class="st1" points="13.46,0.78 14.16,2.93 12.33,1.6 14.59,1.6 12.76,2.93 13.46,0.78"/><polygon class="st1" points="13.46,4.94 14.16,7.09 12.33,5.76 14.59,5.76 12.76,7.09 13.46,4.94"/><polygon class="st1" points="13.46,9.1 14.16,11.25 12.33,9.92 14.59,9.92 12.76,11.25 13.46,9.1"/><polygon class="st1" points="13.46,13.26 14.16,15.41 12.33,14.08 14.59,14.08 12.76,15.41 13.46,13.26"/><polygon class="st1" points="13.46,17.42 14.16,19.57 12.33,18.24 14.59,18.24 12.76,19.57 13.46,17.42"/><polygon class="st1" points="15.9,2.86 16.6,5.01 14.77,3.68 17.03,3.68 15.21,5.01 15.9,2.86"/><polygon class="st1" points="15.9,7.02 16.6,9.17 14.77,7.84 17.03,7.84 15.21,9.17 15.9,7.02"/><polygon class="st1" points="15.9,11.18 16.6,13.33 14.77,12 17.03,12 15.21,13.33 15.9,11.18"/><polygon class="st1" points="15.9,15.34 16.6,17.49 14.77,16.16 17.03,16.16 15.21,17.49 15.9,15.34"/><polygon class="st1" points="18.35,0.78 19.05,2.93 17.22,1.6 19.48,1.6 17.65,2.93 18.35,0.78"/><polygon class="st1" points="18.35,4.94 19.05,7.09 17.22,5.76 19.48,5.76 17.65,7.09 18.35,4.94"/><polygon class="st1" points="18.35,9.1 19.05,11.25 17.22,9.92 19.48,9.92 17.65,11.25 18.35,9.1"/><polygon class="st1" points="18.35,13.26 19.05,15.41 17.22,14.08 19.48,14.08 17.65,15.41 18.35,13.26"/><polygon class="st1" points="18.35,17.42 19.05,19.57 17.22,18.24 19.48,18.24 17.65,19.57 18.35,17.42"/></g></svg>`;
-const NAV_LINKS_RU = ['дом', 'игра', 'галерея', RUS_FLAG];
-const NAV_LINKS_US = ["home", "game", 'gallery', US_FLAG];
-const PROMO_SENTENCE_RU = "Думаешь, что знаешь птиц?";
-const PROMO_SENTENCE_US = 'Do you think you know birds?';
-const START_RU = "Начать";
-const START_US = 'Start';
-const RULES_TEXT_RU = ["Когда вы кликаете по варианту музыки, выводится информация по этой музыке", "Если вы выбрали правильный ответ, в блоке с вопросом выводится название и изображение композитора", "Если игрок дал правильный ответ с первой попытки, его счёт увеличивается на 5 баллов, каждая следующая попытка даёт на один балл меньше, если правильный ответ дан только с последней, шестой попытки, игрок получает за него 0 баллов. Баллы за все вопросы cуммируются", "Для правильных и неправильных ответов игрока используется звуковая и цветовая индикация", 'Когда игрок дал правильный ответ, активируется кнопка "Дальше" и он получает возможность перейти к следующему вопросу', "После последнего вопроса выводится страница с результатами игры"];
-const RULES_TEXT_US = ['When you click on a music variant, information about that music is displayed', 'If you have chosen the correct answer, the name and image of the composer will be displayed in the question block', 'If the player gave the correct answer on the first attempt, his score increases by 5 points, each next attempt gives one point less, if the correct answer is given only on the last, sixth attempt, the player receives 0 points for it. Points for all questions are summed up.', 'Sound and color indication is used for correct and incorrect player answers', 'When the player has given the correct answer, the "Next" button is activated and he gets the opportunity to move on to the next question', 'After the last poll, a page with the results of the game is displayed'];
-const CATEGORIES_RU = ["Разминка", "Воробьиные", "Лесные", "Певчие", "Хищные", "Морские"];
-const CATEGORIES_US = ['Warm-up', 'Vorobushky', 'Woody', 'Singers', 'Predators', 'Navy'];
-const NEXT_BTN_TEXT_DEFAULT_RU = "Правильно ответишь - я буду активной";
-const NEXT_BTN_TEXT_SUCCESS_RU = "Молодест, жмякай, чтобы перейти дальше";
-const NEXT_BTN_TEXT_SUCCESS_US = "Youth, click to move on";
-const NEXT_BTN_TEXT_DEFAULT_US = "Correct answer - I will be active";
-const DEFAULT_TEXT_RU = "Выберите вариант ответа, и здесь появится информация по птице. А если угадаешь, то сверху вместо вопроса тоже появится личико птички";
-const DEFAULT_TEXT_US = "Select an answer option, and information on the bird will appear here. And if you guess right, then instead of a question, a bird's face will also appear on top";
-const CONGRATULATIONS_RU = 'Очень поздравляем! Вы набрали максимальное количество баллов! Судя по всему, кукушка и дятел для вас не пустые слова! Не думаю, что вам захочется сыграть еще разок:(';
-const CONGRATULATIONS_EN = 'Congratulations! You have scored the maximum number of points! Apparently, the cuckoo and the woodpecker are not empty words for you! I don\'t think you\'ll want to play again :(';
-const LAST_GROUP = 5;
-const PATHS = {
-  main: '#main',
-  game: '#game',
-  gallery: '#gallery',
-  results: '#results'
-};
-const MAX_SCORE = 30;
-const MIN_COUNTER = 0;
-const MAX_GAP_SCORE = 5;
-const LOCAL_STORAGE_KEYS = {
-  answers: 'answers',
-  language: 'language'
-};
-const LANGUAGES = {
-  ru: 'ru',
-  us: 'us'
-};
-const AUTHOR_LINK_RU = 'Связаться с автором';
-const AUTHOR_LINK_US = 'Contact the author';
-const GITHUB_ACCOUNT = "https://github.com/sanich123";
-const INITIAL_COUNT = 0;
-
-/***/ }),
-
-/***/ "./src/js/utils/helpers.js":
-/*!*********************************!*\
-  !*** ./src/js/utils/helpers.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addActiveToNavigation": () => (/* binding */ addActiveToNavigation),
-/* harmony export */   "changeLanguageOnAnswers": () => (/* binding */ changeLanguageOnAnswers),
-/* harmony export */   "getBirdNameOnAnotherLang": () => (/* binding */ getBirdNameOnAnotherLang),
-/* harmony export */   "getRandomNumber": () => (/* binding */ getRandomNumber),
-/* harmony export */   "getRightCongratulations": () => (/* binding */ getRightCongratulations),
-/* harmony export */   "getSearchParams": () => (/* binding */ getSearchParams),
-/* harmony export */   "getSeconds": () => (/* binding */ getSeconds),
-/* harmony export */   "getUrl": () => (/* binding */ getUrl),
-/* harmony export */   "setDeclineAcceptStyles": () => (/* binding */ setDeclineAcceptStyles)
-/* harmony export */ });
-/* harmony import */ var _audio_success_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../audio/success.mp3 */ "./src/audio/success.mp3");
-/* harmony import */ var _audio_fail_mp3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../audio/fail.mp3 */ "./src/audio/fail.mp3");
-/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.js");
-
-
-
-const getRandomNumber = max => Math.floor(Math.random() * max);
-function setDeclineAcceptStyles(checkedAnswer, innerQuestionBird) {
-  const answersList = document.querySelector('.answers-list');
-  const answersBtns = document.querySelectorAll(".answers-list__btn");
-  const fail = new Audio(_audio_fail_mp3__WEBPACK_IMPORTED_MODULE_1__);
-  const success = new Audio(_audio_success_mp3__WEBPACK_IMPORTED_MODULE_0__);
-  const body = document.querySelector(".page");
-  if (checkedAnswer === innerQuestionBird.name) {
-    answersBtns.forEach(btn => {
-      if (btn.value === innerQuestionBird.name) {
-        success.play();
-        body.style.background = "green";
-        btn.classList.add("accept");
-        setTimeout(() => body.style.background = "#ebe2e2", 50);
-      } else {
-        btn.disabled = true;
-      }
-    });
-  } else {
-    answersBtns.forEach(btn => {
-      if (btn.value === checkedAnswer) {
-        fail.play();
-        body.style.background = "orange";
-        btn.classList.add("decline");
-        btn.disabled = true;
-        setTimeout(() => body.style.background = "#ebe2e2", 50);
-      }
-    });
-  }
-  const stringifiedNodes = new XMLSerializer().serializeToString(answersList);
-  localStorage.setItem(_const__WEBPACK_IMPORTED_MODULE_2__.LOCAL_STORAGE_KEYS.answers, JSON.stringify(stringifiedNodes));
-}
-function addActiveToNavigation(innerCounter, innerLang) {
-  const categoriesList = document.querySelectorAll(".categories-list__btn");
-  const isRu = innerLang === _const__WEBPACK_IMPORTED_MODULE_2__.LANGUAGES.ru;
-  const categoriesMocks = isRu ? _const__WEBPACK_IMPORTED_MODULE_2__.CATEGORIES_RU : _const__WEBPACK_IMPORTED_MODULE_2__.CATEGORIES_US;
-  categoriesList.forEach(category => {
-    if (category.value === categoriesMocks[innerCounter]) {
-      category.style.background = "red";
-    }
-  });
-}
-function getSeconds(secs) {
-  const mins = Math.trunc(Math.floor(secs) / 60);
-  const seconds = Math.floor(secs - mins * 60);
-  return `${mins > 9 ? mins : `0${mins}`}:${seconds > 9 ? seconds : `0${seconds}`}`;
-}
-function changeLanguageOnAnswers(isRu, counter, ruMocks, enMocks, string) {
-  const namesRu = ruMocks[counter].slice().map(_ref => {
-    let {
-      name
-    } = _ref;
-    return name;
-  });
-  const namesEn = enMocks[counter].slice().map(_ref2 => {
-    let {
-      name
-    } = _ref2;
-    return name;
-  });
-  if (!isRu) {
-    for (let i = 0; i < namesRu.length; i++) {
-      string = string.replace(new RegExp(`${namesRu[i]}`, 'gi'), namesEn[i]);
-    }
-    return string;
-  } else {
-    for (let i = 0; i < namesEn.length; i++) {
-      string = string.replace(new RegExp(`${namesEn[i]}`, 'gi'), namesRu[i]);
-    }
-    return string;
-  }
-}
-function getRightCongratulations(totalScore, maxScore, innerLang) {
-  const isRu = innerLang === _const__WEBPACK_IMPORTED_MODULE_2__.LANGUAGES.ru;
-  if (totalScore === maxScore) {
-    if (isRu) {
-      return _const__WEBPACK_IMPORTED_MODULE_2__.CONGRATULATIONS_RU;
-    } else {
-      return _const__WEBPACK_IMPORTED_MODULE_2__.CONGRATULATIONS_EN;
-    }
-  } else {
-    if (isRu) {
-      return `Вы набрали ${totalScore} баллов. Судя по всему, вам надо немножко еще потренироваться определять разных птичек. Сыграем еще раз? Жмякай кнопку ниже, если хочешь еще разок`;
-    } else {
-      return `You have collected ${totalScore} points. Apparently, you need to practice a little more to identify different birds. Shall we play again? Click the button below if you want more`;
-    }
-  }
-}
-function getBirdNameOnAnotherLang(ruBirds, enBirds) {
-  const flattedRu = ruBirds.slice().flat();
-  const flattedEn = enBirds.slice().flat();
-  const result = {};
-  for (let i = 0; i < flattedRu.length; i++) {
-    result[flattedRu[i].name] = flattedEn[i].name;
-    result[flattedEn[i].name] = flattedRu[i].name;
-  }
-  return result;
-}
-function getUrl(string) {
-  return string.slice(string.indexOf('#'));
-}
-function getSearchParams() {}
-
-/***/ }),
-
-/***/ "./src/js/utils/mocks.js":
-/*!*******************************!*\
-  !*** ./src/js/utils/mocks.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "BIRDS_DATA_EN": () => (/* binding */ BIRDS_DATA_EN),
-/* harmony export */   "BIRDS_DATA_RU": () => (/* binding */ BIRDS_DATA_RU)
-/* harmony export */ });
-const BIRDS_DATA_RU = [[{
-  id: 1,
-  name: "Ворон",
-  species: "Corvus corax",
-  description: "Ворон – крупная птица. Длина тела достигает 70 сантиметров, размах крыльев – до полутора метров. Вороны населяют окрестности Тауэра. В Англии бытует поверье, что в день, когда черные вороны улетят от Тауэра, монархия рухнет.",
-  image: "https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/XIQVMQVUPP/XC518684-Grands%20corbeaux%2009012020%20Suzon.mp3"
-}, {
-  id: 2,
-  name: "Журавль",
-  species: "Grus grus",
-  description: "Звуки, издаваемые журавлем, похожи на звонкое «кур-лы – кур-лы». Журавли чаще всего поют дуэтом – одна птица начинает запев со слога «кур», а вторая подхватывает «лы». Если птица поёт одна, то она издает только звук «кур».",
-  image: "https://live.staticflickr.com/65535/49221158846_b0b69a58f1.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC512582-190604_1087_Grus_tok.mp3"
-}, {
-  id: 3,
-  name: "Ласточка",
-  species: "Delichon urbicum",
-  description: "Для ласточек характерно негромкое щебетание. Песни ласточек не смолкают на протяжении всего лета. Исследователи различают у птиц до 6 щебечущих звуков: «вит», «ви-вит», «чивит», «чиривит» и т.п. Ласточки любят петь дуэтом.",
-  image: "https://live.staticflickr.com//65535//48539007512_5029d2a9a0.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489247-190724_09.10h_huiszwaluw_biesbosch_amaliahoeve_roep_100%2Bex_fouragerend_gezien_%20%282%29.mp3"
-}, {
-  id: 4,
-  name: "Козодой",
-  species: "Caprimulgus europaeus",
-  description: "Козодой – неприметная птица, известная благодаря своему голосу. Песня козодоя звучит как монотонная трель похожая на тарахтение мотоцикла. Такое дребезжание слышно от заката до рассвета, его тональность, частота и громкость изменяются. ",
-  image: "https://live.staticflickr.com/65535/48456345286_dbc8530027.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC486956-190623_22.37h_nachtzwaluw_rechte%20heide_zang_ad%20_2ex_gezien_.mp3"
-}, {
-  id: 5,
-  name: "Кукушка",
-  species: "Cuculus canorus",
-  description: "Кукушку назвали так из-за особенностей ее песен. Звонкое «ку-ку» не спутать ни с какой другой птицей. Кукушки не строят гнезда, их потомство выращивают другие виды пернатых, которым кукушки подбрасывают свои яйца.",
-  image: "https://live.staticflickr.com/65535/48377838151_e15f430ec1.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501461-190616_08.13h_koekoek_brabantse%20biesbosch%20jantjesplaat_roep_1%20ex_ad%20m_ter%20plaatse%20zingend_gezien_.mp3"
-}, {
-  id: 6,
-  name: "Синица",
-  species: "Parus major",
-  description: "В щебетании синиц различают более 40 различных звуковых сочетаний. Поют они практически круглый год, немного затихая только зимой. Синицы настоящие санитары леса. Одна пара синиц в период гнездования оберегает от вредителей десятки деревьев.",
-  image: "https://live.staticflickr.com//65535//49366042493_c48c81d58d.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/RFGQDPLDEC/XC518417-Kj%C3%B8ttmeis%20XC%20Helg%C3%B8ya%20Elias%20A.%20Ryberg20200108133922_079.mp3"
-}], [{
-  id: 1,
-  name: "Воробей",
-  species: "Passer domesticus",
-  description: "Воробьи являются самыми известными и узнаваемыми пернатыми. Их легко узнать по пестрому оперению и задорному чириканью. Воробьи относятся к синатропному виду — они селятся поблизости к человеческому жилищу.",
-  image: "https://live.staticflickr.com//65535//49366595303_06cf65b07e.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/CXFHOPIVAS/XC503224-191020_0134.mp3"
-}, {
-  id: 2,
-  name: "Грач",
-  species: "Corvus frugilegus",
-  description: "Грачи очень умные и сообразительные птицы. С помощью клюва они создают и используют простейшие орудия. У грачей развит рефлекс на звуки трактора. Услышав «тарахтение», они летят на звук – трактор пашет землю, значит, в этом месте много корма.",
-  image: "https://live.staticflickr.com//65535//49347123322_291c86b016.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/RLRHCUIPIY/XC512540-gawron%20Suble%2019.12.19%20%2012.35.mp3"
-}, {
-  id: 3,
-  name: "Галка",
-  species: "Coloeus monedula",
-  description: "Слово «галка» произошло из старославянского языка и переводится как «чёрный». Этим словом часто называют воронов или других черных птиц. Латинское название галки «monedula» связывают со словами монета за любовь птицы к блестящим и ярким вещам.",
-  image: "https://live.staticflickr.com//65535//49237149586_993cf685c5.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC510498-Coloeus%20monedula_2019.11.13_11.55_01.mp3"
-}, {
-  id: 4,
-  name: "Певчий дрозд",
-  species: "Turdus philomelos",
-  description: "Дрозд — лучший певец из отряда воробьиных. Песня состоит только из красивых звучных свистов и коротких трелей. Чаще всего её можно услышать в утреннее и вечернее время. Поют дрозды в течении всего периода гнездования.",
-  image: "https://live.staticflickr.com/65535/48979125763_e2534f54bd.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513326-190704_1146_TF-Glogow.mp3"
-}, {
-  id: 5,
-  name: "Сорока",
-  species: "Pica pica",
-  description: "Сорока очень трудолюбивая птица. Она строит до восьми гнёзд, а потом выбирает из них самое лучшее. Вход в гнездо сорок всегда обращен на юг, чтобы в жилище было теплее. Сороки являются единственными птицами, которые узнают себя в зеркале.",
-  image: "https://live.staticflickr.com//65535//49360363066_ff02bb6a73.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC500868-Pica%20pica2019.08.23_09.18_02.mp3"
-}, {
-  id: 6,
-  name: "Сойка",
-  species: "Garrulus glandarius",
-  description: "Когда сойка волнуется, хохолок на её голове взъерошивается. Птица старается создать устрашающее зрелище. Сойки умеют имитировать голоса других птиц, животных и звуки, которые создает человек. На зиму они делают большие запасы желудей и орехов.",
-  image: "https://live.staticflickr.com//65535//49369678956_9a7465c7f4.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/TFOGOENSTQ/XC501517-191008_1590%201300.%20Eichelh%C3%A4her%20D%2C%20NW%2C%20LEV.%20Stephan%20Risch.mp3"
-}], [{
-  id: 1,
-  name: "Зяблик",
-  species: "Fringilla coelebs",
-  description: "В дикой природе насчитывается 450 видов зябликов. Зимой зяблики ведут стайный образ жизни. Иногда в их семьях можно увидеть воробьев. Запевают зяблики весной, с наступлением брачного периода. Их пение – это заливистые многоминутные рулады.",
-  image: "https://live.staticflickr.com/65535/49143150817_2d3a2f6c1e.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC512407-150622_03%20zi%C4%99ba%20%282%29.mp3"
-}, {
-  id: 2,
-  name: "Клёст",
-  species: "Loxia curvirostra",
-  description: "Клестов называют «рождественскими» птицами. В естественных условиях они дают потомство зимой – в январе. Эти птицы утепляют свои гнезда мхом и шерстью животных, потому птенцам не холодно. В поисках шишек клесты могут улетать за 3500 км от гнезда.",
-  image: "https://live.staticflickr.com//65535//49365470123_f2de66bb35.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/OTVUCEGYZN/XC495381-Kruisbek%20roep%20NHD%20290619.mp3"
-}, {
-  id: 3,
-  name: "Горлица",
-  species: "Streptopelia turtur",
-  description: "Горлица обитает в смешанных и широколиственных лесах, а также в городских парках и поселках. Птицы часто выбирают места жизни рядом с человеком и легко привыкают к людям. Благодаря мелодичному приятному пению горлиц часто разводят в домашних условиях.",
-  image: "https://live.staticflickr.com/65535/48063004977_84252f9ceb.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC324106-Turkawka_Streptopelia_turtur_Poland_Jarek_Matusiak_2011625_07.mp3"
-}, {
-  id: 4,
-  name: "Дятел",
-  species: "Dendrocopos major",
-  description: "Дятел – заметная и шумная птица, часто живет рядом с человеком. С середины января до конца июня можно услышать «барабанную дробь» дятлов – трель от вибрации веток под быстрыми ударами клюва птицы. В хорошую погоду дробь слышна в радиусе 1,5 км.",
-  image: "https://live.staticflickr.com/65535/49339376578_e933426455.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC518928-AB-017%20dzi%C4%99cio%C5%82%20du%C5%BCy%20agresja%20%282%29.mp3"
-}, {
-  id: 5,
-  name: "Удод",
-  species: "Upupa epops",
-  description: "Удоды предпочитают жить на открытых ландшафтах с отдельными деревьями или рощами. Наиболее удобными для птицы являются лесостепь и саванна. Удод может выбирать места жительства рядом с человеком: пастбища, виноградники, фруктовые сады.",
-  image: "https://live.staticflickr.com//65535//49226383598_6f8be86a06.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC477326-dudek%20%282%29.mp3"
-}, {
-  id: 6,
-  name: "Стриж",
-  species: "Apus apus",
-  description: "Стрижа можно увидеть практически в каждом уголке планеты. Они обитают как в лесных зонах, так и на открытых местностях. Живут стрижи крупными стаями. Большие колонии этих птиц можно увидеть в городах или на прибрежных скалах.",
-  image: "https://live.staticflickr.com//65535//48386150031_7b749df74b.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/TMUAWSDHDJ/XC511871-G.mp3"
-}], [{
-  id: 1,
-  name: "Жаворонок",
-  species: "Alauda arvensis",
-  description: "Жаворонки — перелетные птицы. С начала сентября они отлетают на юг. Возвращаются они в начале марта, независимо от того, сошел снег или нет. По прилету жаворонков определяли наступление весны и пору, когда пора пахать землю.",
-  image: "https://live.staticflickr.com/65535/47105096764_f751fba568.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC462158-Skowronek_Alauda_arvensis_Poland_Jarek_Matusiak_%20-006%20skowronek%20%282%29.mp3"
-}, {
-  id: 2,
-  name: "Соловей",
-  species: "Luscinia luscinia",
-  description: "Соловьи поют с начала мая и до конца лета. Каждая песня соловья состоит из 12 повторяющихся элементов, которые еще называют коленами. Кроме собственных трелей, соловьи легко и хорошо перенимают пение других птиц.",
-  image: "https://live.staticflickr.com/7605/27669397735_f3c21758f2.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/HILVWSADVL/XC513809-R07_0052%20Thrush%20Nightingale%20Snipe.mp3"
-}, {
-  id: 3,
-  name: "Скворец",
-  species: "Sturnus vulgaris",
-  description: "Скворцы - перелётные птицы. Синхронный перелет больших стай скворцов называется мурмурацией. Это красивое и завораживающее явление – множество птиц будто танцуют в воздухе, образуя замысловатые фигуры, которые уменьшаются и увеличиваются в небе.",
-  image: "https://live.staticflickr.com/65535/49357593971_9509fe1d7c.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC515519-2020.01.01_17.24_01.MP3"
-}, {
-  id: 4,
-  name: "Иволга",
-  species: "Oriolus oriolus",
-  description: "Мелодичность голоса иволги сравнивают со звучанием флейты. Человеку сложно разглядеть иволгу, так как она обитает высоко на деревьях. Иволга не только очень красивая, но и  полезная птица. Она уничтожает ядовитых гусениц, которых не поедают другие птицы.",
-  image: "https://live.staticflickr.com/65535/47102184004_58a93380b9.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC491801-2019.07.07_06.28_01.mp3"
-}, {
-  id: 5,
-  name: "Свиристель",
-  species: "Bombycilla garrulus",
-  description: "У свиристели очень цепкие коготки, что помогает птице удерживаться на ветках и склевывать ягоды, которые труднее всего достать. В период ухаживаний самец предлагает самке ягоду или другое угощение. Если самка его принимает, то птицы создают пару.",
-  image: "https://live.staticflickr.com//65535//49367433842_1b06da0e6b.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC517421-AB-004%20%282%29%20jemio%C5%82uszka.mp3"
-}, {
-  id: 6,
-  name: "Щегол",
-  species: "Carduelis carduelis",
-  description: "Щеглы поют красиво и мелодично. И в природе, и в неволе они щебечут почти круглый год. В пении щегла различают более 20 переливчатых трелей. Щеглы привыкают к людям, и даже могут возвратиться к хозяину после того, как их выпустили на волю",
-  image: "https://live.staticflickr.com//65535//49366257253_db3ce48b9a.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489265-190724_07.58h_putter_biesbosch_%20boompjes%20langs%20open%20water_zang_1ex_ad_niet%20gezien_.mp3"
-}], [{
-  id: 1,
-  name: "Орёл",
-  species: "Aquila nipalensis",
-  description: "В древние времена орел был символом солнца. Орлы часто парят над землей, при этом скорость их перемещения может достигать 240 км/ч. Иллюзия медленного движения происходит из-за высоты полета – более 700 метров",
-  image: "https://live.staticflickr.com//4835//43867392960_7105d71e19.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/KTBTZAHSXF/10_Aquila_nipalensis_al02D85.mp3"
-}, {
-  id: 2,
-  name: "Коршун",
-  species: "Milvus migrans",
-  description: "Коршуны – крупные хищники, в высоту они достигают около полуметра, а вес взрослых особей достигает 1 кг. Крылья узкие и длинные, их размах составляет 1,5 м. Коршуны часто гнездятся большими стаями и даже образуют крупные колонии.",
-  image: "https://live.staticflickr.com//65535//48701190276_ee2a9ed594.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/SDPCHKOHRH/XC485740-2019-06-22%20Selenga%20Milan%20brun%20cris%20de%20quemandage%203.mp3"
-}, {
-  id: 3,
-  name: "Лунь",
-  species: "Circus cyaneus",
-  description: "Лунь – это небольшой сокол. Питается в основном мышевидными грызунами, основа его рациона – полёвки, хомяки, мыши. Оперение луня может быть пепельно-серым. С такой птицей связано сравнение «седой, как лунь».",
-  image: "https://live.staticflickr.com/4480/37240531151_b74619c99d.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513498-190709_1175_Cir.cyan-f.mp3"
-}, {
-  id: 4,
-  name: "Сокол",
-  species: "Falco peregrinus",
-  description: "Латинское название сокола Falco произошло от слова «серп» из-за серповидной формы крыльев. Длинные и широкие крылья позволяют соколу высоко подниматься в небо и свободно парить. Скорость полёта сокола достигает 280-320 километров в час.",
-  image: "https://live.staticflickr.com//65535//49310710607_92a3a145a9.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC496049-Pilgrimsfalk_06.mp3"
-}, {
-  id: 5,
-  name: "Ястреб",
-  species: "Accipiter gentilis",
-  description: "Для всех ястребов характерны широкие и короткие крылья. Ещё один отличительный признак - белые «брови» над глазами. Славянские дружинники размещали изображение ястреба на своих знаменах, как символ отваги, мощи и безжалостности к врагам.",
-  image: "https://live.staticflickr.com//65535//49024617331_b9d0d2c9b3.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC512740-Duvh%C3%B6k_09.mp3"
-}, {
-  id: 6,
-  name: "Филин",
-  species: "Bubo bubo",
-  description: "Полет филина бесшумный, зрение очень острое. Эти особенности делают птицу непревзойденным ночным охотником. У филина нет естественных врагов, ни один зверь не охотится на взрослых птиц. А вот на птенцов нападают лисы и волки.",
-  image: "https://live.staticflickr.com/65535/48137123012_393653c2e4.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/WNLIDKJKXT/XC518386-sense%20t%C3%ADtol.mp3"
-}], [{
-  id: 1,
-  name: "Альбатрос",
-  species: "Diomedea exulans",
-  description: "Альбатрос - самая крупная летающая птица в мире. Размах крыльев достигает три с половиной, вес - десять килограммов. Большую часть жизни альбатросы проводят в воздухе, покрывая над океанскими просторами огромные расстояния",
-  image: "https://live.staticflickr.com/7557/16260253965_8e9430cb66.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/WOEAFQRMUD/XC293087-Diomedea%20exulans151120_T254.mp3"
-}, {
-  id: 2,
-  name: "Олуша",
-  species: "Sula nebouxii",
-  description: "Особенностью голубоногой олуши является не только насыщенный ярко-синий цвет лапок, но еще и тот факт, что они очень теплые. В то время как другие виды птиц греют кладки своим телом, голубоногая олуша делает это с помощью лапок",
-  image: "https://live.staticflickr.com/800/40645471394_4422e69ed8.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/YHKQPPJDVP/XC411507-171217_1491%20BF%20Booby%205ft%20IDLP%201230%20mp3%20amp.mp3"
-}, {
-  id: 3,
-  name: "Буревестник",
-  species: "Puffinus griseus",
-  description: "Размеры буревестниковых разные. Самые маленькие из них в длину составляют до 25 см, самые большие - до 1 м, при размахе крыльев около 2 м. Существует поверье, что появление буревестника в воздухе предвещает бурю, о чем говорит само название птицы.",
-  image: "https://live.staticflickr.com//607//22136056020_935cb113f9.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/XQEVNREHJY/SHEARWATER%20Christmas%20Island_04_Motu_Isla%20de%20Pascua-Easter%20Island_CH_4MAR03_Alvaro%20Jaramillo.mp3"
-}, {
-  id: 4,
-  name: "Пеликан",
-  species: "Pelecanus",
-  description: "Пеликаны — обитатели морей и рек. Ходят они неуклюже, но хорошо летают и плавают. Питаются в основном рыбой, устраивают коллективные охоты — выстроившись полукругом хлопают по воде крыльями и клювами и вытесняют напуганную рыбу на мелководье.",
-  image: "https://live.staticflickr.com/65535/49159147156_dcbbb5c12a.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/XAMHIHFTZG/XC331138-call1.mp3"
-}, {
-  id: 5,
-  name: "Пингвин",
-  species: "Aptenodytes forsteri",
-  description: "Самец императорского пингвина достигает роста 130 см, его масса может приближаться к 50 кг. Из всех современных пингвинов этот вид – самый крупный. Питание пингвина состоит из рыбы, кальмаров и криля. Охотятся птицы в океане большими группами.",
-  image: "https://live.staticflickr.com/5202/5252413926_8e013a3efd.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/OOECIWCSWV/XC449827-LS100829%20King%20Penguin%20call%20A.mp3"
-}, {
-  id: 6,
-  name: "Чайка",
-  species: "Larus argentatus",
-  description: "Чайки населяют берега морей, озёр, рек, водохранилищ, болот, часто гнездятся на островах. С конца прошлого века чайки стали появляться в крупных городах, где устраивает гнёзда на крышах зданий. Все чайки ведут колониальный образ жизни.",
-  image: "https://live.staticflickr.com/65535/48577115317_7034201dde.jpg",
-  audio: "https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501190-190801_06.50h_zilvermeeuw_duinen%20van%20goeree_roep_2ex_overvliegend_gezien_.mp3"
-}]];
-const BIRDS_DATA_EN = [[{
-  id: 1,
-  name: 'Raven',
-  species: 'Corvus corax',
-  description: 'Raven is a large bird. The body length reaches 70 centimeters, the wingspan is up to one and a half meters. Ravens inhabit the vicinity of the Tower. There is a belief in England that the day the black crows fly away from the Tower, the monarchy will collapse.',
-  image: 'https://live.staticflickr.com//65535//49298804222_474cfe8682.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/XIQVMQVUPP/XC518684-Grands%20corbeaux%2009012020%20Suzon.mp3'
-}, {
-  id: 2,
-  name: 'Shadoof',
-  species: 'Grus grus',
-  description: 'The sounds made by the shadoof are similar to the voiced «kur-ly - kur-ly». Cranes most often sing in a duet - one bird begins the song with the syllable «kur», and the second picks up «ly». If a bird sings alone, then it makes only the sound of «chickens».',
-  image: 'https://live.staticflickr.com/65535/49221158846_b0b69a58f1.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC512582-190604_1087_Grus_tok.mp3'
-}, {
-  id: 3,
-  name: 'Swallow',
-  species: 'Delichon urbicum',
-  description: 'Swallows are characterized by a low chirping. The songs of the swallows do not stop throughout the summer. Researchers distinguish up to 6 chirping sounds in birds: “vit”, “vi-vit”, “chivit”, “chirivit”, etc. Swallows love to sing a duet.',
-  image: 'https://live.staticflickr.com//65535//48539007512_5029d2a9a0.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489247-190724_09.10h_huiszwaluw_biesbosch_amaliahoeve_roep_100%2Bex_fouragerend_gezien_%20%282%29.mp3'
-}, {
-  id: 4,
-  name: 'Nightjar',
-  species: 'Caprimulgus europaeus',
-  description: 'Nightjar is an inconspicuous bird known for its voice. The song of the nightjar sounds like a monotonous trill similar to the rattling of a motorcycle. Such rattling is heard from dusk to dawn, its tonality, frequency and volume change.',
-  image: 'https://live.staticflickr.com/65535/48456345286_dbc8530027.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC486956-190623_22.37h_nachtzwaluw_rechte%20heide_zang_ad%20_2ex_gezien_.mp3'
-}, {
-  id: 5,
-  name: 'Cuckoo',
-  species: 'Cuculus canorus',
-  description: 'The cuckoo was named so because of the peculiarities of its songs. The voiced “cuckoo” cannot be confused with any other bird. Cuckoos do not build nests, their offspring are raised by other species of birds, to which cuckoos throw their eggs.',
-  image: 'https://live.staticflickr.com/65535/48377838151_e15f430ec1.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501461-190616_08.13h_koekoek_brabantse%20biesbosch%20jantjesplaat_roep_1%20ex_ad%20m_ter%20plaatse%20zingend_gezien_.mp3'
-}, {
-  id: 6,
-  name: 'Tit',
-  species: 'Parus major',
-  description: 'More than 40 different sound combinations are distinguished in the chirping of tits. They sing almost all year round, fading a little only in winter. Tits are real orderlies of the forest. One pair of tits during the nesting period protects dozens of trees from pests.',
-  image: 'https://live.staticflickr.com//65535//49366042493_c48c81d58d.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/RFGQDPLDEC/XC518417-Kj%C3%B8ttmeis%20XC%20Helg%C3%B8ya%20Elias%20A.%20Ryberg20200108133922_079.mp3'
-}], [{
-  id: 1,
-  name: 'Sparrow',
-  species: 'Passer domesticus',
-  description: 'Sparrows are the most famous and recognizable birds. They are easily recognizable by their colorful plumage and perky chirping. Sparrows belong to the synotropic species - they settle close to human habitation.',
-  image: 'https://live.staticflickr.com//65535//49366595303_06cf65b07e.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/CXFHOPIVAS/XC503224-191020_0134.mp3'
-}, {
-  id: 2,
-  name: 'Rook',
-  species: 'Corvus frugilegus',
-  description: 'Rooks are very smart and quick-witted birds. With the help of a beak, they create and use the simplest tools. Rooks have a developed reflex to the sounds of a tractor. Hearing “rattling”, they fly to the sound - the tractor plows the ground, which means that there is a lot of food in this place.',
-  image: 'https://live.staticflickr.com//65535//49347123322_291c86b016.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/RLRHCUIPIY/XC512540-gawron%20Suble%2019.12.19%20%2012.35.mp3'
-}, {
-  id: 3,
-  name: 'Jackdaw',
-  species: 'Coloeus monedula',
-  description: 'The word “jackdaw” comes from word “jack” is translated as “black”. This word is often used to refer to ravens or other black birds. The Latin name of the jackdaw “monedula” is associated with the words coin for the bird\'s love for shiny and bright things.',
-  image: 'https://live.staticflickr.com//65535//49237149586_993cf685c5.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC510498-Coloeus%20monedula_2019.11.13_11.55_01.mp3'
-}, {
-  id: 4,
-  name: 'Songthrush',
-  species: 'Turdus philomelos',
-  description: 'Songthrush is the best singer from the sparrow squad. The song consists only of beautiful sonorous whistles and short trills. Most often it can be heard in the morning and evening. Thrushes sing during the entire nesting period.',
-  image: 'https://live.staticflickr.com/65535/48979125763_e2534f54bd.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513326-190704_1146_TF-Glogow.mp3'
-}, {
-  id: 5,
-  name: 'Magpie',
-  species: 'Pica pica',
-  description: 'Magpie is a very hardworking bird. She builds up to eight nests, and then chooses the best of them. The entrance to the nest of magpies is always facing south, so that it is warmer in the dwelling. Magpies are the only birds that recognize themselves in a mirror.',
-  image: 'https://live.staticflickr.com//65535//49360363066_ff02bb6a73.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC500868-Pica%20pica2019.08.23_09.18_02.mp3'
-}, {
-  id: 6,
-  name: 'Jay',
-  species: 'Garrulus glandarius',
-  description: 'When the jay is worried, the tuft on her head is ruffled. The bird tries to create a frightening sight. Jays are able to imitate the voices of other birds, animals and the sounds that humans create. For the winter they make large stocks of acorns and nuts.',
-  image: 'https://live.staticflickr.com//65535//49369678956_9a7465c7f4.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/TFOGOENSTQ/XC501517-191008_1590%201300.%20Eichelh%C3%A4her%20D%2C%20NW%2C%20LEV.%20Stephan%20Risch.mp3'
-}], [{
-  id: 1,
-  name: 'Finch',
-  species: 'Fringilla coelebs',
-  description: 'There are 450 species of finches in the wild. In winter, finches lead a flocking lifestyle. Sometimes sparrows can be seen in their families. Finches sing in the spring, with the onset of the mating season. Their singing is a gushing multi-minute roulades.',
-  image: 'https://live.staticflickr.com/65535/49143150817_2d3a2f6c1e.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC512407-150622_03%20zi%C4%99ba%20%282%29.mp3'
-}, {
-  id: 2,
-  name: 'Crossbill',
-  species: 'Loxia curvirostra',
-  description: 'Crossbills are called “Christmas” birds. Under exceptional conditions, they give birth in winter - in January. These birds insulate their nests with moss and animal hair, so the chicks are not cold. In search of cones crossbills can fly 3500 km from the nest.',
-  image: 'https://live.staticflickr.com//65535//49365470123_f2de66bb35.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/OTVUCEGYZN/XC495381-Kruisbek%20roep%20NHD%20290619.mp3'
-}, {
-  id: 3,
-  name: 'Turtledove',
-  species: 'Streptopelia turtur',
-  description: 'Turtledoves live in mixed and broad-leaved forests, as well as in city parks and towns. Birds often choose places of life next to humans and easily get used to people. Due to the melodic pleasant singing of turtle doves, they are often bred at home.',
-  image: 'https://live.staticflickr.com/65535/48063004977_84252f9ceb.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC324106-Turkawka_Streptopelia_turtur_Poland_Jarek_Matusiak_2011625_07.mp3'
-}, {
-  id: 4,
-  name: 'Woodpecker',
-  species: 'Dendrocopos major',
-  description: 'The woodpecker is a conspicuous and noisy bird that often lives next to humans. From mid-January to the end of June, you can hear the “drum roll” of woodpeckers - a trill from the vibration of branches under the quick beats of the bird\'s beak. In good weather, the shot can be heard within a radius of 1.5 km.',
-  image: 'https://live.staticflickr.com/65535/49339376578_e933426455.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC518928-AB-017%20dzi%C4%99cio%C5%82%20du%C5%BCy%20agresja%20%282%29.mp3'
-}, {
-  id: 5,
-  name: 'Hoopoe',
-  species: 'Upupa epops',
-  description: 'Hoopoes prefer to live in open landscapes with selected trees or groves. The most typical for birds are forest-steppe and savannah. A hoopoe can choose a place of residence next to a person: pastures, vineyards, orchards.',
-  image: 'https://live.staticflickr.com//65535//49226383598_6f8be86a06.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC477326-dudek%20%282%29.mp3'
-}, {
-  id: 6,
-  name: 'Swift',
-  species: 'Apus apus',
-  description: 'Swift can be seen in almost every corner of the planet. They live both in forest areas and in open areas. Swifts live in large flocks. Large colonies of these birds can be seen in cities or on coastal cliffs.',
-  image: 'https://live.staticflickr.com//65535//48386150031_7b749df74b.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/TMUAWSDHDJ/XC511871-G.mp3'
-}], [{
-  id: 1,
-  name: 'Lark',
-  species: 'Alauda arvensis',
-  description: 'Larks are migratory birds. From the beginning of September, they fly south. They return at the beginning of March, regardless of whether the snow has melted or not. By the arrival of the larks, they determined the onset of spring and the time when it was time to plow the land.',
-  image: 'https://live.staticflickr.com/65535/47105096764_f751fba568.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC462158-Skowronek_Alauda_arvensis_Poland_Jarek_Matusiak_%20-006%20skowronek%20%282%29.mp3'
-}, {
-  id: 2,
-  name: 'Nightingale',
-  species: 'Luscinia luscinia',
-  description: 'Nightingales sing from the beginning of May until the end of summer. Each song of the nightingale consists of 12 repeating elements, which are also called knees. In addition to their own trills, nightingales easily and well adopt the singing of other birds.',
-  image: 'https://live.staticflickr.com/7605/27669397735_f3c21758f2.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/HILVWSADVL/XC513809-R07_0052%20Thrush%20Nightingale%20Snipe.mp3'
-}, {
-  id: 3,
-  name: 'Starling',
-  species: 'Sturnus vulgaris',
-  description: 'Starlings are migratory birds. Synchronous flight of large flocks of starlings is called murmuration. This is a beautiful and mesmerizing phenomenon - many birds seem to dance in the air, forming intricate shapes that decrease and increase in the sky.',
-  image: 'https://live.staticflickr.com/65535/49357593971_9509fe1d7c.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC515519-2020.01.01_17.24_01.MP3'
-}, {
-  id: 4,
-  name: 'Oriole',
-  species: 'Oriolus oriolus',
-  description: 'The melody of the oriole\'s voice is compared to the sound of a flute. It is difficult for a person to see the oriole, as it lives high in the trees. The oriole is not only a very beautiful, but also a useful bird. It destroys poisonous caterpillars that other birds do not eat.',
-  image: 'https://live.staticflickr.com/65535/47102184004_58a93380b9.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/GYAUIPUVNM/XC491801-2019.07.07_06.28_01.mp3'
-}, {
-  id: 5,
-  name: 'Waxwing',
-  species: 'Bombycilla garrulus',
-  description: 'The waxwing has very tenacious claws, which helps the bird to stay on the branches and peck at the berries that are the hardest to get. During courtship, the male offers the female a berry or other treat. If the female accepts it, then the birds create a pair.',
-  image: 'https://live.staticflickr.com//65535//49367433842_1b06da0e6b.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/ZNCDXTUOFL/XC517421-AB-004%20%282%29%20jemio%C5%82uszka.mp3'
-}, {
-  id: 6,
-  name: 'Goldfinch',
-  species: 'Carduelis carduelis',
-  description: 'Goldfinches sing beautifully and melodiously. Both in nature and in captivity, they chirp almost all year round. More than 20 iridescent trills are distinguished in the singing of the goldfinch. Goldfinches get used to people, and can even return to the owner after they are released into the wild.',
-  image: 'https://live.staticflickr.com//65535//49366257253_db3ce48b9a.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC489265-190724_07.58h_putter_biesbosch_%20boompjes%20langs%20open%20water_zang_1ex_ad_niet%20gezien_.mp3'
-}], [{
-  id: 1,
-  name: 'Eagle',
-  species: 'Aquila nipalensis',
-  description: 'In ancient times, the eagle was a symbol of the sun. Eagles often soar above the ground, while their speed can reach 240 km/h. The illusion of slow movement is due to the flight altitude - more than 700 meters',
-  image: 'https://live.staticflickr.com//4835//43867392960_7105d71e19.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/KTBTZAHSXF/10_Aquila_nipalensis_al02D85.mp3'
-}, {
-  id: 2,
-  name: 'Kite',
-  species: 'Milvus migrans',
-  description: 'Kites are large predators, they reach a height of about half a meter, and the weight of adults reaches 1 kg. The wings are narrow and long, their span is 1.5 m. Kites often nest in large flocks and even form large colonies.',
-  image: 'https://live.staticflickr.com//65535//48701190276_ee2a9ed594.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/SDPCHKOHRH/XC485740-2019-06-22%20Selenga%20Milan%20brun%20cris%20de%20quemandage%203.mp3'
-}, {
-  id: 3,
-  name: 'Harrier',
-  species: 'Circus cyaneus',
-  description: 'Harrier is a small falcon. It feeds mainly on mouse-like rodents, the basis of its diet is voles, hamsters, and mice. The plumage of the Harrier may be ash grey. The comparison “gray-haired like a harrier” is associated with such a bird.',
-  image: 'https://live.staticflickr.com/4480/37240531151_b74619c99d.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/BLMSIUFTFU/XC513498-190709_1175_Cir.cyan-f.mp3'
-}, {
-  id: 4,
-  name: 'Falcon',
-  species: 'Falco peregrinus',
-  description: 'The Latin name of the falcon Falco comes from the word “sickle” because of the sickle-shaped wings. Long and wide wings allow the falcon to rise high into the sky and soar freely. The flight speed of the falcon reaches 280-320 kilometers per hour.',
-  image: 'https://live.staticflickr.com//65535//49310710607_92a3a145a9.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC496049-Pilgrimsfalk_06.mp3'
-}, {
-  id: 5,
-  name: 'Hawk',
-  species: 'Accipiter gentilis',
-  description: 'All hawks are characterized by wide and short wings. Another distinguishing feature is the white “eyebrows” above the eyes. Slavic warriors placed the image of a hawk on their banners as a symbol of courage, power and ruthlessness towards enemies.',
-  image: 'https://live.staticflickr.com//65535//49024617331_b9d0d2c9b3.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/MMEJYLOPDO/XC512740-Duvh%C3%B6k_09.mp3'
-}, {
-  id: 6,
-  name: 'Eagle owl',
-  species: 'Bubo bubo',
-  description: 'The flight of the eagle owl is silent, the eyesight is very sharp. These features make the bird an unsurpassed night hunter. The eagle owl has no natural enemies, not a single animal preys on adult birds. But foxes and wolves attack the chicks.',
-  image: 'https://live.staticflickr.com/65535/48137123012_393653c2e4.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/WNLIDKJKXT/XC518386-sense%20t%C3%ADtol.mp3'
-}], [{
-  id: 1,
-  name: 'Albatross',
-  species: 'Diomedea exulans',
-  description: 'Albatross is the largest flying bird in the world. The wingspan reaches three and a half, weight - ten kilograms. Albatrosses spend most of their lives in the air, covering vast distances above the ocean.',
-  image: 'https://live.staticflickr.com/7557/16260253965_8e9430cb66.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/WOEAFQRMUD/XC293087-Diomedea%20exulans151120_T254.mp3'
-}, {
-  id: 2,
-  name: 'Gannet',
-  species: 'Sula nebouxii',
-  description: 'A feature of the blue-footed gannet is not only the rich bright blue color of the legs, but also the fact that they are very warm. While other species of birds warm the clutches with their bodies, the blue-footed booby does this with the help of its paws.',
-  image: 'https://live.staticflickr.com/800/40645471394_4422e69ed8.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/YHKQPPJDVP/XC411507-171217_1491%20BF%20Booby%205ft%20IDLP%201230%20mp3%20amp.mp3'
-}, {
-  id: 3,
-  name: 'Petrel',
-  species: 'Puffinus griseus',
-  description: 'The sizes of petrels are different. The smallest of them are up to 25 cm long, the largest - up to 1 m, with a wingspan of about 2 m. There is a belief that the appearance of a petrel in the air portends a storm, as the very name of the bird indicates.',
-  image: 'https://live.staticflickr.com//607//22136056020_935cb113f9.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/XQEVNREHJY/SHEARWATER%20Christmas%20Island_04_Motu_Isla%20de%20Pascua-Easter%20Island_CH_4MAR03_Alvaro%20Jaramillo.mp3'
-}, {
-  id: 4,
-  name: 'Pelican',
-  species: 'Pelecanus',
-  description: 'Pelicans are inhabitants of the seas and rivers. They walk awkwardly, but fly and swim well. They feed mainly on fish, organize collective hunts - lining up in a semicircle, they flap their wings and beaks on the water and force out the frightened fish in shallow water.',
-  image: 'https://i.ibb.co/mqqxpKB/89644134.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/XAMHIHFTZG/XC331138-call1.mp3'
-}, {
-  id: 5,
-  name: 'Penguin',
-  species: 'Aptenodytes forsteri',
-  description: 'The male emperor penguin reaches a height of 130 cm, its weight can approach 50 kg. Of all modern penguins, this species is the largest. The penguin\'s diet consists of fish, squid and krill. Birds hunt in the ocean in large groups.',
-  image: 'https://live.staticflickr.com/5202/5252413926_8e013a3efd.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/OOECIWCSWV/XC449827-LS100829%20King%20Penguin%20call%20A.mp3'
-}, {
-  id: 6,
-  name: 'Seagull',
-  species: 'Larus argentatus',
-  description: 'Seagulls inhabit the shores of the seas, lakes, rivers, reservoirs, swamps, often nest on islands. Since the end of the last century, seagulls began to appear in large cities, where they nest on the roofs of buildings. All seagulls lead a colonial lifestyle.',
-  image: 'https://live.staticflickr.com/65535/48577115317_7034201dde.jpg',
-  audio: 'https://www.xeno-canto.org/sounds/uploaded/VOLIQOYWKG/XC501190-190801_06.50h_zilvermeeuw_duinen%20van%20goeree_roep_2ex_overvliegend_gezien_.mp3'
-}]];
-
-/***/ }),
-
-/***/ "./src/js/utils/router.js":
-/*!********************************!*\
-  !*** ./src/js/utils/router.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "router": () => (/* binding */ router)
-/* harmony export */ });
-/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.js");
-/* harmony import */ var _create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../create-start-page/create-start-page */ "./src/js/create-start-page/create-start-page.js");
-/* harmony import */ var _create_game_create_game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../create-game/create-game */ "./src/js/create-game/create-game.js");
-/* harmony import */ var _create_gallery_create_gallery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../create-gallery/create-gallery */ "./src/js/create-gallery/create-gallery.js");
-
-
-
-
-function router(location) {
-  if (location.includes(_const__WEBPACK_IMPORTED_MODULE_0__.PATHS.main)) {
-    return (0,_create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_1__.createStartPage)();
-  } else if (location.includes(_const__WEBPACK_IMPORTED_MODULE_0__.PATHS.game)) {
-    return (0,_create_game_create_game__WEBPACK_IMPORTED_MODULE_2__.createGamePage)();
-  } else if (location.includes(_const__WEBPACK_IMPORTED_MODULE_0__.PATHS.gallery)) {
-    return (0,_create_gallery_create_gallery__WEBPACK_IMPORTED_MODULE_3__.createGalleryPage)();
-  } else {
-    return (0,_create_start_page_create_start_page__WEBPACK_IMPORTED_MODULE_1__.createStartPage)();
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/core-js/es6/index.js":
 /*!*******************************************!*\
   !*** ./node_modules/core-js/es6/index.js ***!
@@ -10896,9 +9119,9 @@ module.exports = __webpack_require__(/*! ../modules/_core */ "./node_modules/cor
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/less-loader/dist/cjs.js!./src/less/entry.less":
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/less-loader/dist/cjs.js!./src/less/entry.less":
 /*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/less-loader/dist/cjs.js!./src/less/entry.less ***!
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/less-loader/dist/cjs.js!./src/less/entry.less ***!
   \********************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -10911,29 +9134,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
 // Imports
 
 
-
-var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../fonts/Roboto-400.woff */ "./src/fonts/Roboto-400.woff"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../fonts/Roboto-400.woff2 */ "./src/fonts/Roboto-400.woff2"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 60 60%27 style=%27enable-background:new 0 0 60 60;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orange%27 d=%27M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30 c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15 C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z%27/%3E%3Cpath fill=%27orange%27 d=%27M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30 S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z%27/%3E%3C/g%3E%3C/svg%3E */ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 60 60%27 style=%27enable-background:new 0 0 60 60;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orange%27 d=%27M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30 c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15 C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z%27/%3E%3Cpath fill=%27orange%27 d=%27M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30 S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z%27/%3E%3C/g%3E%3C/svg%3E"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 122.88 122.88%27 style=%27enable-background:new 0 0 122.88 122.88%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M61.44,0c16.97,0,32.33,6.88,43.44,18c11.12,11.12,18,26.48,18,43.44c0,16.97-6.88,32.33-18,43.44 c-11.12,11.12-26.48,18-43.44,18c-16.97,0-32.33-6.88-43.44-18C6.88,93.77,0,78.41,0,61.44C0,44.47,6.88,29.11,18,18 C29.11,6.88,44.47,0,61.44,0L61.44,0z M42.3,39.47h13.59v43.95l-13.59,0V39.47L42.3,39.47L42.3,39.47z M66.99,39.47h13.59v43.95 l-13.59,0V39.47L66.99,39.47L66.99,39.47z M97.42,25.46c-9.21-9.21-21.93-14.9-35.98-14.9c-14.05,0-26.78,5.7-35.98,14.9 c-9.21,9.21-14.9,21.93-14.9,35.98s5.7,26.78,14.9,35.98c9.21,9.21,21.93,14.9,35.98,14.9c14.05,0,26.78-5.7,35.98-14.9 c9.21-9.21,14.9-21.93,14.9-35.98S106.63,34.66,97.42,25.46L97.42,25.46z%27/%3E%3C/g%3E%3C/svg%3E */ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 122.88 122.88%27 style=%27enable-background:new 0 0 122.88 122.88%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M61.44,0c16.97,0,32.33,6.88,43.44,18c11.12,11.12,18,26.48,18,43.44c0,16.97-6.88,32.33-18,43.44 c-11.12,11.12-26.48,18-43.44,18c-16.97,0-32.33-6.88-43.44-18C6.88,93.77,0,78.41,0,61.44C0,44.47,6.88,29.11,18,18 C29.11,6.88,44.47,0,61.44,0L61.44,0z M42.3,39.47h13.59v43.95l-13.59,0V39.47L42.3,39.47L42.3,39.47z M66.99,39.47h13.59v43.95 l-13.59,0V39.47L66.99,39.47L66.99,39.47z M97.42,25.46c-9.21-9.21-21.93-14.9-35.98-14.9c-14.05,0-26.78,5.7-35.98,14.9 c-9.21,9.21-14.9,21.93-14.9,35.98s5.7,26.78,14.9,35.98c9.21,9.21,21.93,14.9,35.98,14.9c14.05,0,26.78-5.7,35.98-14.9 c9.21-9.21,14.9-21.93,14.9-35.98S106.63,34.66,97.42,25.46L97.42,25.46z%27/%3E%3C/g%3E%3C/svg%3E"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27 viewBox=%270 0 16 16%27%3E%3Cpath fill=%27orange%27 fill-rule=%27evenodd%27 d=%27M12 8.02c0 1.09-.45 2.09-1.17 2.83l-.67-.67c.55-.56.89-1.31.89-2.16 0-.85-.34-1.61-.89-2.16l.67-.67A3.99 3.99 0 0 1 12 8.02zM7.72 2.28L4 6H2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2l3.72 3.72c.47.47 1.28.14 1.28-.53V2.81c0-.67-.81-1-1.28-.53zm5.94.08l-.67.67a6.996 6.996 0 0 1 2.06 4.98c0 1.94-.78 3.7-2.06 4.98l.67.67A7.973 7.973 0 0 0 16 8c0-2.22-.89-4.22-2.34-5.66v.02zm-1.41 1.41l-.69.67a5.05 5.05 0 0 1 1.48 3.58c0 1.39-.56 2.66-1.48 3.56l.69.67A5.97 5.97 0 0 0 14 8.02c0-1.65-.67-3.16-1.75-4.25z%27/%3E%3C/svg%3E */ "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27 viewBox=%270 0 16 16%27%3E%3Cpath fill=%27orange%27 fill-rule=%27evenodd%27 d=%27M12 8.02c0 1.09-.45 2.09-1.17 2.83l-.67-.67c.55-.56.89-1.31.89-2.16 0-.85-.34-1.61-.89-2.16l.67-.67A3.99 3.99 0 0 1 12 8.02zM7.72 2.28L4 6H2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2l3.72 3.72c.47.47 1.28.14 1.28-.53V2.81c0-.67-.81-1-1.28-.53zm5.94.08l-.67.67a6.996 6.996 0 0 1 2.06 4.98c0 1.94-.78 3.7-2.06 4.98l.67.67A7.973 7.973 0 0 0 16 8c0-2.22-.89-4.22-2.34-5.66v.02zm-1.41 1.41l-.69.67a5.05 5.05 0 0 1 1.48 3.58c0 1.39-.56 2.66-1.48 3.56l.69.67A5.97 5.97 0 0 0 14 8.02c0-1.65-.67-3.16-1.75-4.25z%27/%3E%3C/svg%3E"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 208.175 208.175%27 style=%27enable-background:new 0 0 208.175 208.175;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M0,58.432v90.817h29.3l66.291,50.079V8.847l-65.64,49.585H0z M5.411,143.841V63.84h22.744v80.002 H5.411z M90.18,19.712v168.746l-56.614-42.767V62.483L90.18,19.712z%27/%3E%3Cpolygon fill=%27orangered%27 points=%27207.856,62.87 208.175,62.555 205.265,59.642 163.725,101.178 122.511,59.96 122.196,59.642 119.28,62.555 160.812,104.087 119.605,145.309 119.28,145.623 122.196,148.537 163.725,107 204.943,148.218 205.265,148.54 208.175,145.623 166.642,104.087 %27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E */ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 208.175 208.175%27 style=%27enable-background:new 0 0 208.175 208.175;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M0,58.432v90.817h29.3l66.291,50.079V8.847l-65.64,49.585H0z M5.411,143.841V63.84h22.744v80.002 H5.411z M90.18,19.712v168.746l-56.614-42.767V62.483L90.18,19.712z%27/%3E%3Cpolygon fill=%27orangered%27 points=%27207.856,62.87 208.175,62.555 205.265,59.642 163.725,101.178 122.511,59.96 122.196,59.642 119.28,62.555 160.812,104.087 119.605,145.309 119.28,145.623 122.196,148.537 163.725,107 204.943,148.218 205.265,148.54 208.175,145.623 166.642,104.087 %27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 512 512%27 style=%27enable-background:new 0 0 512 512;%27 xml:space=%27preserve%27%3E%3Cpath d=%27M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658 c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499 c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737 C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861 c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328 c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956 h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307 c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77 c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743 C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738 c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741 c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z%27/%3E%3Cpath style=%27fill:%23FFB8A7;%27 d=%27M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741 c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738 c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684 c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773 S234.694,199.684,242.3,199.684z%27/%3E%3Cpath style=%27fill:%23FF5F7B;%27 d=%27M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347 c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771 c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z%27/%3E%3Ccircle cx=%27242.293%27 cy=%27213.457%27 r=%2713.773%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216 c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233 c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z%27/%3E%3Cpath d=%27M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928 c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876 c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325 c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971 c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233 c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216 c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326 c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895 c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z%27/%3E%3Cpath d=%27M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904 c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559 c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474 c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325 C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221 c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278 c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607 C369.62,69.92,386.503,35.316,402.629,30.157z%27/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E */ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 512 512%27 style=%27enable-background:new 0 0 512 512;%27 xml:space=%27preserve%27%3E%3Cpath d=%27M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658 c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499 c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737 C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861 c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328 c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956 h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307 c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77 c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743 C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738 c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741 c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z%27/%3E%3Cpath style=%27fill:%23FFB8A7;%27 d=%27M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741 c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738 c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684 c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773 S234.694,199.684,242.3,199.684z%27/%3E%3Cpath style=%27fill:%23FF5F7B;%27 d=%27M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347 c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771 c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z%27/%3E%3Ccircle cx=%27242.293%27 cy=%27213.457%27 r=%2713.773%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216 c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233 c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z%27/%3E%3Cpath d=%27M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928 c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876 c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325 c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971 c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233 c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216 c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326 c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895 c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z%27/%3E%3Cpath d=%27M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904 c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559 c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474 c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325 C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221 c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278 c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607 C369.62,69.92,386.503,35.316,402.629,30.157z%27/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
-var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
-var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
-var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_3___);
-var ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_4___);
-var ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_5___);
-var ___CSS_LOADER_URL_REPLACEMENT_6___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_6___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline;\n  -webkit-text-decoration: underline dotted currentColor;\n          text-decoration: underline dotted currentColor;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + "), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  cursor: default;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n  -webkit-appearance: none;\n          appearance: none;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  grid-gap: 10px;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .answers-list__btn:disabled {\n  opacity: 0.5;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__btn {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list .decline {\n  background: red;\n}\n.game .answers-list .accept {\n  background: green;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  display: grid;\n  grid-template-rows: auto auto;\n  grid-gap: 10px;\n  gap: 10px;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 35px/20px sans-serif;\n  }\n}\n.game .checked-answer__surname--species {\n  font-style: italic;\n  font-weight: normal;\n}\n.game .checked-answer__default {\n  font: normal 30px/40px sans-serif;\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n  transform: scale(1.05);\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.game .audio-container {\n  margin-top: 10px;\n  display: grid;\n  grid-template-columns: auto 1fr auto;\n  grid-template-rows: auto auto;\n  grid-gap: 10px;\n  gap: 10px;\n  align-items: center;\n  width: 100%;\n}\n@media (min-width: 720px) {\n  .game .audio-container {\n    grid-area: audio;\n    margin-top: 30px;\n  }\n}\n.game .audio-container__play {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 50px;\n  height: 50px;\n}\n.game .audio-container .play {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ");\n}\n.game .audio-container .play:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .pause {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ");\n}\n.game .audio-container .pause:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container__mute-wrapper {\n  position: relative;\n}\n.game .audio-container__mute-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 20px;\n  height: 20px;\n}\n.game .audio-container .unmuted {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ");\n}\n.game .audio-container .unmuted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .muted {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ");\n}\n.game .audio-container .muted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .checked-answer .audio-container__duration-container,\n.game .question .audio-container__duration-container {\n  display: grid;\n  position: relative;\n}\n@media (min-width: 720px) {\n  .game .checked-answer .audio-container,\n  .game .question .audio-container {\n    grid-area: audio;\n  }\n}\n.game .checked-answer .audio-container__current-time,\n.game .question .audio-container__current-time,\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  position: absolute;\n  bottom: -30px;\n}\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  right: 0;\n}\n.game .checked-answer .audio-container__duration-changer,\n.game .question .audio-container__duration-changer {\n  width: 100%;\n}\n.game .checked-answer .audio-container__volume-changer,\n.game .question .audio-container__volume-changer {\n  display: none;\n}\n.game .checked-answer .audio-container .is-open,\n.game .question .audio-container .is-open {\n  display: block;\n  position: absolute;\n  transform: rotate(270deg);\n  right: -15px;\n  top: -30px;\n  width: 50px;\n}\n.audio-container__duration-changer,\n.audio-container__volume-changer {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 100%;\n  height: 10px;\n  background: rgba(199, 243, 40, 0.897);\n  border-radius: 5px;\n  outline: none;\n  opacity: 0.5;\n  transition: opacity 0.2s;\n}\n.audio-container__duration-changer:hover,\n.audio-container__volume-changer:hover {\n  opacity: 1;\n}\n.audio-container__duration-changer::-webkit-slider-thumb,\n.audio-container__volume-changer::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ");\n  cursor: pointer;\n}\n.audio-container__duration-changer::-webkit-slider-thumb:hover,\n.audio-container__volume-changer::-webkit-slider-thumb:hover {\n  transform: scale(1.2);\n  -webkit-transition: transform 0.2s;\n  transition: transform 0.2s;\n}\n.slider-controls {\n  margin-top: 20px;\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .slider-controls {\n    margin-top: 80px;\n  }\n}\n@media (min-width: 1240px) {\n  .slider-controls {\n    margin-top: 150px;\n  }\n}\n.slider-controls__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n.slider-controls__btn svg {\n  width: 40px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .slider-controls__btn svg {\n    width: 80px;\n  }\n}\n@media (min-width: 1240px) {\n  .slider-controls__btn svg {\n    width: 120px;\n  }\n}\n.slider-controls__btn:hover svg {\n  transition: all 1s ease;\n  fill: orangered;\n}\n.slider-controls__btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n.slider-controls__btn:disabled svg {\n  fill: grey;\n}\n.slider-controls .right svg {\n  transform: rotate(180deg);\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  grid-gap: 25px;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n  }\n}\n.header .logo svg {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo svg {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo svg {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr auto;\n  grid-gap: 20px;\n  gap: 20px;\n  margin-top: 20px;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.header .nav-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item button {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item button {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item button:hover {\n  color: orange;\n}\n.header .nav-list__item button:focus {\n  color: red;\n}\n.header .nav-list__btn--svg svg {\n  width: 23px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__btn--svg svg {\n    width: 30px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__btn--svg svg {\n    width: 50px;\n  }\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n  width: 100px;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n    width: 150px;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: rgba(1,2,1,0.5098);\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__results {\n  font: italic 35px/40px sans-serif;\n  text-align: center;\n  color: rgba(1,2,1,0.5098);\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    align-items: center;\n    justify-items: center;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n", "",{"version":3,"sources":["webpack://./src/less/entry.less","webpack://./src/less/global/normalize.less","webpack://./src/less/global/global.less","webpack://./src/less/global/mixins.less","webpack://./src/less/fonts/fonts.less","webpack://./src/less/components/game.less","webpack://./src/less/components/footer.less","webpack://./src/less/components/header.less","webpack://./src/less/components/promo.less"],"names":[],"mappings":"AAAA,2EAA2E;AAC3E;+EAC+E;AAC/E;;;EAGE;ACIF;EACE,iBAAA;EDFA,MAAM;ECGN,8BAAA;EDDA,MAAM;AACR;AACA;+EAC+E;AAC/E;;EAEE;ACKF;EACE,SAAA;ADHF;AACA;;EAEE;ACOF;EACE,cAAA;ADLF;AACA;;;EAGE;ACSF;EACE,cAAA;EACA,gBAAA;ADPF;AACA;+EAC+E;AAC/E;;;EAGE;ACYF;EACE,uBAAA;EDVA,MAAM;ECWN,SAAA;EDTA,MAAM;ECUN,iBAAA;EDRA,MAAM;AACR;AACA;;;EAGE;ACWF;EACE,sBAAA;EDTA,MAAM;ECUN,cAAA;EDRA,MAAM;AACR;AACA;+EAC+E;AAC/E;;EAEE;ACYF;EACE,6BAAA;ADVF;AACA;;;EAGE;ACcF;EACE,mBAAA;EDZA,MAAM;ECaN,0BAAA;EDXA,MAAM;ECYN,0BAAA;EAAA,sDAAA;UAAA,8CAAA;EDVA,MAAM;AACR;AACA;;EAEE;ACaF;;EAEE,mBAAA;ADXF;AACA;;;EAGE;ACeF;;;EAGE,sBAAA;EDbA,MAAM;ECcN,cAAA;EDZA,MAAM;AACR;AACA;;EAEE;ACeF;EACE,cAAA;ADbF;AACA;;;EAGE;ACiBF;;EAEE,cAAA;EACA,cAAA;EACA,kBAAA;EACA,wBAAA;ADfF;ACkBA;EACE,eAAA;ADhBF;ACmBA;EACE,WAAA;ADjBF;AACA;+EAC+E;AAC/E;;EAEE;ACsBF;EACE,kBAAA;ADpBF;AACA;+EAC+E;AAC/E;;;EAGE;ACyBF;;;;;EAKE,oBAAA;EDvBA,MAAM;ECwBN,eAAA;EDtBA,MAAM;ECuBN,iBAAA;EDrBA,MAAM;ECsBN,SAAA;EDpBA,MAAM;AACR;AACA;;;EAGE;ACuBF;;EDpBE,MAAM;ECuBN,iBAAA;ADrBF;AACA;;;EAGE;ACyBF;;EDtBE,MAAM;ECyBN,oBAAA;ADvBF;AACA;;EAEE;AC2BF;;;;EAIE,0BAAA;ADzBF;AACA;;EAEE;AC6BF;;;;EAIE,kBAAA;EACA,UAAA;AD3BF;AACA;;EAEE;AC+BF;;;;EAIE,8BAAA;AD7BF;AACA;;EAEE;ACiCF;EACE,8BAAA;AD/BF;AACA;;;;;EAKE;ACmCF;EACE,sBAAA;EDjCA,MAAM;ECkCN,cAAA;EDhCA,MAAM;ECiCN,cAAA;ED/BA,MAAM;ECgCN,eAAA;ED9BA,MAAM;EC+BN,UAAA;ED7BA,MAAM;EC8BN,mBAAA;ED5BA,MAAM;AACR;AACA;;EAEE;AC+BF;EACE,wBAAA;AD7BF;AACA;;EAEE;ACiCF;EACE,cAAA;AD/BF;AACA;;;EAGE;ACmCF;;EAEE,sBAAA;EDjCA,MAAM;ECkCN,UAAA;EDhCA,MAAM;AACR;AACA;;EAEE;ACmCF;;EAEE,YAAA;ADjCF;AACA;;;EAGE;ACqCF;EACE,6BAAA;EDnCA,MAAM;ECoCN,oBAAA;EDlCA,MAAM;AACR;AACA;;EAEE;ACqCF;EACE,wBAAA;ADnCF;AACA;;;EAGE;ACuCF;EACE,0BAAA;EDrCA,MAAM;ECsCN,aAAA;EDpCA,MAAM;AACR;AACA;+EAC+E;AAC/E;;EAEE;ACwCF;EACE,cAAA;ADtCF;AACA;;EAEE;AC0CF;EACE,kBAAA;ADxCF;AACA;+EAC+E;AAC/E;;EAEE;AC6CF;EACE,aAAA;AD3CF;AACA;;EAEE;AC+CF;EACE,aAAA;AD7CF;AEhTA;;;EAGE,sBAAA;AFkTF;AE/SA;EACE,uBAAA;AFiTF;AE9SA;EACE,cAAA;EACA,eAAA;EACA,YAAA;AFgTF;AE7SA;EACE,aAAA;EACA,iCAAA;EACA,0CAAA;EACA,gBAAA;EACA,kBAAA;EACA,gBAAA;EACA,iBAAA;EACA,mBAAA;AF+SF;AE5SA;EACE,qBAAA;AF8SF;AE3SA;EACE,kBAAA;EACA,UAAA;EACA,WAAA;EACA,YAAA;EACA,UAAA;EACA,SAAA;EACA,mBAAA;EACA,gBAAA;AF6SF;AE1SA;EACE,gBAAA;EACA,SAAA;EACA,UAAA;AF4SF;AGpVA;EACE,SAAA;EACA,UAAA;EACA,gBAAA;AHsVF;AGnVA;EACE,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;AHqVF;AIpWA;EACI,qBAAA;EACA,qFAAA;AJsWJ;AKxWA;EACE,aAAA;EFAA,YAAA;EACA,cAAA;AH2WF;AK1WE;EAAA;IFFA,YAAA;IACA,cAAA;EHgXA;AACF;AK7WE;EAAA;IFLA,aAAA;IACA,cAAA;EHsXA;AACF;AKhXE;EACE,aAAA;EACA,sCAAA;EACA,6BAAA;EACA,qBAAA;EACA,mBAAA;EACA,cAAA;EAAA,SAAA;ALkXJ;AKjXI;EAAA;IACE,sCAAA;IACA,wBAAA;IACA,MAAA;ELoXJ;AACF;AKxYA;EFYE,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EEUI,eAAA;EACA,mBAAA;EACA,YAAA;EACA,kBAAA;EACA,YAAA;EACA,yBAAA;EACA,wBAAA;UAAA,gBAAA;ALsXN;AKrXM;EAAA;IACE,iBAAA;IACA,yBAAA;IACA,eAAA;ELwXN;AACF;AKvXM;EAAA;IACE,kBAAA;IACA,yBAAA;IACA,eAAA;EL0XN;AACF;AKnaA;EA8CI,gBAAA;EACA,aAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;ALwXJ;AKvXI;EAAA;IACE,2CAAA;IAGA,cAAA;ELwXJ;AACF;AKtXI;EACE,YAAA;ALwXN;AKvXM;EAAA;IACE,cAAA;IACA,YAAA;EL0XN;AACF;AKzXM;EAAA;IACE,YAAA;IACA,cAAA;EL4XN;AACF;AK1XI;EACE,gBAAA;EACA,iCAAA;AL4XN;AK3XM;EAAA;IACE,eAAA;EL8XN;AACF;AK7XM;EAAA;IACE,iCAAA;IACA,eAAA;ELgYN;AACF;AK5cA;EAgFI,gBAAA;EACA,aAAA;EACA,cAAA;EAAA,SAAA;AL+XJ;AK9XI;EAAA;IACE,mBAAA;IAAA,qBAAA;IAAA,mBAAA;ELiYJ;AACF;AKhYI;EAAA;IACE,8BAAA;ELmYJ;AACF;AKjYI;EF9EF,uBAAA;EACA,aAAA;EACA,YAAA;EE8EI,iCAAA;EACA,YAAA;EACA,mBAAA;EACA,kBAAA;EACA,YAAA;EACA,aAAA;EACA,eAAA;ALqYN;AKpYM;EACE,qBAAA;EACA,iBAAA;ALsYR;AKpYM;EACE,YAAA;ALsYR;AKpYM;EAAA;IACE,kBAAA;IACA,+BAAA;IACA,YAAA;ELuYN;AACF;AKrfA;EAiHM,eAAA;ALuYN;AKxfA;EAoHM,iBAAA;ALuYN;AK3fA;EAyHI,gBAAA;EACA,aAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;ALqYJ;AKpYI;EAAA;IACE,gBAAA;IACA,gEAAA;IAIA,SAAA;ELoYJ;AACF;AKnYI;EAAA;IACE,8BAAA;IACA,eAAA;ELsYJ;AACF;AKnYM;EAAA;IACE,cAAA;ELsYN;AACF;AKnYM;EAAA;IACE,sBAAA;IACA,iCAAA;ELsYN;AACF;AKrYM;EAAA;IACE,kBAAA;ELwYN;AACF;AKtYI;EACE,aAAA;EACA,6BAAA;EACA,cAAA;EAAA,SAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;EACA,cAAA;EACA,iCAAA;ALwYN;AKvYM;EAAA;IACE,kBAAA;IACA,+BAAA;EL0YN;AACF;AKzYM;EACE,kBAAA;EACA,mBAAA;AL2YR;AKxYI;EACE,iCAAA;AL0YN;AKljBA;EFYE,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EE+JE,cAAA;EACA,iBAAA;EACA,kBAAA;EACA,YAAA;EACA,mBAAA;EACA,aAAA;EACA,yBAAA;EACA,+BAAA;EACA,yBAAA;AL2YJ;AK1YI;EACE,qBAAA;EACA,iBAAA;EACA,sBAAA;AL4YN;AK1YI;EACE,gBAAA;EACA,iBAAA;AL4YN;AK1YI;EAAA;IACE,iBAAA;IACA,kBAAA;IACA,+BAAA;EL6YJ;AACF;AKjlBA;EAuMI,gBAAA;EACA,aAAA;EACA,oCAAA;EACA,6BAAA;EACA,cAAA;EAAA,SAAA;EACA,mBAAA;EACA,WAAA;AL6YJ;AK5YI;EAAA;IACE,gBAAA;IACA,gBAAA;EL+YJ;AACF;AK9YI;EFtMF,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EEqMI,WAAA;EACA,YAAA;ALmZN;AKxmBA;EAwNM,yDAAA;ALmZN;AKlZM;EACE,qBAAA;EACA,0BAAA;ALoZR;AK/mBA;EA+NM,yDAAA;ALmZN;AKlZM;EACE,qBAAA;EACA,0BAAA;ALoZR;AKhZI;EACE,kBAAA;ALkZN;AKhZI;EF7NF,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EE4NI,WAAA;EACA,YAAA;ALqZN;AKjoBA;EA+OM,yDAAA;ALqZN;AKpZM;EACE,qBAAA;EACA,0BAAA;ALsZR;AKxoBA;EAsPM,yDAAA;ALqZN;AKpZM;EACE,qBAAA;EACA,0BAAA;ALsZR;AKhZI;;EACE,aAAA;EACA,kBAAA;ALmZN;AKjZI;EAAA;;IACE,gBAAA;ELqZJ;AACF;AKpZI;;;;EAEE,kBAAA;EACA,aAAA;ALwZN;AKtZI;;EACE,QAAA;ALyZN;AKvZI;;EACE,WAAA;AL0ZN;AKxZI;;EACE,aAAA;AL2ZN;AK7qBA;;EAqRM,cAAA;EACA,kBAAA;EACA,yBAAA;EACA,YAAA;EACA,UAAA;EACA,WAAA;AL4ZN;AKvZA;;EAEE,wBAAA;EACA,gBAAA;EACA,WAAA;EACA,YAAA;EACA,qCAAA;EACA,kBAAA;EACA,aAAA;EACA,YAAA;EAEA,wBAAA;ALyZF;AKvZA;;EAEE,UAAA;ALyZF;AKvZA;;EAEE,wBAAA;EACA,gBAAA;EACA,WAAA;EACA,YAAA;EACA,yDAAA;EACA,eAAA;ALyZF;AKvZA;;EAEE,qBAAA;EACA,kCAAA;EAAA,0BAAA;ALyZF;AKtZA;EACE,gBAAA;EACA,WAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;ALwZF;AKvZE;EAAA;IACE,gBAAA;EL0ZF;AACF;AKzZE;EAAA;IACE,iBAAA;EL4ZF;AACF;AK3ZE;EF/TA,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;AH6tBF;AKjaE;EAII,WAAA;ALgaN;AK/ZM;EAAA;IACE,WAAA;ELkaN;AACF;AKjaM;EAAA;IACE,YAAA;ELoaN;AACF;AKlaI;EAEI,uBAAA;EACA,eAAA;ALmaR;AKhaI;EAIE,YAAA;EACA,mBAAA;AL+ZN;AKpaI;EAEI,UAAA;ALqaR;AKrcA;EAwCM,yBAAA;ALgaN;AMvwBA;EHCE,YAAA;EACA,cAAA;EGAA,aAAA;AN0wBF;AM5wBA;EAII,aAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;EACA,cAAA;EAAA,SAAA;AN2wBJ;AM1wBI;EAAA;IACE,qCAAA;EN6wBJ;AACF;AM5wBI;EAEI,YAAA;AN6wBR;AM/wBI;EAKI,iCAAA;EACA,yBAAA;AN6wBR;AM5wBQ;EACE,aAAA;AN8wBV;AMhyBA;EAuBM,+BAAA;AN4wBN;AMzwBE;EAAA;IHzBA,YAAA;IACA,cAAA;EHsyBA;AACF;AM5wBE;EAAA;IH5BA,aAAA;IACA,cAAA;EH4yBA;AACF;AO/yBA;EJCE,YAAA;EACA,cAAA;EIAA,aAAA;EACA,aAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;APkzBF;AOhzBE;EAAA;IJLA,YAAA;IACA,cAAA;IIME,yCAAA;IACA,mBAAA;EPozBF;AACF;AOnzBE;EAAA;IJVA,aAAA;IACA,cAAA;IIWE,yCAAA;EPuzBF;AACF;AOr0BA;EAiBM,YAAA;APuzBN;AOtzBM;EAAA;IACE,YAAA;EPyzBN;AACF;AOxzBM;EAAA;IACE,YAAA;EP2zBN;AACF;AOl1BA;EA2BI,aAAA;EACA,uCAAA;EACA,cAAA;EAAA,SAAA;EACA,gBAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;AP0zBJ;AOzzBI;EJpBF,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EImBI,iCAAA;EACA,yBAAA;EACA,cAAA;EACA,yBAAA;AP8zBN;AO7zBM;EAAA;IACE,+BAAA;EPg0BN;AACF;AO/zBM;EAAA;IACE,+BAAA;EPk0BN;AACF;AOj0BM;EACE,aAAA;APm0BR;AOj0BM;EACE,UAAA;APm0BR;AOh0BI;EAEI,WAAA;APi0BR;AOh0BQ;EAAA;IACE,WAAA;EPm0BR;AACF;AOl0BQ;EAAA;IACE,WAAA;EPq0BR;AACF;AOj0BE;EACE,iCAAA;EACA,YAAA;APm0BJ;AOr0BE;EAII,iCAAA;APo0BN;AOn0BM;EAAA;IACE,iCAAA;EPs0BN;AACF;AOp0BI;EAAA;IACE,gBAAA;EPu0BJ;AACF;AOt0BI;EAAA;IACE,gBAAA;IACA,iCAAA;IACA,YAAA;EPy0BJ;AACF;AQx5BA;ELCE,YAAA;EACA,cAAA;EKAA,aAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;AR25BF;AQ15BE;EACE,YAAA;AR45BJ;AQ15BE;EACE,YAAA;EACA,aAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;EACA,iCAAA;EACA,yBAAA;AR45BJ;AQ35BI;EAAA;IACE,iCAAA;ER85BJ;AACF;AQ55BE;EACE,iCAAA;EACA,kBAAA;EACA,yBAAA;AR85BJ;AQ55BE;ELVA,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EKSE,gBAAA;EACA,mBAAA;EACA,qBAAA;EACA,kBAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,+BAAA;EACA,yBAAA;EACA,uBAAA;ARi6BJ;AQh6BI;EAAA;IACE,YAAA;IACA,aAAA;IACA,+BAAA;ERm6BJ;AACF;AQj6BE;EACE,aAAA;EACA,gBAAA;ARm6BJ;AQh6BE;EAAA;IL5CA,YAAA;IACA,cAAA;EHg9BA;EQn6BE;IACE,YAAA;ERq6BJ;AACF;AQn6BE;EAAA;ILlDA,aAAA;IACA,cAAA;IKmDE,aAAA;IACA,mBAAA;IAAA,qBAAA;IAAA,mBAAA;ERu6BF;EQt6BE;IACE,iCAAA;ERw6BJ;AACF","sourcesContent":["/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n@font-face {\n  font-family: 'Roboto';\n  src: url('../fonts/Roboto-400.woff'), url('../fonts/Roboto-400.woff2');\n}\n.game {\n  padding: 10px;\n  width: 360px;\n  margin: 0 auto;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .game {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.game__list {\n  display: grid;\n  grid-template-columns: repeat(3, auto);\n  grid-template-rows: auto auto;\n  justify-items: center;\n  align-items: center;\n  gap: 10px;\n}\n@media (min-width: 720px) {\n  .game__list {\n    grid-template-columns: repeat(6, auto);\n    grid-template-rows: none;\n    gap: 0;\n  }\n}\n.game .categories-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  cursor: default;\n  border-radius: 10px;\n  color: white;\n  background: orange;\n  padding: 5px;\n  transition: all 0.6s ease;\n  appearance: none;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .categories-list__item button {\n    padding: 10px 5px;\n    text-transform: uppercase;\n    font-size: 16px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .categories-list__item button {\n    padding: 15px 40px;\n    text-transform: uppercase;\n    font-size: 18px;\n  }\n}\n.game .question {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .question {\n    grid-template-areas: \"img name\" \"img audio\";\n    margin: 40px 0;\n  }\n}\n.game .question__img {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__img {\n    grid-area: img;\n    width: 200px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__img {\n    width: 250px;\n    grid-area: img;\n  }\n}\n.game .question__name {\n  margin-top: 20px;\n  font: normal 45px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .question__name {\n    grid-area: name;\n  }\n}\n@media (min-width: 1240px) {\n  .game .question__name {\n    font: normal 95px/20px sans-serif;\n    grid-area: name;\n  }\n}\n.game .answers-list {\n  margin-top: 20px;\n  display: grid;\n  gap: 10px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .game .answers-list {\n    place-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .game .answers-list {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n.game .answers-list__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  font: normal 20px/20px sans-serif;\n  width: 360px;\n  border-radius: 10px;\n  background: orange;\n  color: white;\n  padding: 10px;\n  cursor: pointer;\n}\n.game .answers-list__btn:hover {\n  background: orangered;\n  color: whitesmoke;\n}\n.game .answers-list__btn:disabled {\n  opacity: 0.5;\n}\n@media (min-width: 1240px) {\n  .game .answers-list__btn {\n    padding: 15px 30px;\n    font: bold 30px/20px sans-serif;\n    width: 600px;\n  }\n}\n.game .answers-list .decline {\n  background: red;\n}\n.game .answers-list .accept {\n  background: green;\n}\n.game .checked-answer {\n  margin-top: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) {\n  .game .checked-answer {\n    margin-top: 30px;\n    grid-template-areas: \"img surname\" \"img description\" \"img audio\";\n    gap: 10px;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer {\n    grid-template-columns: 30% 70%;\n    padding: 0 10px;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__img {\n    grid-area: img;\n  }\n}\n@media (min-width: 720px) {\n  .game .checked-answer__description {\n    grid-area: description;\n    font: normal 20px/20px sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .game .checked-answer__description {\n    padding: 10px 20px;\n  }\n}\n.game .checked-answer__surname {\n  display: grid;\n  grid-template-rows: auto auto;\n  gap: 10px;\n  place-items: center;\n  margin: 20px 0;\n  font: italic 30px/20px sans-serif;\n}\n@media (min-width: 720px) {\n  .game .checked-answer__surname {\n    grid-area: surname;\n    font: bold 35px/20px sans-serif;\n  }\n}\n.game .checked-answer__surname--species {\n  font-style: italic;\n  font-weight: normal;\n}\n.game .checked-answer__default {\n  font: normal 30px/40px sans-serif;\n}\n.game .next-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: block;\n  margin: 20px auto;\n  background: orange;\n  color: white;\n  border-radius: 10px;\n  padding: 10px;\n  text-transform: uppercase;\n  font: bold 16px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.game .next-btn:hover {\n  background: orangered;\n  color: whitesmoke;\n  transform: scale(1.05);\n}\n.game .next-btn:disabled {\n  background: grey;\n  color: whitesmoke;\n}\n@media (min-width: 720px) {\n  .game .next-btn {\n    margin: 40px auto;\n    padding: 20px 40px;\n    font: bold 20px/20px sans-serif;\n  }\n}\n.game .audio-container {\n  margin-top: 10px;\n  display: grid;\n  grid-template-columns: auto 1fr auto;\n  grid-template-rows: auto auto;\n  gap: 10px;\n  align-items: center;\n  width: 100%;\n}\n@media (min-width: 720px) {\n  .game .audio-container {\n    grid-area: audio;\n    margin-top: 30px;\n  }\n}\n.game .audio-container__play {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 50px;\n  height: 50px;\n}\n.game .audio-container .play {\n  background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 60 60' style='enable-background:new 0 0 60 60;' xml:space='preserve'%3E%3Cg%3E%3Cpath fill='orange' d='M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30 c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15 C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z'/%3E%3Cpath fill='orange' d='M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30 S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z'/%3E%3C/g%3E%3C/svg%3E\");\n}\n.game .audio-container .play:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .pause {\n  background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 122.88 122.88' style='enable-background:new 0 0 122.88 122.88' xml:space='preserve'%3E%3Cg%3E%3Cpath fill='orangered' d='M61.44,0c16.97,0,32.33,6.88,43.44,18c11.12,11.12,18,26.48,18,43.44c0,16.97-6.88,32.33-18,43.44 c-11.12,11.12-26.48,18-43.44,18c-16.97,0-32.33-6.88-43.44-18C6.88,93.77,0,78.41,0,61.44C0,44.47,6.88,29.11,18,18 C29.11,6.88,44.47,0,61.44,0L61.44,0z M42.3,39.47h13.59v43.95l-13.59,0V39.47L42.3,39.47L42.3,39.47z M66.99,39.47h13.59v43.95 l-13.59,0V39.47L66.99,39.47L66.99,39.47z M97.42,25.46c-9.21-9.21-21.93-14.9-35.98-14.9c-14.05,0-26.78,5.7-35.98,14.9 c-9.21,9.21-14.9,21.93-14.9,35.98s5.7,26.78,14.9,35.98c9.21,9.21,21.93,14.9,35.98,14.9c14.05,0,26.78-5.7,35.98-14.9 c9.21-9.21,14.9-21.93,14.9-35.98S106.63,34.66,97.42,25.46L97.42,25.46z'/%3E%3C/g%3E%3C/svg%3E\");\n}\n.game .audio-container .pause:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container__mute-wrapper {\n  position: relative;\n}\n.game .audio-container__mute-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 20px;\n  height: 20px;\n}\n.game .audio-container .unmuted {\n  background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 16 16'%3E%3Cpath fill='orange' fill-rule='evenodd' d='M12 8.02c0 1.09-.45 2.09-1.17 2.83l-.67-.67c.55-.56.89-1.31.89-2.16 0-.85-.34-1.61-.89-2.16l.67-.67A3.99 3.99 0 0 1 12 8.02zM7.72 2.28L4 6H2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2l3.72 3.72c.47.47 1.28.14 1.28-.53V2.81c0-.67-.81-1-1.28-.53zm5.94.08l-.67.67a6.996 6.996 0 0 1 2.06 4.98c0 1.94-.78 3.7-2.06 4.98l.67.67A7.973 7.973 0 0 0 16 8c0-2.22-.89-4.22-2.34-5.66v.02zm-1.41 1.41l-.69.67a5.05 5.05 0 0 1 1.48 3.58c0 1.39-.56 2.66-1.48 3.56l.69.67A5.97 5.97 0 0 0 14 8.02c0-1.65-.67-3.16-1.75-4.25z'/%3E%3C/svg%3E\");\n}\n.game .audio-container .unmuted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .audio-container .muted {\n  background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 208.175 208.175' style='enable-background:new 0 0 208.175 208.175;' xml:space='preserve'%3E%3Cg%3E%3Cg%3E%3Cpath fill='orangered' d='M0,58.432v90.817h29.3l66.291,50.079V8.847l-65.64,49.585H0z M5.411,143.841V63.84h22.744v80.002 H5.411z M90.18,19.712v168.746l-56.614-42.767V62.483L90.18,19.712z'/%3E%3Cpolygon fill='orangered' points='207.856,62.87 208.175,62.555 205.265,59.642 163.725,101.178 122.511,59.96 122.196,59.642 119.28,62.555 160.812,104.087 119.605,145.309 119.28,145.623 122.196,148.537 163.725,107 204.943,148.218 205.265,148.54 208.175,145.623 166.642,104.087 '/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n}\n.game .audio-container .muted:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.game .checked-answer .audio-container__duration-container,\n.game .question .audio-container__duration-container {\n  display: grid;\n  position: relative;\n}\n@media (min-width: 720px) {\n  .game .checked-answer .audio-container,\n  .game .question .audio-container {\n    grid-area: audio;\n  }\n}\n.game .checked-answer .audio-container__current-time,\n.game .question .audio-container__current-time,\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  position: absolute;\n  bottom: -30px;\n}\n.game .checked-answer .audio-container__duration,\n.game .question .audio-container__duration {\n  right: 0;\n}\n.game .checked-answer .audio-container__duration-changer,\n.game .question .audio-container__duration-changer {\n  width: 100%;\n}\n.game .checked-answer .audio-container__volume-changer,\n.game .question .audio-container__volume-changer {\n  display: none;\n}\n.game .checked-answer .audio-container .is-open,\n.game .question .audio-container .is-open {\n  display: block;\n  position: absolute;\n  transform: rotate(270deg);\n  right: -15px;\n  top: -30px;\n  width: 50px;\n}\n.audio-container__duration-changer,\n.audio-container__volume-changer {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 100%;\n  height: 10px;\n  background: rgba(199, 243, 40, 0.897);\n  border-radius: 5px;\n  outline: none;\n  opacity: 0.5;\n  -webkit-transition: 0.2s;\n  transition: opacity 0.2s;\n}\n.audio-container__duration-changer:hover,\n.audio-container__volume-changer:hover {\n  opacity: 1;\n}\n.audio-container__duration-changer::-webkit-slider-thumb,\n.audio-container__volume-changer::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Cpath d='M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658 c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499 c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737 C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861 c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328 c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956 h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307 c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77 c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743 C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738 c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741 c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z'/%3E%3Cpath style='fill:%23FFB8A7;' d='M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741 c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738 c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684 c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773 S234.694,199.684,242.3,199.684z'/%3E%3Cpath style='fill:%23FF5F7B;' d='M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347 c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771 c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z'/%3E%3Ccircle cx='242.293' cy='213.457' r='13.773'/%3E%3Cpath style='fill:%23D21E1E;' d='M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216 c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233 c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z'/%3E%3Cpath d='M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928 c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876 c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325 c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971 c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233 c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216 c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z'/%3E%3Cpath style='fill:%23D21E1E;' d='M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326 c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895 c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z'/%3E%3Cpath d='M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904 c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559 c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474 c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325 C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221 c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278 c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607 C369.62,69.92,386.503,35.316,402.629,30.157z'/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E\");\n  cursor: pointer;\n}\n.audio-container__duration-changer::-webkit-slider-thumb:hover,\n.audio-container__volume-changer::-webkit-slider-thumb:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n.slider-controls {\n  margin-top: 20px;\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .slider-controls {\n    margin-top: 80px;\n  }\n}\n@media (min-width: 1240px) {\n  .slider-controls {\n    margin-top: 150px;\n  }\n}\n.slider-controls__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n.slider-controls__btn svg {\n  width: 40px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .slider-controls__btn svg {\n    width: 80px;\n  }\n}\n@media (min-width: 1240px) {\n  .slider-controls__btn svg {\n    width: 120px;\n  }\n}\n.slider-controls__btn:hover svg {\n  transition: all 1s ease;\n  fill: orangered;\n}\n.slider-controls__btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n.slider-controls__btn:disabled svg {\n  fill: grey;\n}\n.slider-controls .right svg {\n  transform: rotate(180deg);\n}\n.footer {\n  width: 360px;\n  margin: 0 auto;\n  padding: 30px;\n}\n.footer .footer-list {\n  display: grid;\n  place-items: center;\n  gap: 25px;\n}\n@media (min-width: 1240px) {\n  .footer .footer-list {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n.footer .footer-list__item a img {\n  width: 340px;\n}\n.footer .footer-list__item .author-link {\n  font: normal 30px/20px sans-serif;\n  transition: all 0.6s ease;\n}\n.footer .footer-list__item .author-link:hover {\n  color: orange;\n}\n.footer .footer-list .list-item__year {\n  font: bold 30px/20px sans-serif;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .footer {\n    width: 720px;\n    margin: 0 auto;\n  }\n}\n@media (min-width: 1240px) {\n  .footer {\n    width: 1240px;\n    margin: 0 auto;\n  }\n}\n.header {\n  width: 360px;\n  margin: 0 auto;\n  padding: 20px;\n  display: grid;\n  place-items: center;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header {\n    width: 720px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n    align-items: center;\n  }\n}\n@media (min-width: 1240px) {\n  .header {\n    width: 1240px;\n    margin: 0 auto;\n    grid-template-columns: auto 1fr auto auto;\n  }\n}\n.header .logo svg {\n  width: 100px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .logo svg {\n    width: 150px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .logo svg {\n    width: 200px;\n  }\n}\n.header .nav-list {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr auto;\n  gap: 20px;\n  margin-top: 20px;\n  place-items: center;\n}\n.header .nav-list__item button {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  font: normal 20px/200% sans-serif;\n  text-transform: uppercase;\n  color: #00adff;\n  transition: all 0.6s ease;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__item button {\n    font: bold 30px/200% sans-serif;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__item button {\n    font: bold 40px/20px sans-serif;\n  }\n}\n.header .nav-list__item button:hover {\n  color: orange;\n}\n.header .nav-list__item button:focus {\n  color: red;\n}\n.header .nav-list__btn--svg svg {\n  width: 23px;\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header .nav-list__btn--svg svg {\n    width: 30px;\n  }\n}\n@media (min-width: 1240px) {\n  .header .nav-list__btn--svg svg {\n    width: 50px;\n  }\n}\n.header__score {\n  font: normal 20px/200% sans-serif;\n  width: 100px;\n}\n.header__score .score__value {\n  font: normal 30px/20px sans-serif;\n}\n@media (min-width: 1240px) {\n  .header__score .score__value {\n    font: normal 40px/20px sans-serif;\n  }\n}\n@media (min-width: 720px) and (max-width: 1239px) {\n  .header__score {\n    margin-top: 15px;\n  }\n}\n@media (min-width: 1240px) {\n  .header__score {\n    margin-top: 10px;\n    font: normal 40px/20px sans-serif;\n    width: 150px;\n  }\n}\n.promo {\n  width: 360px;\n  margin: 0 auto;\n  display: grid;\n  place-items: center;\n}\n.promo__video {\n  width: 360px;\n}\n.promo__sentence {\n  padding: 5px;\n  display: grid;\n  place-items: center;\n  font: italic 18px/20px sans-serif;\n  color: #01020182;\n}\n@media (min-width: 720px) {\n  .promo__sentence {\n    font: italic 35px/20px sans-serif;\n  }\n}\n.promo__results {\n  font: italic 35px/40px sans-serif;\n  text-align: center;\n  color: #01020182;\n}\n.promo__btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  margin-top: 40px;\n  margin-bottom: 20px;\n  background: orangered;\n  border-radius: 50%;\n  width: 180px;\n  height: 180px;\n  color: white;\n  font: bold 35px/20px sans-serif;\n  text-transform: uppercase;\n  transition: 0.6s linear;\n}\n@media (min-width: 720px) {\n  .promo__btn {\n    width: 360px;\n    height: 360px;\n    font: bold 55px/20px sans-serif;\n  }\n}\n.promo__btn:hover {\n  color: yellow;\n  background: cyan;\n}\n@media (min-width: 720px) {\n  .promo {\n    width: 720px;\n    margin: 0 auto;\n  }\n  .promo__video {\n    width: 720px;\n  }\n}\n@media (min-width: 1240px) {\n  .promo {\n    width: 1240px;\n    margin: 0 auto;\n    display: grid;\n    place-items: center;\n  }\n  .promo-rules__item p {\n    font: normal 25px/25px sans-serif;\n  }\n}\n","/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n\n/* Document\n   ========================================================================== */\n\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\n\nhtml {\n  line-height: 1.15; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n\n/**\n * Remove the margin in all browsers.\n */\n\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\n\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n  box-sizing: content-box; /* 1 */\n  height: 0; /* 1 */\n  overflow: visible; /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\npre {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Remove the gray background on active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n  border-bottom: none; /* 1 */\n  text-decoration: underline; /* 2 */\n  text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\nsamp {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10.\n */\n\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  line-height: 1.15; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\n\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n  box-sizing: border-box; /* 1 */\n  color: inherit; /* 2 */\n  display: table; /* 1 */\n  max-width: 100%; /* 1 */\n  padding: 0; /* 3 */\n  white-space: normal; /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\n\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\n\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 10+.\n */\n\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n\n[hidden] {\n  display: none;\n}","*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Roboto\", \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\n\na {\n  text-decoration: none;\n}\n\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\n \nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}",".container(@width) {\n  width: @width;\n  margin: 0 auto;\n}\n\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}","@font-face {\n    font-family: 'Roboto';\n    src: url('../../fonts/Roboto-400.woff'), \n    url('../../fonts/Roboto-400.woff2');\n}",".game {\n  padding: 10px;\n  .container(@mobile);\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n  &__list {\n    display: grid;\n    grid-template-columns: repeat(3, auto);\n    grid-template-rows: auto auto;\n    justify-items: center;\n    align-items: center;\n    gap: 10px;\n    @media (min-width: @tablet) {\n      grid-template-columns: repeat(6, auto);\n      grid-template-rows: none;\n      gap: 0;\n    }\n  }\n  .categories-list__item {\n    button {\n      .reset-btn();\n      cursor: default;\n      border-radius: 10px;\n      color: white;\n      background: @orange;\n      padding: 5px;\n      transition: all 0.6s ease;\n      appearance: none;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        padding: 10px 5px;\n        text-transform: uppercase;\n        font-size: 16px;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 40px;\n        text-transform: uppercase;\n        font-size: 18px;\n      }\n    }\n  }\n\n  .question {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      grid-template-areas:\n        \"img name\"\n        \"img audio\";\n      margin: 40px 0;\n    }\n\n    &__img {\n      width: 100px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: img;\n        width: 200px;\n      }\n      @media (min-width: @desktop) {\n        width: 250px;\n        grid-area: img;\n      }\n    }\n    &__name {\n      margin-top: 20px;\n      font: normal 45px/20px sans-serif;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        grid-area: name;\n      }\n      @media (min-width: @desktop) {\n        font: normal 95px/20px sans-serif;\n        grid-area: name;\n      }\n    }\n  }\n  .answers-list {\n    margin-top: 20px;\n    display: grid;\n    gap: 10px;\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      place-items: center;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 1fr 1fr;\n    }\n\n    &__btn {\n      .reset-btn();\n      font: normal 20px/20px sans-serif;\n      width: @mobile;\n      border-radius: 10px;\n      background: @orange;\n      color: white;\n      padding: 10px;\n      cursor: pointer;\n      &:hover {\n        background: @orangered;\n        color: whitesmoke;\n      }\n      &:disabled {\n        opacity: 0.5;\n      }\n      @media (min-width: @desktop) {\n        padding: 15px 30px;\n        font: bold 30px/20px sans-serif;\n        width: 600px;\n      }\n    }\n    .decline {\n      background: red;\n    }\n    .accept {\n      background: green;\n    }\n  }\n\n  .checked-answer {\n    margin-top: 20px;\n    display: grid;\n    place-items: center;\n    @media (min-width: @tablet) {\n      margin-top: 30px;\n      grid-template-areas:\n        \"img surname\"\n        \"img description\"\n        \"img audio\";\n      gap: 10px;\n    }\n    @media (min-width: @desktop) {\n      grid-template-columns: 30% 70%;\n      padding: 0 10px;\n    }\n\n    &__img {\n      @media (min-width: @tablet) {\n        grid-area: img;\n      }\n    }\n    &__description {\n      @media (min-width: @tablet) {\n        grid-area: description;\n        font: normal 20px/20px sans-serif;\n      }\n      @media (min-width: @desktop) {\n        padding: 10px 20px;\n      }\n    }\n    &__surname {\n      display: grid;\n      grid-template-rows: auto auto;\n      gap: 10px;\n      place-items: center;\n      margin: 20px 0;\n      font: italic 30px/20px sans-serif;\n      @media (min-width: @tablet) {\n        grid-area: surname;\n        font: bold 35px/20px sans-serif;\n      }\n      &--species {\n        font-style: italic;\n        font-weight: normal;\n      }\n    }\n    &__default {\n      font: normal 30px/40px sans-serif;\n    }\n  }\n\n  .next-btn {\n    .reset-btn();\n    display: block;\n    margin: 20px auto;\n    background: @orange;\n    color: white;\n    border-radius: 10px;\n    padding: 10px;\n    text-transform: uppercase;\n    font: bold 16px/20px sans-serif;\n    transition: all 0.6s ease;\n    &:hover {\n      background: @orangered;\n      color: whitesmoke;\n      transform: scale(1.05);\n    }\n    &:disabled {\n      background: grey;\n      color: whitesmoke;\n    }\n    @media (min-width: @tablet) {\n      margin: 40px auto;\n      padding: 20px 40px;\n      font: bold 20px/20px sans-serif;\n    }\n  }\n  .audio-container {\n    margin-top: 10px;\n    display: grid;\n    grid-template-columns: auto 1fr auto;\n    grid-template-rows: auto auto;\n    gap: 10px;\n    align-items: center;\n    width: 100%;\n    @media (min-width: @tablet) {\n      grid-area: audio;\n      margin-top: 30px;\n    }\n    &__play {\n      .reset-btn();\n      width: 50px;\n      height: 50px;\n    }\n    .play {\n      background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 60 60' style='enable-background:new 0 0 60 60;' xml:space='preserve'%3E%3Cg%3E%3Cpath fill='orange' d='M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30 c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15 C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z'/%3E%3Cpath fill='orange' d='M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30 S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z'/%3E%3C/g%3E%3C/svg%3E\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n    .pause {\n      background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 122.88 122.88' style='enable-background:new 0 0 122.88 122.88' xml:space='preserve'%3E%3Cg%3E%3Cpath fill='orangered' d='M61.44,0c16.97,0,32.33,6.88,43.44,18c11.12,11.12,18,26.48,18,43.44c0,16.97-6.88,32.33-18,43.44 c-11.12,11.12-26.48,18-43.44,18c-16.97,0-32.33-6.88-43.44-18C6.88,93.77,0,78.41,0,61.44C0,44.47,6.88,29.11,18,18 C29.11,6.88,44.47,0,61.44,0L61.44,0z M42.3,39.47h13.59v43.95l-13.59,0V39.47L42.3,39.47L42.3,39.47z M66.99,39.47h13.59v43.95 l-13.59,0V39.47L66.99,39.47L66.99,39.47z M97.42,25.46c-9.21-9.21-21.93-14.9-35.98-14.9c-14.05,0-26.78,5.7-35.98,14.9 c-9.21,9.21-14.9,21.93-14.9,35.98s5.7,26.78,14.9,35.98c9.21,9.21,21.93,14.9,35.98,14.9c14.05,0,26.78-5.7,35.98-14.9 c9.21-9.21,14.9-21.93,14.9-35.98S106.63,34.66,97.42,25.46L97.42,25.46z'/%3E%3C/g%3E%3C/svg%3E\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n\n    &__mute-wrapper {\n      position: relative;\n    }\n    &__mute-btn {\n      .reset-btn();\n      width: 20px;\n      height: 20px;\n    }\n    .unmuted {\n      background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 16 16'%3E%3Cpath fill='orange' fill-rule='evenodd' d='M12 8.02c0 1.09-.45 2.09-1.17 2.83l-.67-.67c.55-.56.89-1.31.89-2.16 0-.85-.34-1.61-.89-2.16l.67-.67A3.99 3.99 0 0 1 12 8.02zM7.72 2.28L4 6H2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2l3.72 3.72c.47.47 1.28.14 1.28-.53V2.81c0-.67-.81-1-1.28-.53zm5.94.08l-.67.67a6.996 6.996 0 0 1 2.06 4.98c0 1.94-.78 3.7-2.06 4.98l.67.67A7.973 7.973 0 0 0 16 8c0-2.22-.89-4.22-2.34-5.66v.02zm-1.41 1.41l-.69.67a5.05 5.05 0 0 1 1.48 3.58c0 1.39-.56 2.66-1.48 3.56l.69.67A5.97 5.97 0 0 0 14 8.02c0-1.65-.67-3.16-1.75-4.25z'/%3E%3C/svg%3E\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n    .muted {\n      background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 208.175 208.175' style='enable-background:new 0 0 208.175 208.175;' xml:space='preserve'%3E%3Cg%3E%3Cg%3E%3Cpath fill='orangered' d='M0,58.432v90.817h29.3l66.291,50.079V8.847l-65.64,49.585H0z M5.411,143.841V63.84h22.744v80.002 H5.411z M90.18,19.712v168.746l-56.614-42.767V62.483L90.18,19.712z'/%3E%3Cpolygon fill='orangered' points='207.856,62.87 208.175,62.555 205.265,59.642 163.725,101.178 122.511,59.96 122.196,59.642 119.28,62.555 160.812,104.087 119.605,145.309 119.28,145.623 122.196,148.537 163.725,107 204.943,148.218 205.265,148.54 208.175,145.623 166.642,104.087 '/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\");\n      &:hover {\n        transform: scale(1.2);\n        transition: transform 0.2s;\n      }\n    }\n  }\n  .checked-answer .audio-container,\n  .question .audio-container {\n    &__duration-container {\n      display: grid;\n      position: relative;\n    }\n    @media (min-width: @tablet) {\n      grid-area: audio;\n    }\n    &__current-time,\n    &__duration {\n      position: absolute;\n      bottom: -30px;\n    }\n    &__duration {\n      right: 0;\n    }\n    &__duration-changer {\n      width: 100%;\n    }\n    &__volume-changer {\n      display: none;\n    }\n    .is-open {\n      display: block;\n      position: absolute;\n      transform: rotate(270deg);\n      right: -15px;\n      top: -30px;\n      width: 50px;\n    }\n  }\n}\n\n.audio-container__duration-changer,\n.audio-container__volume-changer {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 100%;\n  height: 10px;\n  background: rgba(199, 243, 40, 0.897);\n  border-radius: 5px;\n  outline: none;\n  opacity: 0.5;\n  -webkit-transition: 0.2s;\n  transition: opacity 0.2s;\n}\n.audio-container__duration-changer:hover,\n.audio-container__volume-changer:hover {\n  opacity: 1;\n}\n.audio-container__duration-changer::-webkit-slider-thumb,\n.audio-container__volume-changer::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  width: 25px;\n  height: 25px;\n  background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Cpath d='M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658 c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499 c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737 C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861 c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328 c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956 h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307 c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77 c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743 C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738 c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741 c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z'/%3E%3Cpath style='fill:%23FFB8A7;' d='M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741 c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738 c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684 c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773 S234.694,199.684,242.3,199.684z'/%3E%3Cpath style='fill:%23FF5F7B;' d='M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347 c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771 c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z'/%3E%3Ccircle cx='242.293' cy='213.457' r='13.773'/%3E%3Cpath style='fill:%23D21E1E;' d='M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216 c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233 c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z'/%3E%3Cpath d='M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928 c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876 c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325 c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971 c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233 c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216 c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z'/%3E%3Cpath style='fill:%23D21E1E;' d='M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326 c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895 c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z'/%3E%3Cpath d='M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904 c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559 c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474 c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325 C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221 c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278 c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607 C369.62,69.92,386.503,35.316,402.629,30.157z'/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E\");\n  cursor: pointer;\n}\n.audio-container__duration-changer::-webkit-slider-thumb:hover,\n.audio-container__volume-changer::-webkit-slider-thumb:hover {\n  transform: scale(1.2);\n  transition: transform 0.2s;\n}\n\n.slider-controls {\n  margin-top: 20px;\n  width: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  place-items: center;\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    margin-top: 80px;\n  }\n  @media (min-width: @desktop) {\n    margin-top: 150px;\n  }\n  &__btn {\n    .reset-btn();\n    \n    svg {\n      width: 40px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        width: 80px;\n      }\n      @media (min-width: @desktop) {\n        width: 120px;\n      }\n    }\n    &:hover {\n      svg {\n        transition: all 1s ease;\n        fill: orangered;\n      }\n    }\n    &:disabled {\n      svg {\n        fill: grey;\n      }\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n  .right {\n    svg {\n      transform: rotate(180deg);\n    }\n  }\n}\n",".footer {\n  .container(@mobile);\n  padding: 30px;\n  .footer-list {\n    display: grid;\n    place-items: center;\n    gap: 25px;\n    @media (min-width: @desktop) {\n      grid-template-columns: repeat(3, 1fr);\n    }\n    &__item {\n      a img {\n        width: 340px;\n      }\n      .author-link {\n        font: normal 30px/20px sans-serif;\n        transition: all 0.6s ease;\n        &:hover {\n          color: @orange;\n        }\n      }\n    }\n    .list-item__year {\n      font: bold 30px/20px sans-serif;\n    }\n  }\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n  }\n}\n",".header {\n  .container(@mobile);\n  padding: 20px;\n  display: grid;\n  place-items: center;\n\n  @media (min-width: @tablet) and (max-width: @almost-desktop) {\n    .container(@tablet);\n    grid-template-columns: auto 1fr auto auto;\n    align-items: center;\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    grid-template-columns: auto 1fr auto auto;\n  }\n  .logo {\n    svg {\n      width: 100px;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        width: 150px;\n      }\n      @media (min-width: @desktop) {\n        width: 200px;\n      }\n    }\n  }\n  .nav-list {\n    display: grid;\n    grid-template-columns: 1fr 1fr 1fr auto;\n    gap: 20px;\n    margin-top: 20px;\n    place-items: center;\n    &__item button {\n      .reset-btn();\n      font: normal 20px/200% sans-serif;\n      text-transform: uppercase;\n      color: #00adff;\n      transition: all 0.6s ease;\n      @media (min-width: @tablet) and (max-width: @almost-desktop) {\n        font: bold 30px/200% sans-serif;\n      }\n      @media (min-width: @desktop) {\n        font: bold 40px/20px sans-serif;\n      }\n      &:hover {\n        color: @orange;\n      }\n      &:focus {\n        color: red;\n      }\n    }\n    &__btn--svg {\n      svg {\n        width: 23px;\n        @media (min-width: @tablet) and (max-width: @almost-desktop) {\n          width: 30px;\n        }\n        @media (min-width: @desktop) {\n          width: 50px;\n        }\n      }\n    }\n  }\n  &__score {\n    font: normal 20px/200% sans-serif;\n    width: 100px;\n    .score__value {\n      font: normal 30px/20px sans-serif;\n      @media (min-width: @desktop) {\n        font: normal 40px/20px sans-serif;\n      }\n    }\n    @media (min-width: @tablet) and (max-width: @almost-desktop) {\n      margin-top: 15px;\n    }\n    @media (min-width: @desktop) {\n      margin-top: 10px;\n      font: normal 40px/20px sans-serif;\n      width: 150px;\n    }\n  }\n}\n",".promo {\n  .container(@mobile);\n  display: grid;\n  place-items: center;\n  &__video {\n    width: @mobile;\n  }\n  &__sentence {\n    padding: 5px;\n    display: grid;\n    place-items: center;\n    font: italic 18px/20px sans-serif;\n    color: #01020182;\n    @media (min-width: @tablet) {\n      font: italic 35px/20px sans-serif;\n    }\n  }\n  &__results {\n    font: italic 35px/40px sans-serif;\n    text-align: center;\n    color: #01020182;\n  }\n  &__btn {\n    .reset-btn();\n    margin-top: 40px;\n    margin-bottom: 20px;\n    background: @orangered;\n    border-radius: 50%;\n    width: 180px;\n    height: 180px;\n    color: white;\n    font: bold 35px/20px sans-serif;\n    text-transform: uppercase;\n    transition: 0.6s linear;\n    @media (min-width: @tablet) {\n      width: 360px;\n      height: 360px;\n      font: bold 55px/20px sans-serif;\n    }\n  }\n  &__btn:hover {\n    color: yellow;\n    background: cyan;\n  }\n\n  @media (min-width: @tablet) {\n    .container(@tablet);\n    &__video {\n      width: @tablet;\n    }\n  }\n  @media (min-width: @desktop) {\n    .container(@desktop);\n    display: grid;\n    place-items: center;\n    &-rules__item p {\n      font: normal 25px/25px sans-serif;\n    }\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline;\n  -webkit-text-decoration: underline dotted currentColor;\n          text-decoration: underline dotted currentColor;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n.lds-hourglass {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-hourglass:after {\n  content: \" \";\n  display: block;\n  border-radius: 50%;\n  width: 0;\n  height: 0;\n  margin: 8px;\n  box-sizing: border-box;\n  border: 32px solid #fff;\n  border-color: #fff transparent #fff transparent;\n  animation: lds-hourglass 1.2s infinite;\n}\n@keyframes lds-hourglass {\n  0% {\n    transform: rotate(0);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n  50% {\n    transform: rotate(900deg);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  100% {\n    transform: rotate(1800deg);\n  }\n}\n.header {\n  margin: 20px;\n}\n.header-nav {\n  display: grid;\n  grid-template-columns: min-content min-content;\n  grid-gap: 20px;\n  gap: 20px;\n}\n.header-nav__nav-link {\n  color: blueviolet;\n  text-transform: uppercase;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n}\n.header-nav__nav-link:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.header-nav .active {\n  color: orange;\n  transform: scale(1.1);\n  background: orangered;\n}\n.create-section {\n  display: grid;\n  grid-gap: 1.5rem;\n  gap: 1.5rem;\n  margin: 1.5rem;\n}\n.create-section .create-car,\n.create-section .update-car {\n  display: grid;\n  grid-template-columns: repeat(3, min-content);\n  grid-gap: 1.5rem;\n  gap: 1.5rem;\n  align-items: center;\n}\n.create-section .create-car__name-input,\n.create-section .update-car__name-input {\n  width: 300px;\n  height: 50px;\n  border-radius: 5px;\n  padding: 10px;\n}\n.create-section .create-car__name-input::placeholder,\n.create-section .update-car__name-input::placeholder {\n  font: italic 1rem/1.2 Arial, sans-serif;\n}\n.create-section .create-car__name-input:focus,\n.create-section .update-car__name-input:focus {\n  background: gainsboro;\n}\n.create-section .create-car__color-input,\n.create-section .update-car__color-input {\n  width: 5rem;\n  height: 3rem;\n  border-radius: 0.3rem;\n}\n.create-section .create-car__color-input:hover,\n.create-section .update-car__color-input:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.create-section .create-car__btn,\n.create-section .update-car__btn {\n  color: blueviolet;\n  text-transform: uppercase;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n  cursor: pointer;\n}\n.create-section .create-car__btn:hover,\n.create-section .update-car__btn:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.create-section__btns .reset__btn,\n.create-section__btns .random-cars__btn,\n.create-section__btns .race__btn {\n  width: auto;\n  color: blueviolet;\n  text-transform: uppercase;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n  cursor: pointer;\n}\n.create-section__btns .reset__btn:hover,\n.create-section__btns .random-cars__btn:hover,\n.create-section__btns .race__btn:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.create-section__btns .reset__btn:disabled,\n.create-section__btns .random-cars__btn:disabled,\n.create-section__btns .race__btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n.cars {\n  margin: 2rem;\n}\n.cars__amount {\n  font: bold 2rem/1.5 Arial sans-serif;\n}\n.cars-list {\n  margin-top: 2rem;\n}\n.cars-list .list-item {\n  border-bottom: 0.5rem dashed blueviolet;\n  margin-top: 20px;\n  position: relative;\n}\n.cars-list .list-item__btn {\n  color: blueviolet;\n  text-transform: uppercase;\n  margin-bottom: 1rem;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n  cursor: pointer;\n}\n.cars-list .list-item__btn:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.cars-list .list-item__btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n.cars-list .list-item__btn:first-child {\n  margin-right: 1rem;\n}\n.cars-list .list-item__name {\n  font: bold 1.5rem/1.5 Arial sans-serif;\n  text-transform: uppercase;\n  color: blueviolet;\n}\n.cars-list .list-item__svg-finish {\n  position: absolute;\n  right: 0;\n  top: 50%;\n}\n.cars-list .list-item__start-stop {\n  margin: 20px 0;\n}\n.cars-list .list-item__start-stop .start-stop__input {\n  display: none;\n}\n.cars-list .list-item__start-stop .start-stop__label {\n  font: normal 1.2rem/1.2 Arial sans-serif;\n  text-transform: uppercase;\n  border: 1px solid orange;\n  padding: 10px;\n  border-radius: 5px;\n  color: orange;\n  transition: 1s;\n}\n.cars-list .list-item__start-stop .start-stop__label:hover {\n  border: 1px solid orangered;\n  color: yellow;\n  cursor: pointer;\n  background: orange;\n}\n.cars-list .list-item__start-stop .start-stop__label:disabled {\n  background: gray;\n  cursor: not-allowed;\n}\n.cars-list .list-item__start-stop .start-stop__input:checked + label {\n  color: orange;\n}\n.cars-list .list-item .winners-message {\n  position: absolute;\n  font: bold 30px/1.5 Arial sans-serif;\n  text-transform: uppercase;\n  top: 50%;\n  left: 50%;\n  margin-right: -50%;\n  transform: translate(-50%, -50%);\n}\n.pagination {\n  display: grid;\n  margin: 20px;\n  grid-template-columns: 300px;\n}\n.pagination__page-btns {\n  display: grid;\n  grid-auto-flow: column;\n  align-items: center;\n  grid-column-gap: 2px;\n  column-gap: 2px;\n}\n.pagination .page-btns__label {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 30px;\n  height: 30px;\n  display: grid;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  background: orange;\n  transition: 0.5s ease;\n  color: white;\n}\n.pagination .page-btns__label:hover {\n  background: orangered;\n}\n.pagination .page-btns__label:disabled {\n  opacity: 0.5;\n  background: grey;\n  cursor: not-allowed;\n}\n.pagination .page-btns-number__input {\n  width: 40px;\n  height: 30px;\n}\n.pagination .checked {\n  background: green;\n}\n.winners-list {\n  display: grid;\n  grid-auto-flow: row;\n}\n.winners-list__item {\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n  width: 600px;\n}\n.winners-list__item .winners-list-item__wins-count,\n.winners-list__item .winners-list-item__time {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: grid;\n  grid-auto-flow: column;\n  align-items: center;\n  justify-items: center;\n  place-items: center;\n}\n#car-icon {\n  transition: 2s ease-in-out;\n}\n#car-icon:hover {\n  transform: translateX(500px);\n}\n", "",{"version":3,"sources":["webpack://./src/less/entry.less","webpack://./src/less/global/normalize.less","webpack://./src/less/global/global.less","webpack://./src/less/global/mixins.less","webpack://./src/less/components/loading.less","webpack://./src/less/components/header.less","webpack://./src/less/components/create-section.less","webpack://./src/less/components/cars-list.less","webpack://./src/less/components/paginaton.less","webpack://./src/less/components/winners.less","webpack://./src/less/animations.less"],"names":[],"mappings":"AAAA,2EAA2E;AAC3E;+EAC+E;AAC/E;;;EAGE;ACIF;EACE,iBAAA;EDFA,MAAM;ECGN,8BAAA;EDDA,MAAM;AACR;AACA;+EAC+E;AAC/E;;EAEE;ACKF;EACE,SAAA;ADHF;AACA;;EAEE;ACOF;EACE,cAAA;ADLF;AACA;;;EAGE;ACSF;EACE,cAAA;EACA,gBAAA;ADPF;AACA;+EAC+E;AAC/E;;;EAGE;ACYF;EACE,uBAAA;EDVA,MAAM;ECWN,SAAA;EDTA,MAAM;ECUN,iBAAA;EDRA,MAAM;AACR;AACA;;;EAGE;ACWF;EACE,sBAAA;EDTA,MAAM;ECUN,cAAA;EDRA,MAAM;AACR;AACA;+EAC+E;AAC/E;;EAEE;ACYF;EACE,6BAAA;ADVF;AACA;;;EAGE;ACcF;EACE,mBAAA;EDZA,MAAM;ECaN,0BAAA;EDXA,MAAM;ECYN,0BAAA;EAAA,sDAAA;UAAA,8CAAA;EDVA,MAAM;AACR;AACA;;EAEE;ACaF;;EAEE,mBAAA;ADXF;AACA;;;EAGE;ACeF;;;EAGE,sBAAA;EDbA,MAAM;ECcN,cAAA;EDZA,MAAM;AACR;AACA;;EAEE;ACeF;EACE,cAAA;ADbF;AACA;;;EAGE;ACiBF;;EAEE,cAAA;EACA,cAAA;EACA,kBAAA;EACA,wBAAA;ADfF;ACkBA;EACE,eAAA;ADhBF;ACmBA;EACE,WAAA;ADjBF;AACA;+EAC+E;AAC/E;;EAEE;ACsBF;EACE,kBAAA;ADpBF;AACA;+EAC+E;AAC/E;;;EAGE;ACyBF;;;;;EAKE,oBAAA;EDvBA,MAAM;ECwBN,eAAA;EDtBA,MAAM;ECuBN,iBAAA;EDrBA,MAAM;ECsBN,SAAA;EDpBA,MAAM;AACR;AACA;;;EAGE;ACuBF;;EDpBE,MAAM;ECuBN,iBAAA;ADrBF;AACA;;;EAGE;ACyBF;;EDtBE,MAAM;ECyBN,oBAAA;ADvBF;AACA;;EAEE;AC2BF;;;;EAIE,0BAAA;ADzBF;AACA;;EAEE;AC6BF;;;;EAIE,kBAAA;EACA,UAAA;AD3BF;AACA;;EAEE;AC+BF;;;;EAIE,8BAAA;AD7BF;AACA;;EAEE;ACiCF;EACE,8BAAA;AD/BF;AACA;;;;;EAKE;ACmCF;EACE,sBAAA;EDjCA,MAAM;ECkCN,cAAA;EDhCA,MAAM;ECiCN,cAAA;ED/BA,MAAM;ECgCN,eAAA;ED9BA,MAAM;EC+BN,UAAA;ED7BA,MAAM;EC8BN,mBAAA;ED5BA,MAAM;AACR;AACA;;EAEE;AC+BF;EACE,wBAAA;AD7BF;AACA;;EAEE;ACiCF;EACE,cAAA;AD/BF;AACA;;;EAGE;ACmCF;;EAEE,sBAAA;EDjCA,MAAM;ECkCN,UAAA;EDhCA,MAAM;AACR;AACA;;EAEE;ACmCF;;EAEE,YAAA;ADjCF;AACA;;;EAGE;ACqCF;EACE,6BAAA;EDnCA,MAAM;ECoCN,oBAAA;EDlCA,MAAM;AACR;AACA;;EAEE;ACqCF;EACE,wBAAA;ADnCF;AACA;;;EAGE;ACuCF;EACE,0BAAA;EDrCA,MAAM;ECsCN,aAAA;EDpCA,MAAM;AACR;AACA;+EAC+E;AAC/E;;EAEE;ACwCF;EACE,cAAA;ADtCF;AACA;;EAEE;AC0CF;EACE,kBAAA;ADxCF;AACA;+EAC+E;AAC/E;;EAEE;AC6CF;EACE,aAAA;AD3CF;AACA;;EAEE;AC+CF;EACE,aAAA;AD7CF;AEhTA;;;EAGE,sBAAA;AFkTF;AE/SA;EACE,uBAAA;AFiTF;AE9SA;EACE,cAAA;EACA,eAAA;EACA,YAAA;AFgTF;AE7SA;EACE,aAAA;EACA,iCAAA;EACA,gCAAA;EACA,gBAAA;EACA,kBAAA;EACA,gBAAA;EACA,iBAAA;EACA,mBAAA;AF+SF;AE5SA;EACE,qBAAA;AF8SF;AE3SA;EACE,kBAAA;EACA,UAAA;EACA,WAAA;EACA,YAAA;EACA,UAAA;EACA,SAAA;EACA,mBAAA;EACA,gBAAA;AF6SF;AE1SA;EACE,gBAAA;EACA,SAAA;EACA,UAAA;AF4SF;AGpVA;EACE,SAAA;EACA,UAAA;EACA,gBAAA;AHsVF;AGnVA;EACE,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;AHqVF;AIpWA;EACE,qBAAA;EACA,kBAAA;EACA,WAAA;EACA,YAAA;AJsWF;AIpWA;EACE,YAAA;EACA,cAAA;EACA,kBAAA;EACA,QAAA;EACA,SAAA;EACA,WAAA;EACA,sBAAA;EACA,uBAAA;EACA,+CAAA;EACA,sCAAA;AJsWF;AIpWA;EACE;IACE,oBAAA;IACA,iEAAA;EJsWF;EIpWA;IACE,yBAAA;IACA,8DAAA;EJsWF;EIpWA;IACE,0BAAA;EJsWF;AACF;AKnYA;EACE,YAAA;ALqYF;AKpYE;EACE,aAAA;EACA,8CAAA;EACA,cAAA;EAAA,SAAA;ALsYJ;AKrYI;EACE,iBAAA;EACA,yBAAA;EACA,uCAAA;EACA,4BAAA;EACA,cAAA;EACA,oBAAA;ALuYN;AKtYM;EACE,qBAAA;EACA,gBAAA;EACA,gBAAA;EACA,2BAAA;ALwYR;AKvZE;EAmBI,aAAA;EACA,qBAAA;EACA,qBAAA;ALuYN;AM9ZA;EACE,aAAA;EACA,gBAAA;EAAA,WAAA;EACA,cAAA;ANgaF;AMnaA;;EAMI,aAAA;EACA,6CAAA;EACA,gBAAA;EAAA,WAAA;EACA,mBAAA;ANiaJ;AMhaI;;EACE,YAAA;EACA,YAAA;EACA,kBAAA;EACA,aAAA;ANmaN;AMlaM;;EACE,uCAAA;ANqaR;AMnaM;;EACE,qBAAA;ANsaR;AMnaI;;EACE,WAAA;EACA,YAAA;EACA,qBAAA;ANsaN;AMraM;;EACE,qBAAA;EACA,gBAAA;ANwaR;AMraI;;EACE,iBAAA;EACA,yBAAA;EACA,uCAAA;EACA,4BAAA;EACA,cAAA;EACA,oBAAA;EACA,eAAA;ANwaN;AMvaM;;EACE,qBAAA;EACA,gBAAA;EACA,gBAAA;EACA,2BAAA;AN0aR;AMtaE;;;EAII,WAAA;EACA,iBAAA;EACA,yBAAA;EACA,uCAAA;EACA,4BAAA;EACA,cAAA;EACA,oBAAA;EACA,eAAA;ANuaN;AMtaM;;;EACE,qBAAA;EACA,gBAAA;EACA,gBAAA;EACA,2BAAA;AN0aR;AMxaM;;;EACE,YAAA;EACA,mBAAA;AN4aR;AO/eA;EACE,YAAA;APifF;AOhfE;EACE,oCAAA;APkfJ;AOhfE;EACE,gBAAA;APkfJ;AOnfE;EAGI,uCAAA;EACA,gBAAA;EACA,kBAAA;APmfN;AOlfM;EACE,iBAAA;EACA,yBAAA;EACA,mBAAA;EACA,uCAAA;EACA,4BAAA;EACA,cAAA;EACA,oBAAA;EACA,eAAA;APofR;AOnfQ;EACE,qBAAA;EACA,gBAAA;EACA,gBAAA;EACA,2BAAA;APqfV;AOnfQ;EACE,YAAA;EACA,mBAAA;APqfV;AOnfQ;EACE,kBAAA;APqfV;AOlfM;EACE,sCAAA;EACA,yBAAA;EACA,iBAAA;APofR;AOlfM;EACE,kBAAA;EACA,QAAA;EACA,QAAA;APofR;AOlfM;EACE,cAAA;APofR;AOrfM;EAGI,aAAA;APqfV;AOxfM;EAMI,wCAAA;EACA,yBAAA;EACA,wBAAA;EACA,aAAA;EACA,kBAAA;EACA,aAAA;EACA,cAAA;APqfV;AOpfU;EACE,2BAAA;EACA,aAAA;EACA,eAAA;EACA,kBAAA;APsfZ;AOpfU;EACE,gBAAA;EACA,mBAAA;APsfZ;AO3gBM;EA0BI,aAAA;APofV;AOrjBE;EAqEM,kBAAA;EACA,oCAAA;EACA,yBAAA;EACA,QAAA;EACA,SAAA;EACA,kBAAA;EACA,gCAAA;APmfR;AQnkBE;EACE,aAAA;EACA,YAAA;EACA,4BAAA;ARqkBJ;AQpkBI;EACE,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,oBAAA;EAAA,eAAA;ARskBN;AQ9kBE;ELYA,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EKHI,WAAA;EACA,YAAA;EACA,aAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;EACA,kBAAA;EACA,qBAAA;EACA,YAAA;ARykBN;AQxkBM;EACE,qBAAA;AR0kBR;AQxkBM;EACE,YAAA;EACA,gBAAA;EACA,mBAAA;AR0kBR;AQnmBE;EA8BI,WAAA;EACA,YAAA;ARwkBN;AQvmBE;EAkCI,iBAAA;ARwkBN;AS1mBA;EACI,aAAA;EACA,mBAAA;AT4mBJ;AS3mBI;EACI,aAAA;EACA,qCAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;EACA,YAAA;AT6mBR;ASjnBI;;ENSF,uBAAA;EACA,aAAA;EACA,YAAA;EACA,eAAA;EMJU,aAAA;EACA,sBAAA;EACA,mBAAA;EAAA,qBAAA;EAAA,mBAAA;ATinBZ;AU9nBA;EACI,0BAAA;AVgoBJ;AU7nBA;EACI,4BAAA;AV+nBJ","sourcesContent":["/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n/* Document\n   ========================================================================== */\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\nhtml {\n  line-height: 1.15;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n}\n/* Sections\n   ========================================================================== */\n/**\n * Remove the margin in all browsers.\n */\nbody {\n  margin: 0;\n}\n/**\n * Render the `main` element consistently in IE.\n */\nmain {\n  display: block;\n}\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n/* Grouping content\n   ========================================================================== */\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\npre {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/* Text-level semantics\n   ========================================================================== */\n/**\n * Remove the gray background on active links in IE 10.\n */\na {\n  background-color: transparent;\n}\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */\n}\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\nb,\nstrong {\n  font-weight: bolder;\n}\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */\n}\n/**\n * Add the correct font size in all browsers.\n */\nsmall {\n  font-size: 80%;\n}\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\nsub {\n  bottom: -0.25em;\n}\nsup {\n  top: -0.5em;\n}\n/* Embedded content\n   ========================================================================== */\n/**\n * Remove the border on images inside links in IE 10.\n */\nimg {\n  border-style: none;\n}\n/* Forms\n   ========================================================================== */\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n}\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n/**\n * Remove the inner border and padding in Firefox.\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n/**\n * Restore the focus styles unset by the previous rule.\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n/**\n * Correct the padding in Firefox.\n */\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */\n}\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\nprogress {\n  vertical-align: baseline;\n}\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\ntextarea {\n  overflow: auto;\n}\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n}\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */\n}\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */\n}\n/* Interactive\n   ========================================================================== */\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\ndetails {\n  display: block;\n}\n/*\n * Add the correct display in all browsers.\n */\nsummary {\n  display: list-item;\n}\n/* Misc\n   ========================================================================== */\n/**\n * Add the correct display in IE 10+.\n */\ntemplate {\n  display: none;\n}\n/**\n * Add the correct display in IE 10.\n */\n[hidden] {\n  display: none;\n}\n*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\nhtml {\n  scroll-behavior: smooth;\n}\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\na {\n  text-decoration: none;\n}\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}\n.lds-hourglass {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-hourglass:after {\n  content: \" \";\n  display: block;\n  border-radius: 50%;\n  width: 0;\n  height: 0;\n  margin: 8px;\n  box-sizing: border-box;\n  border: 32px solid #fff;\n  border-color: #fff transparent #fff transparent;\n  animation: lds-hourglass 1.2s infinite;\n}\n@keyframes lds-hourglass {\n  0% {\n    transform: rotate(0);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n  50% {\n    transform: rotate(900deg);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  100% {\n    transform: rotate(1800deg);\n  }\n}\n.header {\n  margin: 20px;\n}\n.header-nav {\n  display: grid;\n  grid-template-columns: min-content min-content;\n  gap: 20px;\n}\n.header-nav__nav-link {\n  color: blueviolet;\n  text-transform: uppercase;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n}\n.header-nav__nav-link:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.header-nav .active {\n  color: orange;\n  transform: scale(1.1);\n  background: orangered;\n}\n.create-section {\n  display: grid;\n  gap: 1.5rem;\n  margin: 1.5rem;\n}\n.create-section .create-car,\n.create-section .update-car {\n  display: grid;\n  grid-template-columns: repeat(3, min-content);\n  gap: 1.5rem;\n  align-items: center;\n}\n.create-section .create-car__name-input,\n.create-section .update-car__name-input {\n  width: 300px;\n  height: 50px;\n  border-radius: 5px;\n  padding: 10px;\n}\n.create-section .create-car__name-input::placeholder,\n.create-section .update-car__name-input::placeholder {\n  font: italic 1rem/1.2 Arial, sans-serif;\n}\n.create-section .create-car__name-input:focus,\n.create-section .update-car__name-input:focus {\n  background: gainsboro;\n}\n.create-section .create-car__color-input,\n.create-section .update-car__color-input {\n  width: 5rem;\n  height: 3rem;\n  border-radius: 0.3rem;\n}\n.create-section .create-car__color-input:hover,\n.create-section .update-car__color-input:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n}\n.create-section .create-car__btn,\n.create-section .update-car__btn {\n  color: blueviolet;\n  text-transform: uppercase;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n  cursor: pointer;\n}\n.create-section .create-car__btn:hover,\n.create-section .update-car__btn:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.create-section__btns .reset__btn,\n.create-section__btns .random-cars__btn,\n.create-section__btns .race__btn {\n  width: auto;\n  color: blueviolet;\n  text-transform: uppercase;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n  cursor: pointer;\n}\n.create-section__btns .reset__btn:hover,\n.create-section__btns .random-cars__btn:hover,\n.create-section__btns .race__btn:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.create-section__btns .reset__btn:disabled,\n.create-section__btns .random-cars__btn:disabled,\n.create-section__btns .race__btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n.cars {\n  margin: 2rem;\n}\n.cars__amount {\n  font: bold 2rem/1.5 Arial sans-serif;\n}\n.cars-list {\n  margin-top: 2rem;\n}\n.cars-list .list-item {\n  border-bottom: 0.5rem dashed blueviolet;\n  margin-top: 20px;\n  position: relative;\n}\n.cars-list .list-item__btn {\n  color: blueviolet;\n  text-transform: uppercase;\n  margin-bottom: 1rem;\n  font: bold 1.5rem/1.5 Arial, sans-serif;\n  border: 1px solid blueviolet;\n  padding: 0.3em;\n  border-radius: 0.3em;\n  cursor: pointer;\n}\n.cars-list .list-item__btn:hover {\n  transform: scale(1.1);\n  transition: 0.5s;\n  color: burlywood;\n  border: 1px solid burlywood;\n}\n.cars-list .list-item__btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n.cars-list .list-item__btn:first-child {\n  margin-right: 1rem;\n}\n.cars-list .list-item__name {\n  font: bold 1.5rem/1.5 Arial sans-serif;\n  text-transform: uppercase;\n  color: blueviolet;\n}\n.cars-list .list-item__svg-finish {\n  position: absolute;\n  right: 0;\n  top: 50%;\n}\n.cars-list .list-item__start-stop {\n  margin: 20px 0;\n}\n.cars-list .list-item__start-stop .start-stop__input {\n  display: none;\n}\n.cars-list .list-item__start-stop .start-stop__label {\n  font: normal 1.2rem/1.2 Arial sans-serif;\n  text-transform: uppercase;\n  border: 1px solid orange;\n  padding: 10px;\n  border-radius: 5px;\n  color: orange;\n  transition: 1s;\n}\n.cars-list .list-item__start-stop .start-stop__label:hover {\n  border: 1px solid orangered;\n  color: yellow;\n  cursor: pointer;\n  background: orange;\n}\n.cars-list .list-item__start-stop .start-stop__label:disabled {\n  background: gray;\n  cursor: not-allowed;\n}\n.cars-list .list-item__start-stop .start-stop__input:checked + label {\n  color: orange;\n}\n.cars-list .list-item .winners-message {\n  position: absolute;\n  font: bold 30px/1.5 Arial sans-serif;\n  text-transform: uppercase;\n  top: 50%;\n  left: 50%;\n  margin-right: -50%;\n  transform: translate(-50%, -50%);\n}\n.pagination {\n  display: grid;\n  margin: 20px;\n  grid-template-columns: 300px;\n}\n.pagination__page-btns {\n  display: grid;\n  grid-auto-flow: column;\n  align-items: center;\n  column-gap: 2px;\n}\n.pagination .page-btns__label {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  width: 30px;\n  height: 30px;\n  display: grid;\n  place-items: center;\n  background: orange;\n  transition: 0.5s ease;\n  color: white;\n}\n.pagination .page-btns__label:hover {\n  background: orangered;\n}\n.pagination .page-btns__label:disabled {\n  opacity: 0.5;\n  background: grey;\n  cursor: not-allowed;\n}\n.pagination .page-btns-number__input {\n  width: 40px;\n  height: 30px;\n}\n.pagination .checked {\n  background: green;\n}\n.winners-list {\n  display: grid;\n  grid-auto-flow: row;\n}\n.winners-list__item {\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  place-items: center;\n  width: 600px;\n}\n.winners-list__item .winners-list-item__wins-count,\n.winners-list__item .winners-list-item__time {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n  display: grid;\n  grid-auto-flow: column;\n  place-items: center;\n}\n#car-icon {\n  transition: 2s ease-in-out;\n}\n#car-icon:hover {\n  transform: translateX(500px);\n}\n","/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */\n\n/* Document\n   ========================================================================== */\n\n/**\n * 1. Correct the line height in all browsers.\n * 2. Prevent adjustments of font size after orientation changes in iOS.\n */\n\nhtml {\n  line-height: 1.15; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/* Sections\n   ========================================================================== */\n\n/**\n * Remove the margin in all browsers.\n */\n\nbody {\n  margin: 0;\n}\n\n/**\n * Render the `main` element consistently in IE.\n */\n\nmain {\n  display: block;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n  box-sizing: content-box; /* 1 */\n  height: 0; /* 1 */\n  overflow: visible; /* 2 */\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\npre {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Remove the gray background on active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * 1. Remove the bottom border in Chrome 57-\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n  border-bottom: none; /* 1 */\n  text-decoration: underline; /* 2 */\n  text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\nsamp {\n  font-family: monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10.\n */\n\nimg {\n  border-style: none;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change the font styles in all browsers.\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  line-height: 1.15; /* 1 */\n  margin: 0; /* 2 */\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput {\n  /* 1 */\n  overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect {\n  /* 1 */\n  text-transform: none;\n}\n\n/**\n * Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\n[type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText;\n}\n\n/**\n * Correct the padding in Firefox.\n */\n\nfieldset {\n  padding: 0.35em 0.75em 0.625em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n  box-sizing: border-box; /* 1 */\n  color: inherit; /* 2 */\n  display: table; /* 1 */\n  max-width: 100%; /* 1 */\n  padding: 0; /* 3 */\n  white-space: normal; /* 1 */\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n  vertical-align: baseline;\n}\n\n/**\n * Remove the default vertical scrollbar in IE 10+.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10.\n * 2. Remove the padding in IE 10.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding in Chrome and Safari on macOS.\n */\n\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/* Interactive\n   ========================================================================== */\n\n/*\n * Add the correct display in Edge, IE 10+, and Firefox.\n */\n\ndetails {\n  display: block;\n}\n\n/*\n * Add the correct display in all browsers.\n */\n\nsummary {\n  display: list-item;\n}\n\n/* Misc\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 10+.\n */\n\ntemplate {\n  display: none;\n}\n\n/**\n * Add the correct display in IE 10.\n */\n\n[hidden] {\n  display: none;\n}","*,\n*::before,\n*::after {\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n\nimg {\n  display: block;\n  max-width: 100%;\n  height: auto;\n}\n\nbody {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  font-family: \"Arial\", sans-serif;\n  font-weight: 400;\n  font-style: normal;\n  list-style: none;\n  min-height: 100vh;\n  background: #ebe2e2;\n}\n\na {\n  text-decoration: none;\n}\n\n.visually-hidden {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  margin: -1px;\n  padding: 0;\n  border: 0;\n  clip: rect(0 0 0 0);\n  overflow: hidden;\n}\n \nul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}",".container(@width) {\n  width: @width;\n  margin: 0 auto;\n}\n\n.reset-ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n.reset-btn {\n  background: transparent;\n  outline: none;\n  border: none;\n  cursor: pointer;\n}",".lds-hourglass {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-hourglass:after {\n  content: \" \";\n  display: block;\n  border-radius: 50%;\n  width: 0;\n  height: 0;\n  margin: 8px;\n  box-sizing: border-box;\n  border: 32px solid #fff;\n  border-color: #fff transparent #fff transparent;\n  animation: lds-hourglass 1.2s infinite;\n}\n@keyframes lds-hourglass {\n  0% {\n    transform: rotate(0);\n    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);\n  }\n  50% {\n    transform: rotate(900deg);\n    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n  100% {\n    transform: rotate(1800deg);\n  }\n}\n",".header {\n  margin: 20px;\n  &-nav {\n    display: grid;\n    grid-template-columns: min-content min-content;\n    gap: 20px;\n    &__nav-link {\n      color: blueviolet;\n      text-transform: uppercase;\n      font: bold 1.5rem/1.5 Arial, sans-serif;\n      border: 1px solid blueviolet;\n      padding: 0.3em;\n      border-radius: 0.3em;\n      &:hover {\n        transform: scale(1.1);\n        transition: 0.5s;\n        color: burlywood;\n        border: 1px solid burlywood;\n      }\n    }\n    .active {\n      color: orange;\n      transform: scale(1.1);\n      background: orangered;\n    }\n  }\n}\n",".create-section {\n  display: grid;\n  gap: 1.5rem;\n  margin: 1.5rem;\n  .create-car,\n  .update-car {\n    display: grid;\n    grid-template-columns: repeat(3, min-content);\n    gap: 1.5rem;\n    align-items: center;\n    &__name-input {\n      width: 300px;\n      height: 50px;\n      border-radius: 5px;\n      padding: 10px;\n      &::placeholder {\n        font: italic 1rem/1.2 Arial, sans-serif;\n      }\n      &:focus {\n        background: gainsboro;\n      }\n    }\n    &__color-input {\n      width: 5rem;\n      height: 3rem;\n      border-radius: 0.3rem;\n      &:hover {\n        transform: scale(1.1);\n        transition: 0.5s;\n      }\n    }\n    &__btn {\n      color: blueviolet;\n      text-transform: uppercase;\n      font: bold 1.5rem/1.5 Arial, sans-serif;\n      border: 1px solid blueviolet;\n      padding: 0.3em;\n      border-radius: 0.3em;\n      cursor: pointer;\n      &:hover {\n        transform: scale(1.1);\n        transition: 0.5s;\n        color: burlywood;\n        border: 1px solid burlywood;\n      }\n    }\n  }\n  &__btns {\n    .reset__btn,\n    .random-cars__btn,\n    .race__btn {\n      width: auto;\n      color: blueviolet;\n      text-transform: uppercase;\n      font: bold 1.5rem/1.5 Arial, sans-serif;\n      border: 1px solid blueviolet;\n      padding: 0.3em;\n      border-radius: 0.3em;\n      cursor: pointer;\n      &:hover {\n        transform: scale(1.1);\n        transition: 0.5s;\n        color: burlywood;\n        border: 1px solid burlywood;\n      }\n      &:disabled {\n        opacity: 0.5;\n        cursor: not-allowed;\n      }\n    }\n  }\n}\n",".cars {\n  margin: 2rem;\n  &__amount {\n    font: bold 2rem/1.5 Arial sans-serif;\n  }\n  &-list {\n    margin-top: 2rem;\n    .list-item {\n      border-bottom: 0.5rem dashed blueviolet;\n      margin-top: 20px;\n      position: relative;\n      &__btn {\n        color: blueviolet;\n        text-transform: uppercase;\n        margin-bottom: 1rem;\n        font: bold 1.5rem/1.5 Arial, sans-serif;\n        border: 1px solid blueviolet;\n        padding: 0.3em;\n        border-radius: 0.3em;\n        cursor: pointer;\n        &:hover {\n          transform: scale(1.1);\n          transition: 0.5s;\n          color: burlywood;\n          border: 1px solid burlywood;\n        }\n        &:disabled {\n          opacity: 0.5;\n          cursor: not-allowed;\n        }\n        &:first-child {\n          margin-right: 1rem;\n        }\n      }\n      &__name {\n        font: bold 1.5rem/1.5 Arial sans-serif;\n        text-transform: uppercase;\n        color: blueviolet;\n      }\n      &__svg-finish {\n        position: absolute;\n        right: 0;\n        top: 50%;\n      }\n      &__start-stop {\n        margin: 20px 0;\n        .start-stop__input {\n          display: none;\n        }\n        .start-stop__label {\n          font: normal 1.2rem/1.2 Arial sans-serif;\n          text-transform: uppercase;\n          border: 1px solid orange;\n          padding: 10px;\n          border-radius: 5px;\n          color: orange;\n          transition: 1s;\n          &:hover {\n            border: 1px solid orangered;\n            color: yellow;\n            cursor: pointer;\n            background: orange;\n          }\n          &:disabled {\n            background: gray;\n            cursor: not-allowed;\n          }\n        }\n\n        .start-stop__input:checked + label {\n          color: orange;\n        }\n      }\n      .winners-message {\n        position: absolute;\n        font: bold 30px/1.5 Arial sans-serif;\n        text-transform: uppercase;\n        top: 50%;\n        left: 50%;\n        margin-right: -50%;\n        transform: translate(-50%, -50%);\n      }\n    }\n  }\n}\n","  .pagination {\n    display: grid;\n    margin: 20px;\n    grid-template-columns: 300px;\n    &__page-btns {\n      display: grid;\n      grid-auto-flow: column;\n      align-items: center;\n      column-gap: 2px;\n    }\n    .page-btns__label {\n      .reset-btn();\n      width: 30px;\n      height: 30px;\n      display: grid;\n      place-items: center;\n      background: orange;\n      transition: .5s ease;\n      color: white;\n      &:hover {\n        background: orangered;\n      }\n      &:disabled {\n        opacity: 0.5;\n        background: grey;\n        cursor: not-allowed;\n      }\n    }\n\n    .page-btns-number__input {\n      width: 40px;\n      height: 30px;\n    }\n    .checked {\n      background: green;\n    }\n  }",".winners-list {\n    display: grid;\n    grid-auto-flow: row;\n    &__item {\n        display: grid;\n        grid-template-columns: repeat(5, 1fr);\n        place-items: center;\n        width: 600px;\n        .winners-list-item__wins-count,\n        .winners-list-item__time {\n            .reset-btn();\n            display: grid;\n            grid-auto-flow: column;\n            place-items: center;\n        }\n    }\n}","#car-icon {\n    transition: 2s ease-in-out;\n}\n\n#car-icon:hover {\n    transform: translateX(500px);\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10954,68 +9160,55 @@ ___CSS_LOADER_EXPORT___.push([module.id, "/*! normalize.css v8.0.1 | MIT License
   Author Tobias Koppers @sokra
 */
 module.exports = function (cssWithMappingToString) {
-  var list = []; // return the list of modules as css string
+  var list = [];
 
+  // return the list of modules as css string
   list.toString = function toString() {
     return this.map(function (item) {
       var content = "";
       var needLayer = typeof item[5] !== "undefined";
-
       if (item[4]) {
         content += "@supports (".concat(item[4], ") {");
       }
-
       if (item[2]) {
         content += "@media ".concat(item[2], " {");
       }
-
       if (needLayer) {
         content += "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {");
       }
-
       content += cssWithMappingToString(item);
-
       if (needLayer) {
         content += "}";
       }
-
       if (item[2]) {
         content += "}";
       }
-
       if (item[4]) {
         content += "}";
       }
-
       return content;
     }).join("");
-  }; // import a list of modules into the list
+  };
 
-
+  // import a list of modules into the list
   list.i = function i(modules, media, dedupe, supports, layer) {
     if (typeof modules === "string") {
       modules = [[null, modules, undefined]];
     }
-
     var alreadyImportedModules = {};
-
     if (dedupe) {
       for (var k = 0; k < this.length; k++) {
         var id = this[k][0];
-
         if (id != null) {
           alreadyImportedModules[id] = true;
         }
       }
     }
-
     for (var _k = 0; _k < modules.length; _k++) {
       var item = [].concat(modules[_k]);
-
       if (dedupe && alreadyImportedModules[item[0]]) {
         continue;
       }
-
       if (typeof layer !== "undefined") {
         if (typeof item[5] === "undefined") {
           item[5] = layer;
@@ -11024,7 +9217,6 @@ module.exports = function (cssWithMappingToString) {
           item[5] = layer;
         }
       }
-
       if (media) {
         if (!item[2]) {
           item[2] = media;
@@ -11033,7 +9225,6 @@ module.exports = function (cssWithMappingToString) {
           item[2] = media;
         }
       }
-
       if (supports) {
         if (!item[4]) {
           item[4] = "".concat(supports);
@@ -11042,51 +9233,10 @@ module.exports = function (cssWithMappingToString) {
           item[4] = supports;
         }
       }
-
       list.push(item);
     }
   };
-
   return list;
-};
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
-/*!********************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
-  \********************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-module.exports = function (url, options) {
-  if (!options) {
-    options = {};
-  }
-
-  if (!url) {
-    return url;
-  }
-
-  url = String(url.__esModule ? url.default : url); // If url is already wrapped in quotes, remove them
-
-  if (/^['"].*['"]$/.test(url)) {
-    url = url.slice(1, -1);
-  }
-
-  if (options.hash) {
-    url += options.hash;
-  } // Should url be wrapped?
-  // See https://drafts.csswg.org/css-values-3/#urls
-
-
-  if (/["'() \t\n]|(%20)/.test(url) || options.needQuotes) {
-    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, "\\n"), "\"");
-  }
-
-  return url;
 };
 
 /***/ }),
@@ -11103,21 +9253,15 @@ module.exports = function (url, options) {
 module.exports = function (item) {
   var content = item[1];
   var cssMapping = item[3];
-
   if (!cssMapping) {
     return content;
   }
-
   if (typeof btoa === "function") {
     var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(cssMapping))));
     var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
     var sourceMapping = "/*# ".concat(data, " */");
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || "").concat(source, " */");
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join("\n");
+    return [content].concat([sourceMapping]).join("\n");
   }
-
   return [content].join("\n");
 };
 
@@ -11134,52 +9278,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/html-loader/dist/runtime/getUrl.js */ "./node_modules/html-loader/dist/runtime/getUrl.js");
-/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./js/entry.js */ "./src/js/entry.js?cfda"), __webpack_require__.b);
 // Module
-var ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);
-var code = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    <title>SongBird</title>\r\n    <meta content=\"width=device-width, initial-scale=1\" name=\"viewport\" />\r\n    <meta content=\"ie=edge\" http-equiv=\"x-ua-compatible\" />\r\n    <meta content=\"SongBird application\" name=\"description\" />\r\n  </head>\r\n  <body class=\"page\">\r\n  </body>\r\n  <" + "script src=\"" + ___HTML_LOADER_REPLACEMENT_0___ + "\"><" + "/script>\r\n</html>\r\n";
+var code = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n  <head>\r\n    <title>ASYNC-RACE APP</title>\r\n    <meta content=\"width=device-width, initial-scale=1\" name=\"viewport\" />\r\n    <meta content=\"ie=edge\" http-equiv=\"x-ua-compatible\" />\r\n    <meta content=\"Async-race application\" name=\"description\" />\r\n  </head>\r\n  <body class=\"page\">\r\n  </body>\r\n</html>\r\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
-
-/***/ }),
-
-/***/ "./node_modules/html-loader/dist/runtime/getUrl.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/html-loader/dist/runtime/getUrl.js ***!
-  \*********************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-module.exports = function (url, options) {
-  if (!options) {
-    // eslint-disable-next-line no-param-reassign
-    options = {};
-  }
-
-  if (!url) {
-    return url;
-  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign
-
-
-  url = String(url.__esModule ? url.default : url);
-
-  if (options.hash) {
-    // eslint-disable-next-line no-param-reassign
-    url += options.hash;
-  }
-
-  if (options.maybeNeedQuotes && /[\t\n\f\r "'=<>`]/.test(url)) {
-    return "\"".concat(url, "\"");
-  }
-
-  return url;
-};
 
 /***/ }),
 
@@ -11520,31 +9622,32 @@ var runtime = (function (exports) {
   // delegate iterator, or by modifying context.method and context.arg,
   // setting context.delegate to null, and returning the ContinueSentinel.
   function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
+    var methodName = context.method;
+    var method = delegate.iterator[methodName];
     if (method === undefined) {
       // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
+      // method, or a missing .next mehtod, always terminate the
+      // yield* loop.
       context.delegate = null;
 
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
+      // Note: ["return"] must be used for ES3 parsing compatibility.
+      if (methodName === "throw" && delegate.iterator["return"]) {
+        // If the delegate iterator has a return method, give it a
+        // chance to clean up.
+        context.method = "return";
+        context.arg = undefined;
+        maybeInvokeDelegate(delegate, context);
 
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
+        if (context.method === "throw") {
+          // If maybeInvokeDelegate(context) changed context.method from
+          // "return" to "throw", let that override the TypeError below.
+          return ContinueSentinel;
         }
-
+      }
+      if (methodName !== "return") {
         context.method = "throw";
         context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
+          "The iterator does not provide a '" + methodName + "' method");
       }
 
       return ContinueSentinel;
@@ -11976,7 +10079,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!../../node_modules/less-loader/dist/cjs.js!./entry.less */ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/less-loader/dist/cjs.js!./src/less/entry.less");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_2_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!../../node_modules/less-loader/dist/cjs.js!./entry.less */ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./node_modules/less-loader/dist/cjs.js!./src/less/entry.less");
 
       
       
@@ -11998,12 +10101,12 @@ options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWi
 options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
 options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_2_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"], options);
 
 
 
 
-       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_2_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_2_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_2_use_2_node_modules_less_loader_dist_cjs_js_entry_less__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
@@ -12320,157 +10423,1412 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
-/***/ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 208.175 208.175%27 style=%27enable-background:new 0 0 208.175 208.175;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M0,58.432v90.817h29.3l66.291,50.079V8.847l-65.64,49.585H0z M5.411,143.841V63.84h22.744v80.002 H5.411z M90.18,19.712v168.746l-56.614-42.767V62.483L90.18,19.712z%27/%3E%3Cpolygon fill=%27orangered%27 points=%27207.856,62.87 208.175,62.555 205.265,59.642 163.725,101.178 122.511,59.96 122.196,59.642 119.28,62.555 160.812,104.087 119.605,145.309 119.28,145.623 122.196,148.537 163.725,107 204.943,148.218 205.265,148.54 208.175,145.623 166.642,104.087 %27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 208.175 208.175%27 style=%27enable-background:new 0 0 208.175 208.175;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M0,58.432v90.817h29.3l66.291,50.079V8.847l-65.64,49.585H0z M5.411,143.841V63.84h22.744v80.002 H5.411z M90.18,19.712v168.746l-56.614-42.767V62.483L90.18,19.712z%27/%3E%3Cpolygon fill=%27orangered%27 points=%27207.856,62.87 208.175,62.555 205.265,59.642 163.725,101.178 122.511,59.96 122.196,59.642 119.28,62.555 160.812,104.087 119.605,145.309 119.28,145.623 122.196,148.537 163.725,107 204.943,148.218 205.265,148.54 208.175,145.623 166.642,104.087 %27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 208.175 208.175%27 style=%27enable-background:new 0 0 208.175 208.175;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M0,58.432v90.817h29.3l66.291,50.079V8.847l-65.64,49.585H0z M5.411,143.841V63.84h22.744v80.002 H5.411z M90.18,19.712v168.746l-56.614-42.767V62.483L90.18,19.712z%27/%3E%3Cpolygon fill=%27orangered%27 points=%27207.856,62.87 208.175,62.555 205.265,59.642 163.725,101.178 122.511,59.96 122.196,59.642 119.28,62.555 160.812,104.087 119.605,145.309 119.28,145.623 122.196,148.537 163.725,107 204.943,148.218 205.265,148.54 208.175,145.623 166.642,104.087 %27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E";
-
-/***/ }),
-
-/***/ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 60 60%27 style=%27enable-background:new 0 0 60 60;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orange%27 d=%27M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30 c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15 C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z%27/%3E%3Cpath fill=%27orange%27 d=%27M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30 S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z%27/%3E%3C/g%3E%3C/svg%3E":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 60 60%27 style=%27enable-background:new 0 0 60 60;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orange%27 d=%27M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30 c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15 C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z%27/%3E%3Cpath fill=%27orange%27 d=%27M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30 S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z%27/%3E%3C/g%3E%3C/svg%3E ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Capa_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 60 60%27 style=%27enable-background:new 0 0 60 60;%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orange%27 d=%27M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30 c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15 C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z%27/%3E%3Cpath fill=%27orange%27 d=%27M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30 S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z%27/%3E%3C/g%3E%3C/svg%3E";
-
-/***/ }),
-
-/***/ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 122.88 122.88%27 style=%27enable-background:new 0 0 122.88 122.88%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M61.44,0c16.97,0,32.33,6.88,43.44,18c11.12,11.12,18,26.48,18,43.44c0,16.97-6.88,32.33-18,43.44 c-11.12,11.12-26.48,18-43.44,18c-16.97,0-32.33-6.88-43.44-18C6.88,93.77,0,78.41,0,61.44C0,44.47,6.88,29.11,18,18 C29.11,6.88,44.47,0,61.44,0L61.44,0z M42.3,39.47h13.59v43.95l-13.59,0V39.47L42.3,39.47L42.3,39.47z M66.99,39.47h13.59v43.95 l-13.59,0V39.47L66.99,39.47L66.99,39.47z M97.42,25.46c-9.21-9.21-21.93-14.9-35.98-14.9c-14.05,0-26.78,5.7-35.98,14.9 c-9.21,9.21-14.9,21.93-14.9,35.98s5.7,26.78,14.9,35.98c9.21,9.21,21.93,14.9,35.98,14.9c14.05,0,26.78-5.7,35.98-14.9 c9.21-9.21,14.9-21.93,14.9-35.98S106.63,34.66,97.42,25.46L97.42,25.46z%27/%3E%3C/g%3E%3C/svg%3E":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 122.88 122.88%27 style=%27enable-background:new 0 0 122.88 122.88%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M61.44,0c16.97,0,32.33,6.88,43.44,18c11.12,11.12,18,26.48,18,43.44c0,16.97-6.88,32.33-18,43.44 c-11.12,11.12-26.48,18-43.44,18c-16.97,0-32.33-6.88-43.44-18C6.88,93.77,0,78.41,0,61.44C0,44.47,6.88,29.11,18,18 C29.11,6.88,44.47,0,61.44,0L61.44,0z M42.3,39.47h13.59v43.95l-13.59,0V39.47L42.3,39.47L42.3,39.47z M66.99,39.47h13.59v43.95 l-13.59,0V39.47L66.99,39.47L66.99,39.47z M97.42,25.46c-9.21-9.21-21.93-14.9-35.98-14.9c-14.05,0-26.78,5.7-35.98,14.9 c-9.21,9.21-14.9,21.93-14.9,35.98s5.7,26.78,14.9,35.98c9.21,9.21,21.93,14.9,35.98,14.9c14.05,0,26.78-5.7,35.98-14.9 c9.21-9.21,14.9-21.93,14.9-35.98S106.63,34.66,97.42,25.46L97.42,25.46z%27/%3E%3C/g%3E%3C/svg%3E ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 122.88 122.88%27 style=%27enable-background:new 0 0 122.88 122.88%27 xml:space=%27preserve%27%3E%3Cg%3E%3Cpath fill=%27orangered%27 d=%27M61.44,0c16.97,0,32.33,6.88,43.44,18c11.12,11.12,18,26.48,18,43.44c0,16.97-6.88,32.33-18,43.44 c-11.12,11.12-26.48,18-43.44,18c-16.97,0-32.33-6.88-43.44-18C6.88,93.77,0,78.41,0,61.44C0,44.47,6.88,29.11,18,18 C29.11,6.88,44.47,0,61.44,0L61.44,0z M42.3,39.47h13.59v43.95l-13.59,0V39.47L42.3,39.47L42.3,39.47z M66.99,39.47h13.59v43.95 l-13.59,0V39.47L66.99,39.47L66.99,39.47z M97.42,25.46c-9.21-9.21-21.93-14.9-35.98-14.9c-14.05,0-26.78,5.7-35.98,14.9 c-9.21,9.21-14.9,21.93-14.9,35.98s5.7,26.78,14.9,35.98c9.21,9.21,21.93,14.9,35.98,14.9c14.05,0,26.78-5.7,35.98-14.9 c9.21-9.21,14.9-21.93,14.9-35.98S106.63,34.66,97.42,25.46L97.42,25.46z%27/%3E%3C/g%3E%3C/svg%3E";
-
-/***/ }),
-
-/***/ "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 512 512%27 style=%27enable-background:new 0 0 512 512;%27 xml:space=%27preserve%27%3E%3Cpath d=%27M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658 c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499 c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737 C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861 c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328 c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956 h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307 c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77 c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743 C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738 c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741 c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z%27/%3E%3Cpath style=%27fill:%23FFB8A7;%27 d=%27M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741 c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738 c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684 c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773 S234.694,199.684,242.3,199.684z%27/%3E%3Cpath style=%27fill:%23FF5F7B;%27 d=%27M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347 c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771 c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z%27/%3E%3Ccircle cx=%27242.293%27 cy=%27213.457%27 r=%2713.773%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216 c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233 c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z%27/%3E%3Cpath d=%27M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928 c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876 c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325 c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971 c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233 c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216 c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326 c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895 c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z%27/%3E%3Cpath d=%27M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904 c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559 c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474 c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325 C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221 c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278 c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607 C369.62,69.92,386.503,35.316,402.629,30.157z%27/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 512 512%27 style=%27enable-background:new 0 0 512 512;%27 xml:space=%27preserve%27%3E%3Cpath d=%27M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658 c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499 c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737 C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861 c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328 c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956 h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307 c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77 c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743 C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738 c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741 c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z%27/%3E%3Cpath style=%27fill:%23FFB8A7;%27 d=%27M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741 c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738 c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684 c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773 S234.694,199.684,242.3,199.684z%27/%3E%3Cpath style=%27fill:%23FF5F7B;%27 d=%27M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347 c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771 c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z%27/%3E%3Ccircle cx=%27242.293%27 cy=%27213.457%27 r=%2713.773%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216 c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233 c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z%27/%3E%3Cpath d=%27M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928 c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876 c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325 c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971 c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233 c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216 c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326 c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895 c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z%27/%3E%3Cpath d=%27M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904 c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559 c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474 c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325 C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221 c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278 c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607 C369.62,69.92,386.503,35.316,402.629,30.157z%27/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = "data:image/svg+xml,%3Csvg version=%271.1%27 id=%27Layer_1%27 xmlns=%27http://www.w3.org/2000/svg%27 xmlns:xlink=%27http://www.w3.org/1999/xlink%27 x=%270px%27 y=%270px%27 viewBox=%270 0 512 512%27 style=%27enable-background:new 0 0 512 512;%27 xml:space=%27preserve%27%3E%3Cpath d=%27M357.225,231.523l-28.49-23.484l22.73-45.609c2.832-5.681,1.413-12.559-3.431-16.658 c-4.846-4.102-11.865-4.356-16.997-0.623l-27.827,20.244c-20.463-30.995-55.586-51.499-95.425-51.499 c-65.137,0-111.058,45.664-114.267,113.634c-1.613,34.151-7.628,60.413-14.857,80.614c-0.809,0.244-1.618,0.487-2.419,0.737 C24.939,324.77,0,343.442,0,365.958c0,22.518,24.653,41.19,75.955,57.082c12.263,3.798,26.326,7.205,38.377,10.04v63.861 c0,7.606,6.74,13.773,14.346,13.773h84.357c7.606,0,13.773-6.167,13.773-13.773s-6.167-13.772-13.773-13.772h-14.346v-42.328 c30.988-3.658,57.373-17.396,72.457-37.725c6.652-8.964,10.941-18.944,12.352-29.237c19.609-32.76,33.09-75.055,37.208-117.956 h27.759c5.812,0,10.999-3.648,12.962-9.119C363.389,241.334,361.707,235.221,357.225,231.523z M183.05,414.307 c-20.831,0-61.408-6.038-98.659-17.577c-47.198-14.621-56.846-27.989-56.846-30.771c0-2.779,9.648-16.148,56.848-30.77 c37.251-11.54,77.828-17.577,98.659-17.577c39.894,0,73.597,22.139,73.597,48.347c0,7.206-2.469,14.184-7.336,20.743 C236.868,403.471,210.859,414.307,183.05,414.307z M207.784,141.439c47.827,0,86.738,38.911,86.738,86.738 c0,36.029-7.587,72.889-20.628,104.079c-5.194-7.933-12.276-15.182-21.084-21.447c-18.813-13.375-43.587-20.741-69.759-20.741 c-18.932,0-46.036,3.768-72.836,9.806c5.373-19.404,9.484-42.807,10.817-71.049C123.577,174.923,156.819,141.439,207.784,141.439z M141.876,438.176c10.329,1.613,20.659,2.744,29.267,3.293v41.7h-29.267V438.176z%27/%3E%3Cpath style=%27fill:%23FFB8A7;%27 d=%27M110.216,299.874c26.798-6.038,53.902-9.806,72.836-9.806c26.173,0,50.948,7.367,69.76,20.741 c8.808,6.265,15.89,13.514,21.084,21.447c13.039-31.19,20.628-68.05,20.628-104.079c0-47.827-38.911-86.738-86.738-86.738 c-50.965,0-84.207,33.484-86.753,87.387C119.699,257.066,115.589,280.469,110.216,299.874z M242.3,199.684 c7.606,0,13.773,6.167,13.773,13.773c0,7.606-6.167,13.772-13.773,13.772s-13.773-6.167-13.773-13.773 S234.694,199.684,242.3,199.684z%27/%3E%3Cpath style=%27fill:%23FF5F7B;%27 d=%27M249.312,386.701c4.867-6.559,7.336-13.537,7.336-20.743c0-26.207-33.703-48.347-73.597-48.347 c-20.831,0-61.408,6.038-98.659,17.577c-47.198,14.621-56.846,27.991-56.846,30.77c0,2.78,9.648,16.15,56.848,30.771 c37.251,11.54,77.828,17.577,98.659,17.577C210.859,414.307,236.868,403.471,249.312,386.701z%27/%3E%3Ccircle cx=%27242.293%27 cy=%27213.457%27 r=%2713.773%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M477.414,191.276c-1.326-0.424-2.569-0.618-3.727-0.618c-2.934,0-5.323,1.252-7.098,3.216 c-0.64,0.711-1.506,1.066-2.372,1.066c-0.842,0-1.687-0.334-2.333-1c-1.842-1.901-4.156-3.233-7.062-3.233 c-1.062,0-2.202,0.177-3.429,0.57c-7.527,2.408-15.406,18.562,13.012,36.693C492.82,209.84,484.939,193.685,477.414,191.276z%27/%3E%3Cpath d=%27M511.659,196.961c-1.947-14.988-12.094-27.517-25.851-31.92c-4.011-1.281-8.085-1.928-12.122-1.928 c-3.297,0-6.516,0.424-9.601,1.246c-2.999-0.79-6.105-1.196-9.262-1.196c-3.942,0-7.917,0.63-11.815,1.876 c-13.766,4.405-23.916,16.933-25.863,31.923c-1.501,11.565,0.714,33.987,32.441,54.231c4.517,2.882,9.668,4.325,14.816,4.325 c5.149,0,10.297-1.441,14.816-4.325C510.945,230.948,513.16,208.526,511.659,196.961z M464.404,227.971 c-28.418-18.132-20.538-34.287-13.012-36.693c1.227-0.393,2.367-0.57,3.429-0.57c2.906,0,5.22,1.331,7.062,3.233 c0.646,0.666,1.489,1,2.333,1c0.866,0,1.732-0.355,2.372-1.066c1.775-1.966,4.164-3.216,7.098-3.216 c1.159,0,2.403,0.195,3.727,0.618C484.939,193.685,492.82,209.84,464.404,227.971z%27/%3E%3Cpath style=%27fill:%23D21E1E;%27 d=%27M430.498,108.764c60.876-38.842,43.995-73.447,27.874-78.607c-2.837-0.906-5.502-1.326-7.986-1.326 c-6.433,0-11.645,2.806-15.475,7.194c-1.302,1.489-3.13,2.278-4.936,2.278c-1.592,0-3.169-0.611-4.352-1.895 c-4.028-4.362-9.14-7.473-15.646-7.473c-2.274,0-4.719,0.38-7.348,1.221C386.503,35.316,369.62,69.92,430.498,108.764z%27/%3E%3Cpath d=%27M445.315,131.984c19.767-12.612,34.495-26.3,43.779-40.689c11.88-18.416,12.779-34.583,11.44-44.904 c-2.605-20.068-15.857-36.738-33.762-42.469c-5.483-1.751-10.989-2.636-16.384-2.636c-7.219,0-14.136,1.57-20.426,4.559 c-6.215-2.942-12.938-4.455-19.984-4.455c-5.191,0-10.483,0.85-15.732,2.527c-17.92,5.733-31.176,22.404-33.782,42.474 c-1.339,10.321-0.444,26.488,11.44,44.904c9.284,14.389,24.012,28.079,43.779,40.689c4.517,2.882,9.668,4.325,14.818,4.325 C435.649,136.309,440.796,134.868,445.315,131.984z M402.629,30.157c2.629-0.84,5.073-1.221,7.348-1.221 c6.504,0,11.617,3.111,15.646,7.473c1.184,1.283,2.761,1.895,4.352,1.895c1.806,0,3.634-0.788,4.936-2.278 c3.832-4.388,9.042-7.194,15.475-7.194c2.482,0,5.147,0.418,7.986,1.326c16.119,5.16,33.002,39.765-27.874,78.607 C369.62,69.92,386.503,35.316,402.629,30.157z%27/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E";
-
-/***/ }),
-
-/***/ "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27 viewBox=%270 0 16 16%27%3E%3Cpath fill=%27orange%27 fill-rule=%27evenodd%27 d=%27M12 8.02c0 1.09-.45 2.09-1.17 2.83l-.67-.67c.55-.56.89-1.31.89-2.16 0-.85-.34-1.61-.89-2.16l.67-.67A3.99 3.99 0 0 1 12 8.02zM7.72 2.28L4 6H2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2l3.72 3.72c.47.47 1.28.14 1.28-.53V2.81c0-.67-.81-1-1.28-.53zm5.94.08l-.67.67a6.996 6.996 0 0 1 2.06 4.98c0 1.94-.78 3.7-2.06 4.98l.67.67A7.973 7.973 0 0 0 16 8c0-2.22-.89-4.22-2.34-5.66v.02zm-1.41 1.41l-.69.67a5.05 5.05 0 0 1 1.48 3.58c0 1.39-.56 2.66-1.48 3.56l.69.67A5.97 5.97 0 0 0 14 8.02c0-1.65-.67-3.16-1.75-4.25z%27/%3E%3C/svg%3E":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27 viewBox=%270 0 16 16%27%3E%3Cpath fill=%27orange%27 fill-rule=%27evenodd%27 d=%27M12 8.02c0 1.09-.45 2.09-1.17 2.83l-.67-.67c.55-.56.89-1.31.89-2.16 0-.85-.34-1.61-.89-2.16l.67-.67A3.99 3.99 0 0 1 12 8.02zM7.72 2.28L4 6H2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2l3.72 3.72c.47.47 1.28.14 1.28-.53V2.81c0-.67-.81-1-1.28-.53zm5.94.08l-.67.67a6.996 6.996 0 0 1 2.06 4.98c0 1.94-.78 3.7-2.06 4.98l.67.67A7.973 7.973 0 0 0 16 8c0-2.22-.89-4.22-2.34-5.66v.02zm-1.41 1.41l-.69.67a5.05 5.05 0 0 1 1.48 3.58c0 1.39-.56 2.66-1.48 3.56l.69.67A5.97 5.97 0 0 0 14 8.02c0-1.65-.67-3.16-1.75-4.25z%27/%3E%3C/svg%3E ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2720%27 height=%2720%27 viewBox=%270 0 16 16%27%3E%3Cpath fill=%27orange%27 fill-rule=%27evenodd%27 d=%27M12 8.02c0 1.09-.45 2.09-1.17 2.83l-.67-.67c.55-.56.89-1.31.89-2.16 0-.85-.34-1.61-.89-2.16l.67-.67A3.99 3.99 0 0 1 12 8.02zM7.72 2.28L4 6H2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h2l3.72 3.72c.47.47 1.28.14 1.28-.53V2.81c0-.67-.81-1-1.28-.53zm5.94.08l-.67.67a6.996 6.996 0 0 1 2.06 4.98c0 1.94-.78 3.7-2.06 4.98l.67.67A7.973 7.973 0 0 0 16 8c0-2.22-.89-4.22-2.34-5.66v.02zm-1.41 1.41l-.69.67a5.05 5.05 0 0 1 1.48 3.58c0 1.39-.56 2.66-1.48 3.56l.69.67A5.97 5.97 0 0 0 14 8.02c0-1.65-.67-3.16-1.75-4.25z%27/%3E%3C/svg%3E";
-
-/***/ }),
-
-/***/ "./src/js/entry.js?cfda":
+/***/ "./src/js/entry.ts":
 /*!*************************!*\
-  !*** ./src/js/entry.js ***!
+  !*** ./src/js/entry.ts ***!
   \*************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "asset/.js";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
+/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _index_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../index.html */ "./src/index.html");
+/* harmony import */ var _less_entry_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../less/entry.less */ "./src/less/entry.less");
+/* harmony import */ var _utils_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/router */ "./src/js/utils/router.ts");
+
+
+
+
+(0,_utils_router__WEBPACK_IMPORTED_MODULE_3__["default"])();
+
 
 /***/ }),
 
-/***/ "./src/img/svg/question-mark.svg":
-/*!***************************************!*\
-  !*** ./src/img/svg/question-mark.svg ***!
-  \***************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/js/markup/create-cars-list.ts":
+/*!*******************************************!*\
+  !*** ./src/js/markup/create-cars-list.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "img/question-mark.svg";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createCarsList": () => (/* binding */ createCarsList)
+/* harmony export */ });
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.ts");
+/* harmony import */ var _create_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create-icons */ "./src/js/markup/create-icons.ts");
+/* harmony import */ var _create_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-pagination */ "./src/js/markup/create-pagination.ts");
+/* harmony import */ var _start_stop_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./start-stop-form */ "./src/js/markup/start-stop-form.ts");
+
+
+
+
+function createCarsList(carsList, paginatedData, amountPages) {
+    return `<section class="cars">
+        <h2 class="cars__amount">IN GARAGE: ${carsList.length} cars</h2>
+        ${(0,_create_pagination__WEBPACK_IMPORTED_MODULE_2__.createPagination)(amountPages)}
+        <ul class="cars-list">
+        ${paginatedData.length ? paginatedData.map(({ name, color, id }) => `<li class="cars-list__item list-item list-item-${id}">
+          ${_utils_const__WEBPACK_IMPORTED_MODULE_0__.BTNS_VALUES.map((type) => `<button class="list-item__btn" name="${type}-btn" value="${id}">${type.toUpperCase()}</button>`).join('')}
+            <div class="list-item__name">${name}</div>
+            ${(0,_create_icons__WEBPACK_IMPORTED_MODULE_1__.createCarIcon)(color, _utils_const__WEBPACK_IMPORTED_MODULE_0__.CAR_ICON_WIDTH_DEFAULT, _utils_const__WEBPACK_IMPORTED_MODULE_0__.CAR_ICON_HEIGHT_DEFAULT, id)}
+            ${(0,_start_stop_form__WEBPACK_IMPORTED_MODULE_3__.startStopBtns)(id)}
+            <div class="winners-message winners-message-${id}"></div>
+            ${(0,_create_icons__WEBPACK_IMPORTED_MODULE_1__.createFinishFlagIcon)()}
+          </li>`).join('') : _utils_const__WEBPACK_IMPORTED_MODULE_0__.EMPTY_CARSLIST}
+        </ul>
+      </section>`;
+}
+
 
 /***/ }),
 
-/***/ "./src/img/svg/rs-school-icon.svg":
+/***/ "./src/js/markup/create-color-name.ts":
+/*!********************************************!*\
+  !*** ./src/js/markup/create-color-name.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createColorName": () => (/* binding */ createColorName)
+/* harmony export */ });
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.ts");
+/* harmony import */ var _utils_local_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/local-storage */ "./src/js/utils/local-storage.ts");
+
+
+function createColorName() {
+    const createValue = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.createCarValue);
+    const updateValue = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.updateCarValue);
+    const createColor = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.createCarColor);
+    const updateColor = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.updateCarColor);
+    const createColorOrDefault = createColor || _utils_const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_COLOR;
+    const updateColorOrDefault = updateColor || _utils_const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_COLOR;
+    return `<section class="create-section">
+        ${['create', 'update'].map((word) => `<form class="${word}-section__${word}-car ${word}-car">
+        <label>
+          <input class="${word}-car__name-input" type="text" placeholder="Type name of your car" value="${word === 'create' ? createValue : updateValue}" name="${word}-car-name"/><span class="create-update-name-label"></span></label>
+          <input class="${word}-car__color-input" type="color" value="${word === 'create' ? createColorOrDefault : updateColorOrDefault}" name="${word}-car-color"/>
+          
+          <button class="${word}-car__btn" type="submit">${word.toUpperCase()}</button>
+        </form>`).join('')}
+        <form class="create-section__btns">
+        <button class="reset__btn" type="button" name="reset">RESET</button>
+        <button class="race__btn" type="button" name="race">RACE</button>
+        <button class="random-cars__btn" type="button" name="generate">GENERATE CARS</button>
+        </form>
+      </section>`;
+}
+
+
+/***/ }),
+
+/***/ "./src/js/markup/create-header.ts":
 /*!****************************************!*\
-  !*** ./src/img/svg/rs-school-icon.svg ***!
+  !*** ./src/js/markup/create-header.ts ***!
   \****************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "img/rs-school-icon.svg";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createHeader": () => (/* binding */ createHeader)
+/* harmony export */ });
+function createHeader() {
+    return `<header class="header">
+      <nav class="header__nav header-nav">
+        <button class="header-nav__nav-link garage" type="button">Garage</button>
+        <button class="header-nav__nav-link winners" type="button">Winners</button>
+      </nav>
+    </header>`;
+}
+
 
 /***/ }),
 
-/***/ "./src/audio/fail.mp3":
-/*!****************************!*\
-  !*** ./src/audio/fail.mp3 ***!
-  \****************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/js/markup/create-icons.ts":
+/*!***************************************!*\
+  !*** ./src/js/markup/create-icons.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "audio/fail.mp3";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createAscendingIcon": () => (/* binding */ createAscendingIcon),
+/* harmony export */   "createCarIcon": () => (/* binding */ createCarIcon),
+/* harmony export */   "createDescendingIcon": () => (/* binding */ createDescendingIcon),
+/* harmony export */   "createFinishFlagIcon": () => (/* binding */ createFinishFlagIcon)
+/* harmony export */ });
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.ts");
+
+function createCarIcon(color = "blue", width = _utils_const__WEBPACK_IMPORTED_MODULE_0__.CAR_ICON_WIDTH_DEFAULT, height = _utils_const__WEBPACK_IMPORTED_MODULE_0__.CAR_ICON_HEIGHT_DEFAULT, id) {
+    return `<svg fill="${color}" height="${height}" width="${width}" id="car-${id}" class="car-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511 511" xml:space="preserve" transform="matrix(1, 0, 0, 1, 0, 0)">
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="SVGRepo_iconCarrier"> <g> <path d="M119.5,384c-4.142,0-7.5,3.358-7.5,7.5c0,9.098-7.402,16.5-16.5,16.5S79,400.598,79,391.5S86.402,375,95.5,375 c4.142,0,7.5-3.358,7.5-7.5s-3.358-7.5-7.5-7.5C78.131,360,64,374.131,64,391.5S78.131,423,95.5,423s31.5-14.131,31.5-31.5 C127,387.358,123.642,384,119.5,384z"/> <path d="M439.5,384c-4.142,0-7.5,3.358-7.5,7.5c0,9.098-7.402,16.5-16.5,16.5s-16.5-7.402-16.5-16.5s7.402-16.5,16.5-16.5 c4.142,0,7.5-3.358,7.5-7.5s-3.358-7.5-7.5-7.5c-17.369,0-31.5,14.131-31.5,31.5s14.131,31.5,31.5,31.5s31.5-14.131,31.5-31.5 C447,387.358,443.642,384,439.5,384z"/> <path d="M447.5,256h-16c-4.142,0-7.5,3.358-7.5,7.5s3.358,7.5,7.5,7.5h16c4.142,0,7.5-3.358,7.5-7.5S451.642,256,447.5,256z"/> <path d="M327.5,320h-144c-4.142,0-7.5,3.358-7.5,7.5s3.358,7.5,7.5,7.5h144c4.142,0,7.5-3.358,7.5-7.5S331.642,320,327.5,320z"/> <path d="M471.513,224H371.038l-68.199-82.764c-0.077-0.094-0.157-0.186-0.239-0.275c-6.198-6.817-14.583-11.219-23.6-12.537V95.5 c0-17.369-14.131-31.5-31.5-31.5H215v-0.5c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5V64h-41v-0.5c0-4.142-3.358-7.5-7.5-7.5 s-7.5,3.358-7.5,7.5V64h-32.5C94.131,64,80,78.131,80,95.5v32.537c-13.185,0.383-25.202,7.168-32.316,18.347 c-0.068,0.107-0.134,0.217-0.197,0.328L6.061,219.793C2.095,226.095,0,233.356,0,240.805V327.5 c0,15.285,9.017,29.334,22.972,35.791c2.002,0.927,4.312,0.925,6.311-0.006c1.829-0.85,3.221-2.4,3.894-4.285h7.798 C35.282,368.514,32,379.629,32,391.5c0,35.014,28.486,63.5,63.5,63.5s63.5-28.486,63.5-63.5c0-11.871-3.282-22.986-8.975-32.5 h7.775c0.19,0.718,0.375,1.437,0.54,2.162c0.776,3.415,3.812,5.838,7.313,5.838h179.691c3.502,0,6.538-2.423,7.313-5.838 c0.165-0.725,0.35-1.444,0.54-2.162h7.775c-5.693,9.514-8.975,20.629-8.975,32.5c0,35.014,28.486,63.5,63.5,63.5 s63.5-28.486,63.5-63.5c0-11.871-3.282-22.986-8.975-32.5h7.775c0.19,0.718,0.375,1.437,0.54,2.162 c0.776,3.415,3.812,5.838,7.313,5.838h1.823C500.448,367,511,356.447,511,343.477v-79.99C511,241.714,493.286,224,471.513,224z M496,288h-8.5c-4.687,0-8.5-3.813-8.5-8.5s3.813-8.5,8.5-8.5h8.5V288z M304.563,166.916L351.602,224H116.042l24.522-45.65 C145.1,171.238,152.822,167,161.27,167H303.5C303.862,167,304.215,166.966,304.563,166.916z M247.5,79 c9.098,0,16.5,7.402,16.5,16.5V128h-49V79H247.5z M200,79v49h-41V79H200z M111.5,79H144v49H95V95.5C95,86.402,102.402,79,111.5,79z M53.401,166.696c0.667,0.194,1.37,0.304,2.099,0.304h35.457l-24.535,45.671C61.896,219.769,54.187,224,45.754,224H20.918 L53.401,166.696z M95.5,440C68.757,440,47,418.243,47,391.5S68.757,343,95.5,343s48.5,21.757,48.5,48.5S122.243,440,95.5,440z M137.579,344c-11.213-9.944-25.948-16-42.079-16s-30.866,6.056-42.079,16H39.29c11.21-19.986,32.578-33,56.21-33 c14.913,0,28.908,4.948,40.474,14.31c6.412,5.19,11.746,11.568,15.741,18.69H137.579z M415.5,440c-26.743,0-48.5-21.757-48.5-48.5 s21.757-48.5,48.5-48.5s48.5,21.757,48.5,48.5S442.243,440,415.5,440z M457.579,344c-11.213-9.944-25.948-16-42.079-16 s-30.866,6.056-42.079,16h-14.136c3.995-7.123,9.329-13.5,15.741-18.69C386.592,315.948,400.587,311,415.5,311 s28.908,4.948,40.474,14.31c6.412,5.19,11.746,11.568,15.741,18.69H457.579z M491.139,351.172 c-4.717-14.635-13.689-27.777-25.728-37.521C451.35,302.269,433.624,296,415.5,296s-35.85,6.269-49.911,17.651 c-12.266,9.928-21.347,23.382-25.99,38.349H171.401c-4.643-14.967-13.724-28.421-25.99-38.349C131.35,302.269,113.624,296,95.5,296 c-32.221,0-61.034,19.614-73.261,48.782C17.694,340.261,15,334.063,15,327.5V271h384.5c4.142,0,7.5-3.358,7.5-7.5 s-3.358-7.5-7.5-7.5H15v-15.195c0-0.611,0.026-1.22,0.071-1.826C15.214,238.986,15.355,239,15.5,239h30.254 c13.715,0,26.243-6.943,33.512-18.574c0.087-0.139,0.169-0.281,0.247-0.425l30.595-56.951c1.249-2.324,1.184-5.134-0.17-7.398 S106.139,152,103.5,152H62.113c4.661-5.68,11.587-9,19.062-9h192.127c6.858,0,13.44,2.887,18.086,7.926l0.885,1.074H161.27 c-13.729,0-26.271,6.951-33.547,18.594c-0.087,0.139-0.169,0.281-0.247,0.426l-30.582,56.931c-1.249,2.325-1.184,5.134,0.17,7.398 S100.861,239,103.5,239h264h104.013c10.891,0,20.141,7.149,23.312,17H487.5c-12.958,0-23.5,10.542-23.5,23.5s10.542,23.5,23.5,23.5 h8.5v40.477C496,346.866,494.011,349.8,491.139,351.172z"/> </g><span>${id}</span> </g>
+</svg>`;
+}
+function createFinishFlagIcon() {
+    return `<svg
+            class="list-item__svg-finish"
+            width="100"
+              id="finish-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <rect x="256" y="160" fill="black" width="80" height="80" />
+                  <rect x="32" y="80" fill="black" width="64" height="80" />
+                  <rect x="96" y="160" fill="black" width="80" height="80" />
+                  <rect x="416" y="160" fill="black" width="64" height="80" />
+                  <rect x="336" y="80" fill="black" width="80" height="80" />
+                  <rect x="176" y="80" fill="black" width="80" height="80" />
+                </g>
+              </g>
+            </svg>`;
+}
+function createAscendingIcon() {
+    return `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0809 7.28641L12.4345 6.93286L12.788 7.28641L17 11.4984L16.2929 12.2055L12.9345 8.84707V16.9999H11.9345V8.84707L8.57605 12.2055L7.86895 11.4984L12.0809 7.28641Z" fill="#000000"/>
+</svg>`;
+}
+function createDescendingIcon() {
+    return `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0809 7.28641L12.4345 6.93286L12.788 7.28641L17 11.4984L16.2929 12.2055L12.9345 8.84707V16.9999H11.9345V8.84707L8.57605 12.2055L7.86895 11.4984L12.0809 7.28641Z" fill="#000000"/>
+</svg>`;
+}
+
 
 /***/ }),
 
-/***/ "./src/audio/grig-morning.mp3":
+/***/ "./src/js/markup/create-loader.ts":
+/*!****************************************!*\
+  !*** ./src/js/markup/create-loader.ts ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createLoader": () => (/* binding */ createLoader)
+/* harmony export */ });
+function createLoader() {
+    return `<div class="lds-hourglass"></div>`;
+}
+
+
+/***/ }),
+
+/***/ "./src/js/markup/create-pagination.ts":
+/*!********************************************!*\
+  !*** ./src/js/markup/create-pagination.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createPagination": () => (/* binding */ createPagination)
+/* harmony export */ });
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.ts");
+/* harmony import */ var _utils_local_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/local-storage */ "./src/js/utils/local-storage.ts");
+/* harmony import */ var _utils_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/pagination */ "./src/js/utils/pagination.ts");
+
+
+
+function createPagination(amountPages) {
+    const page = (0,_utils_pagination__WEBPACK_IMPORTED_MODULE_2__.getPlace)() ? +(0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumber) : +(0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumberWinners);
+    const isFirstPage = page === 1 ? 'disabled' : '';
+    const isLastPage = page < amountPages ? '' : 'disabled';
+    const isOnePage = amountPages === 1 ? 'disabled' : '';
+    return `<section class="pagination">
+          <form class="pagination__page-btns page-btns">
+            <button
+              class="page-btns__label"
+              type="button"
+              value="previous"
+              name="prev-btn"
+              ${isFirstPage || isOnePage}
+            >
+              <
+            </button>
+            <input
+              class="page-btns__radio visually-hidden"
+              id="number-page-input"
+              name="page-btns"
+              type="radio"
+              value=""
+            />
+            <button for="number-page-input" class="page-btns__label" ${isOnePage}>${page}</button>
+            <button
+              class="page-btns__label"
+              type="button"
+              value="next"
+              name="next-btn"
+              ${isLastPage || isOnePage}
+            >
+              >
+            </button>
+          </form>
+        </section>`;
+}
+
+
+/***/ }),
+
+/***/ "./src/js/markup/create-winners-list.ts":
+/*!**********************************************!*\
+  !*** ./src/js/markup/create-winners-list.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createWinnersList": () => (/* binding */ createWinnersList)
+/* harmony export */ });
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.ts");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/utils */ "./src/js/utils/utils.ts");
+/* harmony import */ var _create_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-icons */ "./src/js/markup/create-icons.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+function createWinnersList(winners = []) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const responseCars = yield fetch(`${_utils_const__WEBPACK_IMPORTED_MODULE_0__.ROOT_URL}/${_utils_const__WEBPACK_IMPORTED_MODULE_0__.URL_ROUTES.garage}`);
+        const cars = yield responseCars.json();
+        const { sortOrder, sortType } = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_1__.getSearchParams)();
+        const ascDescToggler = sortOrder === _utils_const__WEBPACK_IMPORTED_MODULE_0__.SEARCH_PARAMS.asc ? _utils_const__WEBPACK_IMPORTED_MODULE_0__.SEARCH_PARAMS.desc : _utils_const__WEBPACK_IMPORTED_MODULE_0__.SEARCH_PARAMS.asc;
+        const iconToggler = sortOrder === _utils_const__WEBPACK_IMPORTED_MODULE_0__.SEARCH_PARAMS.asc ? (0,_create_icons__WEBPACK_IMPORTED_MODULE_2__.createAscendingIcon)() : (0,_create_icons__WEBPACK_IMPORTED_MODULE_2__.createDescendingIcon)();
+        const isWins = sortType === _utils_const__WEBPACK_IMPORTED_MODULE_0__.SEARCH_PARAMS.wins;
+        return `<secion class="winners">
+    <ul class="winners-list">
+    <li class="winners-list__item">
+    <div class="winners-list-item__number">Number</div>
+    <div class="winners-list-item__car">Car</div>
+    <div class="winners-list-item__name">Name</div>
+    <button class="winners-list-item__wins-count" type="button" value="${ascDescToggler}">Wins ${isWins ? iconToggler : ''}</button>
+    <button class="winners-list-item__time" type="button" value="${ascDescToggler}">Best-time ${!isWins ? iconToggler : ''}</button>
+    </li>
+    ${winners.length ? winners.map(({ wins, time, id }, index) => {
+            const carIds = cars.map(({ id }) => id);
+            if (carIds.includes(id)) {
+                const [{ name, color }] = cars.filter((car) => car.id === id);
+                return `<li class="winners-list__item" id="${id}">
+    <div class="winners-list-item__number">${++index}</div>
+    <div class="winners-list-item__car">${(0,_create_icons__WEBPACK_IMPORTED_MODULE_2__.createCarIcon)(color, _utils_const__WEBPACK_IMPORTED_MODULE_0__.CAR_ICON_WIDTH_SMALL, _utils_const__WEBPACK_IMPORTED_MODULE_0__.CAR_ICON_HEIGHT_SMALL, id)}</div>
+    <div class="winners-list-item__name">${name}</div>
+    <div class="winners-list-item__wins-count">${wins}</div>
+    <div class="winners-list-item__time">${time}</div></li>`;
+            }
+        }).join("") : _utils_const__WEBPACK_IMPORTED_MODULE_0__.EMPTY_WINNERSLIST}
+    </ul>
+    </section>`;
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/js/markup/start-stop-form.ts":
+/*!******************************************!*\
+  !*** ./src/js/markup/start-stop-form.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "startStopBtns": () => (/* binding */ startStopBtns)
+/* harmony export */ });
+function startStopBtns(id) {
+    return `<form class="list-item__start-stop start-stop">
+  <button class="start-stop__label start-btn-${id}" type="button" name="start-stop" value="start-${id}">Start</button>
+  <button class="start-stop__label stop-btn-${id} stop-btn" type="button" name="start-stop" value="stop-${id}" disabled>Stop</button>
+            </form>`;
+}
+
+
+/***/ }),
+
+/***/ "./src/js/nodes/actions-with-nodes.ts":
+/*!********************************************!*\
+  !*** ./src/js/nodes/actions-with-nodes.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "disableNodes": () => (/* binding */ disableNodes),
+/* harmony export */   "enableNodes": () => (/* binding */ enableNodes)
+/* harmony export */ });
+function disableNodes(generateCarsBtn, resetCarsBtn, startStopBtns, selectDeleteBtns) {
+    generateCarsBtn.disabled = true;
+    resetCarsBtn.disabled = true;
+    startStopBtns.forEach((btn) => btn.disabled = true);
+    selectDeleteBtns.forEach((btn) => btn.disabled = true);
+}
+function enableNodes(generateCarsBtn, resetCarsBtn, startStopBtns, selectDeleteBtns) {
+    generateCarsBtn.disabled = false;
+    resetCarsBtn.disabled = false;
+    startStopBtns.forEach((btn) => btn.disabled = false);
+    selectDeleteBtns.forEach((btn) => btn.disabled = false);
+}
+
+
+/***/ }),
+
+/***/ "./src/js/nodes/get-garage-nodes.ts":
+/*!******************************************!*\
+  !*** ./src/js/nodes/get-garage-nodes.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getGarageNodes": () => (/* binding */ getGarageNodes)
+/* harmony export */ });
+function getGarageNodes() {
+    const createCarForm = document.querySelector('.create-car');
+    const updateCarForm = document.querySelector('.update-car');
+    const createNameInput = document.querySelector('.create-car__name-input');
+    const createColorInput = document.querySelector('.create-car__color-input');
+    const updateNameInput = document.querySelector('.update-car__name-input');
+    const updateColorInput = document.querySelector('.update-car__color-input');
+    const carsListListener = document.querySelector('.cars-list');
+    const updateCarBtn = document.querySelector('.update-car__btn');
+    const raceResetGenerateBtns = document.querySelector('.create-section__btns');
+    const paginationBtns = document.querySelector('.page-btns');
+    const raceBtn = document.querySelector('.race__btn');
+    const startStopBtns = document.querySelectorAll('.start-stop__label');
+    const generateCarsBtn = document.querySelector('.random-cars__btn');
+    const resetCarsBtn = document.querySelector('.reset__btn');
+    const selectDeleteBtns = document.querySelectorAll('.list-item__btn');
+    const stopBtns = document.querySelectorAll('.stop-btn');
+    const garageLink = document.querySelector('.garage');
+    const winnersLink = document.querySelector('.winners');
+    const labelUpdateCar = document.querySelector('.create-update-name-label');
+    return {
+        createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateNameInput, updateColorInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns, stopBtns, garageLink, winnersLink, labelUpdateCar
+    };
+}
+
+
+/***/ }),
+
+/***/ "./src/js/nodes/get-nodes-by-id.ts":
+/*!*****************************************!*\
+  !*** ./src/js/nodes/get-nodes-by-id.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getIdNodes": () => (/* binding */ getIdNodes)
+/* harmony export */ });
+function getIdNodes(id) {
+    const stopBtn = document.querySelector(`.stop-btn-${id}`);
+    const startBtn = document.querySelector(`.start-btn-${id}`);
+    const carIcon = document.getElementById(`car-${id}`);
+    const winnersListItem = document.querySelector(`.list-item-${id}`);
+    const winnersMessage = document.querySelector(`.winners-message-${id}`);
+    return {
+        stopBtn,
+        startBtn,
+        carIcon,
+        winnersListItem,
+        winnersMessage,
+    };
+}
+
+
+/***/ }),
+
+/***/ "./src/js/nodes/get-winners-nodes.ts":
+/*!*******************************************!*\
+  !*** ./src/js/nodes/get-winners-nodes.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getWinnersNodes": () => (/* binding */ getWinnersNodes)
+/* harmony export */ });
+function getWinnersNodes() {
+    const winsBtn = document.querySelector(".winners-list-item__wins-count");
+    const timeBtn = document.querySelector('.winners-list-item__time');
+    return { winsBtn, timeBtn };
+}
+
+
+/***/ }),
+
+/***/ "./src/js/pages/create-garage.ts":
+/*!***************************************!*\
+  !*** ./src/js/pages/create-garage.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CreateGarage)
+/* harmony export */ });
+/* harmony import */ var _markup_create_cars_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../markup/create-cars-list */ "./src/js/markup/create-cars-list.ts");
+/* harmony import */ var _markup_create_color_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../markup/create-color-name */ "./src/js/markup/create-color-name.ts");
+/* harmony import */ var _markup_create_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../markup/create-header */ "./src/js/markup/create-header.ts");
+/* harmony import */ var _nodes_get_garage_nodes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../nodes/get-garage-nodes */ "./src/js/nodes/get-garage-nodes.ts");
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.ts");
+/* harmony import */ var _utils_async_functions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/async-functions */ "./src/js/utils/async-functions.ts");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/utils */ "./src/js/utils/utils.ts");
+/* harmony import */ var _utils_pagination__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/pagination */ "./src/js/utils/pagination.ts");
+/* harmony import */ var _utils_local_storage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/local-storage */ "./src/js/utils/local-storage.ts");
+/* harmony import */ var _nodes_actions_with_nodes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../nodes/actions-with-nodes */ "./src/js/nodes/actions-with-nodes.ts");
+/* harmony import */ var _utils_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/router */ "./src/js/utils/router.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+function CreateGarage() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const body = document.querySelector(".page");
+        const carsList = yield (0,_utils_async_functions__WEBPACK_IMPORTED_MODULE_5__.getCars)();
+        (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_8__.setDefaultPageToLocalStorage)(carsList.length);
+        const pageNumber = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_8__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_4__.LS_KEYS.pageNumber);
+        const { paginatedData, amountPages } = (0,_utils_pagination__WEBPACK_IMPORTED_MODULE_7__.getPaginatedData)(carsList, pageNumber);
+        (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.setRightPage)(pageNumber, amountPages);
+        body.innerHTML = `<main class="page-main">${(0,_markup_create_header__WEBPACK_IMPORTED_MODULE_2__.createHeader)()}${(0,_markup_create_color_name__WEBPACK_IMPORTED_MODULE_1__.createColorName)()}${(0,_markup_create_cars_list__WEBPACK_IMPORTED_MODULE_0__.createCarsList)(carsList, paginatedData, amountPages)}</main>`;
+        const { createCarForm, createNameInput, createColorInput, carsListListener, updateCarForm, updateColorInput, updateNameInput, updateCarBtn, raceResetGenerateBtns, paginationBtns, raceBtn, startStopBtns, generateCarsBtn, resetCarsBtn, selectDeleteBtns, stopBtns, garageLink, winnersLink, labelUpdateCar } = (0,_nodes_get_garage_nodes__WEBPACK_IMPORTED_MODULE_3__.getGarageNodes)();
+        garageLink.addEventListener('click', () => (0,_utils_router__WEBPACK_IMPORTED_MODULE_10__.pushState)(_utils_const__WEBPACK_IMPORTED_MODULE_4__.ROUTES.garage));
+        winnersLink.addEventListener('click', () => (0,_utils_router__WEBPACK_IMPORTED_MODULE_10__.pushState)(_utils_const__WEBPACK_IMPORTED_MODULE_4__.ROUTES.winners));
+        raceBtn === null || raceBtn === void 0 ? void 0 : raceBtn.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
+            (0,_nodes_actions_with_nodes__WEBPACK_IMPORTED_MODULE_9__.disableNodes)(generateCarsBtn, resetCarsBtn, startStopBtns, selectDeleteBtns);
+            const { topSpeeds, finished } = yield (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.getFinishedCars)(paginatedData);
+            const filterWastedCars = finished.filter(Boolean);
+            const { id, currentTime } = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.getTopSpeedRacer)(topSpeeds, filterWastedCars);
+            yield (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.sendOrCreateWinner)(id, currentTime);
+            (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.createSuccessMessage)(id, currentTime);
+            (0,_nodes_actions_with_nodes__WEBPACK_IMPORTED_MODULE_9__.enableNodes)(generateCarsBtn, resetCarsBtn, startStopBtns, selectDeleteBtns);
+        }));
+        createCarForm === null || createCarForm === void 0 ? void 0 : createCarForm.addEventListener('input', ({ target }) => {
+            if (target instanceof HTMLInputElement) {
+                const { value, name } = target;
+                (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.updateCarNameColor)(value, name);
+            }
+        });
+        createCarForm === null || createCarForm === void 0 ? void 0 : createCarForm.addEventListener("submit", (e) => __awaiter(this, void 0, void 0, function* () {
+            e.preventDefault();
+            const { value: name } = createNameInput;
+            const { value: color } = createColorInput;
+            yield (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.createCarFromForm)(name, color);
+        }));
+        carsListListener === null || carsListListener === void 0 ? void 0 : carsListListener.addEventListener("click", ({ target }) => __awaiter(this, void 0, void 0, function* () {
+            if (target instanceof HTMLButtonElement) {
+                const { name, value: id } = target;
+                yield (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.deleteSelectCar)(name, id, updateCarBtn, carsList, updateNameInput);
+                yield (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.startCar)(name, target);
+            }
+        }));
+        updateCarForm === null || updateCarForm === void 0 ? void 0 : updateCarForm.addEventListener('input', ({ target }) => {
+            if (target instanceof HTMLInputElement) {
+                const { value, name } = target;
+                (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.updateCarNameColor)(value, name);
+            }
+        });
+        updateCarForm === null || updateCarForm === void 0 ? void 0 : updateCarForm.addEventListener("submit", (e) => __awaiter(this, void 0, void 0, function* () {
+            e.preventDefault();
+            const { value: name } = updateNameInput;
+            const { value: color } = updateColorInput;
+            const carName = carsList.filter((car) => car.name.toLowerCase() === name.toLowerCase());
+            if (carName.length) {
+                const [{ id: carId }] = carName;
+                yield (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.updateCarFromForm)(name, color, carId, labelUpdateCar);
+            }
+            else {
+                labelUpdateCar.textContent = _utils_const__WEBPACK_IMPORTED_MODULE_4__.FAILED_SEARCH;
+                setTimeout(() => labelUpdateCar.textContent = '', 2000);
+            }
+        }));
+        raceResetGenerateBtns === null || raceResetGenerateBtns === void 0 ? void 0 : raceResetGenerateBtns.addEventListener("click", ({ target }) => __awaiter(this, void 0, void 0, function* () {
+            if (target instanceof HTMLButtonElement) {
+                const { name } = target;
+                yield (0,_utils_utils__WEBPACK_IMPORTED_MODULE_6__.generateResetCars)(name, stopBtns);
+            }
+        }));
+        paginationBtns === null || paginationBtns === void 0 ? void 0 : paginationBtns.addEventListener("click", ({ target }) => {
+            if (target instanceof HTMLButtonElement) {
+                const { value } = target;
+                (0,_utils_pagination__WEBPACK_IMPORTED_MODULE_7__.incrementDecrementPage)(value);
+            }
+        });
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/js/pages/create-winners.ts":
+/*!****************************************!*\
+  !*** ./src/js/pages/create-winners.ts ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CreateWinners)
+/* harmony export */ });
+/* harmony import */ var _markup_create_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../markup/create-header */ "./src/js/markup/create-header.ts");
+/* harmony import */ var _markup_create_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../markup/create-loader */ "./src/js/markup/create-loader.ts");
+/* harmony import */ var _markup_create_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../markup/create-pagination */ "./src/js/markup/create-pagination.ts");
+/* harmony import */ var _markup_create_winners_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../markup/create-winners-list */ "./src/js/markup/create-winners-list.ts");
+/* harmony import */ var _nodes_get_garage_nodes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../nodes/get-garage-nodes */ "./src/js/nodes/get-garage-nodes.ts");
+/* harmony import */ var _nodes_get_winners_nodes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../nodes/get-winners-nodes */ "./src/js/nodes/get-winners-nodes.ts");
+/* harmony import */ var _utils_async_functions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/async-functions */ "./src/js/utils/async-functions.ts");
+/* harmony import */ var _utils_const__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/const */ "./src/js/utils/const.ts");
+/* harmony import */ var _utils_local_storage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/local-storage */ "./src/js/utils/local-storage.ts");
+/* harmony import */ var _utils_pagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/pagination */ "./src/js/utils/pagination.ts");
+/* harmony import */ var _utils_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/router */ "./src/js/utils/router.ts");
+/* harmony import */ var _utils_search_params__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils/search-params */ "./src/js/utils/search-params.ts");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/utils */ "./src/js/utils/utils.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+function CreateWinners(sortParams = '') {
+    return __awaiter(this, void 0, void 0, function* () {
+        const body = document.querySelector(".page");
+        body.innerHTML = (0,_markup_create_loader__WEBPACK_IMPORTED_MODULE_1__.createLoader)();
+        const winners = yield (0,_utils_async_functions__WEBPACK_IMPORTED_MODULE_6__.getWinners)(sortParams);
+        const { searchParams } = (0,_utils_utils__WEBPACK_IMPORTED_MODULE_12__.getSearchParams)();
+        (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_8__.setDefaultPageToLocalStorage)(winners.length);
+        const pageNumberWinners = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_8__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_7__.LS_KEYS.pageNumberWinners);
+        const { paginatedData, amountPages } = (0,_utils_pagination__WEBPACK_IMPORTED_MODULE_9__.getPaginatedData)(winners, pageNumberWinners);
+        body.innerHTML = `<main class="page-main">
+    ${(0,_markup_create_header__WEBPACK_IMPORTED_MODULE_0__.createHeader)()}
+    ${(0,_markup_create_pagination__WEBPACK_IMPORTED_MODULE_2__.createPagination)(amountPages)}
+    ${yield (0,_markup_create_winners_list__WEBPACK_IMPORTED_MODULE_3__.createWinnersList)(paginatedData)}</main>`;
+        const { paginationBtns, garageLink, winnersLink } = (0,_nodes_get_garage_nodes__WEBPACK_IMPORTED_MODULE_4__.getGarageNodes)();
+        const { timeBtn, winsBtn } = (0,_nodes_get_winners_nodes__WEBPACK_IMPORTED_MODULE_5__.getWinnersNodes)();
+        garageLink.addEventListener('click', () => (0,_utils_router__WEBPACK_IMPORTED_MODULE_10__.pushState)(_utils_const__WEBPACK_IMPORTED_MODULE_7__.ROUTES.garage));
+        winnersLink.addEventListener('click', () => (0,_utils_router__WEBPACK_IMPORTED_MODULE_10__.pushState)(_utils_const__WEBPACK_IMPORTED_MODULE_7__.ROUTES.winners));
+        winsBtn === null || winsBtn === void 0 ? void 0 : winsBtn.addEventListener("click", ({ target }) => __awaiter(this, void 0, void 0, function* () {
+            if (target instanceof HTMLButtonElement) {
+                const { value } = target;
+                (0,_utils_search_params__WEBPACK_IMPORTED_MODULE_11__.setSortSearchParamsWinners)(searchParams, _utils_const__WEBPACK_IMPORTED_MODULE_7__.SEARCH_PARAMS.wins, value);
+            }
+        }));
+        timeBtn === null || timeBtn === void 0 ? void 0 : timeBtn.addEventListener("click", ({ target }) => __awaiter(this, void 0, void 0, function* () {
+            if (target instanceof HTMLButtonElement) {
+                const { value } = target;
+                (0,_utils_search_params__WEBPACK_IMPORTED_MODULE_11__.setSortSearchParamsWinners)(searchParams, _utils_const__WEBPACK_IMPORTED_MODULE_7__.SEARCH_PARAMS.time, value);
+            }
+        }));
+        paginationBtns === null || paginationBtns === void 0 ? void 0 : paginationBtns.addEventListener("click", ({ target }) => {
+            if (target instanceof HTMLButtonElement) {
+                const { value } = target;
+                (0,_utils_pagination__WEBPACK_IMPORTED_MODULE_9__.incrementDecrementPage)(value);
+            }
+        });
+        (0,_utils_router__WEBPACK_IMPORTED_MODULE_10__.hashListener)();
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/js/utils/animations.ts":
 /*!************************************!*\
-  !*** ./src/audio/grig-morning.mp3 ***!
+  !*** ./src/js/utils/animations.ts ***!
   \************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "audio/grig-morning.mp3";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getLengthOfParentContainer": () => (/* binding */ getLengthOfParentContainer)
+/* harmony export */ });
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.ts");
+
+function getLengthOfParentContainer() {
+    const li = document.querySelector('.list-item');
+    return Number(window.getComputedStyle(li).getPropertyValue('width').replace(/px/gi, '')) - _const__WEBPACK_IMPORTED_MODULE_0__.CAR_ICON_WIDTH_DEFAULT * 2;
+}
+
 
 /***/ }),
 
-/***/ "./src/audio/success.mp3":
+/***/ "./src/js/utils/async-functions.ts":
+/*!*****************************************!*\
+  !*** ./src/js/utils/async-functions.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createCar": () => (/* binding */ createCar),
+/* harmony export */   "createWinner": () => (/* binding */ createWinner),
+/* harmony export */   "deleteCar": () => (/* binding */ deleteCar),
+/* harmony export */   "deleteWinner": () => (/* binding */ deleteWinner),
+/* harmony export */   "getCars": () => (/* binding */ getCars),
+/* harmony export */   "getWinner": () => (/* binding */ getWinner),
+/* harmony export */   "getWinners": () => (/* binding */ getWinners),
+/* harmony export */   "receiveDriveMode": () => (/* binding */ receiveDriveMode),
+/* harmony export */   "sendCars": () => (/* binding */ sendCars),
+/* harmony export */   "startEngine": () => (/* binding */ startEngine),
+/* harmony export */   "stopEngine": () => (/* binding */ stopEngine),
+/* harmony export */   "updateCar": () => (/* binding */ updateCar),
+/* harmony export */   "updateWinner": () => (/* binding */ updateWinner)
+/* harmony export */ });
+/* harmony import */ var _markup_create_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../markup/create-loader */ "./src/js/markup/create-loader.ts");
+/* harmony import */ var _pages_create_garage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/create-garage */ "./src/js/pages/create-garage.ts");
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+function getCars() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const body = document.querySelector(".page");
+        body.innerHTML = (0,_markup_create_loader__WEBPACK_IMPORTED_MODULE_0__.createLoader)();
+        try {
+            const response = yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.garage}`);
+            return yield response.json();
+        }
+        catch (_a) {
+            body.innerHTML = _const__WEBPACK_IMPORTED_MODULE_2__.NETWORK_ERROR;
+        }
+    });
+}
+function createCar(carData) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.garage}`, {
+                method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP.post,
+                headers: _const__WEBPACK_IMPORTED_MODULE_2__.HEADERS_INFO,
+                body: JSON.stringify(carData),
+            });
+        }
+        catch (_a) { }
+    });
+}
+function deleteCar(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.garage}/${id}`, {
+                method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP["delete"],
+            });
+        }
+        catch (_a) { }
+    });
+}
+function updateCar(carData, id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.garage}/${id}`, {
+                method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP.put,
+                headers: _const__WEBPACK_IMPORTED_MODULE_2__.HEADERS_INFO,
+                body: JSON.stringify(carData),
+            });
+        }
+        catch (_a) { }
+    });
+}
+function getWinners(params = "") {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.winners}${params}`);
+            return yield response.json();
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                console.log(error.toString());
+            }
+        }
+    });
+}
+function sendCars(cars) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return Promise.all(cars.map((car) => createCar(car))).then(() => (0,_pages_create_garage__WEBPACK_IMPORTED_MODULE_1__["default"])());
+    });
+}
+function createWinner(winnersData) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.winners}`, {
+                method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP.post,
+                headers: _const__WEBPACK_IMPORTED_MODULE_2__.HEADERS_INFO,
+                body: JSON.stringify(winnersData),
+            });
+        }
+        catch (_a) { }
+    });
+}
+function startEngine(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.engine}?${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.id}=${id}&${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.status}=${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.started}`, { method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP.patch });
+            const data = yield response.json();
+            return data;
+        }
+        catch (_a) { }
+    });
+}
+function stopEngine(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.engine}?${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.id}=${id}&${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.status}=${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.stopped}`, {
+                method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP.patch,
+            });
+            return yield response.json();
+        }
+        catch (_a) { }
+    });
+}
+function receiveDriveMode(id, node, end, duration) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let animationId = 0;
+        const stopBtn = document.querySelector(`.stop-btn-${id}`);
+        const startBtn = document.querySelector(`.start-btn-${id}`);
+        function animatePosition(node, end, duration) {
+            let currentX = 104;
+            const framesCount = (duration / 1000) * 60;
+            const dx = (end - currentX) / framesCount;
+            const tick = () => {
+                currentX += dx;
+                node.style.transform = `translateX(${currentX}px)`;
+                if (currentX < end) {
+                    animationId = requestAnimationFrame(tick);
+                }
+            };
+            tick();
+        }
+        stopBtn === null || stopBtn === void 0 ? void 0 : stopBtn.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
+            yield stopEngine(id);
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                node.style.transform = 'translateX(0)';
+                stopBtn.disabled = true;
+                startBtn.disabled = false;
+            }
+        }));
+        animatePosition(node, end, duration);
+        try {
+            const response = yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.engine}?${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.id}=${id}&${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.status}=${_const__WEBPACK_IMPORTED_MODULE_2__.SEARCH_PARAMS.drive}`, { method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP.patch });
+            const { status } = response;
+            if (status === 500) {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+            }
+            else {
+                return Number(id);
+            }
+        }
+        catch (_a) { }
+    });
+}
+function getWinner(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.winners}/${id}`);
+            const data = yield response.json();
+            return { response, data };
+        }
+        catch (_a) {
+        }
+    });
+}
+function updateWinner(id, winnerData) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.winners}/${id}`, {
+                method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP.put,
+                headers: _const__WEBPACK_IMPORTED_MODULE_2__.HEADERS_INFO,
+                body: JSON.stringify(winnerData),
+            });
+        }
+        catch (_a) {
+        }
+    });
+}
+function deleteWinner(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield fetch(`${_const__WEBPACK_IMPORTED_MODULE_2__.ROOT_URL}/${_const__WEBPACK_IMPORTED_MODULE_2__.URL_ROUTES.winners}/${id}`, {
+                method: _const__WEBPACK_IMPORTED_MODULE_2__.METHODS_HTTP["delete"],
+            });
+        }
+        catch (_a) {
+        }
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/js/utils/const.ts":
 /*!*******************************!*\
-  !*** ./src/audio/success.mp3 ***!
+  !*** ./src/js/utils/const.ts ***!
   \*******************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "audio/success.mp3";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BTNS_VALUES": () => (/* binding */ BTNS_VALUES),
+/* harmony export */   "BTN_VALUES": () => (/* binding */ BTN_VALUES),
+/* harmony export */   "CAR_ICON_HEIGHT_DEFAULT": () => (/* binding */ CAR_ICON_HEIGHT_DEFAULT),
+/* harmony export */   "CAR_ICON_HEIGHT_SMALL": () => (/* binding */ CAR_ICON_HEIGHT_SMALL),
+/* harmony export */   "CAR_ICON_WIDTH_DEFAULT": () => (/* binding */ CAR_ICON_WIDTH_DEFAULT),
+/* harmony export */   "CAR_ICON_WIDTH_SMALL": () => (/* binding */ CAR_ICON_WIDTH_SMALL),
+/* harmony export */   "DEFAULT_AMOUNT_OF_ITEMS": () => (/* binding */ DEFAULT_AMOUNT_OF_ITEMS),
+/* harmony export */   "DEFAULT_AMOUNT_OF_ITEMS_WINNERS": () => (/* binding */ DEFAULT_AMOUNT_OF_ITEMS_WINNERS),
+/* harmony export */   "DEFAULT_COLOR": () => (/* binding */ DEFAULT_COLOR),
+/* harmony export */   "EMPTY_CARSLIST": () => (/* binding */ EMPTY_CARSLIST),
+/* harmony export */   "EMPTY_WINNERSLIST": () => (/* binding */ EMPTY_WINNERSLIST),
+/* harmony export */   "FAILED_SEARCH": () => (/* binding */ FAILED_SEARCH),
+/* harmony export */   "HEADERS_INFO": () => (/* binding */ HEADERS_INFO),
+/* harmony export */   "INITIAL_NUMBER_PAGE": () => (/* binding */ INITIAL_NUMBER_PAGE),
+/* harmony export */   "LS_KEYS": () => (/* binding */ LS_KEYS),
+/* harmony export */   "METHODS_HTTP": () => (/* binding */ METHODS_HTTP),
+/* harmony export */   "MILLISECONDS_IN_SECONDS": () => (/* binding */ MILLISECONDS_IN_SECONDS),
+/* harmony export */   "NETWORK_ERROR": () => (/* binding */ NETWORK_ERROR),
+/* harmony export */   "PAGINATION_BTNS": () => (/* binding */ PAGINATION_BTNS),
+/* harmony export */   "ROOT_URL": () => (/* binding */ ROOT_URL),
+/* harmony export */   "ROUTES": () => (/* binding */ ROUTES),
+/* harmony export */   "SEARCH_PARAMS": () => (/* binding */ SEARCH_PARAMS),
+/* harmony export */   "SUCCESS_UPDATE_CAR": () => (/* binding */ SUCCESS_UPDATE_CAR),
+/* harmony export */   "URL_ROUTES": () => (/* binding */ URL_ROUTES)
+/* harmony export */ });
+const BTNS_VALUES = ["select", "delete"];
+const BTN_VALUES = {
+    select: 'select',
+    delete: 'delete',
+};
+const ROUTES = { garage: "#garage", winners: "#winners" };
+const URL_ROUTES = {
+    garage: 'garage',
+    winners: 'winners',
+    engine: 'engine',
+};
+const ROOT_URL = 'http://127.0.0.1:3000';
+const METHODS_HTTP = {
+    post: 'POST',
+    delete: 'DELETE',
+    put: 'PUT',
+    patch: 'PATCH',
+};
+const HEADERS_INFO = { "Content-Type": "application/json" };
+const NETWORK_ERROR = '<h1>Произошла ошибка во время загрузки данных, проверьте ваше интернет-соединение</h1>';
+const EMPTY_CARSLIST = '<h1>Чтобы играть в машинки, малыш, надо создать их по одной, либо сгенерировать сотенку</h1>';
+const EMPTY_WINNERSLIST = '<h1>Пока никто не побеждал, либо все машинки удалились</h1>';
+const LS_KEYS = {
+    pageNumber: 'pageNumber',
+    pageNumberWinners: 'pageNumberWinners',
+    createCarValue: 'createCarValue',
+    updateCarValue: 'updateCarValue',
+    updateCarColor: 'updateCarColor',
+    createCarColor: 'createCarColor',
+};
+const INITIAL_NUMBER_PAGE = 1;
+const DEFAULT_AMOUNT_OF_ITEMS = 7;
+const DEFAULT_AMOUNT_OF_ITEMS_WINNERS = 10;
+const PAGINATION_BTNS = {
+    next: 'next', previous: 'previous'
+};
+const CAR_ICON_WIDTH_SMALL = 50;
+const CAR_ICON_HEIGHT_SMALL = 50;
+const CAR_ICON_WIDTH_DEFAULT = 104;
+const CAR_ICON_HEIGHT_DEFAULT = 104;
+const MILLISECONDS_IN_SECONDS = 1000;
+const SEARCH_PARAMS = {
+    sort: '_sort',
+    time: 'time',
+    order: '_order',
+    wins: 'wins',
+    asc: 'ASC',
+    desc: 'DESC',
+    id: 'id',
+    started: 'started',
+    stopped: 'stopped',
+    status: 'status',
+    drive: 'drive',
+};
+const DEFAULT_COLOR = '#000000';
+const SUCCESS_UPDATE_CAR = 'Данные машинки успешно обновлены';
+const FAILED_SEARCH = 'Машины с таким названием нет в базе';
+
 
 /***/ }),
 
-/***/ "./src/fonts/Roboto-400.woff":
-/*!***********************************!*\
-  !*** ./src/fonts/Roboto-400.woff ***!
-  \***********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/js/utils/local-storage.ts":
+/*!***************************************!*\
+  !*** ./src/js/utils/local-storage.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "fonts/Roboto-400.woff";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "applyToLocalStorage": () => (/* binding */ applyToLocalStorage),
+/* harmony export */   "getFromLocalStorage": () => (/* binding */ getFromLocalStorage),
+/* harmony export */   "setDefaultPageToLocalStorage": () => (/* binding */ setDefaultPageToLocalStorage)
+/* harmony export */ });
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.ts");
+
+function applyToLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+function getFromLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key) || "[]");
+}
+function setDefaultPageToLocalStorage(length) {
+    const location = window.location.href;
+    const isGarage = location.includes(_const__WEBPACK_IMPORTED_MODULE_0__.ROUTES.garage) || !location.includes("#");
+    if (length < _const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_AMOUNT_OF_ITEMS) {
+        isGarage
+            ? localStorage.removeItem(_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumber)
+            : localStorage.removeItem(_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumberWinners);
+    }
+    if (!localStorage.getItem(_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumber) ||
+        !localStorage.getItem(_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumberWinners)) {
+        isGarage
+            ? applyToLocalStorage(_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumber, _const__WEBPACK_IMPORTED_MODULE_0__.INITIAL_NUMBER_PAGE)
+            : applyToLocalStorage(_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumberWinners, _const__WEBPACK_IMPORTED_MODULE_0__.INITIAL_NUMBER_PAGE);
+    }
+}
+
 
 /***/ }),
 
-/***/ "./src/fonts/Roboto-400.woff2":
+/***/ "./src/js/utils/mocks.ts":
+/*!*******************************!*\
+  !*** ./src/js/utils/mocks.ts ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CAR_BRANDS_MODELS": () => (/* binding */ CAR_BRANDS_MODELS)
+/* harmony export */ });
+const CAR_BRANDS_MODELS = [{ "brand": "Seat", "models": ["Alhambra", "Altea", "Altea XL", "Arosa", "Cordoba", "Cordoba Vario", "Exeo", "Ibiza", "Ibiza ST", "Exeo ST", "Leon", "Leon ST", "Inca", "Mii", "Toledo"] },
+    { "brand": "Renault", "models": ["Captur", "Clio", "Clio Grandtour", "Espace", "Express", "Fluence", "Grand Espace", "Grand Modus", "Grand Scenic", "Kadjar", "Kangoo", "Kangoo Express", "Koleos", "Laguna", "Laguna Grandtour", "Latitude", "Mascott", "Mégane", "Mégane CC", "Mégane Combi", "Mégane Grandtour", "Mégane Coupé", "Mégane Scénic", "Scénic", "Talisman", "Talisman Grandtour", "Thalia", "Twingo", "Wind", "Zoé"] },
+    { "brand": "Peugeot", "models": ["1007", "107", "106", "108", "2008", "205", "205 Cabrio", "206", "206 CC", "206 SW", "207", "207 CC", "207 SW", "306", "307", "307 CC", "307 SW", "308", "308 CC", "308 SW", "309", "4007", "4008", "405", "406", "407", "407 SW", "5008", "508", "508 SW", "605", "806", "607", "807", "Bipper", "RCZ"] },
+    { "brand": "Dacia", "models": ["Dokker", "Duster", "Lodgy", "Logan", "Logan MCV", "Logan Van", "Sandero", "Solenza"] },
+    { "brand": "Citroën", "models": ["Berlingo", "C-Crosser", "C-Elissée", "C-Zero", "C1", "C2", "C3", "C3 Picasso", "C4", "C4 Aircross", "C4 Cactus", "C4 Coupé", "C4 Grand Picasso", "C4 Sedan", "C5", "C5 Break", "C5 Tourer", "C6", "C8", "DS3", "DS4", "DS5", "Evasion", "Jumper", "Jumpy", "Saxo", "Nemo", "Xantia", "Xsara"] },
+    { "brand": "Opel", "models": ["Agila", "Ampera", "Antara", "Astra", "Astra cabrio", "Astra caravan", "Astra coupé", "Calibra", "Campo", "Cascada", "Corsa", "Frontera", "Insignia", "Insignia kombi", "Kadett", "Meriva", "Mokka", "Movano", "Omega", "Signum", "Vectra", "Vectra Caravan", "Vivaro", "Vivaro Kombi", "Zafira"] },
+    { "brand": "Alfa Romeo", "models": ["145", "146", "147", "155", "156", "156 Sportwagon", "159", "159 Sportwagon", "164", "166", "4C", "Brera", "GTV", "MiTo", "Crosswagon", "Spider", "GT", "Giulietta", "Giulia"] },
+    { "brand": "Škoda", "models": ["Favorit", "Felicia", "Citigo", "Fabia", "Fabia Combi", "Fabia Sedan", "Felicia Combi", "Octavia", "Octavia Combi", "Roomster", "Yeti", "Rapid", "Rapid Spaceback", "Superb", "Superb Combi"] },
+    { "brand": "Chevrolet", "models": ["Alero", "Aveo", "Camaro", "Captiva", "Corvette", "Cruze", "Cruze SW", "Epica", "Equinox", "Evanda", "HHR", "Kalos", "Lacetti", "Lacetti SW", "Lumina", "Malibu", "Matiz", "Monte Carlo", "Nubira", "Orlando", "Spark", "Suburban", "Tacuma", "Tahoe", "Trax"] },
+    { "brand": "Porsche", "models": ["911 Carrera", "911 Carrera Cabrio", "911 Targa", "911 Turbo", "924", "944", "997", "Boxster", "Cayenne", "Cayman", "Macan", "Panamera"] },
+    { "brand": "Honda", "models": ["Accord", "Accord Coupé", "Accord Tourer", "City", "Civic", "Civic Aerodeck", "Civic Coupé", "Civic Tourer", "Civic Type R", "CR-V", "CR-X", "CR-Z", "FR-V", "HR-V", "Insight", "Integra", "Jazz", "Legend", "Prelude"] },
+    { "brand": "Subaru", "models": ["BRZ", "Forester", "Impreza", "Impreza Wagon", "Justy", "Legacy", "Legacy Wagon", "Legacy Outback", "Levorg", "Outback", "SVX", "Tribeca", "Tribeca B9", "XV"] },
+    { "brand": "Mazda", "models": ["121", "2", "3", "323", "323 Combi", "323 Coupé", "323 F", "5", "6", "6 Combi", "626", "626 Combi", "B-Fighter", "B2500", "BT", "CX-3", "CX-5", "CX-7", "CX-9", "Demio", "MPV", "MX-3", "MX-5", "MX-6", "Premacy", "RX-7", "RX-8", "Xedox 6"] },
+    { "brand": "Mitsubishi", "models": ["3000 GT", "ASX", "Carisma", "Colt", "Colt CC", "Eclipse", "Fuso canter", "Galant", "Galant Combi", "Grandis", "L200", "L200 Pick up", "L200 Pick up Allrad", "L300", "Lancer", "Lancer Combi", "Lancer Evo", "Lancer Sportback", "Outlander", "Pajero", "Pajeto Pinin", "Pajero Pinin Wagon", "Pajero Sport", "Pajero Wagon", "Space Star"] },
+    { "brand": "Lexus", "models": ["CT", "GS", "GS 300", "GX", "IS", "IS 200", "IS 250 C", "IS-F", "LS", "LX", "NX", "RC F", "RX", "RX 300", "RX 400h", "RX 450h", "SC 430"] },
+    { "brand": "Toyota", "models": ["4-Runner", "Auris", "Avensis", "Avensis Combi", "Avensis Van Verso", "Aygo", "Camry", "Carina", "Celica", "Corolla", "Corolla Combi", "Corolla sedan", "Corolla Verso", "FJ Cruiser", "GT86", "Hiace", "Hiace Van", "Highlander", "Hilux", "Land Cruiser", "MR2", "Paseo", "Picnic", "Prius", "RAV4", "Sequoia", "Starlet", "Supra", "Tundra", "Urban Cruiser", "Verso", "Yaris", "Yaris Verso"] },
+    { "brand": "BMW", "models": ["i3", "i8", "M3", "M4", "M5", "M6", "Rad 1", "Rad 1 Cabrio", "Rad 1 Coupé", "Rad 2", "Rad 2 Active Tourer", "Rad 2 Coupé", "Rad 2 Gran Tourer", "Rad 3", "Rad 3 Cabrio", "Rad 3 Compact", "Rad 3 Coupé", "Rad 3 GT", "Rad 3 Touring", "Rad 4", "Rad 4 Cabrio", "Rad 4 Gran Coupé", "Rad 5", "Rad 5 GT", "Rad 5 Touring", "Rad 6", "Rad 6 Cabrio", "Rad 6 Coupé", "Rad 6 Gran Coupé", "Rad 7", "Rad 8 Coupé", "X1", "X3", "X4", "X5", "X6", "Z3", "Z3 Coupé", "Z3 Roadster", "Z4", "Z4 Roadster"] },
+    { "brand": "Volkswagen", "models": ["Amarok", "Beetle", "Bora", "Bora Variant", "Caddy", "Caddy Van", "Life", "California", "Caravelle", "CC", "Crafter", "Crafter Van", "Crafter Kombi", "CrossTouran", "Eos", "Fox", "Golf", "Golf Cabrio", "Golf Plus", "Golf Sportvan", "Golf Variant", "Jetta", "LT", "Lupo", "Multivan", "New Beetle", "New Beetle Cabrio", "Passat", "Passat Alltrack", "Passat CC", "Passat Variant", "Passat Variant Van", "Phaeton", "Polo", "Polo Van", "Polo Variant", "Scirocco", "Sharan", "T4", "T4 Caravelle", "T4 Multivan", "T5", "T5 Caravelle", "T5 Multivan", "T5 Transporter Shuttle", "Tiguan", "Touareg", "Touran"] },
+    { "brand": "Suzuki", "models": ["Alto", "Baleno", "Baleno kombi", "Grand Vitara", "Grand Vitara XL-7", "Ignis", "Jimny", "Kizashi", "Liana", "Samurai", "Splash", "Swift", "SX4", "SX4 Sedan", "Vitara", "Wagon R+"] },
+    { "brand": "Mercedes-Benz", "models": ["100 D", "115", "124", "126", "190", "190 D", "190 E", "200 - 300", "200 D", "200 E", "210 Van", "210 kombi", "310 Van", "310 kombi", "230 - 300 CE Coupé", "260 - 560 SE", "260 - 560 SEL", "500 - 600 SEC Coupé", "Trieda A", "A", "A L", "AMG GT", "Trieda B", "Trieda C", "C", "C Sportcoupé", "C T", "Citan", "CL", "CL", "CLA", "CLC", "CLK Cabrio", "CLK Coupé", "CLS", "Trieda E", "E", "E Cabrio", "E Coupé", "E T", "Trieda G", "G Cabrio", "GL", "GLA", "GLC", "GLE", "GLK", "Trieda M", "MB 100", "Trieda R", "Trieda S", "S", "S Coupé", "SL", "SLC", "SLK", "SLR", "Sprinter"] },
+    { "brand": "Saab", "models": ["9-3", "9-3 Cabriolet", "9-3 Coupé", "9-3 SportCombi", "9-5", "9-5 SportCombi", "900", "900 C", "900 C Turbo", "9000"] },
+    { "brand": "Audi", "models": ["100", "100 Avant", "80", "80 Avant", "80 Cabrio", "90", "A1", "A2", "A3", "A3 Cabriolet", "A3 Limuzina", "A3 Sportback", "A4", "A4 Allroad", "A4 Avant", "A4 Cabriolet", "A5", "A5 Cabriolet", "A5 Sportback", "A6", "A6 Allroad", "A6 Avant", "A7", "A8", "A8 Long", "Q3", "Q5", "Q7", "R8", "RS4 Cabriolet", "RS4/RS4 Avant", "RS5", "RS6 Avant", "RS7", "S3/S3 Sportback", "S4 Cabriolet", "S4/S4 Avant", "S5/S5 Cabriolet", "S6/RS6", "S7", "S8", "SQ5", "TT Coupé", "TT Roadster", "TTS"] },
+    { "brand": "Kia", "models": ["Avella", "Besta", "Carens", "Carnival", "Cee`d", "Cee`d SW", "Cerato", "K 2500", "Magentis", "Opirus", "Optima", "Picanto", "Pregio", "Pride", "Pro Cee`d", "Rio", "Rio Combi", "Rio sedan", "Sephia", "Shuma", "Sorento", "Soul", "Sportage", "Venga"] },
+    { "brand": "Land Rover", "models": ["109", "Defender", "Discovery", "Discovery Sport", "Freelander", "Range Rover", "Range Rover Evoque", "Range Rover Sport"] },
+    { "brand": "Dodge", "models": ["Avenger", "Caliber", "Challenger", "Charger", "Grand Caravan", "Journey", "Magnum", "Nitro", "RAM", "Stealth", "Viper"] },
+    { "brand": "Chrysler", "models": ["300 C", "300 C Touring", "300 M", "Crossfire", "Grand Voyager", "LHS", "Neon", "Pacifica", "Plymouth", "PT Cruiser", "Sebring", "Sebring Convertible", "Stratus", "Stratus Cabrio", "Town & Country", "Voyager"] },
+    { "brand": "Ford", "models": ["Aerostar", "B-Max", "C-Max", "Cortina", "Cougar", "Edge", "Escort", "Escort Cabrio", "Escort kombi", "Explorer", "F-150", "F-250", "Fiesta", "Focus", "Focus C-Max", "Focus CC", "Focus kombi", "Fusion", "Galaxy", "Grand C-Max", "Ka", "Kuga", "Maverick", "Mondeo", "Mondeo Combi", "Mustang", "Orion", "Puma", "Ranger", "S-Max", "Sierra", "Street Ka", "Tourneo Connect", "Tourneo Custom", "Transit", "Transit", "Transit Bus", "Transit Connect LWB", "Transit Courier", "Transit Custom", "Transit kombi", "Transit Tourneo", "Transit Valnik", "Transit Van", "Transit Van 350", "Windstar"] },
+    { "brand": "Hummer", "models": ["H2", "H3"] },
+    { "brand": "Hyundai", "models": ["Accent", "Atos", "Atos Prime", "Coupé", "Elantra", "Galloper", "Genesis", "Getz", "Grandeur", "H 350", "H1", "H1 Bus", "H1 Van", "H200", "i10", "i20", "i30", "i30 CW", "i40", "i40 CW", "ix20", "ix35", "ix55", "Lantra", "Matrix", "Santa Fe", "Sonata", "Terracan", "Trajet", "Tucson", "Veloster"] },
+    { "brand": "Infiniti", "models": ["EX", "FX", "G", "G Coupé", "M", "Q", "QX"] },
+    { "brand": "Jaguar", "models": ["Daimler", "F-Pace", "F-Type", "S-Type", "Sovereign", "X-Type", "X-type Estate", "XE", "XF", "XJ", "XJ12", "XJ6", "XJ8", "XJ8", "XJR", "XK", "XK8 Convertible", "XKR", "XKR Convertible"] },
+    { "brand": "Jeep", "models": ["Cherokee", "Commander", "Compass", "Grand Cherokee", "Patriot", "Renegade", "Wrangler"] },
+    { "brand": "Nissan", "models": ["100 NX", "200 SX", "350 Z", "350 Z Roadster", "370 Z", "Almera", "Almera Tino", "Cabstar E - T", "Cabstar TL2 Valnik", "e-NV200", "GT-R", "Insterstar", "Juke", "King Cab", "Leaf", "Maxima", "Maxima QX", "Micra", "Murano", "Navara", "Note", "NP300 Pickup", "NV200", "NV400", "Pathfinder", "Patrol", "Patrol GR", "Pickup", "Pixo", "Primastar", "Primastar Combi", "Primera", "Primera Combi", "Pulsar", "Qashqai", "Serena", "Sunny", "Terrano", "Tiida", "Trade", "Vanette Cargo", "X-Trail"] },
+    { "brand": "Volvo", "models": ["240", "340", "360", "460", "850", "850 kombi", "C30", "C70", "C70 Cabrio", "C70 Coupé", "S40", "S60", "S70", "S80", "S90", "V40", "V50", "V60", "V70", "V90", "XC60", "XC70", "XC90"] },
+    { "brand": "Daewoo", "models": ["Espero", "Kalos", "Lacetti", "Lanos", "Leganza", "Lublin", "Matiz", "Nexia", "Nubira", "Nubira kombi", "Racer", "Tacuma", "Tico"] },
+    { "brand": "Fiat", "models": ["1100", "126", "500", "500L", "500X", "850", "Barchetta", "Brava", "Cinquecento", "Coupé", "Croma", "Doblo", "Doblo Cargo", "Doblo Cargo Combi", "Ducato", "Ducato Van", "Ducato Kombi", "Ducato Podvozok", "Florino", "Florino Combi", "Freemont", "Grande Punto", "Idea", "Linea", "Marea", "Marea Weekend", "Multipla", "Palio Weekend", "Panda", "Panda Van", "Punto", "Punto Cabriolet", "Punto Evo", "Punto Van", "Qubo", "Scudo", "Scudo Van", "Scudo Kombi", "Sedici", "Seicento", "Stilo", "Stilo Multiwagon", "Strada", "Talento", "Tipo", "Ulysse", "Uno", "X1/9"] },
+    { "brand": "MINI", "models": ["Cooper", "Cooper Cabrio", "Cooper Clubman", "Cooper D", "Cooper D Clubman", "Cooper S", "Cooper S Cabrio", "Cooper S Clubman", "Countryman", "Mini One", "One D"] },
+    { "brand": "Rover", "models": ["200", "214", "218", "25", "400", "414", "416", "620", "75"] },
+    { "brand": "Smart", "models": ["Cabrio", "City-Coupé", "Compact Pulse", "Forfour", "Fortwo cabrio", "Fortwo coupé", "Roadster"] }];
+
+
+/***/ }),
+
+/***/ "./src/js/utils/pagination.ts":
 /*!************************************!*\
-  !*** ./src/fonts/Roboto-400.woff2 ***!
+  !*** ./src/js/utils/pagination.ts ***!
   \************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "fonts/Roboto-400.woff2";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getPaginatedData": () => (/* binding */ getPaginatedData),
+/* harmony export */   "getPlace": () => (/* binding */ getPlace),
+/* harmony export */   "incrementDecrementPage": () => (/* binding */ incrementDecrementPage)
+/* harmony export */ });
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.ts");
+/* harmony import */ var _local_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./local-storage */ "./src/js/utils/local-storage.ts");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./src/js/utils/router.ts");
+
+
+
+function getPlace() {
+    const location = window.location.href;
+    return location.includes(_const__WEBPACK_IMPORTED_MODULE_0__.ROUTES.garage) || !location.includes("#");
+}
+function getPaginatedData(items, page, amount) {
+    const safeAmount = amount || getPlace() ? _const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_AMOUNT_OF_ITEMS : _const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_AMOUNT_OF_ITEMS_WINNERS;
+    const safePage = page || _const__WEBPACK_IMPORTED_MODULE_0__.INITIAL_NUMBER_PAGE;
+    const amountPages = Math.ceil(items.length / safeAmount);
+    const start = (safePage - 1) * safeAmount;
+    const last = start + safeAmount;
+    const paginatedData = items.slice(start, last);
+    return { amountPages, paginatedData };
+}
+function incrementDecrementPage(value) {
+    const rightPlace = getPlace() ? _const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumber : _const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.pageNumberWinners;
+    const numberOfPage = Number((0,_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(rightPlace));
+    if (value === _const__WEBPACK_IMPORTED_MODULE_0__.PAGINATION_BTNS.next)
+        (0,_local_storage__WEBPACK_IMPORTED_MODULE_1__.applyToLocalStorage)(rightPlace, numberOfPage + 1);
+    if (value === _const__WEBPACK_IMPORTED_MODULE_0__.PAGINATION_BTNS.previous)
+        (0,_local_storage__WEBPACK_IMPORTED_MODULE_1__.applyToLocalStorage)(rightPlace, numberOfPage - 1);
+    (0,_router__WEBPACK_IMPORTED_MODULE_2__["default"])();
+}
+
 
 /***/ }),
 
-/***/ "./src/video/grig-per-gunt.mp4":
-/*!*************************************!*\
-  !*** ./src/video/grig-per-gunt.mp4 ***!
-  \*************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./src/js/utils/router.ts":
+/*!********************************!*\
+  !*** ./src/js/utils/router.ts ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "video/grig-per-gunt.mp4";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Router),
+/* harmony export */   "getUrl": () => (/* binding */ getUrl),
+/* harmony export */   "hashListener": () => (/* binding */ hashListener),
+/* harmony export */   "pushState": () => (/* binding */ pushState)
+/* harmony export */ });
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.ts");
+/* harmony import */ var _pages_create_garage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/create-garage */ "./src/js/pages/create-garage.ts");
+/* harmony import */ var _pages_create_winners__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/create-winners */ "./src/js/pages/create-winners.ts");
+
+
+
+function Router() {
+    const location = window.location.href;
+    if (location.includes(_const__WEBPACK_IMPORTED_MODULE_0__.ROUTES.garage) || !location.includes('#')) {
+        (0,_pages_create_garage__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    }
+    if (location.includes(_const__WEBPACK_IMPORTED_MODULE_0__.ROUTES.winners)) {
+        (0,_pages_create_winners__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    }
+    hashListener();
+}
+function hashListener() {
+    return window.addEventListener('hashchange', (event) => {
+        const { newURL } = event;
+        console.log(getUrl(newURL));
+        window.history.pushState({}, '', getUrl(newURL));
+        Router();
+    });
+}
+function getUrl(string) {
+    return string.slice(string.indexOf('#'));
+}
+function pushState(url) {
+    window.history.pushState({}, '', url);
+    Router();
+}
+
+
+/***/ }),
+
+/***/ "./src/js/utils/search-params.ts":
+/*!***************************************!*\
+  !*** ./src/js/utils/search-params.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "setSortSearchParamsWinners": () => (/* binding */ setSortSearchParamsWinners)
+/* harmony export */ });
+/* harmony import */ var _pages_create_winners__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/create-winners */ "./src/js/pages/create-winners.ts");
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.ts");
+
+
+function setSortSearchParamsWinners(searchParams, winsOrTime, value) {
+    searchParams.set(_const__WEBPACK_IMPORTED_MODULE_1__.SEARCH_PARAMS.sort, winsOrTime);
+    searchParams.set(_const__WEBPACK_IMPORTED_MODULE_1__.SEARCH_PARAMS.order, value);
+    window.history.pushState({}, "", `${window.location.origin}/${_const__WEBPACK_IMPORTED_MODULE_1__.ROUTES.winners}?${searchParams.toString()}`);
+    (0,_pages_create_winners__WEBPACK_IMPORTED_MODULE_0__["default"])(`?${searchParams.toString()}`);
+}
+
+
+/***/ }),
+
+/***/ "./src/js/utils/utils.ts":
+/*!*******************************!*\
+  !*** ./src/js/utils/utils.ts ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createCarFromForm": () => (/* binding */ createCarFromForm),
+/* harmony export */   "createSuccessMessage": () => (/* binding */ createSuccessMessage),
+/* harmony export */   "deleteSelectCar": () => (/* binding */ deleteSelectCar),
+/* harmony export */   "generateResetCars": () => (/* binding */ generateResetCars),
+/* harmony export */   "getFinishedCars": () => (/* binding */ getFinishedCars),
+/* harmony export */   "getRandomCarsColors": () => (/* binding */ getRandomCarsColors),
+/* harmony export */   "getRandomColor": () => (/* binding */ getRandomColor),
+/* harmony export */   "getRandomMember": () => (/* binding */ getRandomMember),
+/* harmony export */   "getSearchParams": () => (/* binding */ getSearchParams),
+/* harmony export */   "getTopSpeedRacer": () => (/* binding */ getTopSpeedRacer),
+/* harmony export */   "sendOrCreateWinner": () => (/* binding */ sendOrCreateWinner),
+/* harmony export */   "setRightPage": () => (/* binding */ setRightPage),
+/* harmony export */   "startCar": () => (/* binding */ startCar),
+/* harmony export */   "updateCarFromForm": () => (/* binding */ updateCarFromForm),
+/* harmony export */   "updateCarNameColor": () => (/* binding */ updateCarNameColor)
+/* harmony export */ });
+/* harmony import */ var _nodes_get_nodes_by_id__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../nodes/get-nodes-by-id */ "./src/js/nodes/get-nodes-by-id.ts");
+/* harmony import */ var _pages_create_garage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/create-garage */ "./src/js/pages/create-garage.ts");
+/* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./animations */ "./src/js/utils/animations.ts");
+/* harmony import */ var _async_functions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./async-functions */ "./src/js/utils/async-functions.ts");
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./const */ "./src/js/utils/const.ts");
+/* harmony import */ var _local_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./local-storage */ "./src/js/utils/local-storage.ts");
+/* harmony import */ var _mocks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./mocks */ "./src/js/utils/mocks.ts");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./router */ "./src/js/utils/router.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+
+
+
+
+function getRandomColor() {
+    const red = Math.floor(Math.random() * 256).toString(16);
+    const green = Math.floor(Math.random() * 256).toString(16);
+    const blue = Math.floor(Math.random() * 256).toString(16);
+    return `#${red}${green}${blue}`;
+}
+function getRandomMember(array) {
+    return array[Math.floor(array.length * Math.random())];
+}
+function getRandomCarsColors() {
+    return [...Array(100).keys()].map(() => {
+        const { brand, models } = getRandomMember(_mocks__WEBPACK_IMPORTED_MODULE_6__.CAR_BRANDS_MODELS);
+        return { name: `${brand} ${models[Math.floor(models.length * Math.random())]}`, color: getRandomColor() };
+    });
+}
+function getSearchParams() {
+    const location = window.location.href;
+    const url = new URL(location).hash;
+    const filtredParams = url.includes('?') ? url.slice(url.indexOf('?')) : '';
+    const searchParams = new URLSearchParams(filtredParams);
+    const sortType = searchParams.get(_const__WEBPACK_IMPORTED_MODULE_4__.SEARCH_PARAMS.sort) || '';
+    const sortOrder = searchParams.get(_const__WEBPACK_IMPORTED_MODULE_4__.SEARCH_PARAMS.order) || '';
+    return {
+        sortType, sortOrder, searchParams,
+    };
+}
+function setRightPage(pageNumber, amountPages) {
+    if (pageNumber > amountPages) {
+        (0,_local_storage__WEBPACK_IMPORTED_MODULE_5__.applyToLocalStorage)(_const__WEBPACK_IMPORTED_MODULE_4__.LS_KEYS.pageNumber, amountPages);
+        (0,_pages_create_garage__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    }
+}
+function generateResetCars(name, stopBtns) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (name === "generate")
+            yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.sendCars)(getRandomCarsColors());
+        if (name === 'reset') {
+            const cars = document.querySelectorAll('.car-icon');
+            cars.forEach((car) => car.style.transform = 'translateX(0)');
+            stopBtns.forEach((btn) => btn.disabled = true);
+        }
+    });
+}
+function updateCarFromForm(name, color, id, successNode) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.updateCar)({ name, color }, id);
+        successNode.textContent = _const__WEBPACK_IMPORTED_MODULE_4__.SUCCESS_UPDATE_CAR;
+        setTimeout(() => (0,_router__WEBPACK_IMPORTED_MODULE_7__["default"])(), 2000);
+    });
+}
+function createCarFromForm(name, color) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.createCar)({ name, color });
+        (0,_router__WEBPACK_IMPORTED_MODULE_7__["default"])();
+    });
+}
+function updateCarNameColor(value, name) {
+    if (name === 'update-car-name') {
+        (0,_local_storage__WEBPACK_IMPORTED_MODULE_5__.applyToLocalStorage)(_const__WEBPACK_IMPORTED_MODULE_4__.LS_KEYS.updateCarValue, value);
+    }
+    if (name === 'update-car-color') {
+        (0,_local_storage__WEBPACK_IMPORTED_MODULE_5__.applyToLocalStorage)(_const__WEBPACK_IMPORTED_MODULE_4__.LS_KEYS.updateCarColor, value);
+    }
+    if (name === 'create-car-name') {
+        (0,_local_storage__WEBPACK_IMPORTED_MODULE_5__.applyToLocalStorage)(_const__WEBPACK_IMPORTED_MODULE_4__.LS_KEYS.createCarValue, value);
+    }
+    if (name === 'create-car-color') {
+        (0,_local_storage__WEBPACK_IMPORTED_MODULE_5__.applyToLocalStorage)(_const__WEBPACK_IMPORTED_MODULE_4__.LS_KEYS.createCarColor, value);
+    }
+}
+function deleteSelectCar(name, id, updateCarBtn, carsList, updateNameInput) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (name.includes(_const__WEBPACK_IMPORTED_MODULE_4__.BTN_VALUES["delete"])) {
+            yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.deleteCar)(id);
+            yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.deleteWinner)(+id);
+            (0,_pages_create_garage__WEBPACK_IMPORTED_MODULE_1__["default"])();
+        }
+        if (name.includes(_const__WEBPACK_IMPORTED_MODULE_4__.BTN_VALUES.select)) {
+            updateCarBtn.value = id;
+            const [{ name }] = carsList.filter((car) => car.id === Number(id));
+            updateNameInput.value = name;
+        }
+    });
+}
+function startCar(name, target) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (name.includes('start-stop')) {
+            const { value } = target;
+            const id = value.replace(/[a-z-]/gi, '');
+            const { stopBtn, startBtn, carIcon } = (0,_nodes_get_nodes_by_id__WEBPACK_IMPORTED_MODULE_0__.getIdNodes)(id);
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            if (value.includes('start')) {
+                const end = (0,_animations__WEBPACK_IMPORTED_MODULE_2__.getLengthOfParentContainer)();
+                const { velocity, distance } = yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.startEngine)(id);
+                const duration = Math.floor(distance / velocity);
+                yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.receiveDriveMode)(id, carIcon, end, duration);
+            }
+        }
+    });
+}
+function getFinishedCars(paginatedData) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const topSpeeds = [];
+        const ids = paginatedData.map(({ id }) => id);
+        const end = (0,_animations__WEBPACK_IMPORTED_MODULE_2__.getLengthOfParentContainer)();
+        const speedDistances = yield Promise.all(ids.map((id) => (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.startEngine)(`${id}`)));
+        const finished = yield Promise.all(speedDistances.map(({ velocity, distance }, i) => __awaiter(this, void 0, void 0, function* () {
+            const duration = Math.floor(distance / velocity);
+            topSpeeds.push({ id: ids[i], duration });
+            const carIcon = document.getElementById(`car-${ids[i]}`);
+            return yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.receiveDriveMode)(`${ids[i]}`, carIcon, end, duration);
+        })));
+        return { topSpeeds, finished };
+    });
+}
+function getTopSpeedRacer(topSpeeds, filterWastedCars) {
+    const { id, duration: currentTime } = topSpeeds.filter(({ id }) => filterWastedCars.includes(id)).sort((a, b) => a.duration - b.duration)[0];
+    return { id, currentTime };
+}
+function sendOrCreateWinner(id, currentTime) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const winnerInfo = yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.getWinner)(id);
+        const currentTimeSecs = currentTime / _const__WEBPACK_IMPORTED_MODULE_4__.MILLISECONDS_IN_SECONDS;
+        if (!(winnerInfo === null || winnerInfo === void 0 ? void 0 : winnerInfo.response.ok)) {
+            yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.createWinner)({ id, time: currentTimeSecs, wins: 1 });
+        }
+        else {
+            const { id: availableId, wins: availableWins, time: availableTime } = winnerInfo === null || winnerInfo === void 0 ? void 0 : winnerInfo.data;
+            if (availableTime > currentTimeSecs) {
+                yield (0,_async_functions__WEBPACK_IMPORTED_MODULE_3__.updateWinner)(availableId, { wins: availableWins + 1, time: currentTimeSecs });
+            }
+        }
+    });
+}
+function createSuccessMessage(id, currentTime) {
+    const { winnersListItem, winnersMessage } = (0,_nodes_get_nodes_by_id__WEBPACK_IMPORTED_MODULE_0__.getIdNodes)(id.toString());
+    winnersListItem.style.border = '5px solid red';
+    winnersListItem.style.borderRadius = '5px';
+    winnersMessage.textContent = `The car with id ${id} and result ${currentTime / _const__WEBPACK_IMPORTED_MODULE_4__.MILLISECONDS_IN_SECONDS}s have just won the race! Конгратулатионс!`;
+}
+
 
 /***/ })
 
@@ -12500,9 +11858,6 @@ module.exports = __webpack_require__.p + "video/grig-per-gunt.mp4";
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -12528,18 +11883,6 @@ module.exports = __webpack_require__.p + "video/grig-per-gunt.mp4";
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -12556,52 +11899,6 @@ module.exports = __webpack_require__.p + "video/grig-per-gunt.mp4";
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		__webpack_require__.b = document.baseURI || self.location.href;
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"main": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		// no on chunks loaded
-/******/ 		
-/******/ 		// no jsonp function
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/nonce */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nc = undefined;
@@ -12613,7 +11910,7 @@ module.exports = __webpack_require__.p + "video/grig-per-gunt.mp4";
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__("./node_modules/@babel/polyfill/lib/index.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/entry.js?7611");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/entry.ts");
 /******/ 	
 /******/ })()
 ;
