@@ -2,15 +2,13 @@ import { createLoader } from "../markup/create-loader";
 import CreateGarage from "../pages/create-garage";
 import { HEADERS_INFO, METHODS_HTTP, NETWORK_ERROR, ROOT_URL, SEARCH_PARAMS, URL_ROUTES } from "./const";
 import { CarsType, WinnersType } from "./types";
-import CreateWinners from "../pages/create-winners";
 
 export async function getCars() {
   const body = document.querySelector(".page") as HTMLBodyElement;
   body.innerHTML = createLoader();
   try {
     const response = await fetch(`${ROOT_URL}/${URL_ROUTES.garage}`);
-    const json = await response.json();
-    CreateGarage(json);
+    return await response.json();
   } catch {
     body.innerHTML = NETWORK_ERROR;
   }
@@ -23,7 +21,7 @@ export async function createCar(carData: Omit<CarsType, "id">) {
       headers: HEADERS_INFO,
       body: JSON.stringify(carData),
     });
-  } catch {}
+  } catch { }
 }
 
 export async function deleteCar(id: string) {
@@ -31,7 +29,7 @@ export async function deleteCar(id: string) {
     await fetch(`${ROOT_URL}/${URL_ROUTES.garage}/${id}`, {
       method: METHODS_HTTP.delete,
     });
-  } catch {}
+  } catch { }
 }
 
 export async function updateCar(carData: Omit<CarsType, "id">, id: string) {
@@ -41,26 +39,22 @@ export async function updateCar(carData: Omit<CarsType, "id">, id: string) {
       headers: HEADERS_INFO,
       body: JSON.stringify(carData),
     });
-  } catch {}
+  } catch { }
 }
 
 export async function getWinners(params = "") {
-  const body = document.querySelector(".page") as HTMLBodyElement;
-  body.innerHTML = createLoader();
   try {
     const response = await fetch(`${ROOT_URL}/${URL_ROUTES.winners}${params}`);
-    const winners = await response.json();
-    CreateWinners(winners);
+    return await response.json();
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.toString())
     }
-    body.innerHTML = NETWORK_ERROR;
   }
 }
 
 export async function sendCars(cars: Omit<CarsType, "id">[]) {
-  return Promise.all(cars.map((car) => createCar(car))).then(() => getCars());
+  return Promise.all(cars.map((car) => createCar(car))).then(() => CreateGarage());
 }
 
 export async function createWinner(winnersData: WinnersType) {
@@ -70,7 +64,7 @@ export async function createWinner(winnersData: WinnersType) {
       headers: HEADERS_INFO,
       body: JSON.stringify(winnersData),
     });
-  } catch {}
+  } catch { }
 }
 
 export async function startEngine(id: string) {
@@ -80,7 +74,7 @@ export async function startEngine(id: string) {
       { method: METHODS_HTTP.patch });
     const data = await response.json();
     return data;
-  } catch {}
+  } catch { }
 }
 
 export async function stopEngine(id: string) {
@@ -93,7 +87,7 @@ export async function stopEngine(id: string) {
     );
     const data = await response.json();
     return data;
-  } catch {}
+  } catch { }
 }
 
 export async function receiveDriveMode(id: string, node: HTMLElement, end: number, duration: number) {
@@ -113,7 +107,7 @@ export async function receiveDriveMode(id: string, node: HTMLElement, end: numbe
     };
     tick();
   }
-  
+
   stopBtn?.addEventListener("click", async () => {
     await stopEngine(id);
     if (animationId) {
@@ -136,7 +130,7 @@ export async function receiveDriveMode(id: string, node: HTMLElement, end: numbe
     } else {
       return Number(id);
     }
-  } catch {}
+  } catch { }
 }
 
 export async function getWinner(id: number) {
@@ -149,7 +143,7 @@ export async function getWinner(id: number) {
   }
 }
 
-export async function updateWinner(id: number, winnerData: {wins: number, time: number}) {
+export async function updateWinner(id: number, winnerData: { wins: number, time: number }) {
   try {
     await fetch(`${ROOT_URL}/${URL_ROUTES.winners}/${id}`, {
       method: METHODS_HTTP.put,

@@ -30,3 +30,5 @@ export function setDefaultPageToLocalStorage(length: number) {
       : applyToLocalStorage(LS_KEYS.pageNumberWinners, INITIAL_NUMBER_PAGE);
   }
 }
+
+

@@ -4,8 +4,8 @@ import { getFromLocalStorage } from "../utils/local-storage";
 export function createColorName() {
   const createValue = getFromLocalStorage(LS_KEYS.createCarValue);
   const updateValue = getFromLocalStorage(LS_KEYS.updateCarValue);
-  const createColor = getFromLocalStorage(LS_KEYS.createCarColor) || '#e66465';
-  const updateColor = getFromLocalStorage(LS_KEYS.updateCarColor) || '#e66465';
+  const createColor = getFromLocalStorage(LS_KEYS.createCarColor);
+  const updateColor = getFromLocalStorage(LS_KEYS.updateCarColor);
 
     return `<section class="create-section">
         ${['create', 'update'].map((word) => `<form class="${word}-section__${word}-car ${word}-car">
