@@ -10,17 +10,13 @@ import { applyToLocalStorage, getFromLocalStorage } from "./local-storage";
 import Router from "./router";
 import { CarsType, WinnersType } from "./types";
 
-export function getPaginatedData(
-  items: CarsType[] | WinnersType[],
-  page?: number,
-  amount?: number
-) {
+function getPlace() {
   const location = window.location.href;
-  const isGarage = location.includes(ROUTES.garage) || !location.includes("#");
-  const safeAmount =
-    amount || isGarage
-      ? DEFAULT_AMOUNT_OF_ITEMS
-      : DEFAULT_AMOUNT_OF_ITEMS_WINNERS;
+  return location.includes(ROUTES.garage) || !location.includes("#");
+}
+
+export function getPaginatedData(items: CarsType[] | WinnersType[], page?: number, amount?: number) {
+  const safeAmount = amount || getPlace() ? DEFAULT_AMOUNT_OF_ITEMS : DEFAULT_AMOUNT_OF_ITEMS_WINNERS;
   const safePage = page || INITIAL_NUMBER_PAGE;
   const amountPages = Math.ceil(items.length / safeAmount);
   const start = (safePage - 1) * safeAmount;
@@ -30,16 +26,9 @@ export function getPaginatedData(
 }
 
 export function incrementDecrementPage(value: string) {
-  const location = window.location.href;
-  const rightPlace = location.includes(ROUTES.garage)
-    ? LS_KEYS.pageNumber
-    : LS_KEYS.pageNumberWinners;
+  const rightPlace = getPlace() ? LS_KEYS.pageNumber : LS_KEYS.pageNumberWinners;
   const numberOfPage = Number(getFromLocalStorage(rightPlace));
-  if (value === PAGINATION_BTNS.next) {
-    applyToLocalStorage(rightPlace, numberOfPage + 1);
-  }
-  if (value === PAGINATION_BTNS.previous) {
-    applyToLocalStorage(rightPlace, numberOfPage - 1);
-  }
+  if (value === PAGINATION_BTNS.next) applyToLocalStorage(rightPlace, numberOfPage + 1);
+  if (value === PAGINATION_BTNS.previous) applyToLocalStorage(rightPlace, numberOfPage - 1);
   Router();
 }
