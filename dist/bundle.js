@@ -11727,6 +11727,7 @@ function generateResetCars(name, stopBtns) {
             const cars = document.querySelectorAll('.car-icon');
             cars.forEach((car) => car.style.transform = 'translateX(0)');
             stopBtns.forEach((btn) => btn.disabled = true);
+            (0,_pages_create_garage__WEBPACK_IMPORTED_MODULE_1__["default"])();
         }
     });
 }
