@@ -50,6 +50,7 @@ export async function generateResetCars(name: string, stopBtns: NodeListOf<HTMLB
     const cars = document.querySelectorAll('.car-icon') as NodeListOf<HTMLElement>;
     cars.forEach((car) => car.style.transform = 'translateX(0)');
     stopBtns.forEach((btn) => btn.disabled = true);
+    CreateGarage();
   }
 }
 
