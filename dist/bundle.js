@@ -10504,8 +10504,8 @@ function createColorName() {
     const updateValue = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.updateCarValue);
     const createColor = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.createCarColor);
     const updateColor = (0,_utils_local_storage__WEBPACK_IMPORTED_MODULE_1__.getFromLocalStorage)(_utils_const__WEBPACK_IMPORTED_MODULE_0__.LS_KEYS.updateCarColor);
-    const createColorOrDefault = createColor || _utils_const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_COLOR;
-    const updateColorOrDefault = updateColor || _utils_const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_COLOR;
+    const createColorOrDefault = createColor.length ? createColor : _utils_const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_COLOR;
+    const updateColorOrDefault = updateColor.length ? updateColor : _utils_const__WEBPACK_IMPORTED_MODULE_0__.DEFAULT_COLOR;
     return `<section class="create-section">
         ${['create', 'update'].map((word) => `<form class="${word}-section__${word}-car ${word}-car">
         <label>
