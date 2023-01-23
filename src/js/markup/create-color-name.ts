@@ -6,8 +6,8 @@ export function createColorName() {
   const updateValue = getFromLocalStorage(LS_KEYS.updateCarValue);
   const createColor = getFromLocalStorage(LS_KEYS.createCarColor);
   const updateColor = getFromLocalStorage(LS_KEYS.updateCarColor);
-  const createColorOrDefault = createColor || DEFAULT_COLOR;
-  const updateColorOrDefault = updateColor || DEFAULT_COLOR;
+  const createColorOrDefault = createColor.length ? createColor : DEFAULT_COLOR;
+  const updateColorOrDefault = updateColor.length ? updateColor : DEFAULT_COLOR;
 
     return `<section class="create-section">
         ${['create', 'update'].map((word) => `<form class="${word}-section__${word}-car ${word}-car">
