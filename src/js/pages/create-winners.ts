@@ -27,8 +27,8 @@ export default async function CreateWinners(sortParams = '') {
     ${await createWinnersList(paginatedData as WinnersType[])}</main>`;
   const { paginationBtns, garageLink, winnersLink } = getGarageNodes();
   const { timeBtn, winsBtn } = getWinnersNodes();
-  garageLink.addEventListener('click', () => pushState(ROUTES.garage));
-  winnersLink.addEventListener('click', () => pushState(ROUTES.winners));
+  garageLink?.addEventListener('click', () => pushState(ROUTES.garage));
+  winnersLink?.addEventListener('click', () => pushState(ROUTES.winners));
   winsBtn?.addEventListener("click", async ({ target }) => {
     if (target instanceof HTMLButtonElement) {
       const { value } = target;

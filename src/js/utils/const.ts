@@ -41,18 +41,18 @@ export const CAR_ICON_WIDTH_DEFAULT = 104;
 export const CAR_ICON_HEIGHT_DEFAULT = 104;
 export const MILLISECONDS_IN_SECONDS = 1000;
 
-export const SEARCH_PARAMS = {
-    sort: '_sort',
-    time: 'time',
-    order: '_order',
-    wins: 'wins',
-    asc: 'ASC',
-    desc: 'DESC',
-    id: 'id',
-    started: 'started',
-    stopped: 'stopped',
-    status: 'status',
-    drive: 'drive',
+export enum SEARCH_PARAMS {
+    sort = '_sort',
+    time = 'time',
+    order ='_order',
+    wins = 'wins',
+    asc = 'ASC',
+    desc = 'DESC',
+    id ='id',
+    started = 'started',
+    stopped = 'stopped',
+    status = 'status',
+    drive = 'drive',
 }
 
 export const DEFAULT_COLOR = '#000000';

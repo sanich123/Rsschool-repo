@@ -21,7 +21,12 @@ export async function createCar(carData: Omit<CarsType, "id">) {
       headers: HEADERS_INFO,
       body: JSON.stringify(carData),
     });
-  } catch { }
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
+  }
 }
 
 export async function deleteCar(id: string) {
@@ -29,7 +34,12 @@ export async function deleteCar(id: string) {
     await fetch(`${ROOT_URL}/${URL_ROUTES.garage}/${id}`, {
       method: METHODS_HTTP.delete,
     });
-  } catch { }
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
+  }
 }
 
 export async function updateCar(carData: Omit<CarsType, "id">, id: string) {
@@ -39,7 +49,12 @@ export async function updateCar(carData: Omit<CarsType, "id">, id: string) {
       headers: HEADERS_INFO,
       body: JSON.stringify(carData),
     });
-  } catch { }
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
+  }
 }
 
 export async function getWinners(params = "") {
@@ -48,7 +63,8 @@ export async function getWinners(params = "") {
     return await response.json();
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.toString())
+      const {message} = error;
+      console.log(message);
     }
   }
 }
@@ -64,7 +80,12 @@ export async function createWinner(winnersData: WinnersType) {
       headers: HEADERS_INFO,
       body: JSON.stringify(winnersData),
     });
-  } catch { }
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
+  }
 }
 
 export async function startEngine(id: string) {
@@ -74,7 +95,12 @@ export async function startEngine(id: string) {
       { method: METHODS_HTTP.patch });
     const data = await response.json();
     return data;
-  } catch { }
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
+  }
 }
 
 export async function stopEngine(id: string) {
@@ -86,7 +112,12 @@ export async function stopEngine(id: string) {
       }
     );
     return await response.json();
-  } catch { }
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
+  }
 }
 
 export async function receiveDriveMode(id: string, node: HTMLElement, end: number, duration: number) {
@@ -137,8 +168,11 @@ export async function getWinner(id: number) {
     const response = await fetch(`${ROOT_URL}/${URL_ROUTES.winners}/${id}`);
     const data = await response.json();
     return { response, data }
-  } catch {
-
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
   }
 }
 
@@ -149,8 +183,11 @@ export async function updateWinner(id: number, winnerData: { wins: number, time:
       headers: HEADERS_INFO,
       body: JSON.stringify(winnerData),
     });
-  } catch {
-
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
   }
 }
 
@@ -159,7 +196,10 @@ export async function deleteWinner(id: number) {
     await fetch(`${ROOT_URL}/${URL_ROUTES.winners}/${id}`, {
       method: METHODS_HTTP.delete,
     });
-  } catch {
-
+  } catch (error) {
+    if (error instanceof Error) {
+      const { message } = error;
+      console.log(message);
+    }
   }
 }
